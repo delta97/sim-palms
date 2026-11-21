@@ -1,0 +1,36 @@
+# Data cache and generated output (see plans/01-architecture.md)
+data/
+build/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+.coverage
+htmlcov/
+
+# .NET
+palmlive/**/bin/
+palmlive/**/obj/
+*.user
+
+# Blender autosaves
+*.blend1
+*.blend2
+
+# OS / editor
+.DS_Store
+__MACOSX/
+Thumbs.db
+.vscode/
+.idea/
+
+# Local Claude Code settings and Claude-managed worktrees
+.claude/settings.local.json
+.claude/worktrees/
