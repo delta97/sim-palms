@@ -7,7 +7,7 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 188 | 5 | 0 | 1 | 19 | 0 | 213 |
+| 188 | 4 | 0 | 1 | 20 | 0 | 213 |
 
 ## In progress / in review
 
@@ -17,7 +17,6 @@ Generated: 2026-11-22
 | [GEN-008](tasks/GEN-008.md) | in_progress | claude-agent | task/gen-008-template-engine-and-xml-writer-on-fake-t | Template engine and XML writer on fake templates |
 | [GEN-014](tasks/GEN-014.md) | in_progress | claude-agent | task/gen-014-build-report-md-and-build-report-json | build_report.md and build_report.json |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
-| [TEST-002](tasks/TEST-002.md) | in_progress | claude-agent | task/test-002-add-the-golden-file-comparison-helper-wi | Add the golden-file comparison helper with an update flag |
 | [TEST-004](tasks/TEST-004.md) | in_progress | claude-agent | task/test-004-add-contract-conformance-tests-for-palms | Add contract conformance tests for palms.geojson |
 
 ## Blocked
@@ -104,7 +103,7 @@ _None._
 | [TEST-005](tasks/TEST-005.md) | done | none | TEST-001 | Add the test-site registry schema and loader |
 | [TEST-100](tasks/TEST-100.md) | todo | human, windows-sim | TEST-005, TEST-006, DEC-004 | Define test sites T1-T5 (bbox, purpose, region, saved flights, three viewpoints each) |
 
-## Phase 2 (5/29 done)
+## Phase 2 (6/29 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -129,7 +128,7 @@ _None._
 | [GEN-100](tasks/GEN-100.md) | todo | windows-sim, human | GEN-017 | Deliverable: palmgen build produces a working Community region package (Phase 2) |
 | [RISK-002](tasks/RISK-002.md) | done | network |  | Audit model, texture and tool licenses for palm assets |
 | [RISK-004](tasks/RISK-004.md) | done | network |  | Collect airport boundaries and known airport add-ons for default masks |
-| [TEST-002](tasks/TEST-002.md) | in_progress | none | TEST-001 | Add the golden-file comparison helper with an update flag |
+| [TEST-002](tasks/TEST-002.md) | done | none | TEST-001 | Add the golden-file comparison helper with an update flag |
 | [TEST-003](tasks/TEST-003.md) | todo | none | TEST-001 | Add geometry assertion helpers for exclusion polygons |
 | [TEST-007](tasks/TEST-007.md) | todo | windows-sim, human | TEST-100, TEST-102 | Capture a baseline no-fix visual run at T1-T5 |
 | [TEST-015](tasks/TEST-015.md) | todo | none | TEST-001 | Write the post-update regression routine, log and entry scaffolder |

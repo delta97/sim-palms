@@ -1,7 +1,7 @@
 ---
 id: TEST-002
 title: Add the golden-file comparison helper with an update flag
-status: review
+status: done
 phase: 2
 area: TEST
 kind: build
@@ -65,3 +65,4 @@ python3 scripts/tasks.py validate
 - 2026-11-22 [claude-agent] Verification: ruff check ok, ruff format --check ok, mypy ok. Code commit 61b0328.
 - 2026-11-22 [claude-agent] Spec notes: GoldenChecker.check defaults to normalize_newlines (plan signature shows normalize=None, but None means raw bytes here). Dir mode compares tests/golden/<case>/expected/ only, so updates never touch input/ and extra-file deletion stays inside expected/.
 - 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] Status review -> done.
