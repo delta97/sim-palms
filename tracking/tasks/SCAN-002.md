@@ -1,7 +1,7 @@
 ---
 id: SCAN-002
 title: "Species normalization table, normalizer and palm filter"
-status: review
+status: done
 phase: 1
 area: SCAN
 kind: build
@@ -68,3 +68,4 @@ python -c "from palmscan.species_names import normalize_species as n; print(n('P
 - 2026-11-22 [claude-agent] ASSET-005 compat: registry uses 'keys: [{key,...}]', which palmcore.assets._load_registry reads. Tests run validate_manifest(fixture manifest, registry_path=real file) -> [] and check assets/library.yaml fallback keys are in the registry. No mismatch. REGISTRY_REL_PATH resolves to this file.
 - 2026-11-22 [claude-agent] Spec changes (also noted in plan W2): extra genus set 'other', genus_aliases, monotypic genus defaults, unlisted epithet -> <genus>_sp (registry rule), alias variants (tree/palm suffix), common column refines generic palm. .gitignore touched: 'data/' ignored palmscan/data, added '!palmscan/data/' (added to touches).
 - 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] Status review -> done.
