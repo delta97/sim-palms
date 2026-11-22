@@ -251,6 +251,14 @@ Task FX-008.
 2. Decode depth with `unpack_log24` into `NNNNNN.depthraw.npy`. `depth.npy` is written later by `palmfx calib`.
 3. Frame time `t_i = t_trigger_i + offset`. `offset` starts at 0 and is fitted in A6.
 4. Pose at `t_i`: positions converted to local ENU and linearly interpolated; attitude as quaternions, interpolated with `scipy.spatial.transform.Slerp`. Pose is `null` when the nearest sample is more than `max_gap_ms` (default 50) away.
+Implemented in FX-008 (`palmfx/offline/ingest.py`, `timing.py`); behaviours the steps above leave open:
+
+- Frame `idx` is the trigger's `frame_idx`; `--drop` takes trigger indices that produced no screenshot and leaves holes in the numbering. The "before" file is clean colour, "after" is packed depth. File suffixes (placeholders `_before` / `_after`, VERIFY in FX-001) come from `--before-suffix/--after-suffix`, else `session.json` `reshade_suffixes`, else the defaults. Pose log column names are mapped by `--pose-column NAME=COL` or `session.json` `pose_columns` (VERIFY in FX-006).
+- Time offset: `calib/time_offset.json` `offset_ms`, else 0 (`--offset-ms` overrides). `t_ns = t_trigger + offset`.
+- `timing.interpolate_poses(rows, t_ns, max_gap_ms=50, conventions=None)` returns canonical poses (conventions applied; the camera body offset is NOT applied, `pose_from_simvars` does that, so call it with empty conventions on ingested poses); `interpolate_poses_with_gap` also returns `pose_gap_ms`, the distance to the nearest sample. Rows are sorted by `t_host_ns`; duplicate timestamps keep the first. Outside the sample range there is no extrapolation: within `max_gap_ms` of the first or last sample the pose holds that sample, further out it is `null`. Inside a hole between samples the pose is `null` once the nearest sample is over `max_gap_ms` away; times within `max_gap_ms` of a sample still interpolate across the hole. Heading wraps through slerp; `cam_*_deg` columns interpolate along the shortest arc. Pitch near +-90 deg (gimbal lock) is not handled.
+- `frames.jsonl` `depth` is `null` until `palmfx calib` writes `depth.npy`.
+- `palmfx fixture` stores `source_frames`, `fixture_scale` and `reshade_suffixes` in the fixture's `session.json`, drops `.inst.png`/`.json` of hand masks (instances are derived from the union mask), and deletes the output directory if it exceeds 5 MB or fails.
+
 5. `palmfx fixture` writes a 0.25-scale *raw* session of selected frames, renumbered from 0: screenshot pairs (area-averaged colour; packed depth stride-sampled, never interpolated), matching trigger and pose rows, `session.json`, scaled `calib/`, hand masks, and a palms subset clipped to 2 km around the frames. Tests ingest it like a real session.
 
 ### A5. Camera model and projection
