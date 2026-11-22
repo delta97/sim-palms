@@ -12,6 +12,7 @@ from typing import Any
 import pytest
 
 from tests.helpers.fixtures import FIXTURES_ROOT, REPO_ROOT
+from tests.helpers.golden import GoldenChecker, set_cli_update
 
 NETWORK_DISABLED_MSG = "network disabled in tests: use tests/fixtures or mark @pytest.mark.network"
 
@@ -27,12 +28,19 @@ def pytest_addoption(parser: pytest.Parser) -> None:
         default=False,
         help="run tests marked sim (Windows with MSFS 2024 only)",
     )
+    group.addoption(
+        "--update-golden",
+        action="store_true",
+        default=False,
+        help="rewrite tests/golden files instead of comparing (refused when CI is set)",
+    )
 
 
 def pytest_configure(config: pytest.Config) -> None:
     config.addinivalue_line("markers", "network: makes live network calls")
     config.addinivalue_line("markers", "sim: needs Windows + MSFS 2024 + SDK")
     config.addinivalue_line("markers", "slow: takes more than about 10 seconds")
+    set_cli_update(bool(config.getoption("update_golden")))
 
 
 def _socket_plugin_active(config: pytest.Config) -> bool:
@@ -112,3 +120,8 @@ def fixtures_root() -> Path:
 @pytest.fixture
 def golden_root() -> Path:
     return REPO_ROOT / "tests" / "golden"
+
+
+@pytest.fixture
+def golden(golden_root: Path) -> GoldenChecker:
+    return GoldenChecker(golden_root)
