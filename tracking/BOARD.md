@@ -7,13 +7,12 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 140 | 1 | 1 | 1 | 71 | 0 | 214 |
+| 140 | 0 | 1 | 1 | 72 | 0 | 214 |
 
 ## In progress / in review
 
 | Task | Status | Owner | Branch | Title |
 |---|---|---|---|---|
-| [FX-011](tasks/FX-011.md) | in_progress | claude-agent | task/fx-011-mask-by-depth-and-colour-heuristics | Mask by depth and colour heuristics |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
 
 ## Blocked
@@ -258,7 +257,7 @@ Generated: 2026-11-22
 | [TEST-008](tasks/TEST-008.md) | done | none | TEST-102 | Add optional image-diff scoring for visual viewpoints |
 | [TEST-018](tasks/TEST-018.md) | todo | windows-sim | TEST-008, TEST-104 | Calibrate the image-diff noise floor at T1 |
 
-## Phase 7 (8/28 done)
+## Phase 7 (9/28 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -272,7 +271,7 @@ Generated: 2026-11-22
 | [FX-008](tasks/FX-008.md) | done | none | FX-003, FX-005 | Ingest, pose interpolation and sample-fixture builder |
 | [FX-009](tasks/FX-009.md) | done | none | FX-004, FX-008 | Calibration: clicks tool, vfov, time offset, pose bias, depth model |
 | [FX-010](tasks/FX-010.md) | done | none | FX-004, ARCH-002 | Mask by projection from palms.geojson |
-| [FX-011](tasks/FX-011.md) | in_progress | none | FX-004 | Mask by depth and colour heuristics |
+| [FX-011](tasks/FX-011.md) | done | none | FX-004 | Mask by depth and colour heuristics |
 | [FX-012](tasks/FX-012.md) | done | none | FX-002 | Mask comparison metrics (pixel IoU, instance precision/recall) |
 | [FX-013](tasks/FX-013.md) | todo | human | FX-007, FX-008, FX-009 | Hand labels: ground-truth blob masks, correspondences, committed sample fixture |
 | [FX-014](tasks/FX-014.md) | blocked | network | FX-002, FX-026 | Inpainting runner: Telea baseline, LaMa backend, tiling |

@@ -5,6 +5,7 @@ Format: `- TASK-ID: what changed (PR link)`.
 
 ## Unreleased
 
+- FX-011: Added palm masks from depth and colour heuristics with YAML thresholds (`palmfx mask-heuristic`); thresholds VERIFY until tuned on real captures (local merge).
 - FX-009: Added calibration (vfov, time offset, pose bias, depth model) from clicks, the click store and UI, and `palmfx calib`/`palmfx clicks`; click UI not yet run on a display (local merge).
 - FX-010: Added palm masks by projecting palms.geojson through the camera model, with depth-buffer occlusion (`palmfx mask-project`) (local merge).
 - FX-004: Added the synthetic test scene generator and session fixtures for palmfx (`palmfx/offline/synth.py`) (local merge).
