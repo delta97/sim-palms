@@ -1,7 +1,7 @@
 ---
 id: SCAN-024
 title: "Palm rule filter with reject reasons"
-status: in_progress
+status: review
 phase: 4
 area: SCAN
 kind: build
@@ -36,10 +36,10 @@ updated: 2026-11-22
 
 ## Acceptance criteria
 
-- [ ] Each rule boundary behaves as the table states.
-- [ ] A 15 m tall, 9 m crown, isolated candidate passes with the exemption and fails `ratio` without it.
-- [ ] Reject rows carry all metrics needed by `qa_rejects.csv`.
-- [ ] Tests pass.
+- [x] Each rule boundary behaves as the table states.
+- [x] A 15 m tall, 9 m crown, isolated candidate passes with the exemption and fails `ratio` without it.
+- [x] Reject rows carry all metrics needed by `qa_rejects.csv`.
+- [x] Tests pass.
 
 ## Verification
 
@@ -51,3 +51,5 @@ pytest tests/unit/palmscan/test_scan_palm_rules.py -q
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [claude-agent] Claimed. branch=task/scan-024-palm-rule-filter-with-reject-reasons worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-024
+- 2026-11-22 [claude-agent] Implemented palm_rules.py + tests; full suite 1655 passed, 5 skipped; ruff/format/mypy clean; all acceptance boxes pass
+- 2026-11-22 [claude-agent] Status in_progress -> review.
