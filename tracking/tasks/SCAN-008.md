@@ -1,7 +1,7 @@
 ---
 id: SCAN-008
 title: "Inventory ingest stage and cross-source dedupe"
-status: todo
+status: in_progress
 phase: 1
 area: SCAN
 kind: build
@@ -11,9 +11,9 @@ requires: [none]
 agent: geo-data-engineer
 estimate_h: 3
 touches: [palmscan/sources/registry.py, palmscan/ingest.py, palmscan/detect/dedupe.py, tests/unit/palmscan/test_scan_ingest.py, tests/unit/palmscan/test_scan_dedupe.py]
-owner: ""
-branch: ""
-worktree: ""
+owner: claude-agent
+branch: task/scan-008-inventory-ingest-stage-and-cross-source
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-008"
 updated: 2026-11-22
 ---
 
@@ -53,3 +53,4 @@ pytest tests/unit/palmscan/test_scan_ingest.py tests/unit/palmscan/test_scan_ded
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [integrator] integrator note from SCAN-004: source cache_max_age_days is not enforced (palmscan.cache.Cache has no freshness check; palmcore.cache.is_fresh exists) — wire it in at ingest or add it to Cache
+- 2026-11-22 [claude-agent] Claimed. branch=task/scan-008-inventory-ingest-stage-and-cross-source worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-008
