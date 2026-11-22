@@ -1,7 +1,7 @@
 ---
 id: TEST-002
 title: Add the golden-file comparison helper with an update flag
-status: in_progress
+status: review
 phase: 2
 area: TEST
 kind: build
@@ -42,10 +42,10 @@ updated: 2026-11-22
 
 ## Acceptance criteria
 
-- [ ] All self-tests pass.
-- [ ] `pytest --update-golden` is accepted by the CLI (`pytest --help | grep update-golden`).
-- [ ] Failure output names the golden path and shows a unified diff of at most 200 lines.
-- [ ] Update refused when `CI` is set.
+- [x] All self-tests pass.
+- [x] `pytest --update-golden` is accepted by the CLI (`pytest --help | grep update-golden`).
+- [x] Failure output names the golden path and shows a unified diff of at most 200 lines.
+- [x] Update refused when `CI` is set.
 
 ## Verification
 
@@ -60,3 +60,8 @@ python3 scripts/tasks.py validate
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [claude-agent] Claimed. branch=task/test-002-add-the-golden-file-comparison-helper-wi worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/TEST-002
+- 2026-11-22 [claude-agent] Self-tests: 18 passed (tests/unit/helpers/test_golden.py); full suite 404 passed. Also passes with CI=1 PALMFIX_UPDATE_GOLDEN=1 (refusal path tested).
+- 2026-11-22 [claude-agent] pytest --help shows --update-golden. Failure output names the golden path and caps the unified diff at 200 lines (tested). Update refused when CI is set (tested).
+- 2026-11-22 [claude-agent] Verification: ruff check ok, ruff format --check ok, mypy ok. Code commit 61b0328.
+- 2026-11-22 [claude-agent] Spec notes: GoldenChecker.check defaults to normalize_newlines (plan signature shows normalize=None, but None means raw bytes here). Dir mode compares tests/golden/<case>/expected/ only, so updates never touch input/ and extra-file deletion stays inside expected/.
+- 2026-11-22 [claude-agent] Status in_progress -> review.
