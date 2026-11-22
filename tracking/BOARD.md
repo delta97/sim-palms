@@ -7,13 +7,14 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 150 | 0 | 0 | 1 | 62 | 0 | 213 |
+| 148 | 1 | 0 | 1 | 63 | 0 | 213 |
 
 ## In progress / in review
 
 | Task | Status | Owner | Branch | Title |
 |---|---|---|---|---|
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
+| [TEST-014](tasks/TEST-014.md) | in_progress | claude-agent | task/test-014-build-soak-test-report-tooling-for-the-l | Build soak-test report tooling for the live spawner |
 
 ## Blocked
 
@@ -30,9 +31,12 @@ _None._
 | [DEC-002](tasks/DEC-002.md) | 3 | human | task-planner | Decide: build or license the palm models |
 | [DEC-008](tasks/DEC-008.md) | 3 | human | task-planner | Decide: storage for large asset binaries (Git LFS or external) |
 | [DEC-005](tasks/DEC-005.md) | 5 | human | test-engineer | Decide: performance budget and reference hardware/settings |
-| [TEST-014](tasks/TEST-014.md) | 5 | none | test-engineer | Build soak-test report tooling for the live spawner |
 | [FX-001](tasks/FX-001.md) | 7 | windows-sim, human | render-fx-researcher | Verify ReShade depth access in MSFS 2024 (incl. multiplayer/online lockout) |
-| [FX-002](tasks/FX-002.md) | 7 | none | python-architect | Scaffold palmfx.offline package, session I/O and CLI |
+| [FX-003](tasks/FX-003.md) | 7 | none | render-fx-researcher | Camera model: geodesy, attitude, pinhole projection |
+| [FX-005](tasks/FX-005.md) | 7 | none | render-fx-researcher | ReShade depth-pack effect and depth decoder |
+| [FX-006](tasks/FX-006.md) | 7 | windows-sim | simconnect-dotnet-engineer | SimConnect pose logger, screenshot trigger and camera SimVar check |
+| [FX-012](tasks/FX-012.md) | 7 | none | test-engineer | Mask comparison metrics (pixel IoU, instance precision/recall) |
+| [FX-014](tasks/FX-014.md) | 7 | network | render-fx-researcher | Inpainting runner: Telea baseline, LaMa backend, tiling |
 
 ## Phase 0 (2/17 done)
 
@@ -220,7 +224,7 @@ _None._
 | [LIVE-101](tasks/LIVE-101.md) | todo | windows-sim, human | LIVE-011, LIVE-100, ASSET-101, TEST-014, DEC-007 | Deliverable: palmlive live spawner (only if the Phase 5 bake-off picks live placement) |
 | [RISK-008](tasks/RISK-008.md) | todo | none | RISK-007, GATE-P5 | Risk review after Phase 5 (before scale-out and any publishing) |
 | [TEST-013](tasks/TEST-013.md) | done | none | TEST-001 | Build the frametime capture parser and run comparison report |
-| [TEST-014](tasks/TEST-014.md) | todo | none | TEST-013 | Build soak-test report tooling for the live spawner |
+| [TEST-014](tasks/TEST-014.md) | in_progress | none | TEST-013 | Build soak-test report tooling for the live spawner |
 | [TEST-103](tasks/TEST-103.md) | todo | windows-sim, gpu | TEST-013, TEST-100, DEC-005 | Performance flight harness: fixed route, capture procedure, dry-run capture |
 
 ## Phase 6 (1/27 done)
@@ -255,12 +259,12 @@ _None._
 | [TEST-008](tasks/TEST-008.md) | done | none | TEST-102 | Add optional image-diff scoring for visual viewpoints |
 | [TEST-018](tasks/TEST-018.md) | todo | windows-sim | TEST-008, TEST-104 | Calibrate the image-diff noise floor at T1 |
 
-## Phase 7 (0/27 done)
+## Phase 7 (1/27 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
 | [FX-001](tasks/FX-001.md) | todo | windows-sim, human |  | Verify ReShade depth access in MSFS 2024 (incl. multiplayer/online lockout) |
-| [FX-002](tasks/FX-002.md) | todo | none | ARCH-009, SCAN-001 | Scaffold palmfx.offline package, session I/O and CLI |
+| [FX-002](tasks/FX-002.md) | done | none | ARCH-009, SCAN-001 | Scaffold palmfx.offline package, session I/O and CLI |
 | [FX-003](tasks/FX-003.md) | todo | none | FX-002 | Camera model: geodesy, attitude, pinhole projection |
 | [FX-004](tasks/FX-004.md) | todo | none | FX-003, FX-005 | Synthetic test scene generator and pytest fixtures |
 | [FX-005](tasks/FX-005.md) | todo | none | FX-002 | ReShade depth-pack effect and depth decoder |
