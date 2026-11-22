@@ -55,3 +55,4 @@ ls /tmp/scan-e2e   # palms.geojson buildings.geojson species_priors.yaml qa_summ
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [reconcile] buildings.geojson now follows the ARCH-002 secondary contract (validate_buildings) and includes every footprint within exclusion.radius_max_m + clip_buffer_m of a kept palm, so palmgen --margin-m tuning (GEN-017) never lacks a footprint; canonical output dir build/scan/<region>/ confirmed for GEN/TEST/FX. Cross-area reconciliation.
+- 2026-11-22 [integrator] integrator note from SCAN-011: on ContractError from write_palms, call write_invalid(fc, out_dir) and exit 3; assign_palm_ids returns ids in input order
