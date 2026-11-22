@@ -1,7 +1,7 @@
 ---
 id: SPIKE-009
 title: Write the SimConnect spawn-and-disconnect spike console app (C#)
-status: todo
+status: in_progress
 phase: 0
 area: SPIKE
 kind: build
@@ -11,9 +11,9 @@ requires: [none]
 agent: simconnect-dotnet-engineer
 estimate_h: 2
 touches: [spikes/simconnect-persist/]
-owner: ""
-branch: ""
-worktree: ""
+owner: claude-agent
+branch: task/spike-009-write-the-simconnect-spawn-and-disconnec
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SPIKE-009"
 updated: 2026-11-22
 ---
 
@@ -60,3 +60,4 @@ Compiling is checked on the sim PC in SPIKE-005 step 1. If `dotnet` is installed
 ## Log
 
 - 2026-11-22 [plan-breakdown] Task created.
+- 2026-11-22 [claude-agent] Claimed. branch=task/spike-009-write-the-simconnect-spawn-and-disconnec worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SPIKE-009

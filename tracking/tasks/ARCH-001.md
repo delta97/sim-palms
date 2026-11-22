@@ -1,7 +1,7 @@
 ---
 id: ARCH-001
 title: "Scaffold the Python monorepo (pyproject, package layout, lint/test tooling, CI)"
-status: todo
+status: in_progress
 phase: 1
 area: ARCH
 kind: build
@@ -11,9 +11,9 @@ requires: [none]
 agent: python-architect
 estimate_h: 4
 touches: [pyproject.toml, palmcore/__init__.py, palmcore/py.typed, palmcore/errors.py, palmcore/schemas.py, palmscan/__init__.py, palmgen/__init__.py, .github/workflows/python.yml, tests/unit/palmcore/test_package.py, tests/unit/palmcore/test_schemas_loader.py]
-owner: ""
-branch: ""
-worktree: ""
+owner: claude-agent
+branch: task/arch-001-scaffold-the-python-monorepo-pyproject-p
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/ARCH-001"
 updated: 2026-11-22
 ---
 
@@ -69,3 +69,4 @@ Then open the PR's Checks tab: `python / lint` and both `python / test` matrix j
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [reconcile] Removed depends_on GATE-P0: Linux-container code (requires none/network) may run in parallel with Phase 0 (policy in plans/detailed/01-architecture.md, proposed ADR-0013). Sim-facing work still waits for gates/SPIKE outputs.
+- 2026-11-22 [claude-agent] Claimed. branch=task/arch-001-scaffold-the-python-monorepo-pyproject-p worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/ARCH-001

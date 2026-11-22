@@ -1,7 +1,7 @@
 ---
 id: RISK-005
 title: Set up the sim/SDK update watch and do the first pass on exclusion bugs
-status: todo
+status: in_progress
 phase: 0
 area: RISK
 kind: research
@@ -11,10 +11,10 @@ requires: [network]
 agent: msfs-sdk-specialist
 estimate_h: 3
 touches: [docs/process/sim-update-watch.md, tracking/logs/sim-update-watch.md]
-owner: ""
-branch: ""
-worktree: ""
-updated: 2026-11-21
+owner: claude-agent
+branch: task/risk-005-set-up-the-sim-sdk-update-watch-and-do-t
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/RISK-005"
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -65,3 +65,4 @@ grep -E "^\| 20[0-9]{2}-" tracking/logs/sim-update-watch.md | head -1   # a date
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [claude-agent] Claimed. branch=task/risk-005-set-up-the-sim-sdk-update-watch-and-do-t worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/RISK-005

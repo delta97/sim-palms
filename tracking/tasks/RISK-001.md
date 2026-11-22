@@ -1,7 +1,7 @@
 ---
 id: RISK-001
 title: Audit data source licenses and terms (inventories, OSM, footprints, LiDAR)
-status: todo
+status: in_progress
 phase: 1
 area: RISK
 kind: research
@@ -11,10 +11,10 @@ requires: [network]
 agent: scribe
 estimate_h: 4
 touches: [docs/licenses/data-sources.md]
-owner: ""
-branch: ""
-worktree: ""
-updated: 2026-11-21
+owner: claude-agent
+branch: task/risk-001-audit-data-source-licenses-and-terms-inv
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/RISK-001"
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -63,3 +63,4 @@ Read the file once and confirm no legal conclusions are stated.
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [claude-agent] Claimed. branch=task/risk-001-audit-data-source-licenses-and-terms-inv worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/RISK-001
