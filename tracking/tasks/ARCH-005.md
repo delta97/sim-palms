@@ -1,7 +1,7 @@
 ---
 id: ARCH-005
 title: "Add palmcore geo helpers (Bbox, distances, UTM, transforms)"
-status: review
+status: done
 phase: 1
 area: ARCH
 kind: build
@@ -66,3 +66,4 @@ ruff check palmcore tests && mypy
 - 2026-11-22 [claude-agent] Implemented palmcore/geo.py + tests (4fbbb07). pytest: 44 passed; ruff check/format clean; mypy: Success, no issues in 6 source files; local_crs_for(San Diego bbox) = EPSG:32611.
 - 2026-11-22 [claude-agent] Spec fix: WS3 said haversine of 0.001 deg lat = 110.9 m, but on the fixed sphere (R=6371008.8) it is 111.195 m; 110.9 m is meters_per_degree(32.79)[1]/1000. Both asserted in tests; WS3 and task text corrected.
 - 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] Status review -> done.

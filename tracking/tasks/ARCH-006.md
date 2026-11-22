@@ -1,7 +1,7 @@
 ---
 id: ARCH-006
 title: "Add deterministic UUIDv5 ids and seeded randomness to palmcore"
-status: review
+status: done
 phase: 1
 area: ARCH
 kind: build
@@ -34,7 +34,7 @@ updated: 2026-11-22
 
 1. Compute `uuid.uuid5(uuid.NAMESPACE_URL, "urn:palmfix:namespace:v1")` once and paste the literal into `NAMESPACE = uuid.UUID("...")`.
 2. Implement `PALM_ID_RE`, `ID_PREFIX_RE`, `palm_key`, `location_key`, `palm_id`, `cluster_key`, `object_guid`, `format_guid` (with the `GuidStyle` Literal), `stable_unit_float`, `seeded_rng` and `assert_unique` as specified. Bad input raises `ValueError`. `assert_unique` raises `palmcore.errors.ContractError`.
-3. `location_key` formats with `f"{lon:.5f},{lat:.5f}"` and turns `-0.00000` into `0.00000`.
+3. `location_key` formats with `f"loc:{lon:.5f},{lat:.5f}"` (plan WS4) and turns `-0.00000` into `0.00000`.
 4. Write `tests/unit/palmcore/test_ids.py`:
    - `NAMESPACE` equals the uuid5 computation (catches a typo in the literal);
    - golden vectors, computed once in this task and committed as literals, for:
@@ -77,3 +77,5 @@ ruff check palmcore tests && mypy
 - 2026-11-22 [claude-agent] ruff check palmcore tests: clean; ruff format --check: clean; mypy (strict palmcore): no issues in 6 source files.
 - 2026-11-22 [claude-agent] Acceptance ticked: signatures match WS4 (ids.py); golden vectors pass (28 tests); AST test finds no hash/uuid1/uuid4/unseeded random calls; ruff/mypy/pytest green.
 - 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] Status review -> done.
+- 2026-11-22 [integrator] integrator: kept the loc: prefix from plan WS4; aligned Step 3 text
