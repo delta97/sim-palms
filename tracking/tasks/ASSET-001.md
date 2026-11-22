@@ -1,7 +1,7 @@
 ---
 id: ASSET-001
 title: "Write reference sheets for the 5 SoCal palm species"
-status: in_progress
+status: review
 phase: 3
 area: ASSET
 kind: research
@@ -39,10 +39,10 @@ One reference sheet per SoCal species in `assets/reference/`. Modelers use them 
 
 ## Acceptance criteria
 
-- [ ] Five files exist, one per species key, each with all six sections.
-- [ ] Each sheet has at least 8 photo links with a license or source note.
+- [x] Five files exist, one per species key, each with all six sections.
+- [x] Each sheet has at least 8 photo links with a license or source note.
 - [ ] Each proportions row has a range and a source.
-- [ ] The look-alike sections for both pairs (robusta/filifera, queen/king) are present.
+- [x] The look-alike sections for both pairs (robusta/filifera, queen/king) are present.
 
 ## Verification
 
@@ -57,3 +57,5 @@ Reviewer: open 3 random photo links per sheet and confirm they show the named sp
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [claude-agent] Claimed. branch=task/asset-001-write-reference-sheets-for-the-5-socal-p worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/ASSET-001
+- 2026-11-22 [claude-agent] 5 sheets written in assets/reference/. Boxes 1,2,4 ticked (6 sections each; 11-14 photo links per species with license; both look-alike pairs). Box 3 left open: rows with no source found are VERIFY (filifera/queen live fronds, petiole lengths, some trunk base values). 42 Commons links verified to exist via API. Plan W5 heights fit; robusta crown (3.5-4.5 m) and filifera crown (4.5/5.5 m) are above extension sources.
+- 2026-11-22 [claude-agent] Status in_progress -> review.
