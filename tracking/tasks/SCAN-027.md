@@ -1,7 +1,7 @@
 ---
 id: SCAN-027
 title: "Decision tree species classifier with rules fallback"
-status: review
+status: done
 phase: 4
 area: SCAN
 kind: build
@@ -54,3 +54,4 @@ pytest tests/unit/palmscan/test_scan_tree_model.py -q
 - 2026-11-22 [claude-agent] Plan W18 step 4 clarified: rules None counts right on _other samples (symmetric with tree), folds pooled out-of-fold; filifera labels fold into robusta; added save_model/load_model and rules kwarg. Task text unchanged otherwise.
 - 2026-11-22 [claude-agent] Verified: test_scan_tree_model 16 passed; full suite 1651 passed 1 skipped; ruff, format, mypy clean. All acceptance boxes pass (gain gate, JSON round trip, sklearn-free predict, report with confusion+reason).
 - 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] Status review -> done.
