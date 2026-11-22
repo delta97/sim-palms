@@ -1,0 +1,17 @@
+# Named graphics profiles for in-sim visual runs (TEST-102).
+# Every value is TBD until the first real run on the user's sim PC records the settings.
+# Read the values from the sim's settings screens, not from memory. Fill them in here in the
+# same commit as the first run's checklist; then a run.yaml only names the profile and lists
+# any deviations.
+# VERIFY: exact settings names and menu paths (TEST-006, sim PC).
+version: 1
+profiles:
+  ref-v1:
+    resolution: TBD
+    preset: TBD
+    render_scaling: TBD
+    upscaler: TBD
+    terrain_lod: TBD
+    object_lod: TBD
+    vsync: TBD
+    frame_cap: TBD
