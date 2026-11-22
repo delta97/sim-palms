@@ -4,7 +4,7 @@
 
 ## Where things stand
 
-- **69 of 214 tasks done** (plus FX-014 merged as code but `blocked` on FX-026), all merged to `main`, pushed, and their GitHub issues closed with a link to the merge commit. Board: [BOARD.md](BOARD.md). Changelog: [CHANGELOG.md](../CHANGELOG.md).
+- **72 of 214 tasks done** (plus FX-014 merged as code but `blocked` on FX-026), all merged to `main`, pushed, and their GitHub issues closed with a link to the merge commit. Board: [BOARD.md](BOARD.md). Changelog: [CHANGELOG.md](../CHANGELOG.md).
 - **Phase 1 code (palmscan) is complete on fixtures.** `palmscan run` goes ingest → dedupe → species → priors → sizes/exclusion/buildings/masks → `palms.geojson` + QA outputs, offline and byte-reproducible (`SOURCE_DATE_EPOCH`). Adapters: geojson/CSV file, ArcGIS REST, Overpass/OSM, building footprints. Live samples are recorded in `tests/fixtures/palmscan/recorded/` (SCAN-007).
 - **Phase 2 code (palmgen) has its building blocks:** inputs, GUIDs, tiling, exclusion geometry + building clipping, masks, variant/scale/heading, template engine on *fake* templates, build reports. The real Scenery Editor XML (SPIKE-003) and package build (SPIKE-004) need the sim PC.
 - **Shared core (palmcore):** contracts and schemas, region config, ids, geo, cache, logging, CLI plumbing, palms.geojson I/O, asset manifest + glTF checks.
@@ -36,5 +36,5 @@ Everything else that is ready needs you, the sim PC, or Blender:
 
 ## Next
 
-1. Phase 7 Stage A (offline image-layer experiment) has its scaffold, camera model, depth decoder (shader untested in ReShade), mask metrics, inpainting runner (Telea tested; LaMa untested; FX-014 blocked on FX-026, #215), synthetic scene generator and session ingest with pose interpolation. Capture formats are placeholders (VERIFY) until FX-001/FX-006/FX-007 on the sim. Now ready for an agent, held for the user's go-ahead: FX-009 (calibration), FX-010 (mask by projection), FX-011 (mask by depth and colour).
+1. Phase 7 Stage A (offline image-layer experiment) code is built on synthetic data: scaffold, camera model, depth decoder (shader untested in ReShade), synthetic scene generator, session ingest with pose interpolation, calibration (click UI not yet run on a display), masks by projection and by depth/colour heuristics, mask metrics, inpainting (Telea tested; LaMa untested, FX-014 blocked on FX-026, #215). Capture formats are placeholders (VERIFY) until FX-001/FX-006/FX-007 on the sim.
 2. The user does DEC-004, then SPIKE-001 on the sim PC. Phase 2 build and validation tasks unblock from the SPIKE results.
