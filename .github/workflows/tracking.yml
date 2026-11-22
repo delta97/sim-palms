@@ -1,0 +1,21 @@
+name: tracking
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate task files
+        run: python3 scripts/tasks.py validate
+      - name: Report unordered touches conflicts (informational)
+        run: python3 scripts/tasks.py conflicts
+      - name: Board is regenerable
+        run: python3 scripts/tasks.py board

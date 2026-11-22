@@ -1,0 +1,10 @@
+# Changelog
+
+One line per merged task, newest first, written at merge time on `main` (see AGENTS.md section 4).
+Format: `- TASK-ID: what changed (PR link)`.
+
+## Unreleased
+
+- INFRA-001: Added the original plan set, detailed per-plan breakdowns with task files, file-based task tracking
+  (`scripts/tasks.py`), worktree helper (`scripts/wt.sh`), operating protocol (`AGENTS.md`), specialist agents and skills
+  ([delta97/sim-palms#1](https://github.com/delta97/sim-palms/pull/1)).

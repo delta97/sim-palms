@@ -1,0 +1,53 @@
+---
+id: SCAN-005
+title: "Overpass client and OSM tree adapter"
+status: todo
+phase: 1
+area: SCAN
+kind: build
+plan_ref: "plans/detailed/02-detection-pipeline.md#w3-inventory-and-osm-source-adapters"
+depends_on: [SCAN-003]
+requires: [none]
+agent: geo-data-engineer
+estimate_h: 2
+touches: [palmscan/sources/overpass.py, palmscan/sources/osm_overpass.py, tests/unit/palmscan/test_scan_osm_overpass.py, tests/fixtures/palmscan/osm_overpass/]
+owner: ""
+branch: ""
+worktree: ""
+updated: 2026-11-21
+---
+
+## Goal
+
+A reusable `OverpassClient` (cached, tiled, retrying) and `OsmTreesAdapter`, which returns OSM `natural=tree` nodes that carry species/genus/taxon tags as `TreeRecord`s.
+
+## Context
+
+- Spec: plan_ref section W3, `overpass.py` and `osm_overpass.py` parts.
+- Default endpoint `https://overpass-api.de/api/interpreter`, overridable by `sources.overpass_url`. Overpass bbox order is (south, west, north, east).
+- SCAN-006 (buildings) reuses `OverpassClient`; keep its API exactly `OverpassClient(http, cache, url)` + `query(ql) -> dict`.
+- OSM data is ODbL; attribution goes into QA and fixture READMEs.
+
+## Steps
+
+1. `palmscan/sources/overpass.py`: `DEFAULT_OVERPASS_URL`, `OverpassClient.query(ql)` (POST `data=ql`, cache namespace `overpass`, key sha1(ql)), `bbox_tiles(bbox, max_deg=0.05)`, `query_bbox(template, bbox)` that formats `(S,W,N,E)` per tile and merges elements by `(type, id)`; `remark` containing `runtime error` -> `SourceError`.
+2. `palmscan/sources/osm_overpass.py`: `OsmTreesAdapter(overpass, name="osm")` using the query in W3; `species_raw` = first of `species`, `genus`, `taxon`, `species:en`; `common_name_raw` = `species:en`; `source_id` = `node/<id>`; untagged nodes dropped and counted; vintage `YYYY-MM` of fetch, basis `fetched`.
+3. Fixtures: `trees_response.json` (palm, non-palm, untagged, genus-only nodes), `runtime_error.json`, `README.md`.
+4. Tests: parsing, tag precedence, untagged count, runtime error, tile splitting (a 0.12 deg bbox -> 9 tiles) and merge without duplicates, cache reuse.
+
+## Acceptance criteria
+
+- [ ] Fixture yields records only for tagged nodes, with `source_id` like `node/123`.
+- [ ] A bbox of 0.12 x 0.12 deg is split into 9 queries; duplicate elements across tiles appear once.
+- [ ] Runtime-error remark raises `SourceError`.
+- [ ] Tests pass offline.
+
+## Verification
+
+```bash
+pytest tests/unit/palmscan/test_scan_osm_overpass.py -q
+```
+
+## Log
+
+- 2026-11-21 [plan-breakdown] Task created.
