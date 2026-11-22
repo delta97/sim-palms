@@ -1,7 +1,7 @@
 ---
 id: SCAN-026
 title: "Species shape rules and classification order"
-status: in_progress
+status: review
 phase: 4
 area: SCAN
 kind: build
@@ -36,10 +36,10 @@ updated: 2026-11-22
 
 ## Acceptance criteria
 
-- [ ] Boundary tests pass for all three rules.
-- [ ] Inventory/OSM species are never overwritten.
-- [ ] A model answer sets `species_source="lidar_tree"`; rules set `lidar_rules`; priors set `prior`.
-- [ ] Tests pass.
+- [x] Boundary tests pass for all three rules.
+- [x] Inventory/OSM species are never overwritten.
+- [x] A model answer sets `species_source="lidar_tree"`; rules set `lidar_rules`; priors set `prior`.
+- [x] Tests pass.
 
 ## Verification
 
@@ -51,3 +51,5 @@ pytest tests/unit/palmscan/test_scan_species_rules.py -q
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [claude-agent] Claimed. branch=task/scan-026-species-shape-rules-and-classification-o worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-026
+- 2026-11-22 [claude-agent] All 4 acceptance criteria pass: tests/unit/palmscan/test_scan_species_rules.py 29 tests; full suite 1602 passed 5 skipped; ruff check/format and mypy clean. Rule table is data (DEFAULT_SHAPE_RULES, marked VERIFY: assets/reference has no species ranges). Plan W18 updated with optional rules param.
+- 2026-11-22 [claude-agent] Status in_progress -> review.
