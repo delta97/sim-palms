@@ -9,15 +9,15 @@ so the same palms give the same polygons whatever the input order.
 from __future__ import annotations
 
 import math
-from collections.abc import Sequence
+from collections.abc import Collection, Mapping, Sequence
 from dataclasses import dataclass
 from typing import Any, Final, Protocol
 
 import numpy as np
 import pyproj
 import shapely
-from shapely.geometry import Polygon
-from shapely.ops import unary_union
+from shapely.geometry import LineString, Point, Polygon
+from shapely.ops import split, unary_union
 from shapely.strtree import STRtree
 
 from palmgen.errors import GenerationError
@@ -28,6 +28,8 @@ RADIUS_CLAMPED: Final = "RADIUS_CLAMPED"
 
 _DIST_DECIMALS: Final = 6  # distances closer than 1 micrometre tie (then palm_id decides)
 _MAX_DOUBLINGS: Final = 5
+_HOLE_AREA_TOL_M2: Final = 1e-6  # remove_holes must preserve area to this tolerance
+_MAX_HOLE_SPLITS: Final = 10_000
 
 
 class RadiusConfig(Protocol):
@@ -338,3 +340,139 @@ def normalize_ring(
     if closed:
         pts.append(pts[0])
     return tuple(pts)
+
+
+@dataclass(frozen=True)
+class ClipResult:
+    """Outcome of :func:`clip_buildings`.
+
+    ``parts`` is ``(cluster, part, member_ids)`` per surviving polygon. ``cluster`` carries the
+    *original* cluster's ``member_ids`` (so names and GUIDs key off the cluster) and the clipped
+    polygon; ``member_ids`` are the palms whose point lies in that part. ``part`` counts from 0
+    within the cluster. ``in_building`` lists palms with no cut (drop their objects too).
+    ``too_small`` counts fragments dropped for being under ``min_part_area_m2``.
+    ``conflict_no_footprint`` lists ``conflict_ids`` palms whose cluster hit no footprint.
+    """
+
+    parts: list[tuple[Cluster, int, list[str]]]
+    in_building: list[str]
+    too_small: int
+    conflict_no_footprint: list[str]
+
+
+def _polygons(g: Any) -> list[Polygon]:
+    """Non-empty Polygon parts of any geometry; lines and points are discarded."""
+    out: list[Polygon] = []
+    for part in shapely.get_parts(g):
+        if isinstance(part, Polygon):
+            if not part.is_empty:
+                out.append(part)
+        elif part.geom_type == "GeometryCollection":
+            out.extend(_polygons(part))
+    return out
+
+
+def _poly_key(poly: Polygon) -> tuple[float, float, float, float, str]:
+    minx, miny, maxx, maxy = poly.bounds
+    return (round(minx, _DIST_DECIMALS), round(miny, _DIST_DECIMALS), maxx, maxy, poly.wkb_hex)
+
+
+def remove_holes(poly: Polygon) -> list[Polygon]:
+    """Split ``poly`` into hole-free polygons by vertical lines through hole centroids.
+
+    Each pass splits one polygon with ``shapely.ops.split`` along the vertical line through the
+    centroid of its first hole; that line crosses the (connected) hole from side to side, so the
+    hole opens onto the exterior in both pieces. Repeats until no interiors remain. The result is
+    sorted by ``(minx, miny)`` and its area equals ``poly.area`` within 1e-6 m² (else
+    ``GenerationError``). A polygon without holes comes back unchanged.
+    """
+    if len(poly.interiors) == 0:
+        return [poly]
+    done: list[Polygon] = []
+    stack = [poly]
+    for _ in range(_MAX_HOLE_SPLITS):
+        if not stack:
+            break
+        cur = stack.pop()
+        if len(cur.interiors) == 0:
+            done.append(cur)
+            continue
+        hole = min(cur.interiors, key=lambda r: (r.centroid.x, r.centroid.y))
+        x = Polygon(hole).centroid.x
+        _, miny, _, maxy = cur.bounds
+        pieces = _polygons(split(cur, LineString([(x, miny - 1.0), (x, maxy + 1.0)])))
+        if len(pieces) < 2:
+            raise GenerationError("remove_holes: splitting through a hole centroid did not split")
+        stack.extend(pieces)
+    else:
+        raise GenerationError("remove_holes: too many splits")
+    done.sort(key=_poly_key)
+    if abs(sum(p.area for p in done) - poly.area) > _HOLE_AREA_TOL_M2:
+        raise GenerationError("remove_holes: area not preserved")
+    return done
+
+
+def clip_buildings(
+    clusters: Sequence[Cluster],
+    footprints_local: Sequence[Polygon],
+    buffer_m: float,
+    min_part_area_m2: float,
+    supports_holes: bool = False,
+    conflict_ids: Collection[str] = frozenset(),
+    *,
+    palm_points_local: Mapping[str, tuple[float, float]],
+) -> ClipResult:
+    """Clip cluster polygons by building footprints buffered by ``buffer_m``.
+
+    For each cluster (processed in ``member_ids`` order) the buffered footprints that intersect it
+    are subtracted. Remaining Polygon pieces get holes removed unless ``supports_holes``, those
+    under ``min_part_area_m2`` are dropped (counted in ``too_small``), and the rest are numbered
+    by sorted ``(minx, miny)``. A cluster with no pieces left is dropped.
+
+    ``palm_points_local`` maps every member palm id to its ``(x, y)`` in local metres. A palm goes
+    to the first part (by number) that covers its point; a palm in no part has no cut, so it is
+    listed in ``in_building`` (its object must be dropped too). That includes a palm whose only
+    piece was dropped as too small. Parts with no member palm are kept. A palm in ``conflict_ids``
+    (``building_conflict``) is listed in ``conflict_no_footprint`` when its cluster hit no
+    footprint. Everything is independent of input order.
+
+    VERIFY: that the sim treats a cut that touches a wall as harmful, and that a palm without a
+    cut doubles the photogrammetry blob, is unconfirmed until SPIKE-007; the rules above follow
+    the plan, not observed sim behaviour.
+    """
+    footprints = sorted(
+        (f for f in (g.buffer(buffer_m) for g in footprints_local) if not f.is_empty),
+        key=_poly_key,
+    )
+    tree = STRtree(footprints) if footprints else None
+    parts_out: list[tuple[Cluster, int, list[str]]] = []
+    in_building: list[str] = []
+    conflicts: list[str] = []
+    too_small = 0
+    for cluster in sorted(clusters, key=lambda c: c.member_ids):
+        poly = cluster.polygon_local
+        hits = sorted(int(i) for i in tree.query(poly, predicate="intersects")) if tree else []
+        if hits:
+            clipped = poly.difference(unary_union([footprints[i] for i in hits]))
+            pieces = _polygons(shapely.make_valid(clipped))
+        else:
+            pieces = [poly]
+            conflicts.extend(m for m in cluster.member_ids if m in conflict_ids)
+        if not supports_holes:
+            pieces = [q for p in pieces for q in remove_holes(p)]
+        kept = [p for p in pieces if p.area >= min_part_area_m2]
+        too_small += len(pieces) - len(kept)
+        kept.sort(key=_poly_key)
+        members: list[list[str]] = [[] for _ in kept]
+        for pid in cluster.member_ids:
+            x, y = palm_points_local[pid]
+            pt = Point(x, y)
+            for k, part_poly in enumerate(kept):
+                if part_poly.covers(pt):
+                    members[k].append(pid)
+                    break
+            else:
+                in_building.append(pid)
+        for k, part_poly in enumerate(kept):
+            parts_out.append((Cluster(cluster.member_ids, part_poly), k, members[k]))
+    return ClipResult(parts_out, sorted(in_building), too_small, sorted(conflicts))
