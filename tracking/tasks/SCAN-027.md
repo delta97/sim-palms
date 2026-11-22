@@ -1,7 +1,7 @@
 ---
 id: SCAN-027
 title: "Decision tree species classifier with rules fallback"
-status: todo
+status: in_progress
 phase: 4
 area: SCAN
 kind: build
@@ -11,10 +11,10 @@ requires: [none]
 agent: lidar-analyst
 estimate_h: 4
 touches: [palmscan/classify/tree_model.py, tests/unit/palmscan/test_scan_tree_model.py]
-owner: ""
-branch: ""
-worktree: ""
-updated: 2026-11-21
+owner: claude-agent
+branch: task/scan-027-decision-tree-species-classifier-with-ru
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-027"
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -50,3 +50,4 @@ pytest tests/unit/palmscan/test_scan_tree_model.py -q
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [claude-agent] Claimed. branch=task/scan-027-decision-tree-species-classifier-with-ru worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-027
