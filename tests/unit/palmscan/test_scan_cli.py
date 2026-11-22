@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import pytest
 
 from palmscan.cli import main
@@ -14,15 +16,9 @@ def test_help_lists_subcommands(capsys: pytest.CaptureFixture[str]) -> None:
         assert name in out
 
 
-@pytest.mark.parametrize(
-    "argv",
-    [
-        ["eval", "--palms", "p.geojson", "--site", "t1"],
-    ],
-)
-def test_eval_not_implemented_exit_1(argv: list[str], capsys: pytest.CaptureFixture[str]) -> None:
-    assert main(argv) == 1
-    assert "not implemented" in capsys.readouterr().err
+def test_eval_missing_palms_file_exits_2(tmp_path: Path) -> None:
+    argv = ["eval", "--palms", str(tmp_path / "p.geojson"), "--site", "T1", "--no-log-file"]
+    assert main(argv) == 2
 
 
 def test_bad_usage_exits_2() -> None:

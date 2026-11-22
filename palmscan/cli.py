@@ -1,14 +1,22 @@
-"""palmscan command line: ``run``, ``priors`` and ``eval`` (stages arrive in later SCAN tasks)."""
+"""palmscan command line: ``run``, ``priors`` and ``eval``."""
 
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 from collections.abc import Callable, Sequence
 from pathlib import Path
+from typing import Any
 
-from palmcore.cli_common import add_common_args, add_region_arg, build_context, run_main
-from palmcore.errors import EXIT_OK
+from palmcore.cli_common import (
+    add_common_args,
+    add_region_arg,
+    build_context,
+    build_paths,
+    run_main,
+)
+from palmcore.errors import EXIT_OK, ConfigError
 from palmcore.paths import ensure_dir
 from palmscan import __version__
 from palmscan.cache import Cache
@@ -16,15 +24,16 @@ from palmscan.classify.priors import compute_priors, priors_yaml
 from palmscan.config import ScanConfig, scan_config_from_region
 from palmscan.http import HttpClient
 from palmscan.pipeline import RunOptions, inventory_stages, run, species_level
+from palmscan.qa.accuracy import (
+    accuracy_doc,
+    accuracy_section_md,
+    evaluate_site,
+    write_accuracy,
+)
 
 TOOL = "palmscan"
 
 Handler = Callable[[argparse.Namespace], int]
-
-
-def _not_implemented(name: str) -> int:
-    print(f"palmscan {name}: not implemented yet", file=sys.stderr)
-    return 1
 
 
 def _load(args: argparse.Namespace) -> tuple[ScanConfig, Cache, Path]:
@@ -48,6 +57,10 @@ def _load(args: argparse.Namespace) -> tuple[ScanConfig, Cache, Path]:
     return cfg, cache, out_dir
 
 
+def _debug(args: argparse.Namespace) -> bool:
+    return int(getattr(args, "verbose", 0) or 0) >= 2
+
+
 def _cmd_run(args: argparse.Namespace) -> int:
     cfg, cache, out_dir = _load(args)
     opts = RunOptions(
@@ -57,6 +70,9 @@ def _cmd_run(args: argparse.Namespace) -> int:
         no_lidar=args.no_lidar,
         only=args.only,
         eval_site=args.eval_site,
+        debug=_debug(args),
+        repo_root=build_paths(args).repo_root,
+        sites_root=args.sites_root,
     )
     result = run(cfg, opts, cache, HttpClient())
     for warning in result.warnings:
@@ -75,8 +91,53 @@ def _cmd_priors(args: argparse.Namespace) -> int:
     return EXIT_OK
 
 
+def _read_palms(path: Path) -> dict[str, Any]:
+    try:
+        doc = json.loads(path.read_text(encoding="utf-8"))
+    except FileNotFoundError:
+        raise ConfigError(f"palms file not found: {path}") from None
+    except (OSError, ValueError) as exc:
+        raise ConfigError(f"cannot read {path}: {exc}") from exc
+    if not isinstance(doc, dict) or not isinstance(doc.get("features"), list):
+        raise ConfigError(f"{path} is not a palms.geojson FeatureCollection")
+    return doc
+
+
 def _cmd_eval(args: argparse.Namespace) -> int:
-    return _not_implemented("eval")
+    """Score a palms.geojson against a site's ground truth (TEST-010) and print the table.
+
+    Exit 0 when the evaluation ran, whatever the scores; threshold failures are in the output
+    (and in the JSON), because tuning runs read the numbers rather than a pass/fail status.
+    """
+    ctx = build_context(args, TOOL, load_region_arg=False)
+    palms = _read_palms(Path(args.palms))
+    warnings: list[str] = []
+    profiles = evaluate_site(
+        palms,
+        args.site,
+        repo_root=ctx.paths.repo_root,
+        sites_root=args.sites_root,
+        profiles=[args.profile] if args.profile else None,
+        radius_m=args.match_radius_m,
+        warnings=warnings,
+    )
+    if not profiles:
+        raise ConfigError(
+            "palmscan eval needs tests/accuracy (TEST-010) from a repository checkout: "
+            + "; ".join(warnings)
+        )
+    doc = accuracy_doc(args.site, profiles, fallback_height_error_m=None, warnings=warnings)
+    sys.stdout.write(accuracy_section_md(doc))
+    if args.out is not None:
+        out = Path(args.out)
+        if out.is_dir():
+            print(f"palmscan: wrote {write_accuracy(doc, out)}")
+        else:
+            out.parent.mkdir(parents=True, exist_ok=True)
+            text = json.dumps(doc, indent=2, sort_keys=True) + "\n"
+            out.write_text(text, encoding="utf-8", newline="\n")
+            print(f"palmscan: wrote {out}")
+    return EXIT_OK
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -101,7 +162,19 @@ def build_parser() -> argparse.ArgumentParser:
         default=None,
         help="run only one detection source",
     )
-    run.add_argument("--eval-site", default=None, metavar="SITE", help="also evaluate on SITE")
+    run.add_argument(
+        "--eval-site",
+        default=None,
+        metavar="SITE",
+        help="also score the palms against ground-truth site SITE (tests/accuracy/SITE)",
+    )
+    run.add_argument(
+        "--sites-root",
+        type=Path,
+        default=None,
+        metavar="DIR",
+        help="folder holding the ground-truth sites (default tests/accuracy)",
+    )
     run.set_defaults(func=_cmd_run)
 
     priors = sub.add_parser("priors", help="compute species priors from the region's inventory")
@@ -115,8 +188,21 @@ def build_parser() -> argparse.ArgumentParser:
     ev.add_argument("--palms", type=Path, required=True, metavar="PATH")
     ev.add_argument("--site", required=True, metavar="SITE")
     ev.add_argument("--profile", default=None, metavar="NAME")
-    ev.add_argument("--match-radius-m", type=float, default=3.0, metavar="M")
-    ev.add_argument("--out", type=Path, default=None, metavar="PATH")
+    ev.add_argument(
+        "--match-radius-m",
+        type=float,
+        default=None,
+        metavar="M",
+        help="match radius (default: thresholds.yaml, or the site's meta.yaml)",
+    )
+    ev.add_argument(
+        "--sites-root",
+        type=Path,
+        default=None,
+        metavar="DIR",
+        help="folder holding the ground-truth sites (default tests/accuracy)",
+    )
+    ev.add_argument("--out", type=Path, default=None, metavar="PATH", help="write the JSON here")
     ev.set_defaults(func=_cmd_eval)
     return parser
 

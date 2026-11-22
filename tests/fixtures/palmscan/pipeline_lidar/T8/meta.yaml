@@ -1,0 +1,10 @@
+# SYNTHETIC fixture for the palmscan LiDAR pipeline test (SCAN-028). Not a real site or label.
+site: T8
+imagery:
+  source: SYNTHETIC (no imagery)
+  date: "2026-11-22"
+  resolution_m: 0.6
+labelers:
+  - "synthetic-fixture"
+labeled_on: "2026-11-22"
+notes: "SYNTHETIC test fixture; positions are the synthetic LiDAR scene of test_scan_pipeline_lidar.py."

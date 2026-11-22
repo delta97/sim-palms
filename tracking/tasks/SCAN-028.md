@@ -10,7 +10,7 @@ depends_on: [SCAN-013, SCAN-020, SCAN-024, SCAN-025, SCAN-027, SCAN-029]
 requires: [none]
 agent: lidar-analyst
 estimate_h: 4
-touches: [palmscan/pipeline.py, palmscan/cli.py, palmscan/qa/summary.py, palmscan/qa/gpkg.py, palmscan/qa/rejects.py, tests/unit/palmscan/test_scan_pipeline_lidar.py, tests/fixtures/palmscan/pipeline_lidar/]
+touches: [palmscan/pipeline.py, palmscan/cli.py, palmscan/qa/summary.py, palmscan/qa/gpkg.py, palmscan/qa/rejects.py, tests/unit/palmscan/test_scan_pipeline_lidar.py, tests/unit/palmscan/test_scan_pipeline.py, tests/unit/palmscan/test_scan_cli.py, tests/fixtures/palmscan/pipeline_lidar/]
 owner: claude-agent
 branch: task/scan-028-wire-lidar-stages-into-palmscan-run-qa-a
 worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-028"

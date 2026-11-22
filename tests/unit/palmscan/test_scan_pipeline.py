@@ -195,17 +195,22 @@ def test_validation_failure_exits_3(tmp_path: Path, monkeypatch: pytest.MonkeyPa
     assert _load(out / "run.json")["exit_code"] == 3
 
 
-def test_lidar_source_warns_and_continues(tmp_path: Path, make_region: Region) -> None:
+def test_lidar_source_offline_without_tiles_exits_5(tmp_path: Path, make_region: Region) -> None:
+    """The LiDAR stage runs (SCAN-028): offline with no cached boundaries is a cache miss."""
+
     def edit(data: dict[str, Any]) -> None:
         data["sources"]["lidar"] = "3dep_ept"
 
-    assert main(_run_args(tmp_path, regions_dir=make_region(edit))) == 0
-    run = _load(tmp_path / "out" / "run.json")
-    assert "LiDAR stage not implemented yet; inventory only" in run["warnings"]
+    assert main(_run_args(tmp_path, regions_dir=make_region(edit))) == 5
+    assert _load(tmp_path / "out" / "run.json")["exit_code"] == 5
 
     assert main([*_run_args(tmp_path, regions_dir=make_region(edit)), "--no-lidar"]) == 0
     run = _load(tmp_path / "out" / "run.json")
     assert run["warnings"] == []
+    assert "lidar_candidates" not in run["counts"]
+
+    only_inventory = [*_run_args(tmp_path, regions_dir=make_region(edit)), "--only", "inventory"]
+    assert main(only_inventory) == 0
 
 
 def test_default_output_dir_is_build_scan_region(tmp_path: Path) -> None:
