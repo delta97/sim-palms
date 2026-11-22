@@ -14,7 +14,7 @@ touches: [palmscan/sources/buildings.py, tests/unit/palmscan/test_scan_buildings
 owner: ""
 branch: ""
 worktree: ""
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -54,3 +54,4 @@ pytest tests/unit/palmscan/test_scan_buildings.py -q
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [integrator] integrator note from SCAN-005: reuse palmscan.sources overpass.query_bbox(template, bbox) (placeholders {south},{west},{north},{east} or {bbox})
