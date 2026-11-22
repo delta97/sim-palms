@@ -7,7 +7,7 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 160 | 3 | 0 | 1 | 49 | 0 | 213 |
+| 157 | 5 | 0 | 1 | 50 | 0 | 213 |
 
 ## In progress / in review
 
@@ -17,6 +17,8 @@ Generated: 2026-11-22
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
 | [SCAN-007](tasks/SCAN-007.md) | in_progress | claude-agent | task/scan-007-record-live-source-fixtures-and-confirm | Record live source fixtures and confirm source fields |
 | [SCAN-013](tasks/SCAN-013.md) | in_progress | claude-agent | task/scan-013-palmscan-run-pipeline-and-cli-end-to-end | palmscan run pipeline and CLI, end-to-end on fixtures |
+| [SCAN-023](tasks/SCAN-023.md) | in_progress | claude-agent | task/scan-023-peak-detection-and-watershed-crown-segme | Peak detection and watershed crown segmentation |
+| [SCAN-029](tasks/SCAN-029.md) | in_progress | claude-agent | task/scan-029-run-the-test-010-accuracy-evaluation-fro | Run the TEST-010 accuracy evaluation from palmscan (in-run QA) |
 
 ## Blocked
 
@@ -33,10 +35,8 @@ _None._
 | [DEC-002](tasks/DEC-002.md) | 3 | human | task-planner | Decide: build or license the palm models |
 | [DEC-008](tasks/DEC-008.md) | 3 | human | task-planner | Decide: storage for large asset binaries (Git LFS or external) |
 | [SCAN-020](tasks/SCAN-020.md) | 4 | none | lidar-analyst | USGS 3DEP EPT LiDAR adapter (PDAL pipeline, tiles, cache) |
-| [SCAN-023](tasks/SCAN-023.md) | 4 | none | lidar-analyst | Peak detection and watershed crown segmentation |
 | [SCAN-025](tasks/SCAN-025.md) | 4 | none | lidar-analyst | Inventory-to-LiDAR matching and merge |
-| [SCAN-026](tasks/SCAN-026.md) | 4 | none | lidar-analyst | Species shape rules and classification order |
-| [SCAN-029](tasks/SCAN-029.md) | 4 | none | test-engineer | Run the TEST-010 accuracy evaluation from palmscan (in-run QA) |
+| [SCAN-027](tasks/SCAN-027.md) | 4 | none | lidar-analyst | Decision tree species classifier with rules fallback |
 | [DEC-005](tasks/DEC-005.md) | 5 | human | test-engineer | Decide: performance budget and reference hardware/settings |
 | [TEST-013](tasks/TEST-013.md) | 5 | none | test-engineer | Build the frametime capture parser and run comparison report |
 | [TEST-008](tasks/TEST-008.md) | 6 | none | test-engineer | Add optional image-diff scoring for visual viewpoints |
@@ -178,7 +178,7 @@ _None._
 | [GEN-019](tasks/GEN-019.md) | todo | windows-sim, human | GEN-100, ASSET-100 | Integrate the real model library into region builds |
 | [RISK-007](tasks/RISK-007.md) | todo | none | RISK-006, GATE-P3 | Risk review after Phase 3 (mid-project) |
 
-## Phase 4 (3/18 done)
+## Phase 4 (4/18 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -186,13 +186,13 @@ _None._
 | [SCAN-020](tasks/SCAN-020.md) | todo | none | SCAN-003 | USGS 3DEP EPT LiDAR adapter (PDAL pipeline, tiles, cache) |
 | [SCAN-021](tasks/SCAN-021.md) | todo | network | SCAN-020, TEST-100 | Record LiDAR fixtures and confirm 3DEP EPT facts |
 | [SCAN-022](tasks/SCAN-022.md) | done | none | SCAN-001 | Canopy height model (DTM, DSM, CHM) |
-| [SCAN-023](tasks/SCAN-023.md) | todo | none | SCAN-022 | Peak detection and watershed crown segmentation |
+| [SCAN-023](tasks/SCAN-023.md) | in_progress | none | SCAN-022 | Peak detection and watershed crown segmentation |
 | [SCAN-024](tasks/SCAN-024.md) | todo | none | SCAN-023 | Palm rule filter with reject reasons |
 | [SCAN-025](tasks/SCAN-025.md) | todo | none | SCAN-008 | Inventory-to-LiDAR matching and merge |
-| [SCAN-026](tasks/SCAN-026.md) | todo | none | SCAN-010 | Species shape rules and classification order |
+| [SCAN-026](tasks/SCAN-026.md) | done | none | SCAN-010 | Species shape rules and classification order |
 | [SCAN-027](tasks/SCAN-027.md) | todo | none | SCAN-026 | Decision tree species classifier with rules fallback |
 | [SCAN-028](tasks/SCAN-028.md) | todo | none | SCAN-013, SCAN-020, SCAN-024, SCAN-025, SCAN-027, SCAN-029 | Wire LiDAR stages into palmscan run, QA and eval |
-| [SCAN-029](tasks/SCAN-029.md) | todo | none | SCAN-001, TEST-010 | Run the TEST-010 accuracy evaluation from palmscan (in-run QA) |
+| [SCAN-029](tasks/SCAN-029.md) | in_progress | none | SCAN-001, TEST-010 | Run the TEST-010 accuracy evaluation from palmscan (in-run QA) |
 | [SCAN-030](tasks/SCAN-030.md) | todo | network, human | SCAN-021, SCAN-028, TEST-101 | Tune LiDAR palm thresholds on test sites |
 | [SCAN-101](tasks/SCAN-101.md) | todo | network, human | SCAN-030, SCAN-100 | Deliverable: LiDAR-enriched palmscan run with heights and LiDAR-only palms (Phase 4) |
 | [TEST-009](tasks/TEST-009.md) | done | none | TEST-005 | Define the ground-truth format and write the labeling guide and tooling |
