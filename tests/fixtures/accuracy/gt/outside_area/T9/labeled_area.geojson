@@ -1,0 +1,39 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "site": "T9",
+        "note": "SYNTHETIC fixture point, not a real palm label"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.01,
+              0.01
+            ],
+            [
+              0.0,
+              0.01
+            ],
+            [
+              0.0,
+              0.0
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

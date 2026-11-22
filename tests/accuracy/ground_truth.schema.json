@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:palmfix:schema:ground-truth:1",
+  "$comment": "Hand-labelled palms for one test site (tests/accuracy/<site>/ground_truth.geojson). Format: plans/detailed/06-testing.md#ground-truth-format. Cross-file checks (points inside labeled_area.geojson, prefix matches folder, meta.yaml) live in tests/accuracy/gt.py.",
+  "title": "ground_truth.geojson",
+  "description": "FeatureCollection of Point features, EPSG:4326, one per palm the labeller could see.",
+  "type": "object",
+  "required": ["type", "features"],
+  "properties": {
+    "type": {"const": "FeatureCollection"},
+    "name": {"type": "string", "description": "Optional; QGIS and GDAL write it."},
+    "crs": {"type": "object", "description": "Optional legacy member; gt.py checks it names WGS84."},
+    "features": {"type": "array", "items": {"$ref": "#/$defs/feature"}}
+  },
+  "$defs": {
+    "feature": {
+      "type": "object",
+      "required": ["type", "geometry", "properties"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {"const": "Feature"},
+        "id": {"type": ["string", "integer"], "description": "Optional; QGIS and GDAL write feature ids."},
+        "geometry": {
+          "type": "object",
+          "required": ["type", "coordinates"],
+          "additionalProperties": false,
+          "properties": {
+            "type": {"const": "Point"},
+            "coordinates": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "prefixItems": [
+                {"type": "number", "minimum": -180, "maximum": 180},
+                {"type": "number", "minimum": -90, "maximum": 90}
+              ],
+              "description": "[lon, lat], WGS84. Crown centre as seen in the orthoimage."
+            }
+          }
+        },
+        "properties": {
+          "type": "object",
+          "required": [
+            "gt_id",
+            "height_class",
+            "species",
+            "species_basis",
+            "context",
+            "confidence"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "gt_id": {
+              "type": "string",
+              "pattern": "^T[0-9]+-gt-[0-9]{4}$(?!\\n)",
+              "description": "<site>-gt-NNNN, unique within the site. Use gt.py next-id."
+            },
+            "height_class": {
+              "enum": ["S", "M", "T", "X", "unknown"],
+              "description": "S < 8 m; M 8 to < 15 m; T 15 to < 25 m; X >= 25 m. Edges match palms height_m classes."
+            },
+            "height_ref_m": {
+              "type": ["number", "null"],
+              "minimum": 0,
+              "description": "CHM maximum within 1.5 m of the point, written by gt.py fill-heights; null where there is no CHM data. Absent or null before fill-heights."
+            },
+            "species": {
+              "anyOf": [
+                {"const": "unknown"},
+                {"type": "string", "pattern": "^[a-z]+(_[a-z]+)+$(?!\\n)"}
+              ],
+              "description": "Species key (for example washingtonia_robusta, or <genus>_sp) or unknown. Same pattern as palms.geojson species."
+            },
+            "species_basis": {
+              "enum": ["inventory", "streetview", "imagery", "unknown"],
+              "description": "Where the species label came from. Never the palmscan prediction."
+            },
+            "context": {
+              "enum": ["street", "beach", "park", "yard", "parking", "other"]
+            },
+            "confidence": {
+              "enum": ["high", "low"],
+              "description": "low = maybe a palm. An unmatched low point is ignored, not a false negative."
+            },
+            "note": {"type": "string"}
+          }
+        }
+      }
+    }
+  }
+}
