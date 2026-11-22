@@ -1,7 +1,7 @@
 ---
 id: SCAN-008
 title: "Inventory ingest stage and cross-source dedupe"
-status: review
+status: done
 phase: 1
 area: SCAN
 kind: build
@@ -56,3 +56,4 @@ pytest tests/unit/palmscan/test_scan_ingest.py tests/unit/palmscan/test_scan_ded
 - 2026-11-22 [claude-agent] Claimed. branch=task/scan-008-inventory-ingest-stage-and-cross-source worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-008
 - 2026-11-22 [claude-agent] Implemented registry.py, ingest.py, detect/dedupe.py + tests (21 pass); full suite 1498 passed 4 skipped, ruff/format/mypy clean. Acceptance all met: non-palms counted/stump+vacant rejected; cross-source merge only, same-source kept; shuffle-invariant output; offline tests. cache_max_age_days enforced in ingest via per-source _FreshnessCache (stale refetched, offline used + warning); tested. height_raw set on PalmRecord (field came from SCAN-009 merge) and tested. Plan W6 refined: dedupe resolves pairs closest-first; osm_adapter test hook; source_order result field. Buildings adapter not registered (not an inventory adapter); hook comment in registry.py.
 - 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] Status review -> done.
