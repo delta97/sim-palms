@@ -1,7 +1,7 @@
 ---
 id: ASSET-002
 title: "Collect build-vs-license inputs for DEC-002 (palm models)"
-status: todo
+status: in_progress
 phase: 3
 area: ASSET
 kind: research
@@ -11,10 +11,10 @@ requires: [network]
 agent: asset-pipeline-artist
 estimate_h: 3
 touches: [assets/reference/build-vs-license.md]
-owner: ""
-branch: ""
-worktree: ""
-updated: 2026-11-21
+owner: claude-agent
+branch: task/asset-002-collect-build-vs-license-inputs-for-dec
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/ASSET-002"
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -54,3 +54,4 @@ python3 scripts/tasks.py show DEC-002 | grep build-vs-license
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [claude-agent] Claimed. branch=task/asset-002-collect-build-vs-license-inputs-for-dec worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/ASSET-002
