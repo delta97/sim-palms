@@ -7,7 +7,7 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 157 | 5 | 0 | 1 | 50 | 0 | 213 |
+| 157 | 4 | 0 | 1 | 51 | 0 | 213 |
 
 ## In progress / in review
 
@@ -16,7 +16,6 @@ Generated: 2026-11-22
 | [ASSET-001](tasks/ASSET-001.md) | in_progress | claude-agent | task/asset-001-write-reference-sheets-for-the-5-socal-p | Write reference sheets for the 5 SoCal palm species |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
 | [SCAN-007](tasks/SCAN-007.md) | in_progress | claude-agent | task/scan-007-record-live-source-fixtures-and-confirm | Record live source fixtures and confirm source fields |
-| [SCAN-013](tasks/SCAN-013.md) | in_progress | claude-agent | task/scan-013-palmscan-run-pipeline-and-cli-end-to-end | palmscan run pipeline and CLI, end-to-end on fixtures |
 | [SCAN-023](tasks/SCAN-023.md) | in_progress | claude-agent | task/scan-023-peak-detection-and-watershed-crown-segme | Peak detection and watershed crown segmentation |
 | [SCAN-029](tasks/SCAN-029.md) | in_progress | claude-agent | task/scan-029-run-the-test-010-accuracy-evaluation-fro | Run the TEST-010 accuracy evaluation from palmscan (in-run QA) |
 
@@ -65,7 +64,7 @@ _None._
 | [SPIKE-011](tasks/SPIKE-011.md) | todo | human | SPIKE-010, RISK-005 | Write the Phase 0 go/no-go proposal and get the user's decision |
 | [TEST-006](tasks/TEST-006.md) | todo | windows-sim |  | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
 
-## Phase 1 (24/31 done)
+## Phase 1 (25/31 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -94,7 +93,7 @@ _None._
 | [SCAN-010](tasks/SCAN-010.md) | done | none | SCAN-001 | Species priors and deterministic prior sampling |
 | [SCAN-011](tasks/SCAN-011.md) | done | none | SCAN-001, ARCH-002, ARCH-006, ARCH-007 | palms.geojson writer, palm IDs and schema validation |
 | [SCAN-012](tasks/SCAN-012.md) | done | none | SCAN-001 | QA outputs: qa_summary.md, qa_map.gpkg, qa_rejects.csv |
-| [SCAN-013](tasks/SCAN-013.md) | in_progress | none | SCAN-006, SCAN-008, SCAN-009, SCAN-010, SCAN-011, SCAN-012 | palmscan run pipeline and CLI, end-to-end on fixtures |
+| [SCAN-013](tasks/SCAN-013.md) | done | none | SCAN-006, SCAN-008, SCAN-009, SCAN-010, SCAN-011, SCAN-012 | palmscan run pipeline and CLI, end-to-end on fixtures |
 | [SCAN-100](tasks/SCAN-100.md) | todo | network, human | SCAN-007, SCAN-013, TEST-100, ARCH-008 | Deliverable: palmscan run produces validated palms.geojson from inventory data (Phase 1) |
 | [TEST-001](tasks/TEST-001.md) | done | none | ARCH-001 | Build the shared pytest harness and fixture loaders |
 | [TEST-004](tasks/TEST-004.md) | done | none | TEST-001, ARCH-002, ARCH-003 | Add contract conformance tests for palms.geojson |

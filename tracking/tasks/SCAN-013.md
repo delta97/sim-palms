@@ -1,7 +1,7 @@
 ---
 id: SCAN-013
 title: "palmscan run pipeline and CLI, end-to-end on fixtures"
-status: review
+status: done
 phase: 1
 area: SCAN
 kind: build
@@ -64,3 +64,4 @@ ls /tmp/scan-e2e   # palms.geojson buildings.geojson species_priors.yaml qa_summ
 - 2026-11-22 [claude-agent] Decisions: added test_scan_cli.py to touches (run/priors placeholders tests removed, eval stays exit 1); RunOptions.generated_at added; wrapped CacheMiss re-raised for exit 5 (ingest wraps it as SourceError, ingest.py untouched); priors computed from species-level palms only (brahea_sp / genus defaults excluded); --only lidar in Phase 1 skips inventory, warns and writes an empty palms.geojson; buildings.geojson has extra top-level notices map.
 - 2026-11-22 [claude-agent] Correction: test_scan_pipeline.py has 10 tests (10 passed), not 12.
 - 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] Status review -> done.
