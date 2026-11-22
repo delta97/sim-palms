@@ -44,6 +44,12 @@ Numbers `001`-`099` are ordinary tasks. `100`-`199` are deliverables or interfac
 
 Full field reference: [`tasks/_TEMPLATE.md`](tasks/_TEMPLATE.md).
 
+## GitHub issues
+
+Each task is mirrored to a GitHub issue (`issue:` field). Gate issues are the parents of their phase's tasks.
+Issues are a read-mostly progress view generated from these files by `scripts/issues.py sync`, which the integrator runs locally after every push to `main`.
+Details: `AGENTS.md` section 5a.
+
 ## Commands
 
 ```bash

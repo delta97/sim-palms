@@ -1,7 +1,7 @@
 ---
 id: INFRA-001
 title: Bootstrap plans, tracking, worktree tooling and specialist agents
-status: review
+status: done
 phase: 0
 area: INFRA
 kind: build
@@ -53,3 +53,5 @@ diff -r <unzipped-source-folder> plans/ --exclude=detailed --exclude=msfs-palm-f
 
 - 2026-11-21 [bootstrap-session] Task created and executed; worktree helper tested in a scratch clone (claim commit, worktree add, double-claim refused, remove).
 - 2026-11-22 [bootstrap-session] PR opened: https://github.com/delta97/sim-palms/pull/1
+- 2026-11-22 [integrator] integrator: PR #1 merged; the follow-up issue-sync commit (004c8a2) that never reached main is now cherry-picked without its GitHub workflow (CI disabled): scripts/issues.py runs locally. Task done.
+- 2026-11-22 [integrator] Status review -> done.

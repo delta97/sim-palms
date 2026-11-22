@@ -23,6 +23,7 @@ every model and every person. `CLAUDE.md` imports it; other tools should be poin
 | `scripts/tasks.py` | Task CLI: list, ready, batch, claim, set, log, validate, board | |
 | `scripts/wt.sh` | Worktree helper for parallel work | |
 | `scripts/ci.py` | Local CI (GitHub Actions is disabled): lint, types, tests + coverage, tracking checks. Must pass before merging to `main` | |
+| `scripts/issues.py` | Mirrors task files to GitHub issues (titles, bodies, labels, open/closed, gate sub-issues). Run locally by the integrator after pushing `main`: `python scripts/issues.py sync` | |
 | `.claude/agents/*.md` | Specialist subagents for this project | |
 | `.claude/skills/*/SKILL.md` | Repeatable procedures: `/start-task`, `/handoff`, `/plan-batch` | |
 
@@ -133,6 +134,21 @@ touch rules. One cloud session = one task (or one tightly related set) = one PR.
 
 A new session must be able to continue from the task file, the newest session log and STATUS.md
 alone, without chat history. Write for that reader.
+
+### 5a. GitHub issues (progress view)
+
+Every task has a GitHub issue titled `[<ID>] <title>`. Its number is in the task's `issue:` field.
+Each phase's gate issue (`[GATE-Pn]`) is the parent of that phase's tasks, so the gate shows the phase's progress.
+
+- **The task file is canonical.** The integrator runs `python scripts/issues.py sync` locally after every push to
+  `main` (GitHub Actions is disabled for this repo): it creates issues for new tasks, regenerates bodies, and sets
+  `status:*` labels and open/closed state from the file.
+  Edit the task file, never the issue body. Comments on issues are fine and are not overwritten.
+- **Commits and PRs:** reference the issue with `Refs #N`. Do **not** write `Closes #N`: the issue closes when the
+  integrator sets the task to `done` on `main`; closing it earlier would be reverted by the next sync.
+- **Filters that are useful:** `label:needs-user` (waiting on the sim PC, Blender, a GPU or the user),
+  `label:status:in_progress`, `label:phase:1`, `label:area:scan`.
+- `python scripts/issues.py sync --dry-run` shows what would change; it needs the `gh` CLI, logged in.
 
 ---
 

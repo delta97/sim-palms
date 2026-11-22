@@ -7,13 +7,11 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 140 | 0 | 1 | 1 | 72 | 0 | 214 |
+| 140 | 0 | 1 | 0 | 73 | 0 | 214 |
 
 ## In progress / in review
 
-| Task | Status | Owner | Branch | Title |
-|---|---|---|---|---|
-| [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
+_None._
 
 ## Blocked
 
@@ -36,13 +34,13 @@ Generated: 2026-11-22
 | [FX-006](tasks/FX-006.md) | 7 | windows-sim | simconnect-dotnet-engineer | SimConnect pose logger, screenshot trigger and camera SimVar check |
 | [FX-026](tasks/FX-026.md) | 7 | network, human | render-fx-researcher | Fetch and pin the LaMa weights, then run the LaMa inpainting backend end to end |
 
-## Phase 0 (2/17 done)
+## Phase 0 (3/17 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
 | [DEC-004](tasks/DEC-004.md) | todo | human, network |  | Decide: first test block (a San Diego or LA street the user knows well) |
 | [GATE-P0](tasks/GATE-P0.md) | todo | human | DEC-004, RISK-005, SPIKE-001, SPIKE-002, SPIKE-003, SPIKE-004, SPIKE-005, SPIKE-006, SPIKE-007, SPIKE-008, SPIKE-009, SPIKE-010, SPIKE-011 | Phase 0 exit gate: one blob cut and replaced, command-line build works |
-| [INFRA-001](tasks/INFRA-001.md) | review | none |  | Bootstrap plans, tracking, worktree tooling and specialist agents |
+| [INFRA-001](tasks/INFRA-001.md) | done | none |  | Bootstrap plans, tracking, worktree tooling and specialist agents |
 | [RISK-005](tasks/RISK-005.md) | done | network |  | Set up the sim/SDK update watch and do the first pass on exclusion bugs |
 | [RISK-006](tasks/RISK-006.md) | todo | none | GATE-P0 | Define the risk review routine and run the first review after Phase 0 |
 | [SPIKE-001](tasks/SPIKE-001.md) | todo | windows-sim, human |  | Install the MSFS 2024 SDK and create an empty Dev Mode scenery project |

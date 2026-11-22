@@ -44,6 +44,8 @@ owner       who claimed it (session id, agent name or person). Empty when unclai
 branch      git branch the work happens on
 worktree    worktree path, if one is used
 updated     YYYY-MM-DD of the last edit to this file
+issue       (optional) GitHub issue number mirroring this task; filled in by scripts/issues.py.
+            New tasks get an issue automatically when they reach main (see AGENTS.md 5a).
 -->
 
 ## Goal
