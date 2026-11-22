@@ -813,6 +813,7 @@ class PointSource(Protocol):
   ```
   `bounds` are the buffered tile bounds transformed into the EPT's native SRS. VERIFY in SCAN-021 that the public EPT SRS is EPSG:3857 (read `srs` from `ept.json` instead of assuming it).
 - Cache: `data/lidar/<dataset>/<tile_id>.laz` plus `.meta.json` (dataset, bounds, point count, PDAL version). Reused unless `--refresh`.
+- As built (SCAN-020): `build_pipeline` returns `{"pipeline": [...]}` (valid PDAL input) and takes keyword-only `ept_srs`; `fetch_tile` takes `ept_srs` (a callable, called only when PDAL must run), `runner` (injectable `PdalRunner`; default `PdalPythonRunner`, lazy `import pdal`, streaming execution) and writes through a `.part` file, so tiles never pass through Python memory (no change to `Cache.get_or_fetch`). A cached tile is reused only if the signature (dataset URL, buffered bounds, CRS, noise classes) in its `.meta.json` matches. Facts read 2026-11-22: boundaries index properties are `name`, `id`, `count`, `url` (2284 MultiPolygon features); `ept.json` `srs` = `{authority: EPSG, horizontal: 3857, wkt}` for the San Diego 2014 dataset; names may carry no year or two (first `_YYYY` is used).
 - Tests: pipeline JSON for a known tile (golden dict), tile planning (count, ids, buffer), dataset selection on `tests/fixtures/palmscan/lidar_ept/boundaries_sample.geojson` (3 hand-made features, overlapping years). Any test that executes PDAL uses `pytest.importorskip("pdal")`.
 
 ### W14. Canopy height model

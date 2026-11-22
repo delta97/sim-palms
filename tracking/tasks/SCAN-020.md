@@ -1,7 +1,7 @@
 ---
 id: SCAN-020
 title: "USGS 3DEP EPT LiDAR adapter (PDAL pipeline, tiles, cache)"
-status: in_progress
+status: review
 phase: 4
 area: SCAN
 kind: build
@@ -42,10 +42,10 @@ updated: 2026-11-22
 
 ## Acceptance criteria
 
-- [ ] Newest dataset chosen on overlap; `lidar.datasets` override respected; no coverage raises `SourceError`.
-- [ ] Pipeline JSON matches the golden file.
-- [ ] Cached tiles are not refetched; offline miss raises `CacheMiss`.
-- [ ] Test suite passes with and without PDAL installed (PDAL tests skipped when absent).
+- [x] Newest dataset chosen on overlap; `lidar.datasets` override respected; no coverage raises `SourceError`. (tests test_newest_dataset_wins_on_overlap, test_forced_*, test_no_coverage_raises)
+- [x] Pipeline JSON matches the golden file. (test_pipeline_matches_golden)
+- [x] Cached tiles are not refetched; offline miss raises `CacheMiss`. (test_cached_tile_is_not_refetched, test_offline_miss_raises_cachemiss)
+- [x] Test suite passes with and without PDAL installed (PDAL tests skipped when absent). (verified without PDAL: 34 passed, 1 skipped; with-PDAL run not possible here, PDAL test written but unrun)
 
 ## Verification
 
@@ -59,3 +59,5 @@ python -c "import pdal" 2>/dev/null && echo "pdal present" || echo "pdal absent:
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [integrator] integrator note from SCAN-001: palmscan Cache.get_or_fetch reads the fetched file fully into memory (reuses palmcore.write_cache); revisit for large LiDAR tiles (stream to disk)
 - 2026-11-22 [claude-agent] Claimed. branch=task/scan-020-usgs-3dep-ept-lidar-adapter-pdal-pipelin worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-020
+- 2026-11-22 [claude-agent] Implemented palmscan/sources/lidar_ept.py (dataset parse/select, tile plan, pipeline JSON, tile cache with .part streaming + signature check, injectable PdalRunner, read_points -> chm fields). Facts read 2026-11-22: boundaries index https://raw.githubusercontent.com/hobuinc/usgs-lidar/master/boundaries/resources.geojson props name/id/count/url, 2284 MultiPolygon; SanDiegoQL1_2014_LAS_2016 ept.json srs authority EPSG horizontal 3857 (live test passed with --run-network). Plan W13 note added (build_pipeline returns {pipeline:[...]}, keyword ept_srs). Cache.get_or_fetch untouched: tiles stream via PDAL to a .part file then os.replace, no touches change. CI/Linux needs: conda-forge pdal + python-pdal, then pip install -e .[pdal]; pdal tests auto-skip otherwise. VERIFY left: Classification classes 2/6 and vertical datum per dataset, execute_streaming/streamable API. Full suite: 1668 passed, 3 skipped; ruff, format, mypy clean.
+- 2026-11-22 [claude-agent] Status in_progress -> review.

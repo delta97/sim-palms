@@ -1,0 +1,120 @@
+{
+  "type": "FeatureCollection",
+  "name": "resources",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "SYN_SanDiego_2014",
+        "id": 0,
+        "count": 1000000,
+        "url": "https://example.test/usgs-lidar-public/SYN_SanDiego_2014/ept.json"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                -117.3,
+                32.6
+              ],
+              [
+                -117.1,
+                32.6
+              ],
+              [
+                -117.1,
+                32.8
+              ],
+              [
+                -117.3,
+                32.8
+              ],
+              [
+                -117.3,
+                32.6
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "SYN_SanDiego_2018",
+        "id": 1,
+        "count": 2000000,
+        "url": "https://example.test/usgs-lidar-public/SYN_SanDiego_2018/ept.json"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                -117.2,
+                32.7
+              ],
+              [
+                -117.14,
+                32.7
+              ],
+              [
+                -117.14,
+                32.76
+              ],
+              [
+                -117.2,
+                32.76
+              ],
+              [
+                -117.2,
+                32.7
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "SYN_Elsewhere_2020",
+        "id": 2,
+        "count": 3000000,
+        "url": "https://example.test/usgs-lidar-public/SYN_Elsewhere_2020/ept.json"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                -118.4,
+                33.9
+              ],
+              [
+                -118.2,
+                33.9
+              ],
+              [
+                -118.2,
+                34.1
+              ],
+              [
+                -118.4,
+                34.1
+              ],
+              [
+                -118.4,
+                33.9
+              ]
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}
