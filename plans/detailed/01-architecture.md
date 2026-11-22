@@ -575,7 +575,7 @@ This merges the source plan's example with the keys requested in `plans/detailed
 | `exclusion.default_radius_m` | number | no | `3.0` | 0..15 (GEN) |
 | `exclusion.max_cluster_extent_m` | number | no | `150` | 10..2000 (GEN) |
 | `exclusion.max_vertices` | integer | no | `256` | 8..10000 (GEN; `VERIFY:` sim limit) |
-| `placement.scale_clamp` | number | no | `0.15` | 0..1 (GEN) |
+| `placement.scale_clamp` | number | no | none | 0..1; optional per-region override. The asset manifest owns scale limits (ASSET-005, plan 03 "Scale limits and species fallback") |
 | `mask_out` | list | no | `[]` | items below |
 | `masks.airports.enabled` | boolean | no | `true` | plan 04 §7; GEN builds the airport file (`palmgen masks airports`) |
 | `masks.airports.buffer_m` | number | no | `100` | 0..2000 |
@@ -636,7 +636,7 @@ class ExclusionConfig:
     max_vertices: int = 256
 @dataclass(frozen=True)
 class PlacementConfig:
-    scale_clamp: float = 0.15
+    scale_clamp: float | None = None   # optional override; manifest owns scale limits
 @dataclass(frozen=True)
 class MaskArea:
     name: str; kind: Literal["mod", "airport", "other"]; bbox: Bbox | None

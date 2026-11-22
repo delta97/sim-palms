@@ -319,9 +319,9 @@ def test_schema_defaults_match_python_defaults() -> None:
         default = getattr(ExclusionConfig(), name)
         assert props["exclusion"]["properties"][name]["default"] == default, name
         assert isinstance(default, type(field.default)), name
-    assert (
-        props["placement"]["properties"]["scale_clamp"]["default"] == PlacementConfig().scale_clamp
-    )
+    # scale_clamp is an optional override with no default (ASSET-005 owns scale limits).
+    assert "default" not in props["placement"]["properties"]["scale_clamp"]
+    assert PlacementConfig().scale_clamp is None
     airports = props["masks"]["properties"]["airports"]["properties"]
     assert airports["enabled"]["default"] == AirportMasks().enabled
     assert airports["buffer_m"]["default"] == AirportMasks().buffer_m

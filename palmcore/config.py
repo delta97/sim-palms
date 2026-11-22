@@ -110,7 +110,9 @@ class ExclusionConfig:
 
 @dataclass(frozen=True)
 class PlacementConfig:
-    scale_clamp: float = 0.15
+    # Optional per-region override. The asset manifest owns scale limits (ASSET-005,
+    # plans/detailed/03-palm-assets.md "Scale limits and species fallback"); None = no override.
+    scale_clamp: float | None = None
 
 
 @dataclass(frozen=True)
@@ -540,13 +542,7 @@ def _build(
         sources=sources,
         species_priors=MappingProxyType(priors),
         exclusion=exclusion,
-        placement=PlacementConfig(
-            scale_clamp=float(
-                cast("Mapping[str, Any]", data.get("placement", {})).get(
-                    "scale_clamp", PlacementConfig().scale_clamp
-                )
-            )
-        ),
+        placement=_placement_config(cast("Mapping[str, Any]", data.get("placement", {}))),
         mask_out=masks,
         airport_masks=airports,
         palmscan=_freeze(cast("Mapping[str, Any]", data.get("palmscan", {}))),
@@ -669,3 +665,8 @@ def check_regions(regions_dir: Path) -> list[str]:
             names = " and ".join(str(f) for f in files)
             errors.append(f"id_prefix {prefix!r} is used by more than one region: {names}")
     return errors
+
+
+def _placement_config(placement: Mapping[str, Any]) -> PlacementConfig:
+    clamp = placement.get("scale_clamp")
+    return PlacementConfig(scale_clamp=None if clamp is None else float(clamp))

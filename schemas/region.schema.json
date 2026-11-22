@@ -60,7 +60,7 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "scale_clamp": {"type": "number", "minimum": 0, "maximum": 1, "default": 0.15}
+        "scale_clamp": {"type": "number", "minimum": 0, "maximum": 1}
       }
     },
     "mask_out": {"type": "array", "items": {"$ref": "#/$defs/mask_item"}, "default": []},
