@@ -5,6 +5,7 @@ Format: `- TASK-ID: what changed (PR link)`.
 
 ## Unreleased
 
+- SCAN-022: Added the canopy height model (DTM, DSM, CHM) on numpy, with fast deterministic gap filling (local merge).
 - SCAN-008: Added the inventory ingest stage (adapter registry, cache freshness) and deterministic cross-source dedupe (local merge).
 - SCAN-006: Added the building footprints adapter (OSM multipolygons, Microsoft file) producing contract-valid buildings (local merge).
 - SCAN-009: Added palm sizes, exclusion radius, building conflicts and mask_out handling (`palmscan/attributes.py`, `palmscan/mask.py`) (local merge).
