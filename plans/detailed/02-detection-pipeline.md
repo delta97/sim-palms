@@ -927,8 +927,9 @@ class ShapeModel(Protocol):
     def predict(self, X: np.ndarray) -> list[tuple[str | None, float]]: ...   # None = no answer
 
 def shape_rules(height_m: float, crown_diam_m: float) -> tuple[str | None, float]: ...
-def classify(palms: list[PalmRecord], priors: dict[str, float], model: ShapeModel | None = None) -> None: ...
+def classify(palms: list[PalmRecord], priors: dict[str, float], model: ShapeModel | None = None, rules: Sequence[ShapeRule] = DEFAULT_SHAPE_RULES) -> None: ...
 ```
+The rule thresholds live in `DEFAULT_SHAPE_RULES` (a table of `ShapeRule`, not logic); `shape_rules(h, c, rules=...)` also takes a table. VERIFY: the starting values below are the plan's, with no cited source yet.
 `shape_rules`, first match wins, bounds inclusive:
 1. `height_m >= 18` and `crown_diam_m <= 5` -> `washingtonia_robusta`, 0.7
 2. `crown_diam_m >= 7` and `8 <= height_m <= 20` -> `phoenix_canariensis`, 0.7
