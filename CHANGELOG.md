@@ -5,6 +5,7 @@ Format: `- TASK-ID: what changed (PR link)`.
 
 ## Unreleased
 
+- DEC-004: First test block decided (ADR-0005): Pacific Beach, Mission Blvd to Sail Bay, San Diego (`regions/sd-pacific-beach.yaml`).
 - INFRA-001: Adopted `scripts/issues.py` (from the unmerged bootstrap follow-up) to sync GitHub issues from task files, run locally; synced all issue bodies and labels.
 - FX-011: Added palm masks from depth and colour heuristics with YAML thresholds (`palmfx mask-heuristic`); thresholds VERIFY until tuned on real captures (local merge).
 - FX-009: Added calibration (vfov, time offset, pose bias, depth model) from clicks, the click store and UI, and `palmfx calib`/`palmfx clicks`; click UI not yet run on a display (local merge).

@@ -7,7 +7,7 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 140 | 0 | 1 | 0 | 73 | 0 | 214 |
+| 139 | 0 | 1 | 0 | 74 | 0 | 214 |
 
 ## In progress / in review
 
@@ -23,9 +23,9 @@ _None._
 
 | Task | Phase | Requires | Agent | Title |
 |---|---|---|---|---|
-| [DEC-004](tasks/DEC-004.md) | 0 | human, network | task-planner | Decide: first test block (a San Diego or LA street the user knows well) |
 | [SPIKE-001](tasks/SPIKE-001.md) | 0 | windows-sim, human | msfs-sdk-specialist | Install the MSFS 2024 SDK and create an empty Dev Mode scenery project |
 | [TEST-006](tasks/TEST-006.md) | 0 | windows-sim | msfs-sdk-specialist | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
+| [DEC-009](tasks/DEC-009.md) | 1 | human, network | geo-data-engineer | Decide: building footprint source (OSM, Microsoft, both, or county data) |
 | [RISK-003](tasks/RISK-003.md) | 1 | network, human | geo-data-engineer | Inventory other palm and tree mods and their coverage for mask_out defaults |
 | [DEC-002](tasks/DEC-002.md) | 3 | human | task-planner | Decide: build or license the palm models |
 | [DEC-008](tasks/DEC-008.md) | 3 | human | task-planner | Decide: storage for large asset binaries (Git LFS or external) |
@@ -34,11 +34,11 @@ _None._
 | [FX-006](tasks/FX-006.md) | 7 | windows-sim | simconnect-dotnet-engineer | SimConnect pose logger, screenshot trigger and camera SimVar check |
 | [FX-026](tasks/FX-026.md) | 7 | network, human | render-fx-researcher | Fetch and pin the LaMa weights, then run the LaMa inpainting backend end to end |
 
-## Phase 0 (3/17 done)
+## Phase 0 (4/17 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
-| [DEC-004](tasks/DEC-004.md) | todo | human, network |  | Decide: first test block (a San Diego or LA street the user knows well) |
+| [DEC-004](tasks/DEC-004.md) | done | human, network |  | Decide: first test block (a San Diego or LA street the user knows well) |
 | [GATE-P0](tasks/GATE-P0.md) | todo | human | DEC-004, RISK-005, SPIKE-001, SPIKE-002, SPIKE-003, SPIKE-004, SPIKE-005, SPIKE-006, SPIKE-007, SPIKE-008, SPIKE-009, SPIKE-010, SPIKE-011 | Phase 0 exit gate: one blob cut and replaced, command-line build works |
 | [INFRA-001](tasks/INFRA-001.md) | done | none |  | Bootstrap plans, tracking, worktree tooling and specialist agents |
 | [RISK-005](tasks/RISK-005.md) | done | network |  | Set up the sim/SDK update watch and do the first pass on exclusion bugs |
