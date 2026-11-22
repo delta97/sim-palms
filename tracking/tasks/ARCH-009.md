@@ -1,7 +1,7 @@
 ---
 id: ARCH-009
 title: "Add shared CLI plumbing and the palmfix utility CLI"
-status: in_progress
+status: review
 phase: 1
 area: ARCH
 kind: build
@@ -62,10 +62,10 @@ Two pieces:
 
 ## Acceptance criteria
 
-- [ ] `palmfix --help` and `python -m palmcore --help` work after `pip install -e .`.
-- [ ] Each exit code in WS1/WS9 is proven by a test, including the `error_map` override.
-- [ ] Results go to stdout and logs to stderr. `validate --json` prints only JSON on stdout.
-- [ ] No files under `palmscan/` or `palmgen/` change.
+- [x] `palmfix --help` and `python -m palmcore --help` work after `pip install -e .`.
+- [x] Each exit code in WS1/WS9 is proven by a test, including the `error_map` override.
+- [x] Results go to stdout and logs to stderr. `validate --json` prints only JSON on stdout.
+- [x] No files under `palmscan/` or `palmgen/` change.
 - [ ] ruff, mypy and pytest are green on Ubuntu and Windows CI.
 
 ## Verification
@@ -85,3 +85,5 @@ ruff check . && mypy
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [claude-agent] Claimed. branch=task/arch-009-add-shared-cli-plumbing-and-the-palmfix worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/ARCH-009
+- 2026-11-22 [claude-agent] Implemented context.py, cli_common.py, cli.py, __main__.py, palmfix script (49c11d7). pytest 542 passed/1 skipped, ruff check+format clean, mypy clean. Verification: palmfix validate sample_10 -> 'OK: 10 features, schema 1.0, 0 warnings' exit 0; duplicate_palm_id exit 3; regions lists full, minimal; regions --check dup_prefix exit 2; config --region minimal --format json has exclusion.margin_m 1.5; python -m palmcore --help ok. validate --json stdout is JSON only (logs on stderr). Exit codes 1/2/3/5/130 and error_map override covered in test_cli_common.py. No files under palmscan/ or palmgen/ changed; palmgen/cli.py not migrated (spec: SCAN/GEN own their CLIs, plumbing use is optional). Note: validate on a missing file exits 2 (ConfigError, bad path) rather than 3. Windows only locally; Ubuntu CI not run.
+- 2026-11-22 [claude-agent] Status in_progress -> review.
