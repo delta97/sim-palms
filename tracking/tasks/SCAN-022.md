@@ -1,7 +1,7 @@
 ---
 id: SCAN-022
 title: "Canopy height model (DTM, DSM, CHM)"
-status: in_progress
+status: review
 phase: 4
 area: SCAN
 kind: build
@@ -10,7 +10,7 @@ depends_on: [SCAN-001]
 requires: [none]
 agent: lidar-analyst
 estimate_h: 3
-touches: [palmscan/detect/chm.py, tests/unit/palmscan/test_scan_chm.py]
+touches: [palmscan/detect/chm.py, tests/unit/palmscan/test_scan_chm.py, pyproject.toml]
 owner: claude-agent
 branch: task/scan-022-canopy-height-model-dtm-dsm-chm
 worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-022"
@@ -41,10 +41,10 @@ updated: 2026-11-22
 
 ## Acceptance criteria
 
-- [ ] Cone of 20 m on flat ground gives CHM max 20 m +/- 0.5 m at the cone cell.
-- [ ] 5% slope without trees gives CHM < 0.3 m almost everywhere (99th percentile).
-- [ ] Ground gaps filled; negative values clipped; a 100 m spike removed and counted.
-- [ ] Tests pass offline.
+- [x] Cone of 20 m on flat ground gives CHM max 20 m +/- 0.5 m at the cone cell.
+- [x] 5% slope without trees gives CHM < 0.3 m almost everywhere (99th percentile).
+- [x] Ground gaps filled; negative values clipped; a 100 m spike removed and counted.
+- [x] Tests pass offline.
 
 ## Verification
 
@@ -57,3 +57,5 @@ pytest tests/unit/palmscan/test_scan_chm.py -q -m slow   # perf check, optional
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [claude-agent] Claimed. branch=task/scan-022-canopy-height-model-dtm-dsm-chm worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-022
+- 2026-11-22 [claude-agent] All 4 acceptance criteria pass: tests/unit/palmscan/test_scan_chm.py 21 passed (cone 20 m +/-0.5, 5% slope p99 < 0.3, gap fill, negative clip, 100 m spike removed+counted, slow 6M-point test 18 s < 30 s). Full suite 903 passed, ruff/format/mypy clean. Commit db24436. Spec notes: plan said griddata over all cells (32+ s); replaced by Delaunay on gap-boundary cells with fixed 0.01 px query offset; added noise classes 7/18 exclusion; outliers counted before hole fill; affine added to dev/scan extras (pyproject.toml added to touches; affine is a rasterio dep but chm.py imports it at module level). ASPRS class codes and EPT Z units/datum marked VERIFY in module docstring; PDAL not used.
+- 2026-11-22 [claude-agent] Status in_progress -> review.

@@ -836,9 +836,9 @@ def write_debug_rasters(chm: ChmResult, out_dir: Path) -> None: ...   # GeoTIFFs
 ```
 Steps:
 1. Grid origin snapped to multiples of `res`; shape from bounds. Points outside bounds are dropped.
-2. DTM: class 2 points; per-cell mean Z (bin with `np.bincount` on flat cell index). Fill empty cells: `scipy.interpolate.griddata(method="linear")` from filled cell centres, then nearest-neighbour for cells outside the convex hull. No ground points at all -> `SourceError("no ground points")`.
-3. DSM: first returns (`ReturnNumber == 1`); per-cell max Z (`np.maximum.at` or a sort-and-reduce). Empty cells: 3x3 max filter over valid cells once; still empty -> DTM value (CHM 0).
-4. CHM = DSM - DTM; values < 0 -> 0; values > 60 m -> 0 and counted as outliers (birds, wires, noise).
+2. DTM: class 2 points; per-cell mean Z (bin with `np.bincount` on flat cell index). Fill empty cells: linear interpolation (Delaunay triangulation of the known cells touching a gap, fixed 0.01 px query offset for speed and determinism; plain `griddata` over all cells took over 30 s on a 540 m tile), then nearest-neighbour for cells outside the convex hull. No ground points at all -> `SourceError("no ground points")`.
+3. DSM: first returns (`ReturnNumber == 1`, noise classes 7 and 18 excluded); per-cell max Z (`np.maximum.at` or a sort-and-reduce). Empty cells: 3x3 max filter over valid cells once; still empty -> DTM value (CHM 0).
+4. CHM = DSM - DTM; values < 0 -> 0; values > 60 m -> 0 and counted as outliers (birds, wires, noise). Outliers are counted on cells with a first return and set to the DTM before the hole fill, so a spike does not spread into neighbouring holes.
 5. `chm_smooth = scipy.ndimage.gaussian_filter(chm, sigma=smooth_sigma_px)`.
 6. Building mask (if `use_building_class`): cells whose max-Z first return has class 6. Only set when the dataset has class 6 points; else `None`.
 - Performance target: a 540 m x 540 m buffered tile at 20 points/m2 (about 6M points) in under 30 s and 2 GB RAM on a laptop.
