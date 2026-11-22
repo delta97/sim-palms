@@ -1,7 +1,7 @@
 ---
 id: TEST-015
 title: Write the post-update regression routine, log and entry scaffolder
-status: todo
+status: in_progress
 phase: 2
 area: TEST
 kind: build
@@ -11,10 +11,10 @@ requires: [none]
 agent: test-engineer
 estimate_h: 2
 touches: [tests/regression/__init__.py, tests/regression/ROUTINE.md, tests/regression/LOG.md, tests/regression/new_entry.py, tests/unit/regression/test_new_entry.py]
-owner: ""
-branch: ""
-worktree: ""
-updated: 2026-11-21
+owner: claude-agent
+branch: task/test-015-write-the-post-update-regression-routine
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/TEST-015"
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -51,3 +51,4 @@ python3 scripts/tasks.py validate
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [claude-agent] Claimed. branch=task/test-015-write-the-post-update-regression-routine worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/TEST-015
