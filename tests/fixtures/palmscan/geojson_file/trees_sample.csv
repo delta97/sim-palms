@@ -1,0 +1,21 @@
+id,species,common_name,status,height_ft,dbh_in,survey_date,lon,lat
+101,Washingtonia robusta,Mexican Fan Palm,Alive,45,14,2019-05-14,-118.45,34.02
+102,Washingtonia robusta,Mexican Fan Palm,Alive,60,16,2019-05-14,-118.451,34.021
+103,Syagrus romanzoffiana,Queen Palm,Alive,30,10,2019-06-02,-118.452,34.022
+104,Phoenix canariensis,Canary Island Date Palm,Alive,25,24,2020-01-20,-118.453,34.023
+105,Jacaranda mimosifolia,Jacaranda,Alive,28,12,2020-01-20,-118.454,34.024
+106,Quercus agrifolia,Coast Live Oak,Alive,35,30,2020-02-11,-118.455,34.025
+107,Platanus racemosa,California Sycamore,Alive,40,22,2020-02-11,-118.456,34.026
+108,Washingtonia robusta,Mexican Fan Palm,Stump,,,2020-03-09,-118.457,34.027
+109,Archontophoenix cunninghamiana,King Palm,Alive,20,8,2020-03-09,-118.458,34.028
+110,Ficus microcarpa,Indian Laurel Fig,Alive,30,18,2021-04-01,-118.459,34.029
+111,Washingtonia filifera,California Fan Palm,Alive,50,18,2021-04-01,-118.4,34.0
+112,Pinus canariensis,Canary Island Pine,Alive,45,20,2021-04-01,-118.51,33.97
+113,Cupaniopsis anacardioides,Carrotwood,Alive,25,9,2021-05-17,-118.44,34.05
+114,Phoenix canariensis,Canary Island Date Palm,Alive,,,2021-05-17,-118.43,34.06
+115,Magnolia grandiflora,Southern Magnolia,Alive,32,14,2021-05-17,-118.42,34.07
+116,Syagrus romanzoffiana,Queen Palm,Vacant,,,,-118.41,34.08
+117,Washingtonia robusta,Mexican Fan Palm,Alive,55,15,2019-05-14,-118.25,34.05
+118,Washingtonia robusta,Mexican Fan Palm,Alive,55,15,2019-05-14,-118.45,34.2
+119,Washingtonia robusta,Mexican Fan Palm,Alive,40,12,2020-06-01,-118.4795,34.0005
+120,,,Alive,,,2020-06-01,-118.47,34.01

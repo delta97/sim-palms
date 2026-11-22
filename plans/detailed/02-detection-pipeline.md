@@ -483,7 +483,7 @@ Tasks: SCAN-003 (base + geojson_file), SCAN-004 (arcgis_rest), SCAN-005 (overpas
 
 **`palmscan/sources/base.py`**
 ```python
-class SourceError(Exception): ...            # source name, url, cause
+from palmcore.errors import SourceError   # re-exported; message carries source name and url
 
 @dataclass(slots=True)
 class FetchResult:
@@ -493,18 +493,19 @@ class FetchResult:
 
 class InventoryAdapter(Protocol):
     name: str
-    def fetch(self, bbox: tuple[float, float, float, float], cache: Cache, http: HttpClient) -> FetchResult: ...
+    def fetch(self, bbox: Bbox | Sequence[float], cache: Cache, http: HttpClient) -> FetchResult: ...
 ```
 Adapters return raw records inside the bbox only. They do not normalize species.
 
-Vintage rule, shared helper `derive_vintage(cfg_vintage, record_dates, layer_edit_ms, fetched_at) -> SourceVintage`: config `vintage` wins (basis `config`); else the median year of parseable record dates (basis `record_dates`); else the layer edit date year (basis `layer_edit_date`); else the fetch date as `YYYY-MM` (basis `fetched`). Date parsing accepts ISO strings, `MM/DD/YYYY`, and epoch milliseconds.
+Vintage rule, shared helper `derive_vintage(cfg_vintage, record_dates, layer_edit_ms, fetched_at, *, source="") -> SourceVintage` (`record_dates` are raw values parsed with `parse_date`; the even-count median takes the lower year): config `vintage` wins (basis `config`); else the median year of parseable record dates (basis `record_dates`); else the layer edit date year (basis `layer_edit_date`); else the fetch date as `YYYY-MM` (basis `fetched`). Date parsing accepts ISO strings, `MM/DD/YYYY`, and epoch milliseconds.
 
 **`palmscan/sources/geojson_file.py`**: `GeoJsonFileAdapter(cfg: InventorySourceCfg)`
 - `url` -> download through `cache.get_or_fetch("geojson_file", sha1(url), ...)`, keeping the original file name as suffix. `path` -> read in place.
 - `format: geojson` -> `geopandas.read_file(path, bbox=bbox, engine="pyogrio")`. Non-point geometries: use the representative point and add a warning count.
 - `format: csv` -> stream with `csv.DictReader` (files can be large: the LA County compilation is 1.6M records), keep rows whose `lon_field`/`lat_field` parse and fall inside the bbox. Rows with bad coordinates are counted in a warning, not raised.
 - Record id: `id_field` value, else GeoJSON feature `id`, else the 0-based row index (warn: unstable across file updates).
-- CRS: GeoJSON must be EPSG:4326 (per RFC 7946); if the file declares another CRS, reproject and warn.
+- CRS: GeoJSON must be EPSG:4326 (per RFC 7946); if the file declares another CRS, the bbox is transformed into it for the OGR filter, then features are reprojected to 4326 and a warning is added.
+- Memory: CSV is streamed; GeoJSON goes through the OGR spatial filter so only clipped features reach Python. VERIFY (SCAN-007): peak memory of the GDAL GeoJSON driver on the 627 MB LA County file; if high, convert once to GeoPackage/FlatGeobuf and point `path` at it.
 - VERIFY in SCAN-007: actual file layout, URLs, field names and coordinate columns of `stiles/la-trees`.
 
 **`palmscan/sources/arcgis_rest.py`**: `ArcGisRestAdapter(cfg)`
