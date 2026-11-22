@@ -1,7 +1,7 @@
 ---
 id: SPIKE-009
 title: Write the SimConnect spawn-and-disconnect spike console app (C#)
-status: in_progress
+status: review
 phase: 0
 area: SPIKE
 kind: build
@@ -42,9 +42,9 @@ A small, single-file .NET 8 console app in `spikes/simconnect-persist/` that the
 
 ## Acceptance criteria
 
-- [ ] `Program.cs` implements `spawn` (with `--count`, `--hold-s`, `--crash`), `remove` and `badtitle`.
-- [ ] Every SimConnect type or member name the code relies on has a `// VERIFY:` comment unless it was checked against the SDK docs page (cite it).
-- [ ] The README gives the exact build and run commands.
+- [x] `Program.cs` implements `spawn` (with `--count`, `--hold-s`, `--crash`), `remove` and `badtitle`.
+- [x] Every SimConnect type or member name the code relies on has a `// VERIFY:` comment unless it was checked against the SDK docs page (cite it).
+- [x] The README gives the exact build and run commands.
 - [ ] A reviewer (simconnect-dotnet-engineer or code-reviewer) has read it against the SPIKE-005 question list and found every question covered.
 
 ## Verification
@@ -61,3 +61,7 @@ Compiling is checked on the sim PC in SPIKE-005 step 1. If `dotnet` is installed
 
 - 2026-11-22 [plan-breakdown] Task created.
 - 2026-11-22 [claude-agent] Claimed. branch=task/spike-009-write-the-simconnect-spawn-and-disconnec worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SPIKE-009
+- 2026-11-22 [claude-agent] Committed fa9a45b: Program.cs (spawn/remove/badtitle), csproj, README, .gitignore in spikes/simconnect-persist/. Verification: ls shows Program.cs, README.md, SimConnectPersist.csproj; grep -cE 'spawn|remove|badtitle' = 15; grep -c VERIFY = 16.
+- 2026-11-22 [claude-agent] Build check skipped: .NET 8 SDK not installed in this environment (C:/Program Files/dotnet has host/runtime only, no sdk folder; winget install still pending). Not compiled; first compile happens in SPIKE-005 step 1.
+- 2026-11-22 [claude-agent] Coverage vs SPIKE-005 steps: badtitle=step3; spawn=4,9,11 and latency; clean exit=5; remove=6; --crash=7; step 8 by not removing; step 10 documented in README (no scale param). Item left for sim PC: all managed names (AICreateSimulatedObject_EX1 overload, AIRemoveObject, SIMCONNECT_DATA_INITPOSITION fields, event/field names, ctor signature, Dispose), SDK env var and DLL subfolders. Cited docs page only for the C EX1 API.
+- 2026-11-22 [claude-agent] Status in_progress -> review.
