@@ -1,7 +1,7 @@
 ---
 id: TEST-008
 title: Add optional image-diff scoring for visual viewpoints
-status: todo
+status: in_progress
 phase: 6
 area: TEST
 kind: build
@@ -11,10 +11,10 @@ requires: [none]
 agent: test-engineer
 estimate_h: 3
 touches: [tests/visual/diff_score.py, tests/visual/diff_thresholds.yaml, tests/unit/visual/test_diff_score.py]
-owner: ""
-branch: ""
-worktree: ""
-updated: 2026-11-21
+owner: claude-agent
+branch: task/test-008-add-optional-image-diff-scoring-for-visu
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/TEST-008"
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -53,3 +53,4 @@ python3 scripts/tasks.py validate
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [claude-agent] Claimed. branch=task/test-008-add-optional-image-diff-scoring-for-visu worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/TEST-008
