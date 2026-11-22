@@ -62,3 +62,4 @@ In Blender: Scene Properties > Units shows Metric and 1.0, and the Outliner show
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [reconcile] Removed depends_on DEC-002: this is the Mexican fan palm pilot, which runs under DEC-002's provisional default ('build one species first'); DEC-002 is now needed before modeling beyond the pilot (ASSET-016 depends on it). Storage policy reference updated to DEC-008/ASSET-008. Cross-area reconciliation.
 - 2026-11-22 [reconcile] Height-distribution check now points at the canonical palmscan output build/scan/<region>/palms.geojson instead of data/ (data/ is the download cache). Cross-area reconciliation.
+- 2026-11-22 [integrator] integrator note from ASSET-001: some proportions in assets/reference/*.md are VERIFY (no published source) — measure from the linked reference photos; ASSET-001 also flags plan W5 crown widths for robusta/filifera as above extension figures
