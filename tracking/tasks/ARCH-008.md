@@ -1,7 +1,7 @@
 ---
 id: ARCH-008
 title: "Write the two example region configs and verify their sources"
-status: todo
+status: in_progress
 phase: 1
 area: ARCH
 kind: build
@@ -11,10 +11,10 @@ requires: [network]
 agent: geo-data-engineer
 estimate_h: 2
 touches: [regions/san-diego-coastal.yaml, regions/la-westside.yaml, tests/unit/palmcore/test_region_files.py]
-owner: ""
-branch: ""
-worktree: ""
-updated: 2026-11-21
+owner: claude-agent
+branch: task/arch-008-write-the-two-example-region-configs-and
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/ARCH-008"
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -59,3 +59,4 @@ python -c "from pathlib import Path; from palmcore.config import check_regions; 
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [claude-agent] Claimed. branch=task/arch-008-write-the-two-example-region-configs-and worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/ARCH-008
