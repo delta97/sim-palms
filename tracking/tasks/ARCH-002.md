@@ -1,7 +1,7 @@
 ---
 id: ARCH-002
 title: "Define the palms.geojson JSON Schema and a shared validator"
-status: todo
+status: in_progress
 phase: 1
 area: ARCH
 kind: build
@@ -11,9 +11,9 @@ requires: [none]
 agent: python-architect
 estimate_h: 6
 touches: [schemas/palms.geojson.schema.json, schemas/buildings.geojson.schema.json, schemas/CHANGELOG.md, palmcore/contract.py, tests/unit/palmcore/test_contract.py, tests/fixtures/palmcore/palms/, tests/fixtures/palmcore/buildings/]
-owner: ""
-branch: ""
-worktree: ""
+owner: claude-agent
+branch: task/arch-002-define-the-palms-geojson-json-schema-and
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/ARCH-002"
 updated: 2026-11-22
 ---
 
@@ -80,3 +80,4 @@ ruff check palmcore tests && mypy
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [reconcile] Added buildings.geojson secondary contract (schemas/buildings.geojson.schema.json, validate_buildings), documented ground_elev_m datum (metres, orthometric, VERIFY vs 3DEP) and nullability, confirmed data_version is GEN's data-version key, noted the species-key registry (SCAN-002 palmscan/data/species_keys.yaml). Cross-area reconciliation.
+- 2026-11-22 [claude-agent] Claimed. branch=task/arch-002-define-the-palms-geojson-json-schema-and worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/ARCH-002
