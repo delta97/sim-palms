@@ -62,3 +62,4 @@ python3 scripts/tasks.py validate
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [reconcile] Confirmed as the single accuracy-metrics implementation and the one that gates Phase 4: SCAN-029 now calls this module's evaluate/load_thresholds/check_thresholds instead of reimplementing them, so those functions are a public API. Example --pred path is the canonical build/scan/<region>/palms.geojson. Cross-area reconciliation.
+- 2026-11-22 [integrator] integrator note from TEST-009: import height classes from gt.height_class (S<8, M 8-<15, T 15-<25, X>=25). GT species check is pattern-only; palmscan/data/species_keys.yaml is now on main (SCAN-002) and can be used for a registry check
