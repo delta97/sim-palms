@@ -1,0 +1,19 @@
+# One defined site with San Diego-like coordinates. Fixture only; not a real test site.
+version: 1
+sites:
+  T1:
+    name: "Fixture street, San Diego"
+    status: defined
+    purpose: happy_path
+    description: "Fixture: palm-lined street"
+    region: san-diego-coastal
+    bbox: [-117.2560, 32.7870, -117.2500, 32.7920]
+    photogrammetry: true
+    inventory_coverage: true
+    ground_truth: false
+    flight: null
+    time_local: "12:00"
+    weather: clear
+    viewpoints:
+      - {id: VP1, kind: street, lat: 32.7895, lon: -117.2530, alt_m_agl: 2, heading_deg: 90, pitch_deg: 0, preset: null}
+      - {id: VP2, kind: oblique, lat: 32.7895, lon: -117.2530, alt_m_agl: 150, heading_deg: 90, pitch_deg: -30, preset: null}

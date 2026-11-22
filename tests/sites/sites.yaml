@@ -1,0 +1,91 @@
+# Test-site registry (TEST-005 skeleton). Validated by tests/sites/sites.schema.json and
+# tests/helpers/sites.py. Every site is status: placeholder until TEST-100 (human, sim PC)
+# fills in real values. Placeholder coordinates are 0 on purpose: a placeholder site is
+# loadable but tools must refuse to run against it. Do not invent coordinates here.
+version: 1
+sites:
+  T1:
+    name: "PLACEHOLDER T1: street and city to be chosen"
+    status: placeholder
+    purpose: happy_path
+    description: "Palm-lined street with inventory coverage (normally the DEC-004 block)"
+    region: san-diego-coastal
+    bbox: [0, 0, 0, 0]          # lon_min, lat_min, lon_max, lat_max (TEST-100)
+    photogrammetry: true
+    inventory_coverage: true
+    ground_truth: false
+    flight: null
+    time_local: "12:00"
+    weather: clear
+    viewpoints:
+      - {id: VP1, kind: street, lat: 0, lon: 0, alt_m_agl: 2, heading_deg: 0, pitch_deg: 0, preset: null}
+      - {id: VP2, kind: oblique, lat: 0, lon: 0, alt_m_agl: 150, heading_deg: 0, pitch_deg: -30, preset: null}
+      - {id: VP3, kind: approach, lat: 0, lon: 0, alt_m_agl: 600, heading_deg: 0, pitch_deg: -15, preset: null}
+  T2:
+    name: "PLACEHOLDER T2: street and city to be chosen"
+    status: placeholder
+    purpose: lidar_only
+    description: "Beach or boardwalk with no inventory coverage (for example Mission Beach or Venice)"
+    region: san-diego-coastal
+    bbox: [0, 0, 0, 0]          # lon_min, lat_min, lon_max, lat_max (TEST-100)
+    photogrammetry: true
+    inventory_coverage: false
+    ground_truth: false
+    flight: null
+    time_local: "12:00"
+    weather: clear
+    viewpoints:
+      - {id: VP1, kind: street, lat: 0, lon: 0, alt_m_agl: 2, heading_deg: 0, pitch_deg: 0, preset: null}
+      - {id: VP2, kind: oblique, lat: 0, lon: 0, alt_m_agl: 150, heading_deg: 0, pitch_deg: -30, preset: null}
+      - {id: VP3, kind: approach, lat: 0, lon: 0, alt_m_agl: 600, heading_deg: 0, pitch_deg: -15, preset: null}
+  T3:
+    name: "PLACEHOLDER T3: street and city to be chosen"
+    status: placeholder
+    purpose: building_clip
+    description: "Palms within 3 m of building walls"
+    region: san-diego-coastal
+    bbox: [0, 0, 0, 0]          # lon_min, lat_min, lon_max, lat_max (TEST-100)
+    photogrammetry: true
+    inventory_coverage: true
+    ground_truth: false
+    flight: null
+    time_local: "12:00"
+    weather: clear
+    viewpoints:
+      - {id: VP1, kind: street, lat: 0, lon: 0, alt_m_agl: 2, heading_deg: 0, pitch_deg: 0, preset: null}
+      - {id: VP2, kind: oblique, lat: 0, lon: 0, alt_m_agl: 150, heading_deg: 0, pitch_deg: -30, preset: null}
+      - {id: VP3, kind: approach, lat: 0, lon: 0, alt_m_agl: 600, heading_deg: 0, pitch_deg: -15, preset: null}
+  T4:
+    name: "PLACEHOLDER T4: street and city to be chosen"
+    status: placeholder
+    purpose: false_positive
+    description: "Italian cypress, eucalyptus, light poles and few palms"
+    region: san-diego-coastal
+    bbox: [0, 0, 0, 0]          # lon_min, lat_min, lon_max, lat_max (TEST-100)
+    photogrammetry: true
+    inventory_coverage: false
+    ground_truth: false
+    flight: null
+    time_local: "12:00"
+    weather: clear
+    viewpoints:
+      - {id: VP1, kind: street, lat: 0, lon: 0, alt_m_agl: 2, heading_deg: 0, pitch_deg: 0, preset: null}
+      - {id: VP2, kind: oblique, lat: 0, lon: 0, alt_m_agl: 150, heading_deg: 0, pitch_deg: -30, preset: null}
+      - {id: VP3, kind: approach, lat: 0, lon: 0, alt_m_agl: 600, heading_deg: 0, pitch_deg: -15, preset: null}
+  T5:
+    name: "PLACEHOLDER T5: street and city to be chosen"
+    status: placeholder
+    purpose: no_harm
+    description: "Outside photogrammetry coverage, inside a region bbox so the package applies there"
+    region: san-diego-coastal
+    bbox: [0, 0, 0, 0]          # lon_min, lat_min, lon_max, lat_max (TEST-100)
+    photogrammetry: false
+    inventory_coverage: false
+    ground_truth: false
+    flight: null
+    time_local: "12:00"
+    weather: clear
+    viewpoints:
+      - {id: VP1, kind: street, lat: 0, lon: 0, alt_m_agl: 2, heading_deg: 0, pitch_deg: 0, preset: null}
+      - {id: VP2, kind: oblique, lat: 0, lon: 0, alt_m_agl: 150, heading_deg: 0, pitch_deg: -30, preset: null}
+      - {id: VP3, kind: approach, lat: 0, lon: 0, alt_m_agl: 600, heading_deg: 0, pitch_deg: -15, preset: null}
