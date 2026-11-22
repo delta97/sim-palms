@@ -68,6 +68,7 @@ class PalmRecord:
     building_conflict: bool = False
     lidar: LidarCandidate | None = None
     species_raw: str | None = None
+    height_raw: str | None = None  # inventory height text, parsed by attributes.assign_sizes
 
 
 @dataclass(slots=True)

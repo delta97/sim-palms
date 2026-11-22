@@ -282,6 +282,7 @@ class PalmRecord:                 # one palm moving through the pipeline
     building_conflict: bool = False
     lidar: LidarCandidate | None = None
     species_raw: str | None = None
+    height_raw: str | None = None   # inventory height text, parsed by W7 assign_sizes
 
 @dataclass(slots=True)
 class Reject:
@@ -601,7 +602,7 @@ Steps per record: `non_tree_reason` -> reject stage `inventory`; `normalize_spec
 - `stable_key = f"{source}:{source_id}"`, `source_ids=[stable_key]`, `x, y` from `geo.to_local`.
 - species: species-level key -> confidence 0.95; genus-level -> 0.8; `palm_unknown` -> species `None` (classified later); `species_source = "inventory"` (or `"osm"` for the OSM adapter); `detected_by` the same.
 - `data_vintage = {"inventory": year}` (record date year if parseable, else the source vintage); OSM: `{"osm": "YYYY-MM"}`.
-- `height_raw` kept for W7.
+- `height_raw` kept on the `PalmRecord` for W7 (`assign_sizes` parses it with the source's `height_units`).
 - OSM trees run after the inventory adapters when `sources.osm_trees` is true. An OSM failure is a warning; an inventory failure aborts the run with `SourceError` (exit 4), because silently missing a source drops palms.
 
 **`palmscan/detect/dedupe.py`**

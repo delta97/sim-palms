@@ -10,7 +10,7 @@ depends_on: [SCAN-002]
 requires: [none]
 agent: geo-data-engineer
 estimate_h: 3
-touches: [palmscan/attributes.py, palmscan/mask.py, tests/unit/palmscan/test_scan_attributes.py, tests/unit/palmscan/test_scan_mask.py]
+touches: [palmscan/model.py, palmscan/attributes.py, palmscan/mask.py, tests/unit/palmscan/test_scan_attributes.py, tests/unit/palmscan/test_scan_mask.py]
 owner: claude-agent
 branch: task/scan-009-palm-sizes-exclusion-radius-building-con
 worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-009"
