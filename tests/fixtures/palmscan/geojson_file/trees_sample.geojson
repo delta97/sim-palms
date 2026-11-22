@@ -1,0 +1,405 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 101,
+    "species": "Washingtonia robusta",
+    "common_name": "Mexican Fan Palm",
+    "status": "Alive",
+    "height_ft": "45",
+    "dbh_in": "14",
+    "survey_date": "2019-05-14"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.45,
+     34.02
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 102,
+    "species": "Washingtonia robusta",
+    "common_name": "Mexican Fan Palm",
+    "status": "Alive",
+    "height_ft": "60",
+    "dbh_in": "16",
+    "survey_date": "2019-05-14"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.451,
+     34.021
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 103,
+    "species": "Syagrus romanzoffiana",
+    "common_name": "Queen Palm",
+    "status": "Alive",
+    "height_ft": "30",
+    "dbh_in": "10",
+    "survey_date": "2019-06-02"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.452,
+     34.022
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 104,
+    "species": "Phoenix canariensis",
+    "common_name": "Canary Island Date Palm",
+    "status": "Alive",
+    "height_ft": "25",
+    "dbh_in": "24",
+    "survey_date": "2020-01-20"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.453,
+     34.023
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 105,
+    "species": "Jacaranda mimosifolia",
+    "common_name": "Jacaranda",
+    "status": "Alive",
+    "height_ft": "28",
+    "dbh_in": "12",
+    "survey_date": "2020-01-20"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.454,
+     34.024
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 106,
+    "species": "Quercus agrifolia",
+    "common_name": "Coast Live Oak",
+    "status": "Alive",
+    "height_ft": "35",
+    "dbh_in": "30",
+    "survey_date": "2020-02-11"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.455,
+     34.025
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 107,
+    "species": "Platanus racemosa",
+    "common_name": "California Sycamore",
+    "status": "Alive",
+    "height_ft": "40",
+    "dbh_in": "22",
+    "survey_date": "2020-02-11"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.456,
+     34.026
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 108,
+    "species": "Washingtonia robusta",
+    "common_name": "Mexican Fan Palm",
+    "status": "Stump",
+    "height_ft": null,
+    "dbh_in": null,
+    "survey_date": "2020-03-09"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.457,
+     34.027
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 109,
+    "species": "Archontophoenix cunninghamiana",
+    "common_name": "King Palm",
+    "status": "Alive",
+    "height_ft": "20",
+    "dbh_in": "8",
+    "survey_date": "2020-03-09"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.458,
+     34.028
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 110,
+    "species": "Ficus microcarpa",
+    "common_name": "Indian Laurel Fig",
+    "status": "Alive",
+    "height_ft": "30",
+    "dbh_in": "18",
+    "survey_date": "2021-04-01"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.459,
+     34.029
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 111,
+    "species": "Washingtonia filifera",
+    "common_name": "California Fan Palm",
+    "status": "Alive",
+    "height_ft": "50",
+    "dbh_in": "18",
+    "survey_date": "2021-04-01"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.4,
+     34.0
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 112,
+    "species": "Pinus canariensis",
+    "common_name": "Canary Island Pine",
+    "status": "Alive",
+    "height_ft": "45",
+    "dbh_in": "20",
+    "survey_date": "2021-04-01"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.51,
+     33.97
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 113,
+    "species": "Cupaniopsis anacardioides",
+    "common_name": "Carrotwood",
+    "status": "Alive",
+    "height_ft": "25",
+    "dbh_in": "9",
+    "survey_date": "2021-05-17"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.44,
+     34.05
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 114,
+    "species": "Phoenix canariensis",
+    "common_name": "Canary Island Date Palm",
+    "status": "Alive",
+    "height_ft": null,
+    "dbh_in": null,
+    "survey_date": "2021-05-17"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.43,
+     34.06
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 115,
+    "species": "Magnolia grandiflora",
+    "common_name": "Southern Magnolia",
+    "status": "Alive",
+    "height_ft": "32",
+    "dbh_in": "14",
+    "survey_date": "2021-05-17"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.42,
+     34.07
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 116,
+    "species": "Syagrus romanzoffiana",
+    "common_name": "Queen Palm",
+    "status": "Vacant",
+    "height_ft": null,
+    "dbh_in": null,
+    "survey_date": null
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.41,
+     34.08
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 117,
+    "species": "Washingtonia robusta",
+    "common_name": "Mexican Fan Palm",
+    "status": "Alive",
+    "height_ft": "55",
+    "dbh_in": "15",
+    "survey_date": "2019-05-14"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.25,
+     34.05
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 118,
+    "species": "Washingtonia robusta",
+    "common_name": "Mexican Fan Palm",
+    "status": "Alive",
+    "height_ft": "55",
+    "dbh_in": "15",
+    "survey_date": "2019-05-14"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.45,
+     34.2
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 119,
+    "species": "Washingtonia robusta",
+    "common_name": "Mexican Fan Palm",
+    "status": "Alive",
+    "height_ft": "40",
+    "dbh_in": "12",
+    "survey_date": "2020-06-01"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -118.48,
+       34.0
+      ],
+      [
+       -118.479,
+       34.0
+      ],
+      [
+       -118.479,
+       34.001
+      ],
+      [
+       -118.48,
+       34.001
+      ],
+      [
+       -118.48,
+       34.0
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 120,
+    "species": null,
+    "common_name": null,
+    "status": "Alive",
+    "height_ft": null,
+    "dbh_in": null,
+    "survey_date": "2020-06-01"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.47,
+     34.01
+    ]
+   }
+  }
+ ]
+}
