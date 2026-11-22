@@ -1,0 +1,20 @@
+# FAKE fixture templates for the palmgen writer tests. Not MSFS XML: every element name
+# below is invented on purpose. Real templates come from SPIKE-003 captures (GEN-009).
+schema_version: 1
+captured: {sim_version: "", sdk_version: "", notes: "none (fake fixture)"}
+format:
+  guid_style: braces_upper
+  lat_decimals: 8
+  lon_decimals: 8
+  heading_decimals: 3
+  scale_decimals: 4
+  vertex_order: ccw
+  ring_closed: false
+  supports_holes: false
+  line_ending: lf
+  scene_dir: FixtureScenery/scene
+templates:
+  scene_file:         {file: scene_file.xml.j2}
+  exclusion_polygon:  {file: exclusion_polygon.xml.j2, count_xpath: "/FixtureScene/FixturePolygon"}
+  scenery_object:     {file: scenery_object.xml.j2,    count_xpath: "/FixtureScene/FixtureObject"}
+placeholder_model: {name: "", model_guid: "", native_height_m: null}
