@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:palmfix:schema:buildings:1",
+  "$comment": "Secondary contract: palmscan writes it next to palms.geojson, palmgen reads it for clipping. Versioning policy: schemas/CHANGELOG.md.",
+  "title": "buildings.geojson",
+  "type": "object",
+  "required": ["type", "schema_version", "region", "features"],
+  "properties": {
+    "type": {"const": "FeatureCollection"},
+    "schema_version": {"type": "string", "pattern": "^1\\.(0|[1-9][0-9]*)$(?!\\n)"},
+    "region": {"type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$(?!\\n)"},
+    "features": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/feature"}
+    }
+  },
+  "$defs": {
+    "feature": {
+      "type": "object",
+      "required": ["type", "geometry", "properties"],
+      "properties": {
+        "type": {"const": "Feature"},
+        "geometry": {
+          "type": "object",
+          "required": ["type", "coordinates"],
+          "properties": {
+            "type": {"enum": ["Polygon", "MultiPolygon"]},
+            "coordinates": {"type": "array"}
+          }
+        },
+        "properties": {
+          "type": "object",
+          "required": ["building_id", "source"],
+          "properties": {
+            "building_id": {"type": "string", "minLength": 1},
+            "source": {"type": "string", "minLength": 1}
+          }
+        }
+      }
+    }
+  }
+}

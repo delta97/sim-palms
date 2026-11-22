@@ -1,0 +1,58 @@
+{
+ "missing_palm_id.geojson": {
+  "path": "features[0].properties",
+  "contains": "'palm_id' is a required property"
+ },
+ "bad_palm_id.geojson": {
+  "path": "features[0].properties.palm_id",
+  "contains": "does not match"
+ },
+ "bad_species_source.geojson": {
+  "path": "features[0].properties.species_source",
+  "contains": "is not one of"
+ },
+ "height_too_low.geojson": {
+  "path": "features[0].properties.height_m",
+  "contains": "less than the minimum of 0.5"
+ },
+ "coords_3d.geojson": {
+  "path": "features[0].geometry.coordinates",
+  "contains": "is too long"
+ },
+ "missing_data_version.geojson": {
+  "path": "",
+  "contains": "'data_version' is a required property"
+ },
+ "duplicate_palm_id.geojson": {
+  "path": "features[1].properties.palm_id",
+  "contains": "duplicate palm_id"
+ },
+ "region_mismatch.geojson": {
+  "path": "features[0].properties.region",
+  "contains": "does not match file region"
+ },
+ "mixed_prefix.geojson": {
+  "path": "features",
+  "contains": "prefixes are not identical"
+ },
+ "id_mismatch.geojson": {
+  "path": "features[0].id",
+  "contains": "does not equal palm_id"
+ },
+ "radius_lt_crown.geojson": {
+  "path": "features[0].properties.exclusion_radius_m",
+  "contains": "less than half"
+ },
+ "lidar_height_without_lidar.geojson": {
+  "path": "features[0].properties.detected_by",
+  "contains": "does not include 'lidar'"
+ },
+ "unknown_property.geojson": {
+  "path": "features[0].properties",
+  "contains": "does not match any of the regexes"
+ },
+ "major_2.geojson": {
+  "path": "",
+  "contains": "not supported"
+ }
+}

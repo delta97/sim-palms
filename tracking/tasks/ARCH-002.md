@@ -1,7 +1,7 @@
 ---
 id: ARCH-002
 title: "Define the palms.geojson JSON Schema and a shared validator"
-status: in_progress
+status: review
 phase: 1
 area: ARCH
 kind: build
@@ -58,14 +58,14 @@ updated: 2026-11-22
 
 ## Acceptance criteria
 
-- [ ] The schema passes `Draft202012Validator.check_schema`.
-- [ ] Each of S1–S9 has at least one test.
-- [ ] `validate_palms` reports schema errors instead of raising, for supported versions. It raises only for a malformed or unsupported major version.
-- [ ] Issue strings follow `error features[i] <palm_id>: <path>: <message>`.
-- [ ] `schemas/CHANGELOG.md` holds the policy and both initial entries.
-- [ ] `ground_elev_m: null` validates; the schema `description` states metres, orthometric, `VERIFY:` 3DEP datum.
-- [ ] `validate_buildings` accepts the valid buildings fixture and rejects both invalid ones.
-- [ ] ruff, mypy (strict for palmcore) and pytest are green.
+- [x] The schema passes `Draft202012Validator.check_schema`.
+- [x] Each of S1–S9 has at least one test.
+- [x] `validate_palms` reports schema errors instead of raising, for supported versions. It raises only for a malformed or unsupported major version.
+- [x] Issue strings follow `error features[i] <palm_id>: <path>: <message>`.
+- [x] `schemas/CHANGELOG.md` holds the policy and both initial entries.
+- [x] `ground_elev_m: null` validates; the schema `description` states metres, orthometric, `VERIFY:` 3DEP datum.
+- [x] `validate_buildings` accepts the valid buildings fixture and rejects both invalid ones.
+- [x] ruff, mypy (strict for palmcore) and pytest are green.
 
 ## Verification
 
@@ -81,3 +81,9 @@ ruff check palmcore tests && mypy
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [reconcile] Added buildings.geojson secondary contract (schemas/buildings.geojson.schema.json, validate_buildings), documented ground_elev_m datum (metres, orthometric, VERIFY vs 3DEP) and nullability, confirmed data_version is GEN's data-version key, noted the species-key registry (SCAN-002 palmscan/data/species_keys.yaml). Cross-area reconciliation.
 - 2026-11-22 [claude-agent] Claimed. branch=task/arch-002-define-the-palms-geojson-json-schema-and worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/ARCH-002
+- 2026-11-22 [claude-agent] Schemas written (palms 1.0, buildings 1.0), schemas/CHANGELOG.md has policy + both initial entries. schemas/.gitkeep removed. contract.py implements WS5 names/signatures, S1-S9, read/write/relaxed modes, validate_buildings. Malformed (non-string or not MAJOR.MINOR) schema_version raises ContractError; a missing one is a one-error report.
+- 2026-11-22 [claude-agent] Verification: pytest 74 passed; slow test (10k features) passed in ~1s; valid_small -> 'True 10'; ruff check clean, ruff format --check clean, mypy 'Success: no issues found in 6 source files'. All 8 acceptance boxes ticked.
+- 2026-11-22 [claude-agent] Interface notes: validate_buildings loads its schema via schema_dir()/buildings.geojson.schema.json (load_schema's name pattern rejects dotted names and 'buildings' is not in SCHEMA_FILES; schemas.py is outside touches). Missing-required errors have path of the parent object (e.g. features[0].properties). Unknown property error text is jsonschema's 'does not match any of the regexes: ^x_...' because of patternProperties. Extra fixture invalid/ten_bad_features.geojson for max_errors test. WS1 plan text amended to document the SCHEMA_FILES exemption in load_schema.
+- 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [code-reviewer] review: APPROVE - all 8 acceptance criteria met; pytest 74 passed, slow ok, ruff/mypy/validate clean. Nits: generated_at pattern 'Z$' accepts 'garbageZ' without rfc3339 checker; parse_version/schema_version patterns accept trailing newline; relaxed mode keeps additionalProperties:false on generator/data_vintage; NaN coords pass.
+- 2026-11-22 [claude-agent] Review fixes: anchored generated_at pattern and a trailing-newline lookahead on every schema pattern (and [0-9] instead of \d); _VERSION_RE uses fullmatch; validate_buildings wraps missing/invalid schema file in PalmfixError (same as load_schema); NaN/Infinity rejected via a finiteness check on envelope and features (no plan change needed); Q19 added to plan Open questions on widening generator/data_vintage. Tests added for each. pytest 86 passed, ruff and mypy clean.

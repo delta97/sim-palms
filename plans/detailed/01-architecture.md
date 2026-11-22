@@ -179,6 +179,9 @@ def schema_dir() -> Path
 def load_schema(name: str) -> dict[str, Any]   # functools.cache; callers must not mutate
     # name: a SCHEMA_FILES key ("palms", "region") or a file name matching ^[a-z0-9-]+\.schema\.json$
     # (e.g. "asset-manifest.schema.json" from ASSET-005), so other areas never edit this module
+    # Names that are SCHEMA_FILES keys map to their file and are exempt from the pattern, because
+    # "palms.geojson.schema.json" contains a dot the pattern rejects. Other files (e.g.
+    # buildings.geojson.schema.json) are read by their owner via schema_dir() / <file name>.
 def make_validator(schema: Mapping[str, Any]) -> jsonschema.Draft202012Validator
     # check_schema() first, then Draft202012Validator(schema, format_checker=Draft202012Validator.FORMAT_CHECKER)
 ```
@@ -899,6 +902,7 @@ Dotted edges are what other areas should depend on. Those areas own their own `d
 | Q16 | ASSET plan expects a species **enum** in the ARCH-002 schema. The schema uses a pattern; the list of valid species keys belongs to SCAN (`palm_genera.yaml`/normalisation tables), which ASSET should validate against. Resolved 2026-11-22: registry is `palmscan/data/species_keys.yaml` (SCAN-002); ASSET-005 validates manifest species against it. | ASSET-005, SCAN |
 | Q17 | `VERIFY:` San Diego layer id field (`OBJECTID`?) and the LA compilation's URL and fields. | ARCH-008 |
 | Q18 | `pyproject.toml` races: SCAN-001 and FX-002 touch it but depend only on ARCH-001, so either can run alongside ARCH-009. Each should depend on ARCH-009. SCAN-001 may not need the edit at all, since ARCH-001 already carries its dependencies. FX-002 must add `palmfx` to the hatch `packages` list. Resolved 2026-11-22: SCAN-001 and FX-002 depend on ARCH-009; FX-002 also depends on SCAN-001. | SCAN-001, FX-002 |
+| Q19 | `generator` and `data_vintage` use `additionalProperties: false` in schema 1.0, so a newer minor that adds a key there fails even in relaxed read mode (the relaxed schema only loosens feature `properties` and three enums). Consider widening these two objects (or relaxing them too) so forward-compatible minors can add keys. Left as the plan states for 1.0. | ARCH-007 |
 
 **Cross-area dependencies** this plan assumes (owners set them in their own task files; all applied 2026-11-22): SCAN-001 → ARCH-001, ARCH-003, ARCH-009 (pyproject); FX-002 → ARCH-009 (pyproject), SCAN-001; ASSET-005 → ARCH-001; SCAN-011 → ARCH-002, ARCH-006, ARCH-007; GEN-001 → ARCH-001; GEN-002 → ARCH-006; GEN-004 → ARCH-002, ARCH-003, ARCH-007; TEST-001 → ARCH-001; TEST-004 → ARCH-002, ARCH-003.
 
