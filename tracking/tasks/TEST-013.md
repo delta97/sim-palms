@@ -1,7 +1,7 @@
 ---
 id: TEST-013
 title: Build the frametime capture parser and run comparison report
-status: todo
+status: in_progress
 phase: 5
 area: TEST
 kind: build
@@ -11,10 +11,10 @@ requires: [none]
 agent: test-engineer
 estimate_h: 5
 touches: [tests/perf/__init__.py, tests/perf/frametimes.py, tests/perf/compare.py, tests/perf/perf_config.yaml, tests/perf/.gitignore, tests/unit/perf/test_frametimes.py, tests/unit/perf/test_compare.py, tests/fixtures/perf/frametimes/, tests/fixtures/perf/compare/]
-owner: ""
-branch: ""
-worktree: ""
-updated: 2026-11-21
+owner: claude-agent
+branch: task/test-013-build-the-frametime-capture-parser-and-r
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/TEST-013"
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -76,3 +76,4 @@ python3 scripts/tasks.py validate
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [claude-agent] Claimed. branch=task/test-013-build-the-frametime-capture-parser-and-r worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/TEST-013
