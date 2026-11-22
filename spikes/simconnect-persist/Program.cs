@@ -80,7 +80,7 @@ internal static class Program
                 Altitude = 0,      // VERIFY: meaning when OnGround = 1 (feet MSL or AGL?); SPIKE-005 checks whether it sits on terrain.
                 Pitch = 0,
                 Bank = 0,
-                Heading = heading, // degrees true
+                Heading = heading, // VERIFY: degrees true vs magnetic for INITPOSITION.Heading
                 OnGround = 1,      // VERIFY: uint vs bool in the managed struct; 1 = on ground per the C struct docs
                 Airspeed = 0,
             };
@@ -93,7 +93,7 @@ internal static class Program
             // The 2020 managed wrapper has AICreateSimulatedObject(title, InitPos, RequestID) with no livery; the 2024
             // wrapper may add an _EX1 overload. If only the non-EX1 one exists, record that as a finding.
             _sc!.AICreateSimulatedObject_EX1(title, "", pos, (Req)reqId);
-            Log($"create req={reqId} title='{title}' lat={pos.Latitude:F7} lon={pos.Longitude:F7} sent");
+            Log($"create req={reqId} title='{title}' lat={pos.Latitude:F7} lon={pos.Longitude:F7} onGround={pos.OnGround} alt={pos.Altitude} sent");
 
             // Dispatch pending messages between sends so latency is not inflated by our own queueing.
             Pump(TimeSpan.FromMilliseconds(1));
@@ -109,8 +109,12 @@ internal static class Program
 
         var ids = _assigned.OrderBy(a => a.req).Select(a => a.objId).ToArray();
         var rec = new Spawned(title, ids, DateTime.UtcNow.ToString("o"));
-        File.WriteAllText("spawned.json", JsonSerializer.Serialize(rec, new JsonSerializerOptions { WriteIndented = true }));
-        Log("wrote spawned.json");
+        var json = JsonSerializer.Serialize(rec, new JsonSerializerOptions { WriteIndented = true });
+        var stamped = $"spawned-{DateTime.UtcNow:yyyyMMdd-HHmmss}.json"; // kept, so earlier runs' ids are not lost
+        File.WriteAllText(stamped, json);
+        File.WriteAllText("spawned.json", json); // latest run; default input of `remove`
+        Log($"wrote {stamped} and spawned.json");
+        var exitCode = _assigned.Count == 0 || _errors.Count > 0 ? 1 : 0;
 
         Log($"holding {holdS:F0} s (look at the spot now)...");
         Pump(TimeSpan.FromSeconds(holdS));
@@ -125,7 +129,7 @@ internal static class Program
         Log("closing connection cleanly");
         Disconnect();
         Log("closed; process exiting. Check whether the objects stay.");
-        return 0;
+        return exitCode;
     }
 
     // SPIKE-005 steps 6 and 7 (remove after crash): a NEW connection removes objects by the OLD ids.
@@ -155,7 +159,7 @@ internal static class Program
         Pump(TimeSpan.FromSeconds(2));
         Log($"RESULT remove_calls={rec.ids.Length} exception_events={_errors.Count}");
         Disconnect();
-        return 0;
+        return _errors.Count > 0 ? 1 : 0;
     }
 
     // SPIKE-005 step 3: what does a non-existent title do?
@@ -190,7 +194,7 @@ internal static class Program
     {
         // VERIFY: constructor signature SimConnect(string name, IntPtr hWnd, uint userEventWin32, WaitHandle handle, uint configIndex).
         // Wait-handle approach: no window needed. If events never arrive with the handle, SPIKE-005 should try a
-        // window-message pump instead: create a hidden WinForms Form, pass its Handle and a user message id (for example
+        // window-message pump instead (add <UseWindowsForms>true</UseWindowsForms> to the csproj): create a hidden WinForms Form, pass its Handle and a user message id (for example
         // WM_USER_SIMCONNECT = 0x0402) to the constructor, override WndProc, and when m.Msg equals that id call _sc.ReceiveMessage().
         _sc = new SimConnect("PalmSpike", IntPtr.Zero, 0, _signal, 0);
 
@@ -238,12 +242,20 @@ internal static class Program
         while (_clock.Elapsed < end && !_quit)
         {
             if (done?.Invoke() == true) return;
-            if (_signal.WaitOne(100))
-            {
-                try { _sc?.ReceiveMessage(); } // VERIFY: method name; it can throw COMException on a broken connection
-                catch (Exception ex) { Log($"ReceiveMessage EXCEPTION {ex.GetType().Name}: {ex.Message} (HResult 0x{ex.HResult:X8})"); }
-            }
+            var remainingMs = (end - _clock.Elapsed).TotalMilliseconds;
+            if (remainingMs <= 0) break;
+            // Clamp the wait so short pumps (the 1 ms one between creates) do not stall for 100 ms.
+            _signal.WaitOne((int)Math.Max(1, Math.Min(100, remainingMs)));
+            // Dispatch on signal AND on timeout: a missed or coalesced signal must not strand queued messages.
+            // VERIFY: ReceiveMessage() may dispatch only one message per call, so drain a few times per wake.
+            for (var k = 0; k < 8; k++) Receive();
         }
+    }
+
+    private static void Receive()
+    {
+        try { _sc?.ReceiveMessage(); } // VERIFY: method name; it can throw COMException on a broken connection
+        catch (Exception ex) { Log($"ReceiveMessage EXCEPTION {ex.GetType().Name}: {ex.Message} (HResult 0x{ex.HResult:X8})"); }
     }
 
     // ---- helpers -----------------------------------------------------------------------------------------------

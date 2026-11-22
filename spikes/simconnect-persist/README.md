@@ -18,7 +18,7 @@ dotnet build -c Release -p:MsfsSdk="C:\MSFS 2024 SDK"
 `-p:SimConnectManagedDir="<folder>" -p:SimConnectNativeDir="<folder>"`.
 
 Output: `bin\Release\net8.0-windows\win-x64\SimConnectPersist.exe` or `bin\Release\net8.0-windows\SimConnectPersist.exe`
-(depends on the SDK's platform handling). `spawned.json` is written to the current directory.
+(depends on the SDK's platform handling). Each spawn writes `spawned-<utc timestamp>.json` (kept) and `spawned.json` (latest) to the current directory; pass an older timestamped file to `remove --ids-file` to clean up an earlier run (for example the step 8 object).
 
 ## Run
 
@@ -28,7 +28,7 @@ Start MSFS 2024 and load into a free flight first. Use a title from an installed
 |---|---|---|
 | `badtitle` | `SimConnectPersist badtitle` | What happens with a title that does not exist: exception, exception event, text? (step 3) |
 | `spawn` | `SimConnectPersist spawn --title "<title>" --lat 32.7336 --lon -117.1897 --heading 0 --hold-s 60` | Does create work; request-to-id latency; does the object sit on the terrain at that lat/lon; which init-position settings work; which message pump works (steps 4, 11) |
-| `spawn`, let it exit | same command; look after it closes | Does the object survive a clean disconnect? (step 5) |
+| `spawn`, let it exit | same command; look after it closes | Does the object survive a clean disconnect? Wait 60 s after it closes and look again. (step 5) |
 | `remove` | `SimConnectPersist remove --ids-file spawned.json` | Can a new connection remove an old object by its old id? (step 6) |
 | `spawn --crash` | `SimConnectPersist spawn --title "<title>" --lat ... --lon ... --crash` | Does the object survive the client process dying? (step 7). Then run `remove` again. |
 | `spawn`, no remove | spawn, reload the flight or go to the main menu and back | Does it survive main menu / new flight? (step 8) |
@@ -37,11 +37,11 @@ Start MSFS 2024 and load into a free flight first. Use a title from an installed
 Scaling (step 10): the C docs show no scale parameter for the create call, so the app does not try to scale. Record anything else you find.
 
 Options: `--heading` degrees true (default 0); `--spacing-m` spacing between objects along an east-west line (default 10);
-`--hold-s` seconds to wait before closing (default 30); `--crash` kills the process without closing the connection.
+`--hold-s` seconds to wait before closing (default 30); Exit code is 1 if no object was assigned or exception events arrived (also for `remove`). `--crash` kills the process without closing the connection.
 Console output is timestamped; save it for `docs/findings/SPIKE-005/<step>.log` (for example `... | Tee-Object step4.log`).
 
 ## Message pump
 
 The app passes an `EventWaitHandle` to the `SimConnect` constructor and calls `ReceiveMessage()` when it is signalled. If no open
-event arrives, switch to a window-message pump (hidden form plus user message id); `Connect()` has the recipe in a comment.
+event arrives, switch to a window-message pump (hidden form plus user message id; needs `<UseWindowsForms>true</UseWindowsForms>` in the csproj); `Connect()` has the recipe in a comment.
 Record which one worked.
