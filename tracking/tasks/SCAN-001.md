@@ -1,7 +1,7 @@
 ---
 id: SCAN-001
 title: "Create palmscan package core: config, cache, HTTP, models, CLI skeleton"
-status: in_progress
+status: review
 phase: 1
 area: SCAN
 kind: build
@@ -10,7 +10,7 @@ depends_on: [ARCH-001, ARCH-003, ARCH-004, ARCH-009]
 requires: [none]
 agent: python-architect
 estimate_h: 3
-touches: [pyproject.toml, palmscan/__init__.py, palmscan/config.py, palmscan/cache.py, palmscan/http.py, palmscan/geo.py, palmscan/model.py, palmscan/cli.py, palmscan/sources/__init__.py, palmscan/detect/__init__.py, palmscan/classify/__init__.py, palmscan/qa/__init__.py, tests/unit/palmscan/test_scan_config.py, tests/unit/palmscan/test_scan_cache.py, tests/unit/palmscan/test_scan_http.py, tests/unit/palmscan/test_scan_geo.py]
+touches: [pyproject.toml, palmscan/__init__.py, palmscan/config.py, palmscan/cache.py, palmscan/http.py, palmscan/geo.py, palmscan/model.py, palmscan/cli.py, palmscan/sources/__init__.py, palmscan/detect/__init__.py, palmscan/classify/__init__.py, palmscan/qa/__init__.py, tests/unit/palmscan/test_scan_config.py, tests/unit/palmscan/test_scan_cache.py, tests/unit/palmscan/test_scan_http.py, tests/unit/palmscan/test_scan_geo.py, tests/unit/palmscan/test_scan_cli.py]
 owner: claude-agent
 branch: task/scan-001-create-palmscan-package-core-config-cach
 worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-001"
@@ -45,12 +45,12 @@ The `palmscan` package exists with its typed config (every detection threshold a
 
 ## Acceptance criteria
 
-- [ ] `python -c "import palmscan, palmscan.config, palmscan.cache, palmscan.http, palmscan.model, palmscan.geo"` succeeds.
-- [ ] `palmscan --help` lists `run`, `priors`, `eval`.
-- [ ] A region mapping with only `region` and `bbox` yields a `ScanConfig` with every plan default.
-- [ ] `palmscan: {rules: {heigth_min_m: 5}}` raises `ConfigError` naming `heigth_min_m`.
-- [ ] Cache in offline mode raises `CacheMiss` for a missing entry; no test opens a network socket.
-- [ ] All new tests pass.
+- [x] `python -c "import palmscan, palmscan.config, palmscan.cache, palmscan.http, palmscan.model, palmscan.geo"` succeeds.
+- [x] `palmscan --help` lists `run`, `priors`, `eval`.
+- [x] A region mapping with only `region` and `bbox` yields a `ScanConfig` with every plan default.
+- [x] `palmscan: {rules: {heigth_min_m: 5}}` raises `ConfigError` naming `heigth_min_m`.
+- [x] Cache in offline mode raises `CacheMiss` for a missing entry; no test opens a network socket.
+- [x] All new tests pass.
 
 ## Verification
 
@@ -65,3 +65,6 @@ python -c "from palmscan.config import scan_config_from_mapping as f; c=f({'regi
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [reconcile] Depends on ARCH-009 (pyproject order) and ARCH-004 (cache helpers). Cache now delegates layout/atomic write/meta to palmcore.cache, errors come from palmcore.errors, geo wraps palmcore.geo; id_prefix and exclusion clamps read from RegionConfig (ARCH-003), removed from the palmscan: block; pdal stays a separate extra per ARCH; script entry already declared by ARCH-001. Cross-area reconciliation.
 - 2026-11-22 [claude-agent] Claimed. branch=task/scan-001-create-palmscan-package-core-config-cach worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-001
+- 2026-11-22 [claude-agent] Implemented palmscan core (config, cache, http, geo, model, cli, subpackages) in 5bf7591. pyproject.toml untouched: ARCH-001/009 already declare geopandas, shapely, pyproj, pyogrio, numpy, scipy, requests, pyyaml, lidar and pdal extras, palmscan script. Verification: pytest 698 passed 1 skipped (56 palmscan); ruff check/format clean; mypy clean (41 files); import check OK; palmscan --help lists run/priors/eval; sdc 8.0 printed; offline Cache raises CacheMiss; HTTP tests monkeypatch requests.Session.request (no sockets). Acceptance ticked.
+- 2026-11-22 [claude-agent] Spec notes: (1) added tests/unit/palmscan/test_scan_cli.py to touches. (2) scan_config_from_mapping defaults config_version to 1 because palmcore.load_region_dict requires it and the Verification one-liner passes only region and bbox. (3) Plan sketch defines CacheMiss(Exception) in palmscan/cache.py; it is re-exported from palmcore.errors (subclass of SourceError, exit 5) per the reconcile note. (4) Cache.get_or_fetch reads the fetched file back into memory to hand to palmcore.write_cache; fine for JSON, revisit in the LiDAR task if tiles are large. (5) HttpClient retries HTTP 500 too, per plan.
+- 2026-11-22 [claude-agent] Status in_progress -> review.
