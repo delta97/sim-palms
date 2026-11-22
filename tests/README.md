@@ -41,7 +41,7 @@ Do not install only `.[dev]`. `pip install -e ".[dev]"` alone fails to collect
 | `tests/golden/<case>/` | golden output; GEN owns the cases | **not present**; created by GEN cases |
 | `tests/accuracy/` | ground truth, thresholds, metrics | **not built**, TEST-009, TEST-010 |
 | `tests/visual/` | visual protocol and run tools | **not built**, TEST-102 (diff scoring: TEST-008, optional) |
-| `tests/perf/` | frametime parser, compare, soak | **not built**, TEST-013, TEST-103, TEST-014 |
+| `tests/perf/` | frametime parser, compare, soak | built: `frametimes`, `compare` (TEST-013), `soak` (TEST-014); flight harness TEST-103 (sim PC) |
 | `tests/regression/` | post-update routine | `ROUTINE.md`, `LOG.md`, `new_entry.py` built (TEST-015); `check_build.py` and `build_history.csv` **not built**, TEST-016 |
 
 ## Run it

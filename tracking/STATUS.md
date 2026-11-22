@@ -4,7 +4,7 @@
 
 ## Where things stand
 
-- **62 of 213 tasks done**, all merged to `main`, pushed, and their GitHub issues closed with a link to the merge commit. Board: [BOARD.md](BOARD.md). Changelog: [CHANGELOG.md](../CHANGELOG.md).
+- **64 of 213 tasks done**, all merged to `main`, pushed, and their GitHub issues closed with a link to the merge commit. Board: [BOARD.md](BOARD.md). Changelog: [CHANGELOG.md](../CHANGELOG.md).
 - **Phase 1 code (palmscan) is complete on fixtures.** `palmscan run` goes ingest → dedupe → species → priors → sizes/exclusion/buildings/masks → `palms.geojson` + QA outputs, offline and byte-reproducible (`SOURCE_DATE_EPOCH`). Adapters: geojson/CSV file, ArcGIS REST, Overpass/OSM, building footprints. Live samples are recorded in `tests/fixtures/palmscan/recorded/` (SCAN-007).
 - **Phase 2 code (palmgen) has its building blocks:** inputs, GUIDs, tiling, exclusion geometry + building clipping, masks, variant/scale/heading, template engine on *fake* templates, build reports. The real Scenery Editor XML (SPIKE-003) and package build (SPIKE-004) need the sim PC.
 - **Shared core (palmcore):** contracts and schemas, region config, ids, geo, cache, logging, CLI plumbing, palms.geojson I/O, asset manifest + glTF checks.
@@ -35,5 +35,5 @@ Everything else that is ready needs you, the sim PC, or Blender:
 
 ## Next
 
-1. Agent-ready work left: TEST-014 (soak-test tooling for the live spawner, only useful if DEC-007 picks live placement) and FX-002 (Phase 7 image-layer scaffold, gated on FX-001 on the sim). Both are held pending the user's go-ahead.
+1. No agent-ready work is left: TEST-014 (soak tooling) and FX-002 (`palmfx.offline` scaffold) are merged. Everything open needs the user, the sim PC, Blender or a GPU.
 2. The user does DEC-004, then SPIKE-001 on the sim PC. Phase 2 build and validation tasks unblock from the SPIKE results.
