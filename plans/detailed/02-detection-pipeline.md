@@ -852,15 +852,15 @@ Task: SCAN-023.
 ```python
 def find_peaks(chm: ChmResult, min_height_m=6.0, min_distance_m=3.0) -> np.ndarray: ...   # (n, 2) row, col
 def segment_crowns(chm: ChmResult, peaks: np.ndarray, mask_height_m=2.0) -> np.ndarray: ...  # int32 labels, 0 = background
-def crown_stats(chm: ChmResult, labels: np.ndarray, peaks, dataset: str, tile_id: str) -> list[LidarCandidate]: ...
+def crown_stats(chm: ChmResult, labels: np.ndarray, peaks, dataset: str, tile_id: str, tile_bounds: Sequence[float] | None = None) -> list[LidarCandidate]: ...   # tile_bounds = unbuffered (xmin, ymin, xmax, ymax)
 ```
-1. `skimage.feature.peak_local_max(chm.chm_smooth, min_distance=round(min_distance_m / res), threshold_abs=min_height_m, exclude_border=False)`. Peaks sorted by (row, col) for determinism.
+1. Peaks: cells of `chm.chm_smooth` that are >= `min_height_m` and equal the max of their 3x3 neighbourhood (1e-4 m tolerance); connected equal cells (a flat top) collapse to the first cell in row-major order; then, highest first (ties by row, col), a peak suppresses lower peaks within `round(min_distance_m / res)` cells (Chebyshev). Returned sorted by (row, col). (`skimage.feature.peak_local_max` was not used: it keeps several peaks on a plateau.)
 2. Markers image with label `i+1` at each peak; `skimage.segmentation.watershed(-chm.chm_smooth, markers, mask=chm.chm_smooth > mask_height_m)`.
 3. Per label: `height_m` = max of the unsmoothed CHM in the segment; `crown_area_m2 = pixel_count * res**2`; `crown_diam_m = 2 * sqrt(area / pi)`; `ratio = height_m / crown_diam_m`; position = peak cell centre, transformed to lon/lat; `ground_elev_m = sample_ground` at the peak.
 4. `shared_boundary_frac`: boundary pixels of the segment (pixels with a 4-neighbour outside the segment) that touch another non-zero label, divided by all boundary pixels. 0 = fully surrounded by low ground; 1 = fully embedded in canopy.
 5. `in_building` from `chm.building_mask` at the peak cell when present.
-6. Candidates whose peak lies in the tile buffer (outside unbuffered bounds) are dropped, so neighbouring tiles never double-count.
-- Tests: two separate synthetic cones -> 2 candidates with correct diameters (+/- 0.5 m); two cones 2 m apart -> 1 peak (min distance); a cone embedded in a wide plateau at 8 m -> high `shared_boundary_frac`; a peak in the buffer -> dropped.
+6. Candidates whose peak lies outside `tile_bounds` (the tile buffer) are dropped, so neighbouring tiles never double-count.
+- Tests: two separate synthetic cones -> 2 candidates with correct diameters (+/- 0.5 m); two cones 2 m apart -> 1 peak (min distance); a tall crown ringed by 8 m crowns -> `shared_boundary_frac` > 0.5 (a lone peak on a wide flat plateau is not a reliable test: the watershed gives the cone most of the plateau); a peak in the buffer -> dropped.
 
 ### W16. Palm rules
 
