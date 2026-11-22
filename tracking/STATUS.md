@@ -25,6 +25,7 @@ Everything else that is ready needs you, the sim PC, or Blender:
    - DEC-008 asset storage (Git LFS or external), DEC-005 performance budget.
    - The open questions at the end of `docs/licenses/data-sources.md` and `docs/licenses/models-and-tools.md` (ODbL share-alike, San Diego indemnity, retail model non-extractability).
 5. **RISK-003:** which other palm/tree mods you use (for default masks).
+6. **FX-026** ([#215](https://github.com/delta97/sim-palms/issues/215)): OK to download and load the LaMa model weights on a machine with torch (CPU is fine), so the LaMa backend can be pinned and run. It blocks FX-014 (#202), which blocks FX-015, FX-017 and FX-018.
 
 ## Known gaps found this session (not yet tasks)
 
@@ -35,5 +36,5 @@ Everything else that is ready needs you, the sim PC, or Blender:
 
 ## Next
 
-1. Phase 7 Stage A (offline image-layer experiment) has its scaffold, camera model, depth decoder (shader untested in ReShade), mask metrics and inpainting runner (Telea tested; LaMa untested, FX-014 blocked on torch + weights). FX-004 (synthetic scene generator) and FX-008 (ingest and pose interpolation) are now ready for an agent; held pending the user's go-ahead. Everything else open needs the user, the sim PC, Blender or a GPU.
+1. Phase 7 Stage A (offline image-layer experiment) has its scaffold, camera model, depth decoder (shader untested in ReShade), mask metrics and inpainting runner (Telea tested; LaMa untested; FX-014 blocked on FX-026, #215). FX-004 (synthetic scene generator) and FX-008 (ingest and pose interpolation) are now ready for an agent; held pending the user's go-ahead. Everything else open needs the user, the sim PC, Blender or a GPU.
 2. The user does DEC-004, then SPIKE-001 on the sim PC. Phase 2 build and validation tasks unblock from the SPIKE results.
