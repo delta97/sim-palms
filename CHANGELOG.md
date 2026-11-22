@@ -5,6 +5,7 @@ Format: `- TASK-ID: what changed (PR link)`.
 
 ## Unreleased
 
+- ASSET-001: Added reference sheets for the five SoCal palm species (`assets/reference/`), with cited proportions and licensed photo links (local merge).
 - SCAN-029: Added in-run accuracy evaluation from palmscan QA, calling the TEST-010 metrics (local merge).
 - SCAN-023: Added CHM peak detection and watershed crown segmentation (`palmscan/detect/peaks.py`) (local merge).
 - SCAN-013: Added the `palmscan run` pipeline and `run`/`priors` CLI, end to end on offline fixtures with contract-valid, byte-reproducible output (local merge).

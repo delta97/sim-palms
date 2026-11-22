@@ -7,13 +7,12 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 157 | 2 | 0 | 1 | 53 | 0 | 213 |
+| 157 | 1 | 0 | 1 | 54 | 0 | 213 |
 
 ## In progress / in review
 
 | Task | Status | Owner | Branch | Title |
 |---|---|---|---|---|
-| [ASSET-001](tasks/ASSET-001.md) | in_progress | claude-agent | task/asset-001-write-reference-sheets-for-the-5-socal-p | Write reference sheets for the 5 SoCal palm species |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
 | [SCAN-007](tasks/SCAN-007.md) | in_progress | claude-agent | task/scan-007-record-live-source-fixtures-and-confirm | Record live source fixtures and confirm source fields |
 
@@ -133,11 +132,11 @@ _None._
 | [TEST-102](tasks/TEST-102.md) | done | none | TEST-001, TEST-005 | Visual test protocol tooling: run scaffolder, checklist template, test log |
 | [TEST-104](tasks/TEST-104.md) | todo | windows-sim, human | TEST-015, TEST-016, TEST-007, GEN-100, GATE-P0 | Run the post-update regression routine once and record the baseline log entry |
 
-## Phase 3 (3/38 done)
+## Phase 3 (4/38 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
-| [ASSET-001](tasks/ASSET-001.md) | in_progress | network |  | Write reference sheets for the 5 SoCal palm species |
+| [ASSET-001](tasks/ASSET-001.md) | done | network |  | Write reference sheets for the 5 SoCal palm species |
 | [ASSET-002](tasks/ASSET-002.md) | done | network |  | Collect build-vs-license inputs for DEC-002 (palm models) |
 | [ASSET-003](tasks/ASSET-003.md) | todo | blender, windows-sim | SPIKE-004, SPIKE-001 | Install and pin Blender and the MSFS 2024 glTF exporter plugin |
 | [ASSET-004](tasks/ASSET-004.md) | todo | blender, windows-sim | ASSET-003, ASSET-008, SPIKE-003 | Smoke-test the asset pipeline end to end with a throwaway model |
