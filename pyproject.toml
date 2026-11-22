@@ -28,6 +28,7 @@ dev = [
   "lxml>=5.0",
   "pillow>=10.0",
   "scikit-image>=0.22",
+  "affine>=2.4",
 ]
 scan = [
   "geopandas>=1.0",
@@ -36,6 +37,7 @@ scan = [
   "numpy>=1.26",
   "scipy>=1.11",
   "requests>=2.31",
+  "affine>=2.4",
 ]
 lidar = [
   "rasterio>=1.3",

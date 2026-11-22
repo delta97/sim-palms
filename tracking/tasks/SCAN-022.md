@@ -10,7 +10,7 @@ depends_on: [SCAN-001]
 requires: [none]
 agent: lidar-analyst
 estimate_h: 3
-touches: [palmscan/detect/chm.py, tests/unit/palmscan/test_scan_chm.py]
+touches: [palmscan/detect/chm.py, tests/unit/palmscan/test_scan_chm.py, pyproject.toml]
 owner: claude-agent
 branch: task/scan-022-canopy-height-model-dtm-dsm-chm
 worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-022"
