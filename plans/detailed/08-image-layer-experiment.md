@@ -294,6 +294,12 @@ Per palm (missing `height_m` defaults to 12 m and missing `crown_diam_m` to 4 m,
 
 Starting parameters (`ProjectParams`): `min_width_m=4.0`, `width_scale=1.3`, `top_extra_m=1.0`, `depth_tol_m=3.0`, `depth_tol_rel=0.05`, `dilate_px=3`, `max_range_m=1500`, `min_height_px=6`.
 
+Implementation notes (FX-010, `palmfx/offline/mask_project.py`, `palmfx mask-project --session DIR --palms GEOJSON [--no-depth-test] [--params JSON|FILE] [--vfov-deg] [--ground-elev-m] [--lenient-palms]`):
+- The quad is rasterised by sampling pixel centres (`cv2.fillPoly` also paints outline pixels, which made thin blobs about 1 px wider per side). Skip reasons are `behind_camera` (base or any corner at `Z <= 0`), `out_of_range`, `too_small`, `off_screen`, and `fully_occluded` (nothing left after the nearer-palm rule or static occluder).
+- Null `ground_elev_m`: median of the palms that have one, else `--ground-elev-m`, else median of `alt_msl_m - alt_agl_m` over posed frames if the pose records both (VERIFY: FX-006), else an error. Filled palms carry `elev_estimated: true`; defaulted `height_m`/`crown_diam_m` are listed in `defaulted`.
+- Camera: `--vfov-deg`, else `calib/camera.json` `vfov_deg` and optional `bias` (VERIFY: FX-009 owns the name), else synthetic `vfov_deg`, else 60. ENU origin is the first posed frame at height 0.
+- On the 320x180 synthetic scene `dilate_px=0, width_scale=1.2, top_extra_m=1.0` gives per-frame IoU >= 0.93 vs ground truth; `dilate_px=3` costs about 0.2 IoU on 5x14 px blobs, so the plan defaults are for 1440 p.
+
 ### A8. Mask by depth and colour
 
 Task FX-011. Uses raw depth only. Gradients of `ln d` don't depend on the depth scale, so no calibration is needed. Thresholds are for 1440 p; pixel sizes scale with `H/1440`. All values live in `palmfx/offline/config/heuristic.yaml`.
