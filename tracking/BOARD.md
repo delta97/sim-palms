@@ -7,13 +7,12 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 144 | 2 | 0 | 1 | 66 | 0 | 213 |
+| 144 | 1 | 0 | 1 | 67 | 0 | 213 |
 
 ## In progress / in review
 
 | Task | Status | Owner | Branch | Title |
 |---|---|---|---|---|
-| [FX-012](tasks/FX-012.md) | in_progress | claude-agent | task/fx-012-mask-comparison-metrics-pixel-iou-instan | Mask comparison metrics (pixel IoU, instance precision/recall) |
 | [FX-014](tasks/FX-014.md) | in_progress | claude-agent | task/fx-014-inpainting-runner-telea-baseline-lama-ba | Inpainting runner: Telea baseline, LaMa backend, tiling |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
 
@@ -258,7 +257,7 @@ _None._
 | [TEST-008](tasks/TEST-008.md) | done | none | TEST-102 | Add optional image-diff scoring for visual viewpoints |
 | [TEST-018](tasks/TEST-018.md) | todo | windows-sim | TEST-008, TEST-104 | Calibrate the image-diff noise floor at T1 |
 
-## Phase 7 (3/27 done)
+## Phase 7 (4/27 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -273,7 +272,7 @@ _None._
 | [FX-009](tasks/FX-009.md) | todo | none | FX-004, FX-008 | Calibration: clicks tool, vfov, time offset, pose bias, depth model |
 | [FX-010](tasks/FX-010.md) | todo | none | FX-004, ARCH-002 | Mask by projection from palms.geojson |
 | [FX-011](tasks/FX-011.md) | todo | none | FX-004 | Mask by depth and colour heuristics |
-| [FX-012](tasks/FX-012.md) | in_progress | none | FX-002 | Mask comparison metrics (pixel IoU, instance precision/recall) |
+| [FX-012](tasks/FX-012.md) | done | none | FX-002 | Mask comparison metrics (pixel IoU, instance precision/recall) |
 | [FX-013](tasks/FX-013.md) | todo | human | FX-007, FX-008, FX-009 | Hand labels: ground-truth blob masks, correspondences, committed sample fixture |
 | [FX-014](tasks/FX-014.md) | in_progress | network | FX-002 | Inpainting runner: Telea baseline, LaMa backend, tiling |
 | [FX-015](tasks/FX-015.md) | todo | none | FX-004, FX-014 | Temporal stabilisation baselines (flow fill, previous-frame reuse, temporal blending) |

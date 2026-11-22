@@ -5,6 +5,7 @@ Format: `- TASK-ID: what changed (PR link)`.
 
 ## Unreleased
 
+- FX-012: Added mask comparison metrics (pixel IoU, instance precision/recall) and the `palmfx mask-compare` command (local merge).
 - FX-003: Added the camera model (WGS84 to ENU geodesy, attitude, pinhole projection and back-projection); sim conventions are VERIFY (local merge).
 - FX-005: Added the log24 ReShade depth-pack shader (untested in ReShade) and its Python depth decoder and depth-model fit (local merge).
 - TEST-014: Added soak-test checks S1-S6, provisional limits and the SOAK procedure for the live spawner (`tests/perf/soak.py`) (local merge).
