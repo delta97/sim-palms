@@ -693,7 +693,7 @@ Task: SCAN-012 (Phase 1 parts); SCAN-028 adds the LiDAR parts.
 | `lidar_candidates` (Phase 4) | Point | all `LidarCandidate` fields, `accepted`, `reasons` |
 | `crowns` (Phase 4, `qa.write_crowns`) | Polygon | `candidate_id` |
 
-Buffers are built in the local CRS and written in EPSG:4326. Empty layers are still written (with schema) so QGIS projects keep working.
+Buffers are built in the local CRS and written in EPSG:4326. Implemented signature additions (SCAN-012): keyword-only `id_prefix` (palm ids match `palms.geojson`) and `crs` (local CRS, default the UTM zone of the palms); `conflict_buildings` is a list of `ConflictBuilding(building_id, source, geometry)` (WGS84); `crowns` is a list of `(candidate_id, geometry)`; `lidar_candidates` and `crowns` are written only when not `None`. `exclusion_circles` skips palms without `exclusion_radius_m`. Vintage years: `data_vintage` keys starting with `lidar` count as LiDAR, all other keys as inventory. Empty layers are still written (with schema) so QGIS projects keep working.
 
 **Vintage grid**: cells of `qa.vintage_grid_deg` aligned to multiples of that step; `cell_id` like `n32p78_w117p26` (same style as palmgen tile names in `plans/04-fs2024-integration.md#1-region-package-layout`). Per cell: palm count, median inventory vintage year, median LiDAR vintage year, `stale = (run_year - min(vintages)) > qa.stale_years`.
 
@@ -710,7 +710,7 @@ Buffers are built in the local CRS and written in EPSG:4326. Empty layers are st
 10. **Classifier** (Phase 4): rules vs tree CV accuracy, chosen model, confusion matrix.
 11. **Accuracy** (when `--eval-site`): TEST-010 results via W19.
 12. **Warnings**: every warning collected during the run.
-Tests mask the timestamp line and compare to `tests/fixtures/palmscan/qa/expected_summary.md`.
+`QaContext` also takes `accuracy_md` (already rendered Markdown from `palmscan/qa/accuracy.py`, SCAN-029), `classifier` (`ClassifierSummary`, so this module does not import the tree model) and `git_sha` (from `git_sha()`; the renderer itself is pure). Classifier and Accuracy are omitted when their data is absent; section headings are unnumbered. Tests mask the timestamp line and compare to `tests/fixtures/palmscan/qa/expected_summary.md`.
 
 ### W11. Pipeline and CLI
 
