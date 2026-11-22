@@ -307,6 +307,7 @@ Task FX-012 (metric), FX-013 (hand masks).
 - Pixel IoU per frame: `IoU = |A ∩ B| / |A ∪ B|` on union masks, static occluder removed from both; reported as mean and median over frames. Empty ∪ empty counts as 1.0 and is listed separately.
 - Instance matching: greedy by IoU, highest first, one-to-one, match if instance IoU ≥ `iou_thr` (0.3; blobs are small and edges vague). Report `precision = TP / (TP + FP)`, `recall = TP / (TP + FN)` and the median IoU of matched pairs.
 - Comparisons run in FX-019: each automatic method vs `hand`, and `project-depth` vs `heuristic`.
+- Implemented in FX-012 (`palmfx/offline/mask_metrics.py`, `palmfx mask-compare --a METHOD --b METHOD [--iou-thr 0.3] [--occluder PNG]`). `--a` is the prediction, `--b` the reference. Precision and recall pool TP, FP and FN over compared frames and are null when their denominator is 0 (as in `plans/detailed/06-testing.md`). Empty ∪ empty frames score 1.0 in the pixel IoU mean and median and are also counted in `empty_empty_frames`. Instance pairs need IoU > 0 as well as IoU >= thr. Ties go to the lower prediction label, then the lower reference label. Output: `metrics/mask-<a>-vs-<b>.json`.
 - Hand masks (FX-013): 6 frames (3 per session, start/middle/end), painted in GIMP or Krita as a separate layer and exported as 8-bit 0/255 PNG, same size. Paint the whole blob including soft edges, but no ground shadow. Procedure in `palmfx/docs/labelling.md`.
 
 ### A10. Inpainting
