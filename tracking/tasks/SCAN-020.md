@@ -1,7 +1,7 @@
 ---
 id: SCAN-020
 title: "USGS 3DEP EPT LiDAR adapter (PDAL pipeline, tiles, cache)"
-status: todo
+status: in_progress
 phase: 4
 area: SCAN
 kind: build
@@ -11,9 +11,9 @@ requires: [none]
 agent: lidar-analyst
 estimate_h: 4
 touches: [palmscan/sources/lidar_ept.py, tests/unit/palmscan/test_scan_lidar_ept.py, tests/fixtures/palmscan/lidar_ept/]
-owner: ""
-branch: ""
-worktree: ""
+owner: claude-agent
+branch: task/scan-020-usgs-3dep-ept-lidar-adapter-pdal-pipelin
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-020"
 updated: 2026-11-22
 ---
 
@@ -58,3 +58,4 @@ python -c "import pdal" 2>/dev/null && echo "pdal present" || echo "pdal absent:
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [integrator] integrator note from SCAN-001: palmscan Cache.get_or_fetch reads the fetched file fully into memory (reuses palmcore.write_cache); revisit for large LiDAR tiles (stream to disk)
+- 2026-11-22 [claude-agent] Claimed. branch=task/scan-020-usgs-3dep-ept-lidar-adapter-pdal-pipelin worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-020
