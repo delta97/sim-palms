@@ -20,7 +20,7 @@ sources:
       path: data/manual/la-trees/la_county_tree_locations.geojson
       format: geojson
       species_field: species
-      id_field: id                    # VERIFY: integer row id of the compilation, not a city tree id; stability across releases unknown
+      id_field: id                    # 0-based row index of the compilation (SCAN-007, 2026-11-22): not a city tree id, stable only while the S3 file is unchanged (last modified 2024-05-31)
       license: "Public records compilation; check before redistributing"
     # StreetsLA (City of Los Angeles) is not added: its only machine-readable endpoint is a GeoServer WFS
     # (https://geola.daveytreekeeper.com/geoserver/Treekeeper/ows, typeName Treekeeper:streetsla_UFDSpeciesLabel,

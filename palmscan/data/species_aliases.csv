@@ -23,6 +23,7 @@ bismarckia nobilis,bismarckia_nobilis,true,
 blue fan palm,brahea_armata,true,
 blue hesper palm,brahea_armata,true,
 blue palm,brahea_armata,true,
+bottle palm,palm_unknown,true,Hyophorbe lagenicaulis (SD layer 20 pairs them); genus is not modelled so species not implied
 brahea armata,brahea_armata,true,
 brahea armatta,brahea_armata,true,
 brahea edulis,brahea_edulis,true,
@@ -57,6 +58,7 @@ chinese windmill palm,trachycarpus_fortunei,true,chamaerops excelsa is an old sy
 christmas palm,adonidia_merrillii,true,
 chrysalidocarpus lutescens,dypsis_lutescens,true,
 chusan palm,trachycarpus_fortunei,true,chamaerops excelsa is an old synonym
+clustered fishtail palm,caryota_mitis,true,SD layer 20 pairs this common name with Caryota mitis
 coco palm,cocos_nucifera,true,
 coconut,cocos_nucifera,true,
 coconut palm,cocos_nucifera,true,
@@ -89,15 +91,21 @@ erythea edulis,brahea_edulis,true,
 european fan palm,chamaerops_humilis,true,
 fan palm,palm_unknown,true,"real palms, species not implied; palmetto may be Sabal or Serenoa"
 feather palm,palm_unknown,true,"real palms, species not implied; palmetto may be Sabal or Serenoa"
+filibusta palm,washingtonia_filibusta,true,SD layer 20 pairs this common name with Washingtonia x filibusta
 fishtail palm,caryota_mitis,true,common name is used for several Caryota
+fishtail wine palm,caryota_sp,true,SD layer 20 pairs this common name with Caryota urens; no species key
 florida royal palm,roystonea_regia,true,
 fountain palm,livistona_chinensis,true,
 foxtail,wodyetia_bifurcata,true,
 foxtail palm,wodyetia_bifurcata,true,
+giant fishtail palm,caryota_sp,true,SD layer 20 pairs this common name with Caryota gigas; no species key
 golden cane palm,dypsis_lutescens,true,
 guadalupe fan palm,brahea_edulis,true,
 guadalupe palm,brahea_edulis,true,
+hesper palm,brahea_sp,true,SD layer 20 pairs this common name with Brahea aculeata; no species key
 howea forsteriana,howea_forsteriana,true,
+hybrid date palm,phoenix_roebelenii,true,SD layer 20 pairs this common name with Phoenix roebelenii x rupicola
+hyophorbe lagenicaulis,palm_unknown,true,genus Hyophorbe is not modelled; real palm
 jelly palm,butia_capitata,true,VERIFY: pindo and jelly palm are sold as Butia capitata; some authorities treat the plant as Butia odorata
 jubaea chilensis,jubaea_chilensis,true,
 jubaea spectabilis,jubaea_chilensis,true,
@@ -111,8 +119,10 @@ lady palm,rhapis_excelsa,true,
 livistona australis,livistona_australis,true,
 livistona chinensis,livistona_chinensis,true,
 livistona chinesis,livistona_chinensis,true,
+madagascar palm,,false,"Pachypodium lamerei, not a palm (SD layer 20 pairs the common name with it)"
 majesty palm,ravenea_rivularis,true,
 manila palm,adonidia_merrillii,true,
+med fan palm,chamaerops_humilis,true,"abbreviation of Mediterranean fan palm seen in la-trees; inferred, no Latin name in that file"
 mediterranean fan,chamaerops_humilis,true,
 mediterranean fan palm,chamaerops_humilis,true,
 medjool,phoenix_dactylifera,true,
@@ -128,11 +138,14 @@ miniature date palm,phoenix_roebelenii,true,
 neodypsis decaryi,dypsis_decaryi,true,
 nikau,rhopalostylis_sapida,true,
 nikau palm,rhopalostylis_sapida,true,
+pachypodium lamerei,,false,"Madagascar palm, not a palm"
 palm lily,,false,"Yucca, not a palm"
 palmetto,palm_unknown,true,"real palms, species not implied; palmetto may be Sabal or Serenoa"
 palmetto palm,sabal_palmetto,true,ambiguous: NZ and AU usage of cabbage palm differs; mapped to Sabal palmetto for Florida data
+palmetto species,sabal_sp,true,SD layer 20 pairs this common name with Sabal spp.
 pandanus,,false,"Pandanus, not a palm"
 pandanus utilis,,false,"Pandanus, not a palm"
+paradise palm,palm_unknown,true,"SD layer 20 rows have no Latin name; real palms, species not implied"
 parlor palm,chamaedorea_elegans,true,
 phoenix canarensis,phoenix_canariensis,true,
 phoenix canariense,phoenix_canariensis,true,
@@ -140,6 +153,7 @@ phoenix canarienses,phoenix_canariensis,true,
 phoenix canariensis,phoenix_canariensis,true,
 phoenix dactilifera,phoenix_dactylifera,true,
 phoenix dactylifera,phoenix_dactylifera,true,
+phoenix mesquite,,false,"Prosopis 'Phoenix' mesquite cultivar, not a Phoenix palm (SD layer 20)"
 phoenix reclinata,phoenix_reclinata,true,
 phoenix robelenii,phoenix_roebelenii,true,
 phoenix roebeleni,phoenix_roebelenii,true,
@@ -148,10 +162,13 @@ phoenix roebelini,phoenix_roebelenii,true,
 phoenix roebelinii,phoenix_roebelenii,true,
 phoenix sylvestris,phoenix_sylvestris,true,common names VERIFY: also used loosely for other Phoenix
 piccabeen palm,archontophoenix_cunninghamiana,true,
+pigmy date palm,phoenix_roebelenii,true,spelling seen in SD layer 20 COMMON_NAME
 pindo,butia_capitata,true,VERIFY: pindo and jelly palm are sold as Butia capitata; some authorities treat the plant as Butia odorata
 pindo palm,butia_capitata,true,VERIFY: pindo and jelly palm are sold as Butia capitata; some authorities treat the plant as Butia odorata
+pony tail palm,,false,"Beaucarnea recurvata, not a palm (hyphenated spelling seen in SD layer 20)"
 ponytail,,false,"Beaucarnea recurvata, not a palm"
 ponytail palm,,false,"Beaucarnea recurvata, not a palm"
+puerto rican hat palm,sabal_sp,true,SD layer 20 pairs this common name with Sabal causiarum; no species key
 pygmy date,phoenix_roebelenii,true,
 pygmy date palm,phoenix_roebelenii,true,
 queen,syagrus_romanzoffiana,true,Cocos plumosa and Arecastrum are synonyms of the queen palm; not genus Cocos
@@ -162,6 +179,7 @@ ravenala madagascariensis,,false,"Ravenala is a Strelitziaceae, not a true palm"
 ravenea rivularis,ravenea_rivularis,true,
 rhapis excelsa,rhapis_excelsa,true,
 rhopalostylis sapida,rhopalostylis_sapida,true,
+ribbon fan palm,livistona_sp,true,SD layer 20 pairs this common name with Livistona decipiens; no species key
 royal,roystonea_regia,true,
 royal palm,roystonea_regia,true,
 roystonea elata,roystonea_regia,true,VERIFY: Florida royal palm; treated as a synonym of R. regia

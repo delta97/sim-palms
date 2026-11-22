@@ -6,3 +6,10 @@ reasons:
   vacant:  [vacant, vacant site, vacant planting site, planting site, empty site, empty tree well,
             tree well, no tree]
   removed: [removed, tree removed, tree removal, proposed removal completed]
+
+# Short status codes. Unlike the markers above these match the WHOLE cleaned status string, because
+# a two-letter code would otherwise hit inside ordinary words. Seen in recorded sources (SCAN-007):
+#   San Diego layer 20 MAPNG_STAT_CD: AB = as built (standing), RM = REMOVED. The layer's domain also lists
+#   AN abandoned, OP operational, NM not mapped; those are not treated as removed.
+status_codes:
+  removed: [rm]

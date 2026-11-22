@@ -1,7 +1,7 @@
 ---
 id: SCAN-007
 title: "Record live source fixtures and confirm source fields"
-status: in_progress
+status: review
 phase: 1
 area: SCAN
 kind: test
@@ -10,7 +10,7 @@ depends_on: [SCAN-002, SCAN-004, SCAN-006]
 requires: [network]
 agent: geo-data-engineer
 estimate_h: 2
-touches: [tests/fixtures/palmscan/recorded/, tests/unit/palmscan/test_scan_recorded_sources.py, palmscan/data/species_aliases.csv, palmscan/data/species_keys.yaml, palmscan/data/non_tree_markers.yaml]
+touches: [plans/detailed/02-detection-pipeline.md, tests/fixtures/palmscan/recorded/, palmscan/filters.py, regions/san-diego-coastal.yaml, regions/la-westside.yaml, tests/unit/palmscan/test_scan_recorded_sources.py, palmscan/data/species_aliases.csv, palmscan/data/species_keys.yaml, palmscan/data/non_tree_markers.yaml]
 owner: claude-agent
 branch: task/scan-007-record-live-source-fixtures-and-confirm
 worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-007"
@@ -40,10 +40,10 @@ Small real responses from each Phase 1 source are saved as fixtures, every VERIF
 
 ## Acceptance criteria
 
-- [ ] Recorded fixtures exist for San Diego trees, la-trees, OSM trees and OSM buildings, each < 2 MB.
-- [ ] README answers every SCAN-007 VERIFY item from the plan's table.
-- [ ] `test_scan_recorded_sources.py` passes offline.
-- [ ] Alias table updated; SCAN-002 tests still pass.
+- [x] Recorded fixtures exist for San Diego trees, la-trees, OSM trees and OSM buildings, each < 2 MB.
+- [x] README answers every SCAN-007 VERIFY item from the plan's table.
+- [x] `test_scan_recorded_sources.py` passes offline.
+- [x] Alias table updated; SCAN-002 tests still pass.
 
 ## Verification
 
@@ -58,3 +58,7 @@ grep -c VERIFY tests/fixtures/palmscan/recorded/README.md   # expect 0 unanswere
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [reconcile] Added palmscan/data/species_keys.yaml to touches: any new species key added to the alias table must also be added to the canonical species-key registry (SCAN-002). Cross-area reconciliation.
 - 2026-11-22 [claude-agent] Claimed. branch=task/scan-007-record-live-source-fixtures-and-confirm worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-007
+- 2026-11-22 [claude-agent] Added touches: palmscan/filters.py (whole-string status_codes match for San Diego status code RM; substring matching would hit inside words), regions/san-diego-coastal.yaml (status_field MAPNG_STAT_CD) and regions/la-westside.yaml (id comment), plan section W5. Did NOT add the Hyophorbe genus: Bottle Palm maps to palm_unknown because a new genus needs species_defaults.yaml (SCAN-009 scope).
+- 2026-11-22 [claude-agent] Plan contradictions found (also in fixtures README and plan W5): SD layer 20 has status field MAPNG_STAT_CD (RM removed = 25% of rows; removed palms were being ingested via COMMON_NAME); no editingInfo.lastEditDate; SPECIES_NAME null on ~37% of AB rows; la-trees county id is a row index, file has no height/status/date; per-city la-trees files are EPSG:2229 with class-string heights; OSM has zero trees in the SD recording bbox (recorded a second bbox with 29 Jubaea palms); MS footprints = CSV index of country+L9 quadkey .csv.gz GeoJSONL tiles (78-171 MB).
+- 2026-11-22 [claude-agent] Evidence: pytest 1548 passed 4 skipped (new test_scan_recorded_sources.py passes offline; species_names and filters tests pass); ruff check, ruff format --check, mypy clean; recorded fixtures 25-40 KB per source; grep -c VERIFY on README = 0. Acceptance boxes 1-4 ticked.
+- 2026-11-22 [claude-agent] Status in_progress -> review.
