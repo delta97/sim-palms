@@ -7,7 +7,7 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 172 | 6 | 0 | 1 | 34 | 0 | 213 |
+| 172 | 5 | 0 | 1 | 35 | 0 | 213 |
 
 ## In progress / in review
 
@@ -18,7 +18,6 @@ Generated: 2026-11-22
 | [SCAN-002](tasks/SCAN-002.md) | in_progress | claude-agent | task/scan-002-species-normalization-table-normalizer-a | Species normalization table, normalizer and palm filter |
 | [SCAN-003](tasks/SCAN-003.md) | in_progress | claude-agent | task/scan-003-source-adapter-base-and-geojson-file-ada | Source adapter base and geojson_file adapter |
 | [SCAN-010](tasks/SCAN-010.md) | in_progress | claude-agent | task/scan-010-species-priors-and-deterministic-prior-s | Species priors and deterministic prior sampling |
-| [SCAN-011](tasks/SCAN-011.md) | in_progress | claude-agent | task/scan-011-palms-geojson-writer-palm-ids-and-schema | palms.geojson writer, palm IDs and schema validation |
 | [TEST-017](tasks/TEST-017.md) | in_progress | claude-agent | task/test-017-write-the-test-runbook-and-ci-wiring-not | Write the test runbook and CI wiring notes |
 
 ## Blocked
@@ -66,7 +65,7 @@ _None._
 | [SPIKE-011](tasks/SPIKE-011.md) | todo | human | SPIKE-010, RISK-005 | Write the Phase 0 go/no-go proposal and get the user's decision |
 | [TEST-006](tasks/TEST-006.md) | todo | windows-sim |  | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
 
-## Phase 1 (14/31 done)
+## Phase 1 (15/31 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -93,7 +92,7 @@ _None._
 | [SCAN-008](tasks/SCAN-008.md) | todo | none | SCAN-002, SCAN-004, SCAN-005 | Inventory ingest stage and cross-source dedupe |
 | [SCAN-009](tasks/SCAN-009.md) | todo | none | SCAN-002 | Palm sizes, exclusion radius, building conflict, mask_out |
 | [SCAN-010](tasks/SCAN-010.md) | in_progress | none | SCAN-001 | Species priors and deterministic prior sampling |
-| [SCAN-011](tasks/SCAN-011.md) | in_progress | none | SCAN-001, ARCH-002, ARCH-006, ARCH-007 | palms.geojson writer, palm IDs and schema validation |
+| [SCAN-011](tasks/SCAN-011.md) | done | none | SCAN-001, ARCH-002, ARCH-006, ARCH-007 | palms.geojson writer, palm IDs and schema validation |
 | [SCAN-012](tasks/SCAN-012.md) | todo | none | SCAN-001 | QA outputs: qa_summary.md, qa_map.gpkg, qa_rejects.csv |
 | [SCAN-013](tasks/SCAN-013.md) | todo | none | SCAN-006, SCAN-008, SCAN-009, SCAN-010, SCAN-011, SCAN-012 | palmscan run pipeline and CLI, end-to-end on fixtures |
 | [SCAN-100](tasks/SCAN-100.md) | todo | network, human | SCAN-007, SCAN-013, TEST-100, ARCH-008 | Deliverable: palmscan run produces validated palms.geojson from inventory data (Phase 1) |

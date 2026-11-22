@@ -5,6 +5,7 @@ Format: `- TASK-ID: what changed (PR link)`.
 
 ## Unreleased
 
+- SCAN-011: Added the palmscan palms.geojson writer, stable palm ids and contract validation (`palmscan/output.py`) (local merge).
 - GEN-007: Added mod and airport masks (buffered in local CRS) and the Overpass airport fetch (`palmgen masks airports`) (local merge).
 - ASSET-002: Collected build-vs-license inputs for DEC-002 (`assets/reference/build-vs-license.md`) (local merge).
 - SCAN-001: Added the palmscan package core: config, cache, HTTP client with retries and User-Agent, models, CLI skeleton (local merge).
