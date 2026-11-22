@@ -45,7 +45,7 @@ A small, single-file .NET 8 console app in `spikes/simconnect-persist/` that the
 - [x] `Program.cs` implements `spawn` (with `--count`, `--hold-s`, `--crash`), `remove` and `badtitle`.
 - [x] Every SimConnect type or member name the code relies on has a `// VERIFY:` comment unless it was checked against the SDK docs page (cite it).
 - [x] The README gives the exact build and run commands.
-- [ ] A reviewer (simconnect-dotnet-engineer or code-reviewer) has read it against the SPIKE-005 question list and found every question covered.
+- [x] A reviewer (simconnect-dotnet-engineer or code-reviewer) has read it against the SPIKE-005 question list and found every question covered.
 
 ## Verification
 
@@ -68,3 +68,4 @@ Compiling is checked on the sim PC in SPIKE-005 step 1. If `dotnet` is installed
 - 2026-11-22 [integrator] integrator build check (.NET SDK 8.0.428, no MSFS SDK): only MSB3245 unresolved Microsoft.FlightSimulator.SimConnect plus CS0234/CS0246 for the SimConnect namespace/type, as expected
 - 2026-11-22 [code-reviewer] review: CHANGES_REQUESTED - Program.cs:99 Pump(1ms) blocks up to 100 ms per create (WaitOne(100) not clamped to remaining time), inflating step-9 total time by up to ~10 s for 100 objects and spacing sends; clamp wait to remaining span. Everything else covered: all SPIKE-005 questions map to modes/README, VERIFY marking is adequate, no obvious masked C# errors. Nits in review reply.
 - 2026-11-22 [claude-agent] Review changes addressed in ff36d2e (Pump clamp, drain, exit codes, timestamped spawned files, log fields, README, VERIFY). dotnet build -c Release: only MSB3245 (SimConnect assembly) + CS0246/CS0234 errors, as expected.
+- 2026-11-22 [integrator] integrator: re-review after ff36d2e; Pump clamp verified (Program.cs:245-248); reviewer found every SPIKE-005 question covered -> reviewer box ticked
