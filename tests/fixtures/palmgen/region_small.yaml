@@ -1,0 +1,36 @@
+# Shared palmgen fixture set: palms_small.geojson, buildings_small.geojson, this file.
+# Region "fixture-small". Tile A = lon -117.26..-117.25, tile B = lon -117.25..-117.24
+# (lat 32.78..32.79). All palm ids are fs-<16 hex>; the number below is the decimal suffix.
+#
+# Palms (all valid against the ARCH-002 palms schema 1.0, which has no nulls for
+# height_m, crown_diam_m or exclusion_radius_m; the "null" cases from the plan are the
+# schema minimums instead, and tests build true None palms in memory):
+#   1-5  tile A  row of 5 washingtonia_robusta, 3 m apart east-west, crown 3.0, radius 2.0.
+#                Palm 4 has height_m 0.5 (the schema minimum, stands in for "height missing").
+#   6,7  tile A  pair of phoenix_canariensis 10 m apart, radius 3.5.
+#   8    tile B  touches a building: fixture:touching has its west edge 2.0 m east of the
+#                palm, inside the 2.5 m radius. building_conflict true.
+#   9    tile B  inside the building fixture:containing. building_conflict true.
+#   10   tile B  inside the inline mod mask "fixture-mod" below.
+#   11   tile B  far corner, the palm GEN-007 tests put next to their own airport polygon
+#                (the airport polygon fixture belongs to GEN-007, not to this set).
+#   12   tile B  unknown species chamaedorea_unlisted (not in the asset manifest), crown 0.3
+#                and radius 0.3 (schema minimums, stand in for "crown and radius missing";
+#                palm_radius clamps them up to radius_min_m).
+#
+# Buildings: fixture:touching (touches palm 8's circle), fixture:containing (contains palm 9).
+config_version: 1
+region: fixture-small
+bbox: [-117.265, 32.775, -117.235, 32.795]
+species_priors:
+  washingtonia_robusta: 0.6
+  washingtonia_filifera: 0.2
+  phoenix_canariensis: 0.2
+mask_out:
+  - name: fixture-mod
+    kind: mod
+    bbox: [-117.2452, 32.7851607, -117.2448, 32.7855607]
+    note: Around palm 10 (fs-0000000000000010).
+masks:
+  airports:
+    enabled: true

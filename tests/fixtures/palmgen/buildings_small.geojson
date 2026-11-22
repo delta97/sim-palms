@@ -1,0 +1,75 @@
+{
+ "type": "FeatureCollection",
+ "schema_version": "1.0",
+ "region": "fixture-small",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -117.2449787,
+       32.7849549
+      ],
+      [
+       -117.2448719,
+       32.7849549
+      ],
+      [
+       -117.2448719,
+       32.7850451
+      ],
+      [
+       -117.2449787,
+       32.7850451
+      ],
+      [
+       -117.2449787,
+       32.7849549
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "building_id": "fixture:touching",
+    "source": "fixture"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -117.2447331,
+       32.7849459
+      ],
+      [
+       -117.2446264,
+       32.7849459
+      ],
+      [
+       -117.2446264,
+       32.7850541
+      ],
+      [
+       -117.2447331,
+       32.7850541
+      ],
+      [
+       -117.2447331,
+       32.7849459
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "building_id": "fixture:containing",
+    "source": "fixture"
+   }
+  }
+ ]
+}
