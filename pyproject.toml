@@ -53,14 +53,27 @@ gen = [
   "jinja2>=3.1",
   "shapely>=2.0",
 ]
+fx = [
+  "numpy>=1.26",
+  "scipy>=1.11",
+  "opencv-python-headless>=4.9",
+  "scikit-image>=0.22",
+  "pyproj>=3.6",
+  "pyyaml>=6.0",
+  "matplotlib>=3.8",
+]
+fx-lama = [
+  "torch",
+]
 
 [project.scripts]
 palmscan = "palmscan.cli:main"
 palmgen = "palmgen.cli:main"
+palmfx = "palmfx.offline.cli:main"
 palmfix = "palmcore.cli:main"
 
 [tool.hatch.build.targets.wheel]
-packages = ["palmcore", "palmscan", "palmgen"]
+packages = ["palmcore", "palmscan", "palmgen", "palmfx"]
 
 [tool.hatch.build.targets.wheel.force-include]
 "schemas" = "palmcore/_schemas"
@@ -80,7 +93,7 @@ select = ["E", "F", "W", "I", "UP", "B", "SIM", "RUF"]
 
 [tool.mypy]
 python_version = "3.12"
-files = ["palmcore", "palmscan", "palmgen"]
+files = ["palmcore", "palmscan", "palmgen", "palmfx"]
 warn_unused_configs = true
 warn_redundant_casts = true
 disallow_untyped_defs = true
@@ -102,6 +115,7 @@ module = [
   "sklearn.*",
   "scipy.*",
   "pyogrio.*",
+  "cv2.*",
 ]
 ignore_missing_imports = true
 
