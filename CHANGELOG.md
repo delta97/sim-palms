@@ -5,6 +5,7 @@ Format: `- TASK-ID: what changed (PR link)`.
 
 ## Unreleased
 
+- FX-005: Added the log24 ReShade depth-pack shader (untested in ReShade) and its Python depth decoder and depth-model fit (local merge).
 - TEST-014: Added soak-test checks S1-S6, provisional limits and the SOAK procedure for the live spawner (`tests/perf/soak.py`) (local merge).
 - FX-002: Scaffolded the `palmfx.offline` package (session I/O, pluggable command CLI, `fx` extra) for the Phase 7 Stage A experiment (local merge).
 - SCAN-028: Wired the LiDAR stages (EPT tiles, CHM, crowns, rules, merge, classifier) into `palmscan run`, QA outputs and `palmscan eval`; real PDAL/3DEP untested (local merge).
