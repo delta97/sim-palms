@@ -5,6 +5,7 @@ Format: `- TASK-ID: what changed (PR link)`.
 
 ## Unreleased
 
+- GEN-005: Added exclusion geometry (palm circles, cluster merge, simplification, ring normalisation); fixed the plan's 3 m row merge example (local merge).
 - GEN-014: Added build_report.json and build_report.md generation for palmgen (local merge).
 - TEST-004: Added palms.geojson contract conformance tests, invariant checks and a validator CLI (`tests/helpers/contract.py`) (local merge).
 - TEST-002: Added the golden-file comparison helper with `--update-golden` (refused under CI) (local merge).

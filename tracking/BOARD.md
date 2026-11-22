@@ -7,7 +7,7 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 186 | 4 | 0 | 1 | 22 | 0 | 213 |
+| 186 | 3 | 0 | 1 | 23 | 0 | 213 |
 
 ## In progress / in review
 
@@ -15,7 +15,6 @@ Generated: 2026-11-22
 |---|---|---|---|---|
 | [ARCH-009](tasks/ARCH-009.md) | in_progress | claude-agent | task/arch-009-add-shared-cli-plumbing-and-the-palmfix | Add shared CLI plumbing and the palmfix utility CLI |
 | [GEN-004](tasks/GEN-004.md) | in_progress | claude-agent | task/gen-004-load-palms-buildings-and-region-config | Load palms, buildings and region config |
-| [GEN-005](tasks/GEN-005.md) | in_progress | claude-agent | task/gen-005-exclusion-circles-merging-and-simplifica | Exclusion circles, merging and simplification |
 | [GEN-008](tasks/GEN-008.md) | in_progress | claude-agent | task/gen-008-template-engine-and-xml-writer-on-fake-t | Template engine and XML writer on fake templates |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
 
@@ -31,6 +30,7 @@ _None._
 | [SPIKE-001](tasks/SPIKE-001.md) | 0 | windows-sim, human | msfs-sdk-specialist | Install the MSFS 2024 SDK and create an empty Dev Mode scenery project |
 | [TEST-006](tasks/TEST-006.md) | 0 | windows-sim | msfs-sdk-specialist | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
 | [RISK-003](tasks/RISK-003.md) | 1 | network, human | geo-data-engineer | Inventory other palm and tree mods and their coverage for mask_out defaults |
+| [GEN-006](tasks/GEN-006.md) | 2 | none | scenery-generator-engineer | Building footprint clipping |
 | [TEST-003](tasks/TEST-003.md) | 2 | none | test-engineer | Add geometry assertion helpers for exclusion polygons |
 | [TEST-015](tasks/TEST-015.md) | 2 | none | test-engineer | Write the post-update regression routine, log and entry scaffolder |
 | [TEST-017](tasks/TEST-017.md) | 2 | none | test-engineer | Write the test runbook and CI wiring notes |
@@ -102,7 +102,7 @@ _None._
 | [TEST-005](tasks/TEST-005.md) | done | none | TEST-001 | Add the test-site registry schema and loader |
 | [TEST-100](tasks/TEST-100.md) | todo | human, windows-sim | TEST-005, TEST-006, DEC-004 | Define test sites T1-T5 (bbox, purpose, region, saved flights, three viewpoints each) |
 
-## Phase 2 (7/29 done)
+## Phase 2 (8/29 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -111,7 +111,7 @@ _None._
 | [GEN-002](tasks/GEN-002.md) | done | none | GEN-001, ARCH-006 | Deterministic GUIDs and per-palm hashes |
 | [GEN-003](tasks/GEN-003.md) | done | none | GEN-001 | 0.01 degree tiling and tile naming |
 | [GEN-004](tasks/GEN-004.md) | in_progress | none | GEN-001, ARCH-002, ARCH-003, ARCH-007 | Load palms, buildings and region config |
-| [GEN-005](tasks/GEN-005.md) | in_progress | none | GEN-001 | Exclusion circles, merging and simplification |
+| [GEN-005](tasks/GEN-005.md) | done | none | GEN-001 | Exclusion circles, merging and simplification |
 | [GEN-006](tasks/GEN-006.md) | todo | none | GEN-005 | Building footprint clipping |
 | [GEN-007](tasks/GEN-007.md) | todo | none | GEN-004, GEN-005 | Mod and airport masks, Overpass airport fetch |
 | [GEN-008](tasks/GEN-008.md) | in_progress | none | GEN-001 | Template engine and XML writer on fake templates |
