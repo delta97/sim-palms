@@ -5,6 +5,7 @@ Format: `- TASK-ID: what changed (PR link)`.
 
 ## Unreleased
 
+- GEN-014: Added build_report.json and build_report.md generation for palmgen (local merge).
 - TEST-004: Added palms.geojson contract conformance tests, invariant checks and a validator CLI (`tests/helpers/contract.py`) (local merge).
 - TEST-002: Added the golden-file comparison helper with `--update-golden` (refused under CI) (local merge).
 - ARCH-007: Added the palms.geojson serializer, reader and writer (`palmcore/palms.py`), deterministic LF output (local merge).

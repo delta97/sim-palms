@@ -7,7 +7,7 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 186 | 5 | 0 | 1 | 21 | 0 | 213 |
+| 186 | 4 | 0 | 1 | 22 | 0 | 213 |
 
 ## In progress / in review
 
@@ -17,7 +17,6 @@ Generated: 2026-11-22
 | [GEN-004](tasks/GEN-004.md) | in_progress | claude-agent | task/gen-004-load-palms-buildings-and-region-config | Load palms, buildings and region config |
 | [GEN-005](tasks/GEN-005.md) | in_progress | claude-agent | task/gen-005-exclusion-circles-merging-and-simplifica | Exclusion circles, merging and simplification |
 | [GEN-008](tasks/GEN-008.md) | in_progress | claude-agent | task/gen-008-template-engine-and-xml-writer-on-fake-t | Template engine and XML writer on fake templates |
-| [GEN-014](tasks/GEN-014.md) | in_progress | claude-agent | task/gen-014-build-report-md-and-build-report-json | build_report.md and build_report.json |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
 
 ## Blocked
@@ -103,7 +102,7 @@ _None._
 | [TEST-005](tasks/TEST-005.md) | done | none | TEST-001 | Add the test-site registry schema and loader |
 | [TEST-100](tasks/TEST-100.md) | todo | human, windows-sim | TEST-005, TEST-006, DEC-004 | Define test sites T1-T5 (bbox, purpose, region, saved flights, three viewpoints each) |
 
-## Phase 2 (6/29 done)
+## Phase 2 (7/29 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -121,7 +120,7 @@ _None._
 | [GEN-011](tasks/GEN-011.md) | todo | none | GEN-002, GEN-004, ASSET-005 | Variant selection, scaling and heading |
 | [GEN-012](tasks/GEN-012.md) | todo | none | GEN-003, GEN-006, GEN-007, GEN-010, GEN-011 | Generate pipeline and golden tests |
 | [GEN-013](tasks/GEN-013.md) | todo | none | GEN-001, SPIKE-004 | fspackagetool wrapper and output checks |
-| [GEN-014](tasks/GEN-014.md) | in_progress | none | GEN-001 | build_report.md and build_report.json |
+| [GEN-014](tasks/GEN-014.md) | done | none | GEN-001 | build_report.md and build_report.json |
 | [GEN-015](tasks/GEN-015.md) | todo | none | GEN-012, GEN-013, GEN-014 | Wire palmgen build end to end |
 | [GEN-016](tasks/GEN-016.md) | todo | windows-sim | GEN-015, SCAN-100, RISK-004 | First Windows build and output check calibration |
 | [GEN-017](tasks/GEN-017.md) | todo | windows-sim, human | GEN-016, TEST-100, TEST-102, ARCH-008 | Dev Mode review and margin tuning |
