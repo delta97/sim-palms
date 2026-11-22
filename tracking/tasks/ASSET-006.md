@@ -1,7 +1,7 @@
 ---
 id: ASSET-006
 title: "glTF stats and automated asset checks (triangle budgets, heights, alpha mode, textures, naming)"
-status: in_progress
+status: review
 phase: 3
 area: ASSET
 kind: build
@@ -40,10 +40,10 @@ updated: 2026-11-22
 
 ## Acceptance criteria
 
-- [ ] `pytest tests/unit/palmcore -q` passes.
-- [ ] Every row of the check table except GUID has at least one failing-fixture test.
-- [ ] Thresholds live only in `assets/budgets.yaml`. Changing a number there changes the check result with no code edit (covered by a test).
-- [ ] `build-manifest` on a fixture species with glTF fills the measured fields.
+- [x] `pytest tests/unit/palmcore -q` passes.
+- [x] Every row of the check table except GUID has at least one failing-fixture test.
+- [x] Thresholds live only in `assets/budgets.yaml`. Changing a number there changes the check result with no code edit (covered by a test).
+- [x] `build-manifest` on a fixture species with glTF fills the measured fields.
 
 ## Verification
 
@@ -56,3 +56,5 @@ python -m palmcore.assets check --assets-dir tests/fixtures/palmcore/assets/gltf
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [claude-agent] Claimed. branch=task/asset-006-gltf-stats-and-automated-asset-checks-tr worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/ASSET-006
+- 2026-11-22 [claude-agent] Implemented gltf_stats.py, checks.py, budgets.yaml, check CLI, fixtures, 69 tests; build-manifest CLI now measures height/crown/triangles from LOD glTFs. pytest 564 passed 1 skipped (full), ruff check/format and mypy clean. Fixture dir check exits 1 (9 errors, 3 warnings). Commit 2d5139a
+- 2026-11-22 [claude-agent] Status in_progress -> review.
