@@ -1,7 +1,7 @@
 ---
 id: SCAN-008
 title: "Inventory ingest stage and cross-source dedupe"
-status: in_progress
+status: review
 phase: 1
 area: SCAN
 kind: build
@@ -38,10 +38,10 @@ updated: 2026-11-22
 
 ## Acceptance criteria
 
-- [ ] Non-palms are counted, not returned; stumps/vacant become rejects with stage `inventory`.
-- [ ] Cross-source duplicates within 2 m merge; same-source neighbours never merge.
-- [ ] Shuffling input order gives identical output.
-- [ ] Tests pass offline.
+- [x] Non-palms are counted, not returned; stumps/vacant become rejects with stage `inventory`.
+- [x] Cross-source duplicates within 2 m merge; same-source neighbours never merge.
+- [x] Shuffling input order gives identical output.
+- [x] Tests pass offline.
 
 ## Verification
 
@@ -54,3 +54,5 @@ pytest tests/unit/palmscan/test_scan_ingest.py tests/unit/palmscan/test_scan_ded
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [integrator] integrator note from SCAN-004: source cache_max_age_days is not enforced (palmscan.cache.Cache has no freshness check; palmcore.cache.is_fresh exists) — wire it in at ingest or add it to Cache
 - 2026-11-22 [claude-agent] Claimed. branch=task/scan-008-inventory-ingest-stage-and-cross-source worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-008
+- 2026-11-22 [claude-agent] Implemented registry.py, ingest.py, detect/dedupe.py + tests (21 pass); full suite 1498 passed 4 skipped, ruff/format/mypy clean. Acceptance all met: non-palms counted/stump+vacant rejected; cross-source merge only, same-source kept; shuffle-invariant output; offline tests. cache_max_age_days enforced in ingest via per-source _FreshnessCache (stale refetched, offline used + warning); tested. height_raw set on PalmRecord (field came from SCAN-009 merge) and tested. Plan W6 refined: dedupe resolves pairs closest-first; osm_adapter test hook; source_order result field. Buildings adapter not registered (not an inventory adapter); hook comment in registry.py.
+- 2026-11-22 [claude-agent] Status in_progress -> review.

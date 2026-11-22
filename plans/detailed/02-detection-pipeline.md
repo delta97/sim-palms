@@ -613,7 +613,8 @@ def dedupe_cross_source(palms: list[PalmRecord], radius_m: float = 2.0,
 ```
 - Only points from different sources merge. Two points from the same source within 2 m are both kept (palms are planted in tight clusters).
 - Process sources in priority order. For each point of a lower-priority source, find the nearest kept point within `radius_m` (scipy `cKDTree` on local x/y) that comes from a different source and has not already absorbed a point from this source. If found: append its `source_ids`, fill `species` if the kept one is `None` or genus-level and this one is species-level, keep the kept point's position, and emit a `Reject(stage="dedupe", reason="duplicate_of:<stable_key>")`. Else keep it.
-- Deterministic: ties broken by `stable_key`. Output sorted by `stable_key`.
+- Deterministic: candidate pairs of one source are resolved closest-first, ties by incoming then kept `stable_key` (so a contested kept point goes to the nearest incoming point, not the one with the smaller key); a source not in `source_priority` ranks after the listed ones, alphabetically. `source_ids` of every output palm are sorted; `height_raw` and missing `data_vintage` keys are filled from the merged-away point. Output sorted by `stable_key`. Inputs are not modified.
+- `ingest_inventory` also takes `osm_adapter=` (test hook), enforces each source's `cache_max_age_days` through a per-source cache view (stale entries are refetched; offline they are used with a warning), counts `excluded` (excluded species or genus outside the set, also rejects) and returns `source_order` (config order, then `osm`) to pass as `source_priority`. `registry.build_osm_adapter` builds the OSM adapter. Buildings are not registered in `ADAPTERS`: SCAN-006's `fetch_buildings` is called by the pipeline directly.
 
 ### W7. Palm attributes and exclusion
 
