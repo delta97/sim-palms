@@ -1,0 +1,8 @@
+config_version: 1
+region: region-minimal
+id_prefix: sdc
+bbox: [-117.30, 32.60, -117.05, 32.90]
+exclusion:
+  margin_m: 1.5
+  radius_min_m: 1.0
+  radius_max_m: 8.0

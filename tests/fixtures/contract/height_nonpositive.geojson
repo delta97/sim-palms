@@ -1,0 +1,112 @@
+{
+ "type": "FeatureCollection",
+ "schema_version": "1.0",
+ "region": "region-minimal",
+ "generated_at": "2026-11-21T12:00:00Z",
+ "data_version": "2026-11",
+ "generator": {
+  "name": "palmscan",
+  "version": "0.1.0"
+ },
+ "config_sha256": null,
+ "features": [
+  {
+   "type": "Feature",
+   "id": "sdc-0000000000000001",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.161,
+     32.7157
+    ]
+   },
+   "properties": {
+    "palm_id": "sdc-0000000000000001",
+    "species": "washingtonia_robusta",
+    "species_confidence": 0.9,
+    "species_source": "inventory",
+    "height_m": 0.0,
+    "height_source": "species_default",
+    "crown_diam_m": 4.0,
+    "ground_elev_m": null,
+    "detected_by": "inventory",
+    "source_ids": [
+     "sdc_inventory:1"
+    ],
+    "exclusion_radius_m": 3.5,
+    "building_conflict": false,
+    "data_vintage": {
+     "inventory": "2024-05",
+     "lidar": "2021"
+    },
+    "region": "region-minimal"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "sdc-0000000000000002",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.14,
+     32.73
+    ]
+   },
+   "properties": {
+    "palm_id": "sdc-0000000000000002",
+    "species": "phoenix_canariensis",
+    "species_confidence": 0.8,
+    "species_source": "inventory",
+    "height_m": 9.0,
+    "height_source": "lidar",
+    "crown_diam_m": 6.0,
+    "ground_elev_m": 35.2,
+    "detected_by": "inventory+lidar",
+    "source_ids": [
+     "sdc_inventory:2",
+     "sdc_lidar:tile-0412#17"
+    ],
+    "exclusion_radius_m": 4.5,
+    "building_conflict": false,
+    "data_vintage": {
+     "inventory": "2024-05",
+     "lidar": "2021-06"
+    },
+    "region": "region-minimal"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "sdc-0000000000000003",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.1,
+     32.82
+    ]
+   },
+   "properties": {
+    "palm_id": "sdc-0000000000000003",
+    "species": "washingtonia_robusta",
+    "species_confidence": 0.6,
+    "species_source": "inventory",
+    "height_m": 7.5,
+    "height_source": "inventory",
+    "crown_diam_m": 2.0,
+    "ground_elev_m": null,
+    "detected_by": "inventory+osm",
+    "source_ids": [
+     "osm:node/123456",
+     "sdc_inventory:3"
+    ],
+    "exclusion_radius_m": 2.5,
+    "building_conflict": false,
+    "data_vintage": {
+     "inventory": "2024-05",
+     "lidar": "2021"
+    },
+    "region": "region-minimal"
+   }
+  }
+ ]
+}

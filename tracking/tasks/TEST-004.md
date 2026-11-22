@@ -1,7 +1,7 @@
 ---
 id: TEST-004
 title: Add contract conformance tests for palms.geojson
-status: in_progress
+status: review
 phase: 1
 area: TEST
 kind: test
@@ -37,20 +37,20 @@ Every `palms.geojson` (fixtures and any local palmscan output) is checked agains
    - `check_palms_invariants(fc, *, region=None) -> list[str]`: the invariants listed in the plan (unique `palm_id`, `region` consistent, point inside `bbox`, `exclusion_radius_m ≥ crown_diam_m/2` and > 0, `height_m > 0`, `species_confidence` in [0,1], `height_source == "lidar"` implies `lidar` in `detected_by`).
    - `assert_palms_ok(path_or_fc, *, region=None)`: load path or dict, load region via `palmcore.config.load_region` if a path, raise `AssertionError` listing at most 50 errors plus a count.
    - CLI `python -m tests.helpers.contract <palms.geojson> [--region <yaml>]`: print errors, exit 0 if none, 1 otherwise.
-2. Fixtures in `tests/fixtures/contract/`: `valid_minimal.geojson` (3 palms, all fields, using the example from `plans/01-architecture.md` as a pattern), `region_minimal.yaml`, and one invalid file per invariant (`dup_palm_id.geojson`, `outside_bbox.geojson`, `radius_too_small.geojson`, `region_mismatch.geojson`, `lidar_height_without_lidar.geojson`), plus `schema_missing_field.geojson`.
+2. Fixtures in `tests/fixtures/contract/`: `valid_minimal.geojson` (3 palms, all fields, using the example from `plans/01-architecture.md` as a pattern), `region-minimal.yaml` (renamed: `load_region` requires the file stem to equal the region slug, and slugs cannot contain `_`), and one invalid file per invariant (`dup_palm_id.geojson`, `outside_bbox.geojson`, `radius_too_small.geojson`, `region_mismatch.geojson`, `lidar_height_without_lidar.geojson`), plus `schema_missing_field.geojson`.
 3. `tests/unit/contract/test_palms_contract.py`: valid fixture passes; each invalid fixture fails with an error that names the rule; a parametrized test over `REPO_ROOT.glob("build/scan/*/palms.geojson")` that skips with reason "no local palmscan output" when the list is empty.
 
 ## Acceptance criteria
 
-- [ ] Valid fixture passes; every invalid fixture fails with a rule-specific message.
-- [ ] Local `build/scan/*/palms.geojson` files are tested when present and skipped cleanly when not.
-- [ ] CLI exits 0 on the valid fixture and 1 on an invalid one.
+- [x] Valid fixture passes; every invalid fixture fails with a rule-specific message. (tests/unit/contract: 25 passed)
+- [x] Local `build/scan/*/palms.geojson` files are tested when present and skipped cleanly when not. (no local output here: 1 skipped with reason)
+- [x] CLI exits 0 on the valid fixture and 1 on an invalid one. (`python -m tests.helpers.contract` checked: exit=0 valid, exit=1 dup_palm_id)
 
 ## Verification
 
 ```bash
 pytest tests/unit/contract -q -ra
-python -m tests.helpers.contract tests/fixtures/contract/valid_minimal.geojson --region tests/fixtures/contract/region_minimal.yaml; echo "exit=$?"   # exit=0
+python -m tests.helpers.contract tests/fixtures/contract/valid_minimal.geojson --region tests/fixtures/contract/region-minimal.yaml; echo "exit=$?"   # exit=0
 python -m tests.helpers.contract tests/fixtures/contract/dup_palm_id.geojson; echo "exit=$?"                                                       # exit=1
 python3 scripts/tasks.py validate
 ```
@@ -60,3 +60,9 @@ python3 scripts/tasks.py validate
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [reconcile] Local palmscan output is globbed at the canonical build/scan/**/palms.geojson (was data/**). V13 resolved: exclusion_radius_m = clamp(crown_diam_m/2 + exclusion.margin_m, radius_min_m, radius_max_m) from the region exclusion: block, so the equality check applies when a region is given. Cross-area reconciliation.
 - 2026-11-22 [claude-agent] Claimed. branch=task/test-004-add-contract-conformance-tests-for-palms worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/TEST-004
+- 2026-11-22 [claude-agent] Added tests/helpers/contract.py: validate_palms (wraps palmcore.contract.validate_palms, errors only), check_palms_invariants (unique palm_id, region/file region, bbox, exclusion clamp equality when region given else >= crown/2, height_m > 0, species_confidence in [0,1], lidar rule), assert_palms_ok (max 50 + count), CLI.
+- 2026-11-22 [claude-agent] Deviation: fixture region file is region-minimal.yaml, not region_minimal.yaml. load_region requires file stem == region slug and the slug pattern forbids underscores. Task Steps/Verification updated.
+- 2026-11-22 [claude-agent] Deviation: valid fixture is a new 3-palm doc, not a copy of plans' sample_10.geojson (that path does not exist; ARCH-002 has palms/valid_minimal.geojson with radius 2.5, which fails the clamp rule for crown 4.0). Added height_nonpositive.geojson and confidence_out_of_range.geojson so every invariant has an invalid fixture.
+- 2026-11-22 [claude-agent] Verification: pytest tests/unit/contract -q -ra: 25 passed, 1 skipped (no local build/scan output). Full suite: 411 passed, 1 skipped. ruff check and format --check clean; mypy: no issues in 22 files. CLI: valid exit=0, dup_palm_id exit=1.
+- 2026-11-22 [claude-agent] Writer round-trip tests not in this spec and not written; ARCH-007 is not on this branch. Duplicate palm_id is reported by both palmcore and the invariant check, so the CLI prints it twice.
+- 2026-11-22 [claude-agent] Status in_progress -> review.
