@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <PlatformTarget>x64</PlatformTarget>
+    <Platforms>x64</Platforms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>SimConnectPersist</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- SDK root. Override with: dotnet build -p:MsfsSdk="C:\MSFS 2024 SDK"
+         VERIFY: the env var name MSFS_SDK and the install folder (SPIKE-001 records both). -->
+    <MsfsSdk Condition="'$(MsfsSdk)' == ''">$(MSFS_SDK)</MsfsSdk>
+    <!-- VERIFY: subfolder of the managed DLL under the SDK root (SPIKE-001). Common in the 2020 SDK:
+         SimConnect SDK\lib\managed\Microsoft.FlightSimulator.SimConnect.dll -->
+    <SimConnectManagedDir Condition="'$(SimConnectManagedDir)' == ''">$(MsfsSdk)\SimConnect SDK\lib\managed</SimConnectManagedDir>
+    <!-- VERIFY: subfolder of the native SimConnect.dll under the SDK root. Common in the 2020 SDK:
+         SimConnect SDK\lib\SimConnect.dll -->
+    <SimConnectNativeDir Condition="'$(SimConnectNativeDir)' == ''">$(MsfsSdk)\SimConnect SDK\lib</SimConnectNativeDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.FlightSimulator.SimConnect">
+      <HintPath>$(SimConnectManagedDir)\Microsoft.FlightSimulator.SimConnect.dll</HintPath>
+    </Reference>
+    <!-- The managed wrapper loads the native SimConnect.dll from the app folder. -->
+    <None Include="$(SimConnectNativeDir)\SimConnect.dll" CopyToOutputDirectory="PreserveNewest" Link="SimConnect.dll" />
+  </ItemGroup>
+
+</Project>
