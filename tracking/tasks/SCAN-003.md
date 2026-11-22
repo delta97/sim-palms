@@ -1,7 +1,7 @@
 ---
 id: SCAN-003
 title: "Source adapter base and geojson_file adapter"
-status: in_progress
+status: review
 phase: 1
 area: SCAN
 kind: build
@@ -42,10 +42,10 @@ A common adapter interface (`InventoryAdapter`, `FetchResult`, `SourceError`, vi
 
 ## Acceptance criteria
 
-- [ ] GeoJSON and CSV fixtures yield the same records (ids, coordinates, species) inside the bbox.
-- [ ] Points outside the bbox are excluded; polygon features become points with a warning.
-- [ ] `derive_vintage` honours the precedence config > record dates > layer edit date > fetched.
-- [ ] No test touches the network; tests pass.
+- [x] GeoJSON and CSV fixtures yield the same records (ids, coordinates, species) inside the bbox.
+- [x] Points outside the bbox are excluded; polygon features become points with a warning.
+- [x] `derive_vintage` honours the precedence config > record dates > layer edit date > fetched.
+- [x] No test touches the network; tests pass.
 
 ## Verification
 
@@ -57,3 +57,5 @@ pytest tests/unit/palmscan/test_scan_geojson_file.py -q
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [claude-agent] Claimed. branch=task/scan-003-source-adapter-base-and-geojson-file-ada worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-003
+- 2026-11-22 [claude-agent] Implemented palmscan/sources/base.py and geojson_file.py. Verified: pytest tests/unit/palmscan/test_scan_geojson_file.py 41 passed; full suite 903 passed, 1 skipped; ruff check/format and mypy clean. Plan text fixed: SourceError re-exported from palmcore.errors (not a new class); fetch bbox accepts Bbox or 4-sequence; derive_vintage gained keyword source; CRS and memory behaviour documented (GeoJSON memory on the 627 MB file is VERIFY for SCAN-007). Findings: pyogrio parses ISO date strings to datetime, so reads use datetime_as_string=True; feature-id fallback uses the GDAL FID, which is only reliable when no feature has an id member (warned as unstable).
+- 2026-11-22 [claude-agent] Status in_progress -> review.
