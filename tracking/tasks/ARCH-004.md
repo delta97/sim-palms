@@ -1,7 +1,7 @@
 ---
 id: ARCH-004
 title: "Add palmcore logging, path resolution and download-cache helpers"
-status: todo
+status: in_progress
 phase: 1
 area: ARCH
 kind: build
@@ -11,10 +11,10 @@ requires: [none]
 agent: python-architect
 estimate_h: 3
 touches: [palmcore/log.py, palmcore/paths.py, palmcore/cache.py, tests/unit/palmcore/test_log.py, tests/unit/palmcore/test_paths.py, tests/unit/palmcore/test_cache.py]
-owner: ""
-branch: ""
-worktree: ""
-updated: 2026-11-21
+owner: claude-agent
+branch: task/arch-004-add-palmcore-logging-path-resolution-and
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/ARCH-004"
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -80,3 +80,4 @@ ruff check palmcore tests && mypy
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [claude-agent] Claimed. branch=task/arch-004-add-palmcore-logging-path-resolution-and worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/ARCH-004
