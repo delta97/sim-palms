@@ -5,6 +5,7 @@ Format: `- TASK-ID: what changed (PR link)`.
 
 ## Unreleased
 
+- TEST-004: Added palms.geojson contract conformance tests, invariant checks and a validator CLI (`tests/helpers/contract.py`) (local merge).
 - TEST-002: Added the golden-file comparison helper with `--update-golden` (refused under CI) (local merge).
 - ARCH-007: Added the palms.geojson serializer, reader and writer (`palmcore/palms.py`), deterministic LF output (local merge).
 - ARCH-008: Added the San Diego coastal and LA Westside example region configs with verified source endpoints (local merge).

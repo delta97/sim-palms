@@ -1,7 +1,7 @@
 ---
 id: TEST-004
 title: Add contract conformance tests for palms.geojson
-status: review
+status: done
 phase: 1
 area: TEST
 kind: test
@@ -66,3 +66,4 @@ python3 scripts/tasks.py validate
 - 2026-11-22 [claude-agent] Verification: pytest tests/unit/contract -q -ra: 25 passed, 1 skipped (no local build/scan output). Full suite: 411 passed, 1 skipped. ruff check and format --check clean; mypy: no issues in 22 files. CLI: valid exit=0, dup_palm_id exit=1.
 - 2026-11-22 [claude-agent] Writer round-trip tests not in this spec and not written; ARCH-007 is not on this branch. Duplicate palm_id is reported by both palmcore and the invariant check, so the CLI prints it twice.
 - 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] Status review -> done.
