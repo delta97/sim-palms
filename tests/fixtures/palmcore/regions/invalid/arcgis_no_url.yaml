@@ -1,0 +1,6 @@
+config_version: 1
+region: arcgis-no-url
+bbox: [-117.30, 32.60, -117.05, 32.90]
+sources:
+  inventory:
+    - {name: t, type: arcgis_rest, species_field: S}

@@ -1,0 +1,3 @@
+config_version: 1
+region: bad-bbox-order
+bbox: [-117.05, 32.60, -117.30, 32.90]

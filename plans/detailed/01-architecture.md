@@ -550,7 +550,7 @@ This merges the source plan's example with the keys requested in `plans/detailed
 |---|---|---|---|---|
 | `config_version` | integer | yes | | const `1` |
 | `region` | string | yes | | slug; equals file stem |
-| `id_prefix` | string | no | initials of the `-`-parts of `region` (`san-diego-coastal` → `sdc`) | `^[a-z]{2,6}$`; unique across `regions/`; prefix of `palm_id` |
+| `id_prefix` | string | no | initials of the `-`-parts of `region` (`san-diego-coastal` → `sdc`); a slug with fewer than 2 initials uses its first 3 letters (`minimal` → `min`) | `^[a-z]{2,6}$`; unique across `regions/`; prefix of `palm_id` |
 | `name` | string | no | `region` | label |
 | `bbox` | [4 numbers] | yes | | lon_min, lat_min, lon_max, lat_max; checked by `Bbox` |
 | `local_crs` | string or null | no | null (auto UTM) | any pyproj CRS string |
@@ -660,10 +660,10 @@ def list_regions(regions_dir: Path) -> list[str]     # sorted stems of *.yaml; s
 def check_regions(regions_dir: Path) -> list[str]    # load every file; errors incl. duplicate id_prefix
 ```
 
-- `name_or_path`: a value ending in `.yaml`/`.yml` or containing a path separator is a path; otherwise a slug resolved as `regions_dir / f"{name}.yaml"` (`regions_dir` required, else `ConfigError`). `base_dir` default: the parent of the regions directory.
+- `name_or_path`: a value ending in `.yaml`/`.yml` is a path; anything else is a slug (must match `^[a-z0-9]+(-[a-z0-9]+)*$`, so `../x` or `a/b` raise `ConfigError` before any file access), a slug resolved as `regions_dir / f"{name}.yaml"` (`regions_dir` required, else `ConfigError`). `base_dir` default: the parent of the regions directory.
 - YAML: `yaml.load` with a `SafeLoader` subclass that raises `ConfigError` on duplicate keys (plain PyYAML keeps the last one silently). Empty file or non-mapping top level → `ConfigError`.
 - Errors: all schema errors (`iter_errors`, sorted by path) in one `ConfigError`, one line each, e.g. `regions/x.yaml: sources.inventory[0].species_field: 'species_field' is a required property`.
-- Semantic checks after the schema: stem match, `Bbox`, unique inventory and mask names, priors, csv lon/lat fields, `radius_min_m <= radius_max_m`, `local_crs` parses, `config_version` supported. A mask bbox outside the region bbox gives a logged warning.
+- Semantic checks after the schema: stem match, `Bbox`, unique inventory and mask names, priors, csv lon/lat fields, `radius_min_m <= radius_max_m`, `local_crs` parses, `config_version` supported. A mask bbox entirely outside the region bbox (no intersection) gives a logged warning.
 - Shorthands: `lidar: 3dep_ept` → `TypedSource("3dep_ept", {})`; `null` → `TypedSource("none", {})`.
 - Fixtures in `tests/fixtures/palmcore/regions/`: `minimal.yaml`, `full.yaml`, `invalid/` cases with `expected.json` (`dup_key`, `bad_bbox_order`, `priors_negative`, `unknown_key`, `arcgis_no_url`, `file_url_and_path`, `csv_no_lon_field`, `stem_mismatch`, `bad_prefix`, `radius_min_gt_max`, `mask_two_geometries`, `version_2`), and a `dup_prefix/` folder with two valid files sharing an `id_prefix`.
 

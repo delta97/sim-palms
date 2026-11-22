@@ -1,7 +1,7 @@
 ---
 id: ARCH-003
 title: "Define the region YAML config schema and loader"
-status: in_progress
+status: review
 phase: 1
 area: ARCH
 kind: build
@@ -64,12 +64,12 @@ updated: 2026-11-22
 
 ## Acceptance criteria
 
-- [ ] `masks.airports.path` defaults to the absolute path of `docs/compat/airports-mask.geojson`; `full.yaml` sets it explicitly.
-- [ ] Every error names the file and the dotted key path.
-- [ ] Duplicate YAML keys are rejected.
-- [ ] Defaults are defined once in Python, and a test checks the schema `default` values against them.
-- [ ] `RegionConfig` and its parts are frozen; paths are absolute; `raw` holds the parsed YAML; `sha256` is the hash of the raw bytes.
-- [ ] ruff, mypy (strict for palmcore) and pytest are green.
+- [x] `masks.airports.path` defaults to the absolute path of `docs/compat/airports-mask.geojson`; `full.yaml` sets it explicitly.
+- [x] Every error names the file and the dotted key path.
+- [x] Duplicate YAML keys are rejected.
+- [x] Defaults are defined once in Python, and a test checks the schema `default` values against them.
+- [x] `RegionConfig` and its parts are frozen; paths are absolute; `raw` holds the parsed YAML; `sha256` is the hash of the raw bytes.
+- [x] ruff, mypy (strict for palmcore) and pytest are green.
 
 ## Verification
 
@@ -84,3 +84,7 @@ ruff check palmcore tests && mypy
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [reconcile] Spec now lists every cross-area key: masks.airports.path (default docs/compat/airports-mask.geojson from RISK-004), the SCAN-owned palmscan: block keys (without id_prefix and radius clamps, which are top-level/exclusion here), and states that exclusion.margin_m/radius_min_m/radius_max_m (1.5/1.0/8.0) are the single defaults SCAN and GEN read. Cross-area reconciliation.
 - 2026-11-22 [claude-agent] Claimed. branch=task/arch-003-define-the-region-yaml-config-schema-and worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/ARCH-003
+- 2026-11-22 [claude-agent] Acceptance 1-5 verified by tests in tests/unit/palmcore/test_config.py (airport default absolute, errors name file+dotted path, dup keys rejected, schema defaults == Python constants, frozen/absolute/raw/sha256). Commits 92ce59d, 2120b8c.
+- 2026-11-22 [claude-agent] Verification: pytest 113 passed (41 in test_config.py); ruff check 'All checks passed!'; ruff format 13 files already formatted; mypy 'Success: no issues found in 8 source files'; verify one-liner printed 'minimal min 1.5 EPSG:32611'.
+- 2026-11-22 [claude-agent] Spec resolutions (plan WS7 edited): (1) slug vs path: only .yaml/.yml suffix means path, so '../x' is an invalid slug and raises before file access (spec's 'contains a separator is a path' contradicted the ../ test); (2) id_prefix initials give 1 letter for single-word slugs like 'minimal', which fails ^[a-z]{2,6}$, so fall back to first 3 letters ('min'); (3) mask bbox warning fires only when it does not intersect the region bbox; (4) YAML timestamp resolver disabled so vintage 2020-05-01 stays text; (5) schema oneOf/anyOf/not errors use the subschema description for readable messages. Note for integrator: ARCH-004 palmcore.log not on this branch; config.py uses stdlib logging.getLogger(__name__).
+- 2026-11-22 [claude-agent] Status in_progress -> review.

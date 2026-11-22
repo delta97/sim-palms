@@ -1,0 +1,82 @@
+config_version: 1
+region: full
+id_prefix: fll
+name: Full example region
+bbox: [-117.30, 32.60, -117.05, 32.90]
+local_crs: "EPSG:26911"
+sources:
+  inventory:
+    - name: city_trees
+      type: arcgis_rest
+      url: https://example.invalid/arcgis/rest/services/Trees/FeatureServer/0
+      species_field: SPECIES
+      common_name_field: COMMON
+      id_field: OBJECTID
+      status_field: STATUS
+      height_field: HEIGHT
+      height_units: m
+      dbh_field: DBH
+      date_field: PLANTED
+      where: "STATUS = 'Active'"
+      vintage: "2023-05"
+      license: Public domain
+      cache_max_age_days: 30
+      options:
+        page_size: 1000
+    - name: park_trees
+      type: geojson_file
+      path: data/inventory/park_trees.csv
+      species_field: species
+      lon_field: lon
+      lat_field: lat
+      vintage: "2022-01-15"
+      cache_max_age_days: null
+  lidar:
+    type: 3dep_ept
+    options:
+      resolution_m: 0.5
+  buildings: microsoft_footprints
+  buildings_path: data/buildings/local.geojson
+  overpass_url: https://overpass.example.invalid/api/interpreter
+  osm_trees: true
+species_priors:
+  washingtonia_robusta: 0.5
+  phoenix_canariensis: 0.25
+  syagrus_romanzoffiana: 0.25
+exclusion:
+  margin_m: 2.0
+  polygon_sides: 16
+  merge_gap_m: 3.0
+  clip_buildings: false
+  clip_buffer_m: 0.5
+  min_part_area_m2: 2.0
+  radius_min_m: 1.5
+  radius_max_m: 9.0
+  default_radius_m: 4.0
+  max_cluster_extent_m: 200
+  max_vertices: 128
+placement:
+  scale_clamp: 0.2
+mask_out:
+  - name: tower_mod
+    kind: mod
+    bbox: [-117.20, 32.70, -117.19, 32.71]
+    note: Custom landmark
+  - name: harbor_island
+    kind: airport
+    geometry:
+      type: Polygon
+      coordinates:
+        - [[-117.20, 32.72], [-117.19, 32.72], [-117.19, 32.73], [-117.20, 32.72]]
+  - name: from_file
+    path: data/masks/extra.geojson
+masks:
+  airports:
+    enabled: false
+    buffer_m: 150
+    path: docs/compat/airports-mask.geojson
+palmscan:
+  output_dir: build/full
+  dedupe_radius_m: 2.0
+palmgen:
+  note: free form

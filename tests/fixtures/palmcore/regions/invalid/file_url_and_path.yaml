@@ -1,0 +1,6 @@
+config_version: 1
+region: file-url-and-path
+bbox: [-117.30, 32.60, -117.05, 32.90]
+sources:
+  inventory:
+    - {name: t, type: geojson_file, url: 'https://x.invalid/a.geojson', path: a.geojson, species_field: S}
