@@ -1,0 +1,8 @@
+// SYNTHETIC FIXTURE: hand-written test data, not a real capture. Column names are the plan's placeholders (VERIFY, TEST-103).
+Application,MsBetweenPresents,MsBetweenDisplayChange,PresentMode
+sim.exe,16.7,16.7,Hardware
+sim.exe,16.6,16.6,Hardware
+sim.exe,n/a,16.6,Hardware
+sim.exe,33.4,33.4,Hardware
+sim.exe,0,16.6,Hardware
+sim.exe,16.7,16.7,Hardware

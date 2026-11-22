@@ -1,0 +1,7 @@
+// SYNTHETIC FIXTURE: hand-written test data, not a real capture. Second placeholder column name (VERIFY, TEST-103).
+Index,FrameTime,TimeInSeconds
+1,10.0,0.010
+2,10.0,0.020
+3,10.0,0.030
+4,50.0,0.080
+5,10.0,0.090
