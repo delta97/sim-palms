@@ -14,7 +14,7 @@ touches: [palmscan/sources/registry.py, palmscan/ingest.py, palmscan/detect/dedu
 owner: ""
 branch: ""
 worktree: ""
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -52,3 +52,4 @@ pytest tests/unit/palmscan/test_scan_ingest.py tests/unit/palmscan/test_scan_ded
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [integrator] integrator note from SCAN-004: source cache_max_age_days is not enforced (palmscan.cache.Cache has no freshness check; palmcore.cache.is_fresh exists) — wire it in at ingest or add it to Cache
