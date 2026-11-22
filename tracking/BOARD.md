@@ -7,13 +7,11 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 138 | 1 | 1 | 0 | 74 | 0 | 214 |
+| 138 | 0 | 1 | 0 | 75 | 0 | 214 |
 
 ## In progress / in review
 
-| Task | Status | Owner | Branch | Title |
-|---|---|---|---|---|
-| [SPIKE-001](tasks/SPIKE-001.md) | in_progress | user | main | Install the MSFS 2024 SDK and create an empty Dev Mode scenery project |
+_None._
 
 ## Blocked
 
@@ -25,6 +23,8 @@ Generated: 2026-11-22
 
 | Task | Phase | Requires | Agent | Title |
 |---|---|---|---|---|
+| [SPIKE-002](tasks/SPIKE-002.md) | 0 | windows-sim, human | msfs-sdk-specialist | Cut one photogrammetry palm blob with Exclude TIN and the vegetation exclude |
+| [SPIKE-005](tasks/SPIKE-005.md) | 0 | windows-sim | simconnect-dotnet-engineer | Test SimConnect static SimObject spawn and whether it survives client disconnect |
 | [TEST-006](tasks/TEST-006.md) | 0 | windows-sim | msfs-sdk-specialist | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
 | [DEC-009](tasks/DEC-009.md) | 1 | human, network | geo-data-engineer | Decide: building footprint source (OSM, Microsoft, both, or county data) |
 | [RISK-003](tasks/RISK-003.md) | 1 | network, human | geo-data-engineer | Inventory other palm and tree mods and their coverage for mask_out defaults |
@@ -35,7 +35,7 @@ Generated: 2026-11-22
 | [FX-006](tasks/FX-006.md) | 7 | windows-sim | simconnect-dotnet-engineer | SimConnect pose logger, screenshot trigger and camera SimVar check |
 | [FX-026](tasks/FX-026.md) | 7 | network, human | render-fx-researcher | Fetch and pin the LaMa weights, then run the LaMa inpainting backend end to end |
 
-## Phase 0 (4/17 done)
+## Phase 0 (5/17 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -44,7 +44,7 @@ Generated: 2026-11-22
 | [INFRA-001](tasks/INFRA-001.md) | done | none |  | Bootstrap plans, tracking, worktree tooling and specialist agents |
 | [RISK-005](tasks/RISK-005.md) | done | network |  | Set up the sim/SDK update watch and do the first pass on exclusion bugs |
 | [RISK-006](tasks/RISK-006.md) | todo | none | GATE-P0 | Define the risk review routine and run the first review after Phase 0 |
-| [SPIKE-001](tasks/SPIKE-001.md) | in_progress | windows-sim, human |  | Install the MSFS 2024 SDK and create an empty Dev Mode scenery project |
+| [SPIKE-001](tasks/SPIKE-001.md) | done | windows-sim, human |  | Install the MSFS 2024 SDK and create an empty Dev Mode scenery project |
 | [SPIKE-002](tasks/SPIKE-002.md) | todo | windows-sim, human | SPIKE-001, DEC-004 | Cut one photogrammetry palm blob with Exclude TIN and the vegetation exclude |
 | [SPIKE-003](tasks/SPIKE-003.md) | todo | windows-sim, human | SPIKE-002, SPIKE-006 | Capture Scenery Editor XML templates (Exclude TIN polygon, vegetation exclude, scenery object) into palmgen/templates/ |
 | [SPIKE-004](tasks/SPIKE-004.md) | todo | windows-sim | SPIKE-001, SPIKE-002, SPIKE-008 | Measure fspackagetool command-line builds (1 and 1,000 polygons; behaviour with the sim open) |

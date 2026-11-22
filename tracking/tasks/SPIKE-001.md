@@ -1,7 +1,7 @@
 ---
 id: SPIKE-001
 title: Install the MSFS 2024 SDK and create an empty Dev Mode scenery project
-status: in_progress
+status: done
 phase: 0
 area: SPIKE
 kind: spike
@@ -91,3 +91,5 @@ A reviewer checks that no row says "assumed".
 - 2026-11-22 [integrator] integrator, read from disk 2026-11-22: SDK 1.8.2 (Core) at C:\MSFS 2024 SDK\, env MSFS2024_SDK (machine), fspackagetool at Tools\bin (not on PATH), SimConnect DLLs at SimConnect SDK\lib and lib\managed. Project palmfix-spike.xml saved in Documents\MyFSProjects (OneDrive) at 14:43:07 with <Packages/>, not built. Sim 1.9.24.0 crashed 14:43:32 (0xe06d7363 then 0xc0000005, WinMain, DevMode=1, world map). Partial findings: docs/findings/SPIKE-001.md. Steps 7-11 remain.
 - 2026-11-22 [user] Claimed. branch=main worktree=-
 - 2026-11-22 [integrator] integrator 2026-11-22: user built package cole-palmfix (scenery, one BGL asset group) in project palmfix-spike at 14:55; _RPTErrors.xml empty. Captured project/package XML, Scene.xml, manifest/layout JSON and tree.txt under docs/findings/SPIKE-001/. Open: Dev Mode menu path and editor click steps not recorded (user reports Dev Mode often freezes/crashes the sim on entry), on-screen version check. Boxes 2 and 3 ticked; 1 and 4 wait on those.
+- 2026-11-22 [integrator] user accepted in chat 2026-11-22 ('Yes, accept it') without the Dev Mode menu path and editor click steps (boxes 1 and 4 stay unticked): Dev Mode freezes/crashes the sim on entry, and the captured project/package files replace the click notes as the reference. On-screen sim version check also waived (1.9.24.0 from the crash report and manifest).
+- 2026-11-22 [integrator] Status in_progress -> done.

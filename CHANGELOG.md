@@ -5,6 +5,7 @@ Format: `- TASK-ID: what changed (PR link)`.
 
 ## Unreleased
 
+- SPIKE-001: MSFS 2024 SDK 1.8.2 installed on the sim PC; empty project `palmfix-spike` with scenery package `cole-palmfix` builds cleanly on sim 1.9.24.0; real project, package and scene files captured (`docs/findings/SPIKE-001.md`).
 - DEC-004: First test block decided (ADR-0005): Pacific Beach, Mission Blvd to Sail Bay, San Diego (`regions/sd-pacific-beach.yaml`).
 - INFRA-001: Adopted `scripts/issues.py` (from the unmerged bootstrap follow-up) to sync GitHub issues from task files, run locally; synced all issue bodies and labels.
 - FX-011: Added palm masks from depth and colour heuristics with YAML thresholds (`palmfx mask-heuristic`); thresholds VERIFY until tuned on real captures (local merge).

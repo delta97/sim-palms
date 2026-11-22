@@ -4,7 +4,7 @@
 
 ## Where things stand
 
-- **74 of 214 tasks done** (plus FX-014 merged as code but `blocked` on FX-026), all merged to `main` and pushed. GitHub issues are synced from the task files by `python scripts/issues.py sync` (bodies, labels, open/closed); done issues are closed with a link to the merge commit. Board: [BOARD.md](BOARD.md). Changelog: [CHANGELOG.md](../CHANGELOG.md).
+- **75 of 214 tasks done** (plus FX-014 merged as code but `blocked` on FX-026), all merged to `main` and pushed. GitHub issues are synced from the task files by `python scripts/issues.py sync` (bodies, labels, open/closed); done issues are closed with a link to the merge commit. Board: [BOARD.md](BOARD.md). Changelog: [CHANGELOG.md](../CHANGELOG.md).
 - **Phase 1 code (palmscan) is complete on fixtures.** `palmscan run` goes ingest → dedupe → species → priors → sizes/exclusion/buildings/masks → `palms.geojson` + QA outputs, offline and byte-reproducible (`SOURCE_DATE_EPOCH`). Adapters: geojson/CSV file, ArcGIS REST, Overpass/OSM, building footprints. Live samples are recorded in `tests/fixtures/palmscan/recorded/` (SCAN-007).
 - **Phase 2 code (palmgen) has its building blocks:** inputs, GUIDs, tiling, exclusion geometry + building clipping, masks, variant/scale/heading, template engine on *fake* templates, build reports. The real Scenery Editor XML (SPIKE-003) and package build (SPIKE-004) need the sim PC.
 - **Shared core (palmcore):** contracts and schemas, region config, ids, geo, cache, logging, CLI plumbing, palms.geojson I/O, asset manifest + glTF checks.
@@ -17,7 +17,7 @@
 Everything else that is ready needs you, the sim PC, or Blender:
 
 1. ~~DEC-004~~ **decided:** first test block is Pacific Beach, Mission Blvd to Sail Bay ([ADR-0005](decisions/ADR-0005-first-test-block.md), `regions/sd-pacific-beach.yaml`). A live `palmscan` run there gave 387 valid palms (SCAN-100 Log).
-2. **SPIKE-001** on the sim PC: install the MSFS 2024 SDK and make an empty Dev Mode project. Then SPIKE-002..007 runbooks, TEST-006 (repeatable camera/screenshot method), SPIKE-005 using the console app in `spikes/simconnect-persist/` (build: see its README).
+2. ~~SPIKE-001~~ **done** on this PC: SDK 1.8.2 at `C:\MSFS 2024 SDK\`, sim 1.9.24.0, project `palmfix-spike` with package `cole-palmfix` builds cleanly ([findings](../docs/findings/SPIKE-001.md)). Dev Mode often freezes or crashes the sim on entry (RISK-005). Then SPIKE-002..007 runbooks, TEST-006 (repeatable camera/screenshot method), SPIKE-005 using the console app in `spikes/simconnect-persist/` (build: see its README).
 3. **Review the proposed ADRs:** ADR-0001 (tracking structure) and ADR-0013 (Linux code ahead of Phase 0, which this session relied on).
 4. **Decisions with evidence ready:**
    - DEC-002 build or license palm models: `assets/reference/build-vs-license.md`, `docs/licenses/models-and-tools.md`.
@@ -37,4 +37,4 @@ Everything else that is ready needs you, the sim PC, or Blender:
 ## Next
 
 1. Phase 7 Stage A (offline image-layer experiment) code is built on synthetic data: scaffold, camera model, depth decoder (shader untested in ReShade), synthetic scene generator, session ingest with pose interpolation, calibration (click UI not yet run on a display), masks by projection and by depth/colour heuristics, mask metrics, inpainting (Telea tested; LaMa untested, FX-014 blocked on FX-026, #215). Capture formats are placeholders (VERIFY) until FX-001/FX-006/FX-007 on the sim.
-2. The user does SPIKE-001 on the sim PC (this PC: MSFS 2024 Steam edition, SDK not installed yet; see the SPIKE-001 Log). Phase 2 build and validation tasks unblock from the SPIKE results.
+2. Next on the sim PC: SPIKE-002 (cut one palm blob with Exclude TIN at the ADR-0005 block) and SPIKE-004 (command-line fspackagetool builds). Phase 2 build and validation tasks unblock from the SPIKE results.
