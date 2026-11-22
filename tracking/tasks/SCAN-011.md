@@ -1,7 +1,7 @@
 ---
 id: SCAN-011
 title: "palms.geojson writer, palm IDs and schema validation"
-status: todo
+status: in_progress
 phase: 1
 area: SCAN
 kind: build
@@ -11,9 +11,9 @@ requires: [none]
 agent: python-architect
 estimate_h: 2
 touches: [palmscan/output.py, tests/unit/palmscan/test_scan_output.py, tests/fixtures/palmscan/output/]
-owner: ""
-branch: ""
-worktree: ""
+owner: claude-agent
+branch: task/scan-011-palms-geojson-writer-palm-ids-and-schema
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-011"
 updated: 2026-11-22
 ---
 
@@ -55,3 +55,4 @@ pytest tests/unit/palmscan/test_scan_output.py -q
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [reconcile] Depends on ARCH-006 and ARCH-007 (ARCH request). Removed duplicate implementation scope: palm ids come from palmcore.ids.palm_id (16 hex, schema pattern), writing delegates to palmcore.palms.write_palms_doc (canonical rounding/layout, atomic write); this task keeps only PalmRecord -> FeatureCollection mapping, the validate wrapper and the invalid-output helper. Cross-area reconciliation.
+- 2026-11-22 [claude-agent] Claimed. branch=task/scan-011-palms-geojson-writer-palm-ids-and-schema worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-011
