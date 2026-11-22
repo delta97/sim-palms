@@ -1,7 +1,7 @@
 ---
 id: SCAN-009
 title: "Palm sizes, exclusion radius, building conflict, mask_out"
-status: review
+status: done
 phase: 1
 area: SCAN
 kind: build
@@ -58,3 +58,4 @@ pytest tests/unit/palmscan/test_scan_attributes.py tests/unit/palmscan/test_scan
 - 2026-11-22 [claude-agent] Claimed. branch=task/scan-009-palm-sizes-exclusion-radius-building-con worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-009
 - 2026-11-22 [claude-agent] Done: attributes.py (parse_height, assign_sizes, assign_exclusion, flag_building_conflicts) and mask.py (load_masks, apply_masks). 50 new tests pass offline; full suite 1335 passed 1 skipped; ruff and mypy clean. Acceptance: parse_height('30-45','ft')=11.43; canary crown 12 -> 7.5, crown 20 -> 8.0; edge-touch not flagged, overlap flagged and building returned once; mask rejects carry mask_out:<name>. Contract proof: test_written_palms_pass_contract_invariants runs sizes -> exclusion -> to_feature_collection -> check_palms_invariants(region=cfg) clean. Spec fix: PalmRecord had no height_raw (W6 says 'kept for W7'), so added it to palmscan/model.py and the plan, and added model.py to touches. SCAN-002 exposes no species_defaults loader, so attributes.py loads it via read_data_text. Radius uses crown rounded to 0.1 m (the stored precision) so written radii match the TEST-004 0.01 m tolerance. mask kinds all remove palms; airport masks stay with palmgen.
 - 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] Status review -> done.
