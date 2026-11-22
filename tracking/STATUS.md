@@ -35,5 +35,5 @@ Everything else that is ready needs you, the sim PC, or Blender:
 
 ## Next
 
-1. No agent-ready work is left: TEST-014 (soak tooling) and FX-002 (`palmfx.offline` scaffold) are merged. Everything open needs the user, the sim PC, Blender or a GPU.
+1. TEST-014 (soak tooling) and FX-002 (`palmfx.offline` scaffold) are merged. FX-002 unblocked four more Phase 7 Stage A tasks an agent can do (FX-003 camera model, FX-005 depth decoder, FX-012 mask metrics, FX-014 inpainting runner); held pending the user's go-ahead, since the experiment depends on FX-001 on the sim. Everything else open needs the user, the sim PC, Blender or a GPU.
 2. The user does DEC-004, then SPIKE-001 on the sim PC. Phase 2 build and validation tasks unblock from the SPIKE results.
