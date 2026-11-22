@@ -256,7 +256,7 @@ ARCH-003 owns the schema and is the only place the defaults below are defined (p
 | `masks.airports.enabled` *new* | true | default airport mask |
 | `masks.airports.buffer_m` *new* | 100 | buffer around aerodrome polygons |
 | `masks.airports.path` *new* | `docs/compat/airports-mask.geojson` | default airport polygons, produced by RISK-004; may point at a `palmgen masks airports` output |
-| `placement.scale_clamp` *new* | 0.15 | ±15% |
+| `placement.scale_clamp` *new* | none (optional override) | replaces the manifest `scale_limits` when set (ASSET-005); `GenConfig.scale_clamp` is `None` when unset. ARCH-003 still carries a 0.15 default in `RegionConfig` and the schema; GEN-004 reads the raw value so an unset key stays `None` |
 
 ### Asset manifest fields palmgen reads
 
@@ -551,10 +551,10 @@ GEN-003. Grid of 0.01°, tile named by its south-west corner.
 
 GEN-004.
 
-- `load_palms`: read with `palmcore.palms.read_palms` (ARCH-007, validates with ARCH-002; GEN-004 depends on ARCH-007); `InputError` listing the first 20 schema errors. Duplicate `palm_id` → `InputError`. Features whose `region` differs from `--region` → `InputError`. Returns palms sorted by `palm_id` plus collection-level metadata for `resolve_data_version`.
+- `load_palms`: read with `palmcore.palms.read_palms` (ARCH-007, validates with ARCH-002; GEN-004 depends on ARCH-007); `InputError` listing the first 20 schema errors. Duplicate `palm_id` → `InputError`. Features whose `region` differs from `--region` → `InputError`. Returns palms sorted by `palm_id` plus the collection-level members (every top-level key except `type` and `features`) for `resolve_data_version`. Missing, unreadable or non-JSON files are also `InputError`.
 - `load_buildings`: the ARCH-002 secondary contract `buildings.geojson` (checked with `palmcore.contract.validate_buildings`), Polygon/MultiPolygon in EPSG:4326; MultiPolygons exploded; invalid geometries repaired with `shapely.make_valid`, empty ones dropped. File missing while `clip_buildings` is true → `InputError` with a hint to pass `--buildings` or set `clip_buildings: false`.
-- `load_gen_config`: loads the region YAML through `palmcore` and maps the keys in [Region config keys palmgen reads](#region-config-keys-palmgen-reads) into a frozen `GenConfig`; defaults come from `RegionConfig` (ARCH-003), not from GEN code. Unknown keys under `exclusion` produce a warning, not an error.
-- Fixtures created here and reused by later tasks: `tests/fixtures/palmgen/palms_small.geojson` (12 palms over 2 tiles: one 5-palm row 3 m apart, one pair 10 m apart, one palm touching a building, one palm inside a building, one palm inside a mod mask, one palm near an airport polygon, one with null height, one with an unknown species, one with null crown and null radius), `buildings_small.geojson`, `region_small.yaml`.
+- `load_gen_config`: loads the region YAML through `palmcore` and maps the keys in [Region config keys palmgen reads](#region-config-keys-palmgen-reads) into a frozen `GenConfig`; defaults come from `RegionConfig` (ARCH-003), not from GEN code. Unknown keys under `exclusion` produce a warning, not an error (they are dropped before the ARCH-003 loader runs, which would reject them). `region` must equal `region_name`; the file name is not checked, so `region_small.yaml` can hold region `fixture-small`. `GenConfig` exposes `margin_m`, `default_radius_m`, `radius_min_m`, `radius_max_m` as read-only properties so it satisfies `palmgen.geometry.RadiusConfig`, which is declared with read-only properties for that reason (a plain attribute in a Protocol is settable and rejects frozen dataclasses).
+- Fixtures created here and reused by later tasks: `tests/fixtures/palmgen/palms_small.geojson` (12 palms over 2 tiles: one 5-palm row 3 m apart, one pair 10 m apart, one palm touching a building, one palm inside a building, one palm inside a mod mask, one palm near an airport polygon, one with the minimum height 0.5 m, one with an unknown species, one with the minimum crown 0.3 m and radius 0.3 m; the ARCH-002 palms schema has no nulls for `height_m`, `crown_diam_m` or `exclusion_radius_m`, so the "null" cases are built in memory by the tests that need them), `buildings_small.geojson`, `region_small.yaml`.
 
 #### GEN geometry
 

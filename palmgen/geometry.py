@@ -35,10 +35,18 @@ _MAX_HOLE_SPLITS: Final = 10_000
 class RadiusConfig(Protocol):
     """The ``exclusion.*`` values :func:`palm_radius` reads (satisfied by ``GenConfig``)."""
 
-    margin_m: float
-    default_radius_m: float
-    radius_min_m: float
-    radius_max_m: float
+    # Read-only members, so frozen dataclasses and property-backed configs both satisfy it.
+    @property
+    def margin_m(self) -> float: ...
+
+    @property
+    def default_radius_m(self) -> float: ...
+
+    @property
+    def radius_min_m(self) -> float: ...
+
+    @property
+    def radius_max_m(self) -> float: ...
 
 
 class LocalProjection:

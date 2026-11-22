@@ -1,0 +1,386 @@
+{
+ "type": "FeatureCollection",
+ "schema_version": "1.0",
+ "region": "fixture-small",
+ "generated_at": "2026-11-22T00:00:00Z",
+ "data_version": "2026-11",
+ "generator": {
+  "name": "palmscan",
+  "version": "0.1.0"
+ },
+ "config_sha256": null,
+ "features": [
+  {
+   "type": "Feature",
+   "id": "fs-0000000000000001",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.255,
+     32.785
+    ]
+   },
+   "properties": {
+    "palm_id": "fs-0000000000000001",
+    "species": "washingtonia_robusta",
+    "species_confidence": 0.9,
+    "species_source": "inventory",
+    "height_m": 12.0,
+    "height_source": "inventory",
+    "crown_diam_m": 3.0,
+    "ground_elev_m": null,
+    "detected_by": "inventory",
+    "source_ids": [
+     "fixture_inventory:1"
+    ],
+    "exclusion_radius_m": 2.0,
+    "building_conflict": false,
+    "data_vintage": {
+     "inventory": "2024-05"
+    },
+    "region": "fixture-small"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "fs-0000000000000002",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.254968,
+     32.785
+    ]
+   },
+   "properties": {
+    "palm_id": "fs-0000000000000002",
+    "species": "washingtonia_robusta",
+    "species_confidence": 0.9,
+    "species_source": "inventory",
+    "height_m": 12.0,
+    "height_source": "inventory",
+    "crown_diam_m": 3.0,
+    "ground_elev_m": null,
+    "detected_by": "inventory",
+    "source_ids": [
+     "fixture_inventory:2"
+    ],
+    "exclusion_radius_m": 2.0,
+    "building_conflict": false,
+    "data_vintage": {
+     "inventory": "2024-05"
+    },
+    "region": "fixture-small"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "fs-0000000000000003",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.254936,
+     32.785
+    ]
+   },
+   "properties": {
+    "palm_id": "fs-0000000000000003",
+    "species": "washingtonia_robusta",
+    "species_confidence": 0.9,
+    "species_source": "inventory",
+    "height_m": 12.0,
+    "height_source": "inventory",
+    "crown_diam_m": 3.0,
+    "ground_elev_m": null,
+    "detected_by": "inventory",
+    "source_ids": [
+     "fixture_inventory:3"
+    ],
+    "exclusion_radius_m": 2.0,
+    "building_conflict": false,
+    "data_vintage": {
+     "inventory": "2024-05"
+    },
+    "region": "fixture-small"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "fs-0000000000000004",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.2549039,
+     32.785
+    ]
+   },
+   "properties": {
+    "palm_id": "fs-0000000000000004",
+    "species": "washingtonia_robusta",
+    "species_confidence": 0.9,
+    "species_source": "inventory",
+    "height_m": 0.5,
+    "height_source": "inventory",
+    "crown_diam_m": 3.0,
+    "ground_elev_m": null,
+    "detected_by": "inventory",
+    "source_ids": [
+     "fixture_inventory:4"
+    ],
+    "exclusion_radius_m": 2.0,
+    "building_conflict": false,
+    "data_vintage": {
+     "inventory": "2024-05"
+    },
+    "region": "fixture-small"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "fs-0000000000000005",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.2548719,
+     32.785
+    ]
+   },
+   "properties": {
+    "palm_id": "fs-0000000000000005",
+    "species": "washingtonia_robusta",
+    "species_confidence": 0.9,
+    "species_source": "inventory",
+    "height_m": 12.0,
+    "height_source": "inventory",
+    "crown_diam_m": 3.0,
+    "ground_elev_m": null,
+    "detected_by": "inventory",
+    "source_ids": [
+     "fixture_inventory:5"
+    ],
+    "exclusion_radius_m": 2.0,
+    "building_conflict": false,
+    "data_vintage": {
+     "inventory": "2024-05"
+    },
+    "region": "fixture-small"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "fs-0000000000000006",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.254573,
+     32.7852705
+    ]
+   },
+   "properties": {
+    "palm_id": "fs-0000000000000006",
+    "species": "phoenix_canariensis",
+    "species_confidence": 0.9,
+    "species_source": "inventory",
+    "height_m": 9.0,
+    "height_source": "inventory",
+    "crown_diam_m": 5.0,
+    "ground_elev_m": null,
+    "detected_by": "inventory",
+    "source_ids": [
+     "fixture_inventory:6"
+    ],
+    "exclusion_radius_m": 3.5,
+    "building_conflict": false,
+    "data_vintage": {
+     "inventory": "2024-05"
+    },
+    "region": "fixture-small"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "fs-0000000000000007",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.2544663,
+     32.7852705
+    ]
+   },
+   "properties": {
+    "palm_id": "fs-0000000000000007",
+    "species": "phoenix_canariensis",
+    "species_confidence": 0.9,
+    "species_source": "inventory",
+    "height_m": 9.5,
+    "height_source": "inventory",
+    "crown_diam_m": 5.0,
+    "ground_elev_m": null,
+    "detected_by": "inventory",
+    "source_ids": [
+     "fixture_inventory:7"
+    ],
+    "exclusion_radius_m": 3.5,
+    "building_conflict": false,
+    "data_vintage": {
+     "inventory": "2024-05"
+    },
+    "region": "fixture-small"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "fs-0000000000000008",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.245,
+     32.785
+    ]
+   },
+   "properties": {
+    "palm_id": "fs-0000000000000008",
+    "species": "washingtonia_robusta",
+    "species_confidence": 0.9,
+    "species_source": "inventory",
+    "height_m": 14.0,
+    "height_source": "inventory",
+    "crown_diam_m": 4.0,
+    "ground_elev_m": null,
+    "detected_by": "inventory",
+    "source_ids": [
+     "fixture_inventory:8"
+    ],
+    "exclusion_radius_m": 2.5,
+    "building_conflict": true,
+    "data_vintage": {
+     "inventory": "2024-05"
+    },
+    "region": "fixture-small"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "fs-0000000000000009",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.2446798,
+     32.785
+    ]
+   },
+   "properties": {
+    "palm_id": "fs-0000000000000009",
+    "species": "washingtonia_robusta",
+    "species_confidence": 0.9,
+    "species_source": "inventory",
+    "height_m": 11.0,
+    "height_source": "inventory",
+    "crown_diam_m": 4.0,
+    "ground_elev_m": null,
+    "detected_by": "inventory",
+    "source_ids": [
+     "fixture_inventory:9"
+    ],
+    "exclusion_radius_m": 2.5,
+    "building_conflict": true,
+    "data_vintage": {
+     "inventory": "2024-05"
+    },
+    "region": "fixture-small"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "fs-0000000000000010",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.245,
+     32.7853607
+    ]
+   },
+   "properties": {
+    "palm_id": "fs-0000000000000010",
+    "species": "washingtonia_filifera",
+    "species_confidence": 0.9,
+    "species_source": "inventory",
+    "height_m": 15.0,
+    "height_source": "inventory",
+    "crown_diam_m": 5.0,
+    "ground_elev_m": null,
+    "detected_by": "inventory",
+    "source_ids": [
+     "fixture_inventory:10"
+    ],
+    "exclusion_radius_m": 3.0,
+    "building_conflict": false,
+    "data_vintage": {
+     "inventory": "2024-05"
+    },
+    "region": "fixture-small"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "fs-0000000000000011",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.2443595,
+     32.7858115
+    ]
+   },
+   "properties": {
+    "palm_id": "fs-0000000000000011",
+    "species": "washingtonia_robusta",
+    "species_confidence": 0.9,
+    "species_source": "inventory",
+    "height_m": 13.0,
+    "height_source": "inventory",
+    "crown_diam_m": 4.0,
+    "ground_elev_m": null,
+    "detected_by": "inventory",
+    "source_ids": [
+     "fixture_inventory:11"
+    ],
+    "exclusion_radius_m": 2.5,
+    "building_conflict": false,
+    "data_vintage": {
+     "inventory": "2024-05"
+    },
+    "region": "fixture-small"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "fs-0000000000000012",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.2442528,
+     32.7851803
+    ]
+   },
+   "properties": {
+    "palm_id": "fs-0000000000000012",
+    "species": "chamaedorea_unlisted",
+    "species_confidence": 0.9,
+    "species_source": "inventory",
+    "height_m": 6.0,
+    "height_source": "inventory",
+    "crown_diam_m": 0.3,
+    "ground_elev_m": null,
+    "detected_by": "inventory",
+    "source_ids": [
+     "fixture_inventory:12"
+    ],
+    "exclusion_radius_m": 0.3,
+    "building_conflict": false,
+    "data_vintage": {
+     "inventory": "2024-05"
+    },
+    "region": "fixture-small"
+   }
+  }
+ ]
+}
