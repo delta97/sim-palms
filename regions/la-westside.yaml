@@ -1,0 +1,49 @@
+# LA Westside and beaches example region (ARCH-008). Source endpoints checked 2026-11-22; see the task log.
+config_version: 1
+region: la-westside
+id_prefix: law
+name: LA Westside and beaches
+bbox: [-118.52, 33.96, -118.37, 34.09]   # Santa Monica, Venice, Westwood, Culver City. Starting value; REGION tasks may tune it.
+sources:
+  inventory:
+    # LA County compilation from github.com/stiles/la-trees (README links this S3 file).
+    # About 627 MB, too large for a raw URL, so SCAN reads it from a local copy. Download once:
+    #   mkdir -p data/manual/la-trees
+    #   curl -L -o data/manual/la-trees/la_county_tree_locations.geojson \
+    #     https://s3.us-west-1.amazonaws.com/stilesdata.com/jacarandas/la_county_tree_locations.geojson
+    # data/ is gitignored; never commit the file.
+    # Feature properties (first rows, 2026-11-22): id, place, species, ispalm, mexfanpalm, jacaranda, pine, oak,
+    # magnolia, category, ... "species" holds common names ("Mexican Fan Palm", "Queen Palm"), not Latin names.
+    # SCAN should normalise them; unknown names go to the review list.
+    - name: la_county_trees
+      type: geojson_file
+      path: data/manual/la-trees/la_county_tree_locations.geojson
+      format: geojson
+      species_field: species
+      id_field: id                    # VERIFY: integer row id of the compilation, not a city tree id; stability across releases unknown
+      license: "Public records compilation; check before redistributing"
+    # StreetsLA (City of Los Angeles) is not added: its only machine-readable endpoint is a GeoServer WFS
+    # (https://geola.daveytreekeeper.com/geoserver/Treekeeper/ows, typeName Treekeeper:streetsla_UFDSpeciesLabel,
+    # fields site_id, tree_common, EPSG:2229 coordinates), and inventory types are arcgis_rest or geojson_file only.
+    # SCAN: add a WFS adapter (or a one-off export to GeoJSON in EPSG:4326) before enabling it.
+    # The la-trees compilation above already includes LA city trees (from the same WFS).
+  lidar: 3dep_ept
+  buildings: osm
+  osm_trees: true
+species_priors:                       # placeholders; SCAN computes real values (palmscan priors)
+  washingtonia_robusta: 0.45
+  syagrus_romanzoffiana: 0.25
+  phoenix_canariensis: 0.15
+  archontophoenix_cunninghamiana: 0.10
+  washingtonia_filifera: 0.05
+exclusion:
+  margin_m: 1.5
+  polygon_sides: 12
+  merge_gap_m: 2.0
+  clip_buildings: true
+mask_out: []
+masks:
+  airports:
+    enabled: true
+    path: docs/compat/airports-mask.geojson
+palmscan: {}
