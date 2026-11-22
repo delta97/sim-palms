@@ -1,7 +1,7 @@
 ---
 id: RISK-001
 title: Audit data source licenses and terms (inventories, OSM, footprints, LiDAR)
-status: in_progress
+status: review
 phase: 1
 area: RISK
 kind: research
@@ -44,10 +44,10 @@ One file records, for every data source the pipeline may use, the license or ter
 
 ## Acceptance criteria
 
-- [ ] All six core sources (LA compilation, StreetsLA, San Diego, OSM, Microsoft footprints, USGS 3DEP) have a section with a terms URL and a date checked.
-- [ ] Each section quotes the redistribution and attribution text, or states "no terms found" with the pages searched.
-- [ ] The summary table has one row per source.
-- [ ] No sentence states that something is legally permitted or forbidden; open points are phrased as questions.
+- [x] All six core sources (LA compilation, StreetsLA, San Diego, OSM, Microsoft footprints, USGS 3DEP) have a section with a terms URL and a date checked.
+- [x] Each section quotes the redistribution and attribution text, or states "no terms found" with the pages searched.
+- [x] The summary table has one row per source.
+- [x] No sentence states that something is legally permitted or forbidden; open points are phrased as questions.
 
 ## Verification
 
@@ -64,3 +64,6 @@ Read the file once and confirm no legal conclusions are stated.
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [claude-agent] Claimed. branch=task/risk-001-audit-data-source-licenses-and-terms-inv worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/RISK-001
+- 2026-11-22 [claude-agent] Wrote docs/licenses/data-sources.md (commit 9df9af6): 6 core sources + LARIAC/SanGIS, each with terms URL and date checked 2026-11-22; 9 date-checked rows; summary table 8 rows; 10 open questions. Verification greps all found. Acceptance criteria 1-4 ticked. Unreadable pages marked VERIFY (USGS copyrights page 403, LA city disclaimer, SanGIS 404, LA County terms read via ArcGIS item data not rendered page).
+- 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [claude-agent] validate: 213 tasks, 0 errors, 0 warnings; status set to review
