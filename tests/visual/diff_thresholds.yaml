@@ -1,0 +1,10 @@
+# Thresholds for tests/visual/diff_score.py (TEST-008). Edit here, never in code.
+# Provisional: the starting values from plans/detailed/06-testing.md. TEST-018 measures the noise
+# floor on the sim PC (two no-fix runs at T1 in one session), then sets:
+#   ssim_min = noise_ssim_min - 0.03
+#   mad_max  = noise_mad_max + 0.02
+# and records the measured values under noise_floor and sets calibrated: true.
+ssim_min: 0.90
+mad_max: 0.05
+calibrated: false
+noise_floor: null
