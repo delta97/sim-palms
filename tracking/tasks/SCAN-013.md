@@ -1,7 +1,7 @@
 ---
 id: SCAN-013
 title: "palmscan run pipeline and CLI, end-to-end on fixtures"
-status: todo
+status: in_progress
 phase: 1
 area: SCAN
 kind: build
@@ -11,9 +11,9 @@ requires: [none]
 agent: geo-data-engineer
 estimate_h: 3
 touches: [palmscan/pipeline.py, palmscan/cli.py, tests/unit/palmscan/test_scan_pipeline.py, tests/fixtures/palmscan/regions/]
-owner: ""
-branch: ""
-worktree: ""
+owner: claude-agent
+branch: task/scan-013-palmscan-run-pipeline-and-cli-end-to-end
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-013"
 updated: 2026-11-22
 ---
 
@@ -59,3 +59,4 @@ ls /tmp/scan-e2e   # palms.geojson buildings.geojson species_priors.yaml qa_summ
 - 2026-11-22 [integrator] integrator note from SCAN-012: call write_qa_gpkg(..., id_prefix=cfg.id_prefix) and fill QaContext.git_sha from git_sha(); data_vintage keys starting with 'lidar' are treated as LiDAR vintages
 - 2026-11-22 [integrator] integrator note from SCAN-006: look up building licence/attribution notices from SOURCE_NOTICES by the frame's 'source' column (frame.attrs may not survive pandas ops)
 - 2026-11-22 [integrator] integrator note from SCAN-008: call dedupe_cross_source(res.palms, cfg.dedupe_radius_m, res.source_order); ingest raises SourceError on inventory failure (exit 4); source names must not contain ':'; buildings adapter is not in ADAPTERS (hook comment in registry.py) — call fetch_buildings separately
+- 2026-11-22 [claude-agent] Claimed. branch=task/scan-013-palmscan-run-pipeline-and-cli-end-to-end worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-013
