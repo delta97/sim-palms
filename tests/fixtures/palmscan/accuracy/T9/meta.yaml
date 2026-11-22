@@ -1,0 +1,10 @@
+# SYNTHETIC fixture for palmscan QA accuracy (SCAN-029). Not a real site, not a real label.
+site: T9
+imagery:
+  source: SYNTHETIC (no imagery)
+  date: "2026-11-22"
+  resolution_m: 0.6
+labelers:
+  - "synthetic-fixture"
+labeled_on: "2026-11-22"
+notes: "SYNTHETIC test fixture. Coordinates are Null Island, not a real street."

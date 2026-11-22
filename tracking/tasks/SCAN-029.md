@@ -1,7 +1,7 @@
 ---
 id: SCAN-029
 title: Run the TEST-010 accuracy evaluation from palmscan (in-run QA)
-status: in_progress
+status: review
 phase: 4
 area: SCAN
 kind: build
@@ -39,10 +39,10 @@ updated: 2026-11-22
 
 ## Acceptance criteria
 
-- [ ] No matching or metric formula and no numeric target is defined in `palmscan/qa/accuracy.py` (grep for `linear_sum_assignment` and `0.9` finds nothing).
-- [ ] `evaluate_site` results equal TEST-010's `evaluate` output on the fixture.
-- [ ] Empty prediction set does not raise; missing evaluator is a warning.
-- [ ] Tests pass.
+- [x] No matching or metric formula and no numeric target is defined in `palmscan/qa/accuracy.py` (grep for `linear_sum_assignment` and `0.9` finds nothing).
+- [x] `evaluate_site` results equal TEST-010's `evaluate` output on the fixture.
+- [x] Empty prediction set does not raise; missing evaluator is a warning.
+- [x] Tests pass.
 
 ## Verification
 
@@ -55,3 +55,11 @@ pytest tests/unit/palmscan/test_scan_accuracy.py -q
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [reconcile] Rescoped: TEST-010 is the single accuracy-metrics implementation and the one that gates Phase 4. This task no longer reimplements matching/metrics; it loads the site ground truth through TEST-009/TEST-010, runs TEST-010's evaluate/check_thresholds for palmscan's in-run QA, and keeps only the SCAN-specific fallback height error. Height classes follow TEST (S/M/T/X, edges 8/15/25 m). Added depends_on TEST-010. Cross-area reconciliation.
 - 2026-11-22 [claude-agent] Claimed. branch=task/scan-029-run-the-test-010-accuracy-evaluation-fro worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-029
+- 2026-11-22 [claude-agent] Built palmscan/qa/accuracy.py on TEST-010 (metrics.evaluate, load_thresholds, profile_for, check_thresholds, unchecked_thresholds) and TEST-009 (gt.load_ground_truth, load_labeled_area). No matching or metric code; grep for linear_sum_assignment and 0.9 finds nothing (also asserted in a test).
+- 2026-11-22 [claude-agent] AC2: evaluate_site results equal direct TEST-010 evaluate and check_thresholds on fixture T9 for all three profiles (test_evaluate_site_equals_direct_test010_call).
+- 2026-11-22 [claude-agent] AC3: empty predictions (pred_empty.geojson) do not raise; precision None, recall 0.0, undefined-precision failure reported. Missing evaluator (repo_root outside checkout) gives warning 'accuracy skipped: tests.accuracy not importable' and {} (no crash).
+- 2026-11-22 [claude-agent] Deviation: site folder is T9, not site_TX. TEST-009 site ids must match T[0-9]+ (gt.site_dir); the fixture root is tests/fixtures/palmscan/accuracy/ with sites_root passed in.
+- 2026-11-22 [claude-agent] Deviation: load_evaluator returns a Evaluator(metrics, gt) namedtuple (or None) instead of a bare module, since both TEST modules are used. It also refuses a tests package that resolves outside repo_root.
+- 2026-11-22 [claude-agent] Verification: pytest tests/unit/palmscan/test_scan_accuracy.py -q -> 10 passed. Full: pytest -q -> 1587 passed, 1 skipped; ruff check clean; ruff format --check 141 files formatted; mypy 66 files no issues.
+- 2026-11-22 [claude-agent] Commit f2934ca scan(SCAN-029): run TEST-010 accuracy evaluation from palmscan QA.
+- 2026-11-22 [claude-agent] Status in_progress -> review.

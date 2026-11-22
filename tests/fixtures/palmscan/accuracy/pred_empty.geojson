@@ -1,0 +1,13 @@
+{
+  "type": "FeatureCollection",
+  "schema_version": "1.0",
+  "region": "synthetic-t9",
+  "generated_at": "2026-11-22T00:00:00Z",
+  "data_version": "2026-11",
+  "generator": {
+    "name": "palmscan",
+    "version": "0.1.0"
+  },
+  "config_sha256": null,
+  "features": []
+}
