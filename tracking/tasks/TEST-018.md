@@ -50,3 +50,4 @@ python -m tests.visual.diff_score tests/visual/T1/<date>_calib-a tests/visual/T1
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [reconcile] Narrowed touches from tests/visual/T1/ to the three labelled calibration runs and the mask files, so it no longer overlaps GEN-019. Cross-area reconciliation.
+- 2026-11-22 [integrator] integrator note from TEST-008: with default thresholds (ssim 0.90 / mad 0.05) a 50x50 block change in a 400x300 frame is NOT flagged (ssim 0.9815, mad 0.0101); calibrate defaults here
