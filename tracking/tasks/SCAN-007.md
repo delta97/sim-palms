@@ -1,7 +1,7 @@
 ---
 id: SCAN-007
 title: "Record live source fixtures and confirm source fields"
-status: todo
+status: in_progress
 phase: 1
 area: SCAN
 kind: test
@@ -11,9 +11,9 @@ requires: [network]
 agent: geo-data-engineer
 estimate_h: 2
 touches: [tests/fixtures/palmscan/recorded/, tests/unit/palmscan/test_scan_recorded_sources.py, palmscan/data/species_aliases.csv, palmscan/data/species_keys.yaml, palmscan/data/non_tree_markers.yaml]
-owner: ""
-branch: ""
-worktree: ""
+owner: claude-agent
+branch: task/scan-007-record-live-source-fixtures-and-confirm
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-007"
 updated: 2026-11-22
 ---
 
@@ -57,3 +57,4 @@ grep -c VERIFY tests/fixtures/palmscan/recorded/README.md   # expect 0 unanswere
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [reconcile] Added palmscan/data/species_keys.yaml to touches: any new species key added to the alias table must also be added to the canonical species-key registry (SCAN-002). Cross-area reconciliation.
+- 2026-11-22 [claude-agent] Claimed. branch=task/scan-007-record-live-source-fixtures-and-confirm worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-007
