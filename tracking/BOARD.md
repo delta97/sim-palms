@@ -7,15 +7,15 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 189 | 5 | 0 | 1 | 18 | 0 | 213 |
+| 188 | 5 | 0 | 1 | 19 | 0 | 213 |
 
 ## In progress / in review
 
 | Task | Status | Owner | Branch | Title |
 |---|---|---|---|---|
-| [ARCH-007](tasks/ARCH-007.md) | in_progress | claude-agent | task/arch-007-add-the-palms-geojson-serializer-reader | Add the palms.geojson serializer, reader and writer |
 | [GEN-005](tasks/GEN-005.md) | in_progress | claude-agent | task/gen-005-exclusion-circles-merging-and-simplifica | Exclusion circles, merging and simplification |
 | [GEN-008](tasks/GEN-008.md) | in_progress | claude-agent | task/gen-008-template-engine-and-xml-writer-on-fake-t | Template engine and XML writer on fake templates |
+| [GEN-014](tasks/GEN-014.md) | in_progress | claude-agent | task/gen-014-build-report-md-and-build-report-json | build_report.md and build_report.json |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
 | [TEST-002](tasks/TEST-002.md) | in_progress | claude-agent | task/test-002-add-the-golden-file-comparison-helper-wi | Add the golden-file comparison helper with an update flag |
 | [TEST-004](tasks/TEST-004.md) | in_progress | claude-agent | task/test-004-add-contract-conformance-tests-for-palms | Add contract conformance tests for palms.geojson |
@@ -31,8 +31,9 @@ _None._
 | [DEC-004](tasks/DEC-004.md) | 0 | human, network | task-planner | Decide: first test block (a San Diego or LA street the user knows well) |
 | [SPIKE-001](tasks/SPIKE-001.md) | 0 | windows-sim, human | msfs-sdk-specialist | Install the MSFS 2024 SDK and create an empty Dev Mode scenery project |
 | [TEST-006](tasks/TEST-006.md) | 0 | windows-sim | msfs-sdk-specialist | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
+| [ARCH-009](tasks/ARCH-009.md) | 1 | none | python-architect | Add shared CLI plumbing and the palmfix utility CLI |
 | [RISK-003](tasks/RISK-003.md) | 1 | network, human | geo-data-engineer | Inventory other palm and tree mods and their coverage for mask_out defaults |
-| [GEN-014](tasks/GEN-014.md) | 2 | none | scenery-generator-engineer | build_report.md and build_report.json |
+| [GEN-004](tasks/GEN-004.md) | 2 | none | scenery-generator-engineer | Load palms, buildings and region config |
 | [TEST-003](tasks/TEST-003.md) | 2 | none | test-engineer | Add geometry assertion helpers for exclusion polygons |
 | [TEST-015](tasks/TEST-015.md) | 2 | none | test-engineer | Write the post-update regression routine, log and entry scaffolder |
 | [TEST-102](tasks/TEST-102.md) | 2 | none | test-engineer | Visual test protocol tooling: run scaffolder, checklist template, test log |
@@ -67,7 +68,7 @@ _None._
 | [SPIKE-011](tasks/SPIKE-011.md) | todo | human | SPIKE-010, RISK-005 | Write the Phase 0 go/no-go proposal and get the user's decision |
 | [TEST-006](tasks/TEST-006.md) | todo | windows-sim |  | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
 
-## Phase 1 (10/31 done)
+## Phase 1 (11/31 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -77,7 +78,7 @@ _None._
 | [ARCH-004](tasks/ARCH-004.md) | done | none | ARCH-001 | Add palmcore logging, path resolution and download-cache helpers |
 | [ARCH-005](tasks/ARCH-005.md) | done | none | ARCH-001 | Add palmcore geo helpers (Bbox, distances, UTM, transforms) |
 | [ARCH-006](tasks/ARCH-006.md) | done | none | ARCH-001 | Add deterministic UUIDv5 ids and seeded randomness to palmcore |
-| [ARCH-007](tasks/ARCH-007.md) | in_progress | none | ARCH-002, ARCH-004 | Add the palms.geojson serializer, reader and writer |
+| [ARCH-007](tasks/ARCH-007.md) | done | none | ARCH-002, ARCH-004 | Add the palms.geojson serializer, reader and writer |
 | [ARCH-008](tasks/ARCH-008.md) | done | network | ARCH-003 | Write the two example region configs and verify their sources |
 | [ARCH-009](tasks/ARCH-009.md) | todo | none | ARCH-003, ARCH-004, ARCH-007 | Add shared CLI plumbing and the palmfix utility CLI |
 | [DEC-009](tasks/DEC-009.md) | todo | human, network | DEC-004, RISK-001 | Decide: building footprint source (OSM, Microsoft, both, or county data) |
@@ -121,7 +122,7 @@ _None._
 | [GEN-011](tasks/GEN-011.md) | todo | none | GEN-002, GEN-004, ASSET-005 | Variant selection, scaling and heading |
 | [GEN-012](tasks/GEN-012.md) | todo | none | GEN-003, GEN-006, GEN-007, GEN-010, GEN-011 | Generate pipeline and golden tests |
 | [GEN-013](tasks/GEN-013.md) | todo | none | GEN-001, SPIKE-004 | fspackagetool wrapper and output checks |
-| [GEN-014](tasks/GEN-014.md) | todo | none | GEN-001 | build_report.md and build_report.json |
+| [GEN-014](tasks/GEN-014.md) | in_progress | none | GEN-001 | build_report.md and build_report.json |
 | [GEN-015](tasks/GEN-015.md) | todo | none | GEN-012, GEN-013, GEN-014 | Wire palmgen build end to end |
 | [GEN-016](tasks/GEN-016.md) | todo | windows-sim | GEN-015, SCAN-100, RISK-004 | First Windows build and output check calibration |
 | [GEN-017](tasks/GEN-017.md) | todo | windows-sim, human | GEN-016, TEST-100, TEST-102, ARCH-008 | Dev Mode review and margin tuning |

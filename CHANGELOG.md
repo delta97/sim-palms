@@ -5,6 +5,7 @@ Format: `- TASK-ID: what changed (PR link)`.
 
 ## Unreleased
 
+- ARCH-007: Added the palms.geojson serializer, reader and writer (`palmcore/palms.py`), deterministic LF output (local merge).
 - ARCH-008: Added the San Diego coastal and LA Westside example region configs with verified source endpoints (local merge).
 - TEST-005: Added the test-site registry schema and loader with a placeholder T1-T5 skeleton (local merge).
 - GEN-003: Added 0.01 degree tiling and canonical tile naming for palmgen (local merge).
