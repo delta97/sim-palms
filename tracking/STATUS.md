@@ -4,12 +4,12 @@
 
 ## Where things stand
 
-- **55 of 213 tasks done**, all merged to `main`, pushed, and their GitHub issues closed with a link to the merge commit. Board: [BOARD.md](BOARD.md). Changelog: [CHANGELOG.md](../CHANGELOG.md).
+- **62 of 213 tasks done**, all merged to `main`, pushed, and their GitHub issues closed with a link to the merge commit. Board: [BOARD.md](BOARD.md). Changelog: [CHANGELOG.md](../CHANGELOG.md).
 - **Phase 1 code (palmscan) is complete on fixtures.** `palmscan run` goes ingest → dedupe → species → priors → sizes/exclusion/buildings/masks → `palms.geojson` + QA outputs, offline and byte-reproducible (`SOURCE_DATE_EPOCH`). Adapters: geojson/CSV file, ArcGIS REST, Overpass/OSM, building footprints. Live samples are recorded in `tests/fixtures/palmscan/recorded/` (SCAN-007).
 - **Phase 2 code (palmgen) has its building blocks:** inputs, GUIDs, tiling, exclusion geometry + building clipping, masks, variant/scale/heading, template engine on *fake* templates, build reports. The real Scenery Editor XML (SPIKE-003) and package build (SPIKE-004) need the sim PC.
 - **Shared core (palmcore):** contracts and schemas, region config, ids, geo, cache, logging, CLI plumbing, palms.geojson I/O, asset manifest + glTF checks.
 - **Tests:** 1,822 passing locally. **GitHub Actions is disabled** (user request, 2026-11-22); `python scripts/ci.py` is the CI now and gates every merge to `main`. Harness, golden files, contract checks, geometry helpers, accuracy metrics, ground-truth format, visual protocol and post-update regression routine are in `tests/`.
-- **Phase 4 (LiDAR) in progress:** CHM, peaks/crowns, species rules and in-run accuracy are merged. EPT adapter, palm rule filter, inventory–LiDAR merge and the tree classifier are being built.
+- **Phase 4 (LiDAR) code is complete on fixtures:** 3DEP EPT adapter (injectable PDAL runner), CHM, peaks/crowns, palm rule filter, inventory–LiDAR merge, species rules + decision-tree classifier, in-run accuracy and `palmscan eval`, all wired into `palmscan run`. Real PDAL and real 3DEP tiles are untested (SCAN-021, SCAN-030).
 - Nothing about the sim, the SDK or SimConnect has been confirmed. Every such claim in code or docs is marked `VERIFY:` and waits for the SPIKE tasks.
 
 ## Waiting on the user
@@ -35,5 +35,5 @@ Everything else that is ready needs you, the sim PC, or Blender:
 
 ## Next
 
-1. Merge the Phase 4 LiDAR batch (SCAN-020, 024, 025, 027), then SCAN-028 (wire LiDAR into `palmscan run`).
+1. Agent-ready work left: TEST-014 (soak-test tooling for the live spawner, only useful if DEC-007 picks live placement) and FX-002 (Phase 7 image-layer scaffold, gated on FX-001 on the sim). Both are held pending the user's go-ahead.
 2. The user does DEC-004, then SPIKE-001 on the sim PC. Phase 2 build and validation tasks unblock from the SPIKE results.
