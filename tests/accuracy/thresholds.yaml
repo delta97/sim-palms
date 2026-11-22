@@ -1,0 +1,23 @@
+# Starting accuracy targets (plans/06-testing.md, plans/detailed/06-testing.md#thresholds).
+# Edit targets here, never in code. A null threshold is reported, never checked.
+# Precedence: CLI flag > tests/accuracy/<site>/meta.yaml `thresholds:` > this file.
+match_radius_m: 3.0
+profiles:
+  lidar_only:                     # Phase 4: palms LiDAR detected
+    pred_detected_by: [lidar, inventory+lidar]
+    gt_context: null              # all contexts
+    precision_min: 0.90
+    recall_min: 0.80
+  combined:                       # all sources
+    pred_detected_by: null
+    gt_context: null
+    precision_min: 0.90
+    recall_min: 0.90
+  phase1_inventory:               # Phase 1 exit: palms along inventory streets within 3 m
+    pred_detected_by: null
+    gt_context: [street]
+    precision_min: null
+    recall_min: 0.90
+position_error_median_max_m: 2.0
+height_error_median_max_m: 2.0
+species_accuracy_min: null        # report only until Phase 4 sets a target

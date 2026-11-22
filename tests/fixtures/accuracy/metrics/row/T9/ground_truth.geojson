@@ -1,0 +1,125 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.0,
+     0.0
+    ]
+   },
+   "properties": {
+    "gt_id": "T9-gt-0001",
+    "height_ref_m": 10.0,
+    "species_basis": "inventory",
+    "context": "street",
+    "confidence": "high",
+    "note": "SYNTHETIC fixture point, not a real palm label",
+    "height_class": "M",
+    "species": "washingtonia_robusta"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     7.19e-05,
+     0.0
+    ]
+   },
+   "properties": {
+    "gt_id": "T9-gt-0002",
+    "height_ref_m": 12.0,
+    "species_basis": "inventory",
+    "context": "street",
+    "confidence": "high",
+    "note": "SYNTHETIC fixture point, not a real palm label",
+    "height_class": "M",
+    "species": "washingtonia_robusta"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.0001437,
+     0.0
+    ]
+   },
+   "properties": {
+    "gt_id": "T9-gt-0003",
+    "height_ref_m": 18.0,
+    "species_basis": "inventory",
+    "context": "street",
+    "confidence": "high",
+    "note": "SYNTHETIC fixture point, not a real palm label",
+    "height_class": "T",
+    "species": "phoenix_canariensis"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.0002156,
+     0.0
+    ]
+   },
+   "properties": {
+    "gt_id": "T9-gt-0004",
+    "height_ref_m": null,
+    "species_basis": "imagery",
+    "context": "beach",
+    "confidence": "high",
+    "note": "SYNTHETIC fixture point, not a real palm label",
+    "height_class": "S",
+    "species": "washingtonia_filifera"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.0002875,
+     0.0
+    ]
+   },
+   "properties": {
+    "gt_id": "T9-gt-0005",
+    "height_ref_m": 26.0,
+    "species_basis": "unknown",
+    "context": "park",
+    "confidence": "high",
+    "note": "SYNTHETIC fixture point, not a real palm label",
+    "height_class": "X",
+    "species": "unknown"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.0003593,
+     0.0
+    ]
+   },
+   "properties": {
+    "gt_id": "T9-gt-0006",
+    "height_ref_m": null,
+    "species_basis": "inventory",
+    "context": "street",
+    "confidence": "high",
+    "note": "SYNTHETIC fixture point, not a real palm label",
+    "height_class": "M",
+    "species": "washingtonia_robusta"
+   }
+  }
+ ]
+}

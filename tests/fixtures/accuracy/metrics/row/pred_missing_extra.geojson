@@ -1,0 +1,200 @@
+{
+ "type": "FeatureCollection",
+ "schema_version": "1.0",
+ "region": "synthetic-test",
+ "generated_at": "2026-11-22T00:00:00Z",
+ "data_version": "2026-11",
+ "generator": {
+  "name": "synthetic-fixture",
+  "version": "0"
+ },
+ "config_sha256": null,
+ "features": [
+  {
+   "type": "Feature",
+   "id": "syn-0000000000000001",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.0,
+     0.0
+    ]
+   },
+   "properties": {
+    "palm_id": "syn-0000000000000001",
+    "species_confidence": 0.8,
+    "height_source": "species_default",
+    "crown_diam_m": 4.0,
+    "ground_elev_m": null,
+    "source_ids": [
+     "synthetic:1"
+    ],
+    "exclusion_radius_m": 2.5,
+    "building_conflict": false,
+    "data_vintage": {
+     "inventory": "2026-11"
+    },
+    "region": "synthetic-test",
+    "detected_by": "inventory",
+    "species": "washingtonia_robusta",
+    "species_source": "inventory",
+    "height_m": 10.0
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "syn-0000000000000002",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     7.19e-05,
+     0.0
+    ]
+   },
+   "properties": {
+    "palm_id": "syn-0000000000000002",
+    "species_confidence": 0.8,
+    "height_source": "species_default",
+    "crown_diam_m": 4.0,
+    "ground_elev_m": null,
+    "source_ids": [
+     "synthetic:2"
+    ],
+    "exclusion_radius_m": 2.5,
+    "building_conflict": false,
+    "data_vintage": {
+     "inventory": "2026-11"
+    },
+    "region": "synthetic-test",
+    "detected_by": "inventory",
+    "species": "washingtonia_robusta",
+    "species_source": "inventory",
+    "height_m": 12.0
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "syn-0000000000000003",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.0001437,
+     0.0
+    ]
+   },
+   "properties": {
+    "palm_id": "syn-0000000000000003",
+    "species_confidence": 0.8,
+    "height_source": "lidar",
+    "crown_diam_m": 4.0,
+    "ground_elev_m": null,
+    "source_ids": [
+     "synthetic:3"
+    ],
+    "exclusion_radius_m": 2.5,
+    "building_conflict": false,
+    "data_vintage": {
+     "inventory": "2026-11"
+    },
+    "region": "synthetic-test",
+    "detected_by": "inventory+lidar",
+    "species": "phoenix_canariensis",
+    "species_source": "inventory",
+    "height_m": 18.0
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "syn-0000000000000005",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.0002875,
+     0.0
+    ]
+   },
+   "properties": {
+    "palm_id": "syn-0000000000000005",
+    "species_confidence": 0.8,
+    "height_source": "lidar",
+    "crown_diam_m": 4.0,
+    "ground_elev_m": null,
+    "source_ids": [
+     "synthetic:5"
+    ],
+    "exclusion_radius_m": 2.5,
+    "building_conflict": false,
+    "data_vintage": {
+     "inventory": "2026-11"
+    },
+    "region": "synthetic-test",
+    "detected_by": "lidar",
+    "species": "phoenix_canariensis",
+    "species_source": "lidar_tree",
+    "height_m": 26.0
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "syn-0000000000000006",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.0003593,
+     0.0
+    ]
+   },
+   "properties": {
+    "palm_id": "syn-0000000000000006",
+    "species_confidence": 0.8,
+    "height_source": "species_default",
+    "crown_diam_m": 4.0,
+    "ground_elev_m": null,
+    "source_ids": [
+     "synthetic:6"
+    ],
+    "exclusion_radius_m": 2.5,
+    "building_conflict": false,
+    "data_vintage": {
+     "inventory": "2026-11"
+    },
+    "region": "synthetic-test",
+    "detected_by": "inventory",
+    "species": "washingtonia_robusta",
+    "species_source": "inventory",
+    "height_m": 11.0
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "syn-0000000000000063",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.0008983,
+     0.0
+    ]
+   },
+   "properties": {
+    "palm_id": "syn-0000000000000063",
+    "species_confidence": 0.8,
+    "height_source": "lidar",
+    "crown_diam_m": 4.0,
+    "ground_elev_m": null,
+    "source_ids": [
+     "synthetic:99"
+    ],
+    "exclusion_radius_m": 2.5,
+    "building_conflict": false,
+    "data_vintage": {
+     "inventory": "2026-11"
+    },
+    "region": "synthetic-test",
+    "detected_by": "lidar",
+    "species": "washingtonia_robusta",
+    "species_source": "lidar_rules",
+    "height_m": 9.0
+   }
+  }
+ ]
+}
