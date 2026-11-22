@@ -4,7 +4,7 @@
 
 ## Where things stand
 
-- **64 of 213 tasks done**, all merged to `main`, pushed, and their GitHub issues closed with a link to the merge commit. Board: [BOARD.md](BOARD.md). Changelog: [CHANGELOG.md](../CHANGELOG.md).
+- **67 of 213 tasks done** (plus FX-014 merged as code but `blocked`), all merged to `main`, pushed, and their GitHub issues closed with a link to the merge commit. Board: [BOARD.md](BOARD.md). Changelog: [CHANGELOG.md](../CHANGELOG.md).
 - **Phase 1 code (palmscan) is complete on fixtures.** `palmscan run` goes ingest → dedupe → species → priors → sizes/exclusion/buildings/masks → `palms.geojson` + QA outputs, offline and byte-reproducible (`SOURCE_DATE_EPOCH`). Adapters: geojson/CSV file, ArcGIS REST, Overpass/OSM, building footprints. Live samples are recorded in `tests/fixtures/palmscan/recorded/` (SCAN-007).
 - **Phase 2 code (palmgen) has its building blocks:** inputs, GUIDs, tiling, exclusion geometry + building clipping, masks, variant/scale/heading, template engine on *fake* templates, build reports. The real Scenery Editor XML (SPIKE-003) and package build (SPIKE-004) need the sim PC.
 - **Shared core (palmcore):** contracts and schemas, region config, ids, geo, cache, logging, CLI plumbing, palms.geojson I/O, asset manifest + glTF checks.
@@ -35,5 +35,5 @@ Everything else that is ready needs you, the sim PC, or Blender:
 
 ## Next
 
-1. TEST-014 (soak tooling) and FX-002 (`palmfx.offline` scaffold) are merged. FX-002 unblocked four more Phase 7 Stage A tasks an agent can do (FX-003 camera model, FX-005 depth decoder, FX-012 mask metrics, FX-014 inpainting runner); held pending the user's go-ahead, since the experiment depends on FX-001 on the sim. Everything else open needs the user, the sim PC, Blender or a GPU.
+1. Phase 7 Stage A (offline image-layer experiment) has its scaffold, camera model, depth decoder (shader untested in ReShade), mask metrics and inpainting runner (Telea tested; LaMa untested, FX-014 blocked on torch + weights). FX-004 (synthetic scene generator) and FX-008 (ingest and pose interpolation) are now ready for an agent; held pending the user's go-ahead. Everything else open needs the user, the sim PC, Blender or a GPU.
 2. The user does DEC-004, then SPIKE-001 on the sim PC. Phase 2 build and validation tasks unblock from the SPIKE results.
