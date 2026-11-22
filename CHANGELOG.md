@@ -5,6 +5,7 @@ Format: `- TASK-ID: what changed (PR link)`.
 
 ## Unreleased
 
+- TEST-009: Added the ground-truth schema, `gt` CLI and labeling guide (labels themselves are user work in TEST-101/TEST-011) (local merge).
 - TEST-102: Added the visual test protocol, run scaffolder, run checker, checklist template and test log (`tests/visual/`) (local merge).
 - SCAN-004: Added the ArcGIS REST inventory adapter with paging, object-id fallback and cache (local merge).
 - SCAN-005: Added the cached, tiling Overpass client and the OSM tree adapter with ODbL attribution (local merge).

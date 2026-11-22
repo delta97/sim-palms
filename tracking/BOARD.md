@@ -7,7 +7,7 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 164 | 5 | 0 | 1 | 43 | 0 | 213 |
+| 163 | 5 | 0 | 1 | 44 | 0 | 213 |
 
 ## In progress / in review
 
@@ -16,9 +16,9 @@ Generated: 2026-11-22
 | [ASSET-001](tasks/ASSET-001.md) | in_progress | claude-agent | task/asset-001-write-reference-sheets-for-the-5-socal-p | Write reference sheets for the 5 SoCal palm species |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
 | [SCAN-006](tasks/SCAN-006.md) | in_progress | claude-agent | task/scan-006-building-footprints-adapter-osm-microsof | Building footprints adapter (OSM, Microsoft file) |
+| [SCAN-008](tasks/SCAN-008.md) | in_progress | claude-agent | task/scan-008-inventory-ingest-stage-and-cross-source | Inventory ingest stage and cross-source dedupe |
 | [SCAN-009](tasks/SCAN-009.md) | in_progress | claude-agent | task/scan-009-palm-sizes-exclusion-radius-building-con | Palm sizes, exclusion radius, building conflict, mask_out |
 | [SCAN-022](tasks/SCAN-022.md) | in_progress | claude-agent | task/scan-022-canopy-height-model-dtm-dsm-chm | Canopy height model (DTM, DSM, CHM) |
-| [TEST-009](tasks/TEST-009.md) | in_progress | claude-agent | task/test-009-define-the-ground-truth-format-and-write | Define the ground-truth format and write the labeling guide and tooling |
 
 ## Blocked
 
@@ -32,11 +32,11 @@ _None._
 | [SPIKE-001](tasks/SPIKE-001.md) | 0 | windows-sim, human | msfs-sdk-specialist | Install the MSFS 2024 SDK and create an empty Dev Mode scenery project |
 | [TEST-006](tasks/TEST-006.md) | 0 | windows-sim | msfs-sdk-specialist | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
 | [RISK-003](tasks/RISK-003.md) | 1 | network, human | geo-data-engineer | Inventory other palm and tree mods and their coverage for mask_out defaults |
-| [SCAN-008](tasks/SCAN-008.md) | 1 | none | geo-data-engineer | Inventory ingest stage and cross-source dedupe |
 | [DEC-002](tasks/DEC-002.md) | 3 | human | task-planner | Decide: build or license the palm models |
 | [DEC-008](tasks/DEC-008.md) | 3 | human | task-planner | Decide: storage for large asset binaries (Git LFS or external) |
 | [SCAN-020](tasks/SCAN-020.md) | 4 | none | lidar-analyst | USGS 3DEP EPT LiDAR adapter (PDAL pipeline, tiles, cache) |
 | [SCAN-026](tasks/SCAN-026.md) | 4 | none | lidar-analyst | Species shape rules and classification order |
+| [TEST-010](tasks/TEST-010.md) | 4 | none | test-engineer | Build the accuracy metrics script with configurable thresholds |
 | [DEC-005](tasks/DEC-005.md) | 5 | human | test-engineer | Decide: performance budget and reference hardware/settings |
 | [TEST-013](tasks/TEST-013.md) | 5 | none | test-engineer | Build the frametime capture parser and run comparison report |
 | [TEST-008](tasks/TEST-008.md) | 6 | none | test-engineer | Add optional image-diff scoring for visual viewpoints |
@@ -89,7 +89,7 @@ _None._
 | [SCAN-005](tasks/SCAN-005.md) | done | none | SCAN-003 | Overpass client and OSM tree adapter |
 | [SCAN-006](tasks/SCAN-006.md) | in_progress | none | SCAN-005 | Building footprints adapter (OSM, Microsoft file) |
 | [SCAN-007](tasks/SCAN-007.md) | todo | network | SCAN-002, SCAN-004, SCAN-006 | Record live source fixtures and confirm source fields |
-| [SCAN-008](tasks/SCAN-008.md) | todo | none | SCAN-002, SCAN-004, SCAN-005 | Inventory ingest stage and cross-source dedupe |
+| [SCAN-008](tasks/SCAN-008.md) | in_progress | none | SCAN-002, SCAN-004, SCAN-005 | Inventory ingest stage and cross-source dedupe |
 | [SCAN-009](tasks/SCAN-009.md) | in_progress | none | SCAN-002 | Palm sizes, exclusion radius, building conflict, mask_out |
 | [SCAN-010](tasks/SCAN-010.md) | done | none | SCAN-001 | Species priors and deterministic prior sampling |
 | [SCAN-011](tasks/SCAN-011.md) | done | none | SCAN-001, ARCH-002, ARCH-006, ARCH-007 | palms.geojson writer, palm IDs and schema validation |
@@ -178,7 +178,7 @@ _None._
 | [GEN-019](tasks/GEN-019.md) | todo | windows-sim, human | GEN-100, ASSET-100 | Integrate the real model library into region builds |
 | [RISK-007](tasks/RISK-007.md) | todo | none | RISK-006, GATE-P3 | Risk review after Phase 3 (mid-project) |
 
-## Phase 4 (0/18 done)
+## Phase 4 (1/18 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -195,7 +195,7 @@ _None._
 | [SCAN-029](tasks/SCAN-029.md) | todo | none | SCAN-001, TEST-010 | Run the TEST-010 accuracy evaluation from palmscan (in-run QA) |
 | [SCAN-030](tasks/SCAN-030.md) | todo | network, human | SCAN-021, SCAN-028, TEST-101 | Tune LiDAR palm thresholds on test sites |
 | [SCAN-101](tasks/SCAN-101.md) | todo | network, human | SCAN-030, SCAN-100 | Deliverable: LiDAR-enriched palmscan run with heights and LiDAR-only palms (Phase 4) |
-| [TEST-009](tasks/TEST-009.md) | in_progress | none | TEST-005 | Define the ground-truth format and write the labeling guide and tooling |
+| [TEST-009](tasks/TEST-009.md) | done | none | TEST-005 | Define the ground-truth format and write the labeling guide and tooling |
 | [TEST-010](tasks/TEST-010.md) | todo | none | TEST-009 | Build the accuracy metrics script with configurable thresholds |
 | [TEST-011](tasks/TEST-011.md) | todo | human | TEST-009, TEST-100 | Hand-label the false-positive site T4 |
 | [TEST-012](tasks/TEST-012.md) | todo | network | TEST-010, TEST-101, TEST-011, SCAN-101 | Evaluate Phase 4 palmscan output against ground truth at T1, T2 and T4 |

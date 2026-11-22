@@ -1,7 +1,7 @@
 ---
 id: TEST-009
 title: Define the ground-truth format and write the labeling guide and tooling
-status: review
+status: done
 phase: 4
 area: TEST
 kind: build
@@ -65,3 +65,4 @@ python3 scripts/tasks.py validate
 - 2026-11-22 [claude-agent] Spec notes: gt_id pattern is the task's ^T[0-9]+-gt-[0-9]{4}$ (same as plan <site>-gt-NNNN for T1..T5). Species checked by pattern only; palmscan/data/species_keys.yaml (SCAN-002) is not on main, so the registry check is not wired yet. VERIFY V14: NAIP WMS GetCapabilities returned 200 on 2026-11-22 at imagery.nationalmap.gov/arcgis/services/USGSNAIPImagery/ImageServer/WMSServer, layer USGSNAIPImagery:NaturalColor. Drawing it in QGIS is still VERIFY on first use (LABELING.md).
 - 2026-11-22 [claude-agent] Plan note: plan step 4 (optional CHM at 50% opacity to help height class) kept, but LABELING.md step 7 asks for height classes from imagery first, because height-class agreement is the independent check (plan 'Resolved' notes). No plan text changed.
 - 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] Status review -> done.
