@@ -73,3 +73,4 @@ python3 scripts/tasks.py validate
 - 2026-11-22 [claude-agent] Design choices for the integrator: tester and sdk_version default to VERIFY and check_run refuses to pass while they are VERIFY; run.yaml also records flight (null until TEST-100) and site_status; a placeholder run needs --allow-placeholder and is for rehearsal only. Pillow is needed only by finalize; it is in the dev extra, but pyproject.toml is not in touches, so runtime install for the sim PC is left to a follow-up (add a visual extra or core dep).
 - 2026-11-22 [claude-agent] VERIFY open items for TEST-006/TEST-100: flight reload and camera placement method, screenshot save location and format, whether community packages need a restart (all marked VERIFY in PROTOCOL.md).
 - 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] integrator review: PROTOCOL.md read standalone; setup, viewpoints, sim-only steps and VERIFY stops are clear
