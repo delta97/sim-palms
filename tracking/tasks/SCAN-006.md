@@ -1,7 +1,7 @@
 ---
 id: SCAN-006
 title: "Building footprints adapter (OSM, Microsoft file)"
-status: in_progress
+status: review
 phase: 1
 area: SCAN
 kind: build
@@ -40,10 +40,10 @@ updated: 2026-11-22
 
 ## Acceptance criteria
 
-- [ ] Multipolygon fixture produces one polygon with an interior ring of the expected area (+/- 1%).
-- [ ] All output geometries are valid and non-empty.
-- [ ] `buildings: null` returns an empty frame plus the plan's warning text.
-- [ ] Tests pass offline.
+- [x] Multipolygon fixture produces one polygon with an interior ring of the expected area (+/- 1%).
+- [x] All output geometries are valid and non-empty.
+- [x] `buildings: null` returns an empty frame plus the plan's warning text.
+- [x] Tests pass offline.
 
 ## Verification
 
@@ -56,3 +56,5 @@ pytest tests/unit/palmscan/test_scan_buildings.py -q
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [integrator] integrator note from SCAN-005: reuse palmscan.sources overpass.query_bbox(template, bbox) (placeholders {south},{west},{north},{east} or {bbox})
 - 2026-11-22 [claude-agent] Claimed. branch=task/scan-006-building-footprints-adapter-osm-microsof worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-006
+- 2026-11-22 [claude-agent] Implemented fetch_buildings (osm, microsoft_footprints, none); 18 tests pass offline, full suite 1357 passed; ruff and mypy clean; commit ce6b920. Acceptance: multipolygon 1 polygon + 1 interior ring area 1500 m2 within 1%; all geometries valid/non-empty and validate_buildings clean; none returns empty frame + warning. Plan W4 updated with return shape (gdf, warnings), msbf id = GDAL fid, attribution in SOURCE_NOTICES/attrs.
+- 2026-11-22 [claude-agent] Status in_progress -> review.
