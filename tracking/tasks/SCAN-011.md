@@ -1,7 +1,7 @@
 ---
 id: SCAN-011
 title: "palms.geojson writer, palm IDs and schema validation"
-status: in_progress
+status: review
 phase: 1
 area: SCAN
 kind: build
@@ -40,10 +40,10 @@ updated: 2026-11-22
 
 ## Acceptance criteria
 
-- [ ] Golden test passes byte-for-byte.
-- [ ] Shuffled input gives the identical file.
-- [ ] Output validates with the ARCH-002 validator; invalid input is rejected with readable messages.
-- [ ] Any schema/plan mismatch is recorded in the Log.
+- [x] Golden test passes byte-for-byte.
+- [x] Shuffled input gives the identical file.
+- [x] Output validates with the ARCH-002 validator; invalid input is rejected with readable messages.
+- [x] Any schema/plan mismatch is recorded in the Log.
 
 ## Verification
 
@@ -56,3 +56,6 @@ pytest tests/unit/palmscan/test_scan_output.py -q
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [reconcile] Depends on ARCH-006 and ARCH-007 (ARCH request). Removed duplicate implementation scope: palm ids come from palmcore.ids.palm_id (16 hex, schema pattern), writing delegates to palmcore.palms.write_palms_doc (canonical rounding/layout, atomic write); this task keeps only PalmRecord -> FeatureCollection mapping, the validate wrapper and the invalid-output helper. Cross-area reconciliation.
 - 2026-11-22 [claude-agent] Claimed. branch=task/scan-011-palms-geojson-writer-palm-ids-and-schema worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-011
+- 2026-11-22 [claude-agent] Implemented palmscan/output.py (stable_key_for, assign_palm_ids, to_feature_collection, validate_palms, write_palms, write_invalid) delegating to palmcore.ids/palms/contract. 9 tests pass: golden bytes, shuffle, id stability, duplicate named, fixture validates via assert_palms_ok, negative height rejected. Full suite 870 passed; ruff and mypy clean.
+- 2026-11-22 [claude-agent] Plan/schema notes: schema enums (species_source, height_source, detected_by, nullable ground_elev_m, palm_id pattern) match the W9 mapping, no mismatch. Signature deviations (plan W9 updated): assign_palm_ids returns list[str] because PalmRecord (slots, SCAN-001) has no palm_id field; to_feature_collection takes keyword id_prefix and meta: PalmsMeta because the file-level fields (generated_at, data_version, generator) are required by the schema and needed for determinism. Missing PalmRecord values stay null so validation reports them. lidar:-prefixed source_ids are excluded from the stable key.
+- 2026-11-22 [claude-agent] Status in_progress -> review.
