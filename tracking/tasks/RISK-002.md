@@ -1,7 +1,7 @@
 ---
 id: RISK-002
 title: Audit model, texture and tool licenses for palm assets
-status: in_progress
+status: review
 phase: 2
 area: RISK
 kind: research
@@ -38,10 +38,10 @@ One file records the terms that govern palm assets: candidate 3D model sources, 
 
 ## Acceptance criteria
 
-- [ ] At least 3 marketplaces with quoted redistribution clauses and a date checked.
-- [ ] Each of the 5 species has 0-2 candidate models recorded (0 is fine if none found; say so).
-- [ ] SDK and exporter terms each have a URL or file path and a quote.
-- [ ] A "Questions for the user" list exists; no legal conclusions are stated.
+- [x] At least 3 marketplaces with quoted redistribution clauses and a date checked.
+- [x] Each of the 5 species has 0-2 candidate models recorded (0 is fine if none found; say so).
+- [x] SDK and exporter terms each have a URL or file path and a quote.
+- [x] A "Questions for the user" list exists; no legal conclusions are stated.
 
 ## Verification
 
@@ -56,3 +56,5 @@ grep -n "Questions for the user" docs/licenses/models-and-tools.md
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [claude-agent] Claimed. branch=task/risk-002-audit-model-texture-and-tool-licenses-fo worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/RISK-002
+- 2026-11-22 [claude-agent] Wrote docs/licenses/models-and-tools.md. Criteria met: (1) 3 marketplaces with quoted redistribution clauses, read 2026-11-22: TurboSquid 3D Model License s7(b)/10(b), CGTrader 21A.2/21A.3/21A.6, Sketchfab store 2.2(b); Fab only summary readable (full EULA 403/absent, marked VERIFY); (2) all 5 species have candidates (verification grep shows found for each); Sketchfab facts from API, CGTrader/TurboSquid rows are search-summary level and marked VERIFY; (3) SDK EULA URL+quotes (docs.flightsimulator.com/msfs2024/retail/introduction/sdk-eula/), exporter: 2024 license NOT confirmed (SDK not installed; marked VERIFY), 2020 sibling Apache-2.0 quoted, Blender GPL/output quote from Blender manual (blender.org 403); (4) 10 questions for the user, no legal conclusions. Key risk: retail licenses require models not extractable from the package; whether an MSFS package meets that is unconfirmed.
+- 2026-11-22 [claude-agent] Status in_progress -> review.
