@@ -6,7 +6,7 @@ phase: 3
 area: ASSET
 kind: build
 plan_ref: "plans/detailed/03-palm-assets.md#w9-mexican-fan-palm-first"
-depends_on: [ASSET-015]
+depends_on: [ASSET-015, DEC-002]
 requires: [blender, windows-sim, human]
 agent: asset-pipeline-artist
 estimate_h: 4
@@ -14,7 +14,7 @@ touches: [assets/blender/washingtonia_robusta/, assets/PackageSources/modelLib/w
 owner: ""
 branch: ""
 worktree: ""
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -24,6 +24,7 @@ All P1 fixes from the ASSET-015 review are done, robusta passes the full accepta
 ## Context
 
 - Input: the fix list in `assets/reviews/washingtonia_robusta.md`. P2 items are optional if they take less than about 1 h each. Turn P3 items into new tasks if they're worth doing (`python3 scripts/tasks.py new ASSET --title ...`).
+- DEC-002 (ADR-0003, build or license) is decided before this task, informed by the pilot hours. Add its one-line `Decided (ADR-0003): ...` note to the W1 build-vs-license section of `plans/detailed/03-palm-assets.md`, and apply its Consequences to the remaining species tasks (licensed species: re-scope their Steps or create the conversion tasks ADR-0003 names).
 - Lessons go in `plans/detailed/03-palm-assets.md`: update the W4/W6/W7/W8 sections where the review showed the plan was wrong (for example LOD switch values, alpha cutoff, texture sizes). Keep each change small and dated in the Log.
 - If the fix work exceeds about 4 h, stop, log it, and split the remainder into a new task rather than going over.
 
@@ -41,6 +42,7 @@ All P1 fixes from the ASSET-015 review are done, robusta passes the full accepta
 - [ ] No open P1 items in the review file, and the checklist is fully ticked by the user (their name or initials on the sign-off line).
 - [ ] `assets/species/washingtonia_robusta.yaml` has `status: accepted`, and the manifest reflects it.
 - [ ] `check`, `build-manifest --check` and `validate` all exit 0.
+- [ ] `plans/detailed/03-palm-assets.md` carries the `Decided (ADR-0003)` note.
 - [ ] The plan, TOOLCHAIN.md and budgets.yaml changes are listed in the Log.
 
 ## Verification
@@ -56,3 +58,4 @@ Manual: the user reviews the new lineup screenshots and signs off in `assets/rev
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [reconcile] Added depends_on DEC-002: DEC-002 must be decided before modeling beyond the pilot, and this task writes the 'Decided (ADR-0003)' note into plans/detailed/03-palm-assets.md (DEC-002 no longer edits that plan). Cross-area reconciliation.

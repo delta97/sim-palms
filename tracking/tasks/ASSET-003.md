@@ -6,7 +6,7 @@ phase: 3
 area: ASSET
 kind: build
 plan_ref: "plans/detailed/03-palm-assets.md#w2-toolchain-and-pipeline-smoke-test"
-depends_on: [SPIKE-004]
+depends_on: [SPIKE-004, SPIKE-001]
 requires: [blender, windows-sim]
 agent: asset-pipeline-artist
 estimate_h: 2
@@ -14,7 +14,7 @@ touches: [assets/TOOLCHAIN.md]
 owner: ""
 branch: ""
 worktree: ""
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -52,3 +52,4 @@ Manual, on the sim PC:
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [integrator] Added SPIKE-001: the SDK install happens there; SPIKE-004 alone did not cover it.

@@ -10,11 +10,11 @@ depends_on: [SCAN-002, SCAN-004, SCAN-006]
 requires: [network]
 agent: geo-data-engineer
 estimate_h: 2
-touches: [tests/fixtures/palmscan/recorded/, tests/unit/palmscan/test_scan_recorded_sources.py, palmscan/data/species_aliases.csv, palmscan/data/non_tree_markers.yaml]
+touches: [tests/fixtures/palmscan/recorded/, tests/unit/palmscan/test_scan_recorded_sources.py, palmscan/data/species_aliases.csv, palmscan/data/species_keys.yaml, palmscan/data/non_tree_markers.yaml]
 owner: ""
 branch: ""
 worktree: ""
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -56,3 +56,4 @@ grep -c VERIFY tests/fixtures/palmscan/recorded/README.md   # expect 0 unanswere
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [reconcile] Added palmscan/data/species_keys.yaml to touches: any new species key added to the alias table must also be added to the canonical species-key registry (SCAN-002). Cross-area reconciliation.

@@ -14,7 +14,7 @@ touches: [tests/visual/__init__.py, tests/visual/new_run.py, tests/visual/check_
 owner: ""
 branch: ""
 worktree: ""
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -27,6 +27,8 @@ One command scaffolds a dated visual run folder, one command turns raw screensho
 - Sites and viewpoints come from `tests/helpers/sites.py` (TEST-005). Refuse to scaffold a run for a site with `status: placeholder` unless `--allow-placeholder`.
 - `tests/visual/` also holds ASSET review lineups (`tests/visual/lineup-<species>/`, ASSET-owned). The tools only create and read `tests/visual/T<n>/`; `check_run` and the log ignore other folders.
 - Pillow does the JPEG conversion. No sim needed: tests use generated images.
+- Storage: finalized JPEG q90 committed in plain git, raw screenshots gitignored, is the plan default. The rule is decided in DEC-008 (ADR-0009, together with asset binaries); if ADR-0009 chooses LFS for screenshots, ASSET-008 adds the `.gitattributes` patterns and nothing here changes except PROTOCOL.md wording.
+- Viewpoints: VP1 street (~2 m), VP2 low oblique (~150 m), VP3 approach (~600 m).
 
 ## Steps
 
@@ -62,3 +64,4 @@ python3 scripts/tasks.py validate
 
 - 2026-11-21 [bootstrap] Anchor stub created.
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [reconcile] Screenshot storage (JPEG q90 in plain git vs Git LFS) is now decided in DEC-008 (ADR-0009); this task implements the plan default and follows ADR-0009 if it differs. Viewpoints are street (~2 m), oblique (~150 m), approach (~600 m). Cross-area reconciliation.

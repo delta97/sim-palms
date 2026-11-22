@@ -10,11 +10,11 @@ depends_on: [TEST-015, TEST-016, TEST-007, GEN-100, GATE-P0]
 requires: [windows-sim, human]
 agent: msfs-sdk-specialist
 estimate_h: 3
-touches: [tests/regression/LOG.md, tests/regression/runs/, tests/regression/build_history.csv, tests/visual/T1/, tests/visual/T3/, tests/visual/test_log.md]
+touches: [tests/regression/LOG.md, tests/regression/runs/, tests/regression/build_history.csv, tests/visual/T1/<date>_regression/, tests/visual/T3/<date>_regression/, tests/visual/test_log.md]
 owner: ""
 branch: ""
 worktree: ""
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -25,7 +25,7 @@ The regression routine has been run end to end once on the current sim and SDK, 
 
 - Procedure: `tests/regression/ROUTINE.md` (TEST-015). Tools: `new_entry`, `check_build` (TEST-016), visual protocol (TEST-102).
 - Needs a working region package (GEN-100) and the Phase 0 single-blob project (GATE-P0 passed).
-- VERIFY (V11): the path of the Phase 0 single-blob project. Look in `docs/findings/` and `plans/detailed/05-phases.md`. If it's not in the repo, ask the user where it is and record the path in ROUTINE.md.
+- (V11, resolved 2026-11-22) The Phase 0 single-blob project lives in `spikes/palmfix-spike/` (see plans/detailed/05-phases.md). Record that path in ROUTINE.md.
 - Use trigger `SDK` or `SU` with the current versions; note "baseline" in the notes file.
 - Each later sim update repeats this routine as its own new task (`python3 scripts/tasks.py new TEST --title "Regression after SU<n>" --phase <current>`).
 
@@ -33,7 +33,7 @@ The regression routine has been run end to end once on the current sim and SDK, 
 
 1. `python -m tests.regression.new_entry --trigger SU --sim-version <v> --sdk-version <v>`.
 2. R1: build and view the Phase 0 single-blob project; record pass/fail and two screenshots' paths in `runs/<date>/notes.md`.
-3. R2: `palmgen build --region <T1 region>`; then `python -m tests.regression.check_build build/palmfix-<region> --palms <palms.geojson> --append-history`.
+3. R2: `palmgen build --region <T1 region>`; then `python -m tests.regression.check_build build/palmfix-<region> --palms build/scan/<region>/palms.geojson --append-history`.
 4. R3: visual protocol at T1 and T3 with `--label regression --variants nofix,static`; `check_run --update-log`.
 5. R4: `skip` unless R1-R3 had a failure.
 6. Fill the row with `new_entry set ...`; set `Result`.
@@ -58,3 +58,5 @@ python -m tests.visual.check_run tests/visual/T1/<date>_regression; echo "exit=$
 
 - 2026-11-21 [bootstrap] Anchor stub created.
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [reconcile] Narrowed touches from tests/visual/T1/ and T3/ to the labelled regression runs (tests/visual/<site>/<date>_regression/), so it no longer overlaps GEN-019; --palms uses the canonical build/scan/<region>/palms.geojson. Cross-area reconciliation.
+- 2026-11-22 [integrator] V11 resolved: Phase 0 project path is spikes/palmfix-spike/.

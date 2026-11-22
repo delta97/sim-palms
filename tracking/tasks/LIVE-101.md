@@ -6,7 +6,7 @@ phase: 5
 area: LIVE
 kind: test
 plan_ref: "plans/detailed/04-fs2024-integration.md#live-in-sim-validation"
-depends_on: [LIVE-011, LIVE-100, ASSET-101]
+depends_on: [LIVE-011, LIVE-100, ASSET-101, TEST-014, DEC-007]
 requires: [windows-sim, human]
 agent: simconnect-dotnet-engineer
 estimate_h: 3
@@ -14,7 +14,7 @@ touches: [tests/perf/soak/, tracking/logs/LIVE-101.md]
 owner: ""
 branch: ""
 worktree: ""
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -23,7 +23,8 @@ With real palm SimObjects, the live spawner survives a 1-hour soak flight within
 
 ## Context
 
-- Only if LIVE-009 picked live placement; otherwise `dropped`.
+- Only if DEC-007 (ADR-0008, from the LIVE-009 bake-off) picked live placement; otherwise DEC-007 sets it to `dropped`.
+- Soak report tooling and telemetry format: TEST-014 (`tests/perf/soak.py`, `plans/detailed/06-testing.md#soak-test`); use it for the counts CSV and the report.
 - Plan section [LIVE in-sim validation](../../plans/detailed/04-fs2024-integration.md#live-in-sim-validation); soak requirement from `plans/06-testing.md` section 5 (count stays under cap, returns to zero after shutdown).
 - SimObject titles from ASSET-101 must be in the region's index (rebuild with `palmgen index` after ASSET-101).
 
@@ -49,3 +50,4 @@ Manual on the Windows PC per the steps. Check: `python3 -c "import csv;r=list(cs
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [reconcile] Added depends_on TEST-014 (soak report tooling) and DEC-007 (live must be chosen in ADR-0008); ASSET-101 kept. Cross-area reconciliation.

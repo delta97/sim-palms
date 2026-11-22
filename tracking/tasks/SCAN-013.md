@@ -14,7 +14,7 @@ touches: [palmscan/pipeline.py, palmscan/cli.py, tests/unit/palmscan/test_scan_p
 owner: ""
 branch: ""
 worktree: ""
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -31,7 +31,7 @@ updated: 2026-11-21
 ## Steps
 
 1. `palmscan/pipeline.py`: `RunOptions`, `RunResult`, `run(cfg, opts, cache, http, adapters=None, point_source=None)` executing stages 1-9 of W11; per-stage INFO log with count and seconds; `run.json` (version, git sha, config hash, stage timings, counts, exit code).
-2. Write `buildings.geojson` (conflicting buildings only) and `species_priors.yaml` (`priors_yaml`).
+2. Write `buildings.geojson` and `species_priors.yaml` (`priors_yaml`). `buildings.geojson` follows the ARCH-002 secondary contract (`schema_version` `1.0`, `region`, Polygon/MultiPolygon features with `building_id`, `source`) and is checked with `palmcore.contract.validate_buildings` before writing. It holds every footprint that intersects a circle of `exclusion.radius_max_m + exclusion.clip_buffer_m` around any kept palm (not only `building_conflict` ones), so palmgen's `--margin-m` override still has every footprint it could clip against.
 3. `palmscan/cli.py`: implement `run` and `priors`; resolve output dir (`--out` > `palmscan.output_dir` > `build/scan/<region>`); map exceptions to exit codes; `-v/-vv` logging levels. Leave `eval` returning 1 ("available in Phase 4").
 4. Fixtures in `tests/fixtures/palmscan/regions/`: `e2e.yaml`, `e2e_trees.geojson` (about 15 records: palms of several species, a vacant site, a non-palm, a genus-only, a `palm_unknown`, a pair duplicated across two sources, one inside the mask), `e2e_buildings.geojson`, `e2e_trees_second_source.geojson`.
 5. Tests: e2e via `cli.main([...])` asserting exit 0, schema-valid output, palm count, one mask reject, one building conflict, every output file present, rerun byte-identical `palms.geojson`; exit 2 on a bad config; exit 5 offline with an empty cache for a URL source; exit 3 when validation is monkeypatched to fail (and `palms.invalid.geojson` exists).
@@ -54,3 +54,4 @@ ls /tmp/scan-e2e   # palms.geojson buildings.geojson species_priors.yaml qa_summ
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [reconcile] buildings.geojson now follows the ARCH-002 secondary contract (validate_buildings) and includes every footprint within exclusion.radius_max_m + clip_buffer_m of a kept palm, so palmgen --margin-m tuning (GEN-017) never lacks a footprint; canonical output dir build/scan/<region>/ confirmed for GEN/TEST/FX. Cross-area reconciliation.

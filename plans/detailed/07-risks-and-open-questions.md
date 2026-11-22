@@ -53,12 +53,12 @@ Each decision gets one ADR. The ADR number is pre-assigned so this register neve
 |---|---|---|---|---|---|---|---|
 | DEC-004 | Which street is the first test block? | Before SPIKE-003 starts (GATE-P0) | Candidate streets you name; agent-proposed candidates from inventory counts | A palm-lined City of San Diego street inside the `san-diego-coastal` bbox with inventory and photogrammetry coverage | Your knowledge of the street; palm counts from the inventory; in-sim screenshot showing blobs | Sets the Phase 0 site, T1 (TEST-100), the first region YAML bbox | ADR-0005 |
 | DEC-009 | Which building footprint source? | Before the SCAN-100 building adapter (GATE-P1) | OSM; Microsoft footprints; union of both; county/city outlines | OSM | Side-by-side coverage at the test block and T3; license terms (RISK-001) | Building adapter, region `buildings:` value, attribution list | ADR-0010 |
-| DEC-002 | Build or license the palm models? | Start of Phase 3 (after GATE-P2) | Build; license; hybrid (licensed LOD0, hand-made LODs) | Build Mexican fan palm first, time it, then re-decide | RISK-002 terms; prices and samples; provisional publish intent; your Blender time | ASSET task list, cost, storage limits (DEC-008), redistribution limits | ADR-0003 |
-| DEC-008 | Where do large asset binaries live? | Before the first `.blend` or texture commit (Phase 3) | Git LFS; external storage + manifest; plain git with size cap; sources outside the repo | Git LFS for `assets/blender/` and texture binaries; licensed sources never in a public repo | Size estimate; repo visibility; LFS quota (VERIFY); RISK-002 storage terms | `.gitattributes`, CI checkout, ASSET workflow | ADR-0009 |
+| DEC-002 | Build or license the palm models? | Opens at the start of Phase 3 (after GATE-P2) with the default; decided before modeling beyond the Mexican fan palm pilot (ASSET-016 depends on it) | Build; license; hybrid (licensed LOD0, hand-made LODs) | Build Mexican fan palm first, time it, then re-decide | RISK-002 terms; ASSET-002 build-vs-license inputs; pilot hours; provisional publish intent; your Blender time | ASSET task list, cost, storage limits (DEC-008), redistribution limits | ADR-0003 |
+| DEC-008 | Where do large asset binaries live, and are visual screenshots JPEG in plain git or LFS? | Before the first `.blend`, texture or screenshot-set commit (Phase 3) | Git LFS; external storage + manifest; plain git with size cap; sources outside the repo | Git LFS for `assets/blender/` and texture binaries; licensed sources never in a public repo | Size estimate; repo visibility; LFS quota (VERIFY); RISK-002 storage terms | `.gitattributes`, CI checkout, ASSET workflow, TEST-102 screenshot rule; implemented by ASSET-008 | ADR-0009 |
 | DEC-006 | Handle other blob trees (Italian cypress, eucalyptus) too? | After ASSET-100, before Phase 4 classifier work (GATE-P4 at latest) | Palms only; add one species; general tall-tree registry | Palms only | Counts of other species at test sites; screenshots proving they blob; Phase 3 actual hours per species; LiDAR separability | Genus filter, species keys, asset list, classifier classes (SCAN-101) | ADR-0007 |
 | DEC-005 | What is the performance budget, on what hardware and settings? | Before TEST-103 runs (Phase 5) | +5% avg frametime and no new stutter; absolute ms budget; tiered by preset | +5% avg frametime, 1% low no worse than 5%, no new stutter; your PC at your usual settings | Your GPU, CPU, RAM, resolution, preset, LOD sliders, upscaler and frame generation; optional baseline run | TEST-103 thresholds, LOD budgets, spawn cap, GATE-P5 criteria | ADR-0006 |
-| DEC-007 | Static or live palm placement? | GATE-P5 | Static; live; hybrid | Static (fewer moving parts) | Bake-off report: 3 setups × 3 runs, pop-in notes, SPIKE-005 disconnect result, soak test | Static: drop LIVE-101 and ASSET-101. Live: build both; `palmgen` exclusions-only mode | ADR-0008 |
-| DEC-003 | Companion app language? | Before palmlive coding (LIVE-100) | C# .NET 8; Python with community SimConnect binding; Python region manager + C# spawner | C# .NET 8 (plan default) | DEC-007 outcome; SPIKE-005 notes; binding check (2024 support, `AICreateSimulatedObject_EX1`, maintenance); your maintenance preference | `palmlive/` layout, test framework, LIVE-100/101 | ADR-0004 |
+| DEC-007 | Static or live palm placement? | GATE-P5 | Static; live; hybrid | Static (fewer moving parts) | LIVE-009 findings (`docs/findings/LIVE-009.md`): 3 setups × 3 runs, pop-in notes; SPIKE-005 disconnect result | Static: drop LIVE-010, LIVE-011, LIVE-101 and ASSET-101. Live: build them; `palmgen` exclusions-only mode | ADR-0008 |
+| DEC-003 | Companion app language? | Before palmlive coding (LIVE-001), hence before the bake-off | C# .NET 8; Python with community SimConnect binding; Python region manager + C# spawner | C# .NET 8 (plan default) | SPIKE-005 notes; binding check (2024 support, `AICreateSimulatedObject_EX1`, maintenance); your maintenance preference | `palmlive/` layout, test framework, LIVE-100/101 | ADR-0004 |
 | DEC-011 | Which regions to scale to, in what order; add Florida? | Start of Phase 6 (after GATE-P5) | Plan order; your own order; SoCal only; add Florida | Plan order (San Diego coastal, LA Westside and beaches, rest of LA basin); Florida deferred | GATE-P5 results; actual hours per region; inventory availability; photogrammetry coverage | REGION tasks per region; Florida species assets and genus list | ADR-0012 |
 | DEC-001 | Personal use or publish? | GATE-P6, before any public upload | Personal; publish packages on flightsim.to; publish tools only; both | Personal until licenses are checked | RISK-001 and RISK-002 re-checked; DEC-011 region list; your support hours | Personal: drop DEC-010 and RISK-009. Publish: DEC-010, RISK-009, release tasks | ADR-0002 |
 | DEC-010 | If publishing, which derived data ships, and in what form? | Before any public upload | Compiled packages only; packages + `palms.geojson`; tools only; per-source mix | Per-source: ship packages only where terms are clear; tools only elsewhere | RISK-001 per-source terms; your answers to the flagged questions | Package contents, attribution file (RISK-009), release notes | ADR-0011 |
@@ -94,13 +94,14 @@ Same procedure for DEC-001..DEC-011. The task file lists the specifics.
 - **Criteria:** looks right per plan 03 acceptance checks; license allows use in a redistributed mod if publishing is possible; total cost and hours; MSFS conversion effort (LODs, cutout materials).
 - **Evidence:** RISK-002 terms for each candidate source; 2-3 candidate models with price, triangle counts, texture licenses; your provisional publish intent; your Blender time per week.
 - **Default:** build Mexican fan palm first, record hours, then re-decide for the other four (matches the plan 05 decision table).
+- **Timing:** opened at the start of Phase 3 (plan 05 Phase 3 task 1), depends on RISK-002 and ASSET-002. The pilot (ASSET-010..015) runs under the default and its hours inform the decision; ASSET-016 (and so every other species) depends on DEC-002, and ASSET-016 writes the `Decided (ADR-0003)` note into `plans/detailed/03-palm-assets.md`.
 - **Outcomes:** build → ASSET per-species tasks proceed as planned. License → purchase task, license records added to `docs/licenses/models-and-tools.md`, conversion tasks, storage limits fed to DEC-008. Hybrid → both, and the LOD0 license still governs the package.
 
 ### DEC-003 Companion app language
 
 - **Question:** C# .NET 8 with the SDK's managed SimConnect wrapper, Python with a community binding, or a split?
 - **Criteria:** SimConnect API coverage for 2024 (especially `SimConnect_AICreateSimulatedObject_EX1` and `SimConnect_AIRemoveObject`); maintenance status; testability without the sim; your comfort maintaining it.
-- **Key dependency:** DEC-007. If static wins, the app only needs folder links and a "sim is running" check, so Python becomes a real option. If live wins, C# is favoured.
+- **Timing:** decided before LIVE-001, so before DEC-007. The bake-off (LIVE-009) needs a spawner (LIVE-008) written in the chosen language, so DEC-003 cannot wait for DEC-007 (that order formed a dependency cycle). Key input: SPIKE-005. If DEC-007 later picks static, the app only needs folder links and a "sim is running" check, and a Python region manager can be reconsidered in a new DEC task.
 - **Default:** C# .NET 8.
 - **Outcomes:** C# → `palmlive/` C# solution and xUnit as planned. Python → `palmlive/` becomes a Python package using `palmcore`, tests in pytest; ARCH layout note updated. Split → Python region manager, C# spawner only if live.
 
@@ -131,17 +132,17 @@ Same procedure for DEC-001..DEC-011. The task file lists the specifics.
 
 - **Question:** which placement method wins the Phase 5 bake-off?
 - **Criteria:** perf within the DEC-005 budget; stutter; pop-in and LOD transitions; leftover objects after disconnect; complexity.
-- **Evidence:** the bake-off report (Phase 5, see `plans/detailed/05-phases.md`), TEST-103 captures, SPIKE-005 disconnect findings, soak test if live was run.
+- **Evidence:** the LIVE-009 bake-off findings (`docs/findings/LIVE-009.md`; DEC-007 depends on LIVE-009, which writes no ADR), TEST-103 captures, SPIKE-005 disconnect findings.
 - **Default:** static when results are within noise of each other, or both are within budget.
-- **Outcomes:** static → LIVE-101 and ASSET-101 dropped (ASSET-101 kept only if it was needed for the bake-off itself and is already done). Live → LIVE-101 and ASSET-101 built; `palmgen` gains an exclusions-only mode plus spatial index output. Either way, DEC-003 then runs.
+- **Outcomes:** static → LIVE-010, LIVE-011, LIVE-101 and ASSET-101 dropped (ASSET-101 kept only if it was needed for the bake-off itself and is already done). Live → those tasks proceed; `palmgen` gains an exclusions-only mode plus spatial index output. LIVE-010 and LIVE-101 depend on DEC-007.
 
 ### DEC-008 Asset binary storage
 
-- **Question:** where do `.blend` files, large textures and exported binaries live?
+- **Question:** where do `.blend` files, large textures and exported binaries live, and are visual-test screenshots (`tests/visual/**`) committed as JPEG q90 in plain git (TEST plan) or through LFS (ASSET plan proposal)?
 - **Criteria:** clone size; cost (LFS quota, VERIFY current GitHub limits); licensed-file restrictions; ease for agents in worktrees.
 - **Evidence:** size estimate (5 species × 2-3 variants, 2K-4K textures); whether the GitHub repo is public or private; RISK-002 storage terms.
 - **Default:** Git LFS for `assets/blender/**` and binary texture formats; exported glTF/bin also via LFS; licensed source files never in a public repo.
-- **Outcomes:** LFS → follow-up task adds `.gitattributes` and CI LFS checkout. External → manifest file with hashes and a fetch script. Plain git → size cap check in CI.
+- **Outcomes:** implemented by ASSET-008 (depends on DEC-008). LFS → `.gitattributes` and CI LFS checkout. External → manifest file with hashes and a fetch script. Plain git → size cap check in CI. The screenshot rule goes to TEST-102.
 
 ### DEC-009 Building footprint source
 
@@ -179,7 +180,7 @@ Same procedure for DEC-001..DEC-011. The task file lists the specifics.
 
 - **RISK-003:** inventory of other palm and tree mods for SoCal (for example the LA palm enhancement mod, Bijan's Seasons 2024 Enhanced), what they cover, and which you run. Output `docs/compat/other-mods.md` and `docs/compat/mods-coverage.geojson`.
 - **RISK-004:** airport boundary polygons for the target regions, plus known airport add-ons. Output `docs/compat/airports.md` and `docs/compat/airports-mask.geojson`.
-- REGION tasks copy these into each region's `mask_out`. The GeoJSON files are candidates, not config.
+- RISK-003's mod coverage: REGION tasks copy it into each region's `mask_out` (`kind: mod`). RISK-004's `airports-mask.geojson` is the default airport mask: ARCH-003's `masks.airports.path` points at it, palmgen buffers it by `masks.airports.buffer_m`, and GEN-016 depends on RISK-004.
 
 ### Sim update watch
 
@@ -226,13 +227,13 @@ A kill criterion stops a phase or the project. Pause means "stop work, keep ever
 | DEC-009 | Decide: building footprint source | 1 | DEC-004, RISK-001 | human, network | 3 |
 | RISK-004 | Collect airport boundaries for default masks | 2 | - | network | 3 |
 | RISK-002 | Audit model, texture and tool licenses | 2 | - | network | 4 |
-| DEC-002 | Decide: build or license the palm models | 3 | RISK-002 | human | 2 |
+| DEC-002 | Decide: build or license the palm models | 3 | RISK-002, ASSET-002 | human | 2 |
 | DEC-008 | Decide: storage for large asset binaries | 3 | RISK-002 | human | 1 |
 | DEC-006 | Decide: scope beyond palms | 3 | ASSET-100, DEC-002 | human | 2 |
 | RISK-007 | Risk review after Phase 3 | 3 | RISK-006, GATE-P3 | none | 2 |
 | DEC-005 | Decide: performance budget and reference hardware | 5 | - | human | 1 |
-| DEC-007 | Decide: static or live placement | 5 | TEST-103, DEC-005 | human | 2 |
-| DEC-003 | Decide: companion app language | 5 | DEC-007 | human | 2 |
+| DEC-007 | Decide: static or live placement | 5 | LIVE-009, TEST-103, DEC-005 | human | 2 |
+| DEC-003 | Decide: companion app language | 5 | SPIKE-005 | human | 2 |
 | RISK-008 | Risk review after Phase 5 | 5 | RISK-007, GATE-P5 | none | 2 |
 | DEC-011 | Decide: scale-out regions and Florida | 6 | GATE-P5 | human | 1 |
 | DEC-001 | Decide: personal use or publish | 6 | RISK-001, RISK-002, DEC-011 | human, network | 2 |
@@ -264,6 +265,9 @@ flowchart TD
         DEC002[DEC-002 build/license]
         DEC008[DEC-008 binary storage]
         A100([ASSET-100])
+        A002([ASSET-002])
+        A016([ASSET-016])
+        A008([ASSET-008])
         DEC006[DEC-006 scope]
         GP3{{GATE-P3}}
         RISK007[RISK-007 review P3]
@@ -271,6 +275,8 @@ flowchart TD
     subgraph P5
         DEC005[DEC-005 perf budget]
         T103([TEST-103])
+        L009([LIVE-009])
+        S005([SPIKE-005])
         DEC007[DEC-007 static/live]
         DEC003[DEC-003 app language]
         GP5{{GATE-P5}}
@@ -286,6 +292,9 @@ flowchart TD
     DEC004 --> DEC009
     RISK001 --> DEC009
     RISK002 --> DEC002
+    A002 --> DEC002
+    DEC002 --> A016
+    DEC008 --> A008
     RISK002 --> DEC008
     DEC002 --> DEC006
     A100 --> DEC006
@@ -293,7 +302,8 @@ flowchart TD
     GP3 --> RISK007
     DEC005 --> DEC007
     T103 --> DEC007
-    DEC007 --> DEC003
+    L009 --> DEC007
+    S005 --> DEC003
     RISK007 --> RISK008
     GP5 --> RISK008
     GP5 --> DEC011
@@ -312,7 +322,7 @@ Rounded boxes are anchors owned by other areas; hexagons are gates.
 
 - **Start now, in parallel:** DEC-004, RISK-005, RISK-001, RISK-003, RISK-004, RISK-002. They share no files. RISK-001..RISK-005 run in a Linux container with network; DEC-004 needs you.
 - **Do early even though the phase is later:** RISK-002 (phase 2) so DEC-002 is ready on time; collect DEC-005 hardware facts whenever you have five minutes.
-- **File ownership:** every DEC task writes its own ADR. Shared detailed-plan files are touched only by ordered chains: `03-palm-assets.md` (DEC-002 → DEC-006), `04-fs2024-integration.md` (DEC-007 → DEC-003), `05-phases.md` (DEC-011 → DEC-001 → DEC-010), this file (RISK-006 → RISK-007 → RISK-008).
+- **File ownership:** every DEC task writes its own ADR. Shared detailed-plan files are touched only by ordered chains: `03-palm-assets.md` (DEC-006 only; DEC-002's note is written by ASSET-016, which DEC-006 follows via ASSET-100), `04-fs2024-integration.md` (DEC-003 → LIVE chain → DEC-007), `05-phases.md` (DEC-011 → DEC-001 → DEC-010), this file (RISK-006 → RISK-007 → RISK-008).
 - **Human batching:** DEC-002 and DEC-008 can be one conversation; so can DEC-005 and DEC-007; and DEC-011, DEC-001, DEC-010.
 - **No `windows-sim` tasks here.** Nothing in this plan competes for the sim PC (R-21).
 
@@ -363,12 +373,22 @@ Checks for this plan's own tasks:
 
 **Inconsistencies found in the source plans**
 
-- Viewpoints: `06-testing.md` uses street level, 150 m and 500 m; `03-palm-assets.md` and Phase 3 exit criteria use street level, 150 m and 600 m. TEST and ASSET owners should align.
-- Airport masks: `04-fs2024-integration.md` says "mask airport boundaries by default", but the region config example has only `mask_out: []`. ARCH-003 should say whether airport masks are a separate key or entries in `mask_out`. RISK-004 output works either way.
-- Decision timing: `05-phases.md` lists build vs license "after phase 3", but Phase 3 task 1 makes the decision at the start. This plan treats it as start of Phase 3 with the "build one species first" default.
-- ADR numbers 0002-0012 are pre-assigned here. Other areas creating ADRs should take numbers from 0013 up, or the next free number.
+- Viewpoints: `06-testing.md` used street level, 150 m and 500 m; `03-palm-assets.md` and Phase 3 exit criteria use street level, 150 m and 600 m. Resolved 2026-11-22: street (~2 m), low oblique (~150 m), approach (~600 m) everywhere.
+- Airport masks: `04-fs2024-integration.md` says "mask airport boundaries by default", but the region config example has only `mask_out: []`. ARCH-003 should say whether airport masks are a separate key or entries in `mask_out`. Resolved 2026-11-22: `masks.airports.{enabled, buffer_m, path}` with `path` defaulting to RISK-004's file; manual extras are `mask_out` entries with `kind: airport`.
+- Decision timing: `05-phases.md` lists build vs license "after phase 3", but Phase 3 task 1 makes the decision at the start. This plan treats it as start of Phase 3 with the "build one species first" default. Resolved 2026-11-22: DEC-002 opens at the start of Phase 3; the pilot runs under the default; ASSET-016 and later species wait for the decision.
+- ADR numbers 0002-0012 are pre-assigned here. ADR-0013 is reserved for the bootstrap session (Linux code work in parallel with Phase 0). Any other task that writes an ADR names it `ADR-NNNN` and takes the next free number when it runs (check `tracking/decisions/`); never a fixed number above 0013 without checking. LIVE-009 no longer writes an ADR (it writes `docs/findings/LIVE-009.md`; DEC-007 writes ADR-0008).
 
 ---
+
+## Reconciliation notes (2026-11-22)
+
+- DEC-002: depends on ASSET-002; opens at the start of Phase 3 with the "build one species first" default; the robusta pilot (ASSET-010..015) no longer waits for it; ASSET-016 depends on it and writes the plan 03 note, so DEC-002 no longer touches `plans/detailed/03-palm-assets.md`.
+- DEC-003: dependency on DEC-007 removed (it formed a cycle once DEC-007 depended on LIVE-009); now depends on SPIKE-005 and is decided before LIVE-001.
+- DEC-007: depends on LIVE-009, reads `docs/findings/LIVE-009.md`, writes ADR-0008, drops LIVE-010, LIVE-011, LIVE-101 and ASSET-101 if static wins; LIVE-010 and LIVE-101 depend on DEC-007.
+- DEC-008: now also decides screenshot storage (JPEG vs LFS, from the TEST plan); ASSET-008 is its implementation and depends on it.
+- RISK-004: its GeoJSON is the default airport mask via ARCH-003 `masks.airports.path`; buffer suggestion aligned to the 100 m config default; GEN-016 depends on it.
+- ADR numbering: 0002-0012 pre-assigned here, 0013 reserved for the bootstrap session, everything else takes the next free number.
+- Resolved inconsistencies: viewpoints (600 m), airport masks key, DEC-002 timing.
 
 ## Recap
 

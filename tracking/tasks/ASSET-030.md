@@ -14,7 +14,7 @@ touches: [assets/species/phoenix_canariensis.yaml, assets/blender/phoenix_canari
 owner: ""
 branch: ""
 worktree: ""
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -32,7 +32,7 @@ updated: 2026-11-21
 
 ## Steps
 
-1. Optional: check the height distribution for `phoenix_canariensis` in any `palms.geojson` under `data/` (same one-liner as ASSET-010, with the species key swapped). Adjust the variant targets if needed and log the numbers.
+1. Optional: check the height distribution for `phoenix_canariensis` in any `build/scan/<region>/palms.geojson` (canonical palmscan output) (same one-liner as ASSET-010, with the species key swapped). Adjust the variant targets if needed and log the numbers.
 2. Write `assets/species/phoenix_canariensis.yaml` with `status: draft`, `set: socal`, `lean_max_deg: 0`, and variants short/medium/tall.
 3. Create `assets/blender/phoenix_canariensis/phoenix_canariensis.blend` with Metric units, scale 1.0, a collection tree per variant (`_LOD0`-`_LOD3`), and `_work` with reference images.
 4. Make the textures within the W7 sizes: `tx_phoenix_canariensis_bark_albedo/normal/orm.png`, `tx_phoenix_canariensis_fronds_albedo/normal/orm.png`. Write SOURCES.md.
@@ -57,3 +57,4 @@ cat assets/blender/phoenix_canariensis/textures/SOURCES.md
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [reconcile] Height-distribution check points at the canonical palmscan output build/scan/<region>/palms.geojson instead of data/. Cross-area reconciliation.

@@ -14,7 +14,7 @@ touches: [tests/sites/sites.yaml, tests/sites/T1/, tests/sites/T2/, tests/sites/
 owner: ""
 branch: ""
 worktree: ""
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -39,7 +39,7 @@ updated: 2026-11-21
    - T5: outside photogrammetry.
 2. In the sim, confirm each site: blobs visible (T1-T4); no photogrammetry (T5). One screenshot per site into the run notes is enough (not committed).
 3. For each site, set up the flight state per TEST-006 (12:00 local, clear weather) and save it to `tests/sites/<site>/flights/` (or record the steps in `preset` if no file exists). Set `flight`.
-4. For each site, choose VP1 (street, about 2 m), VP2 (oblique, about 150 m), VP3 (approach, about 500 m), pointing at the palms. Record lat, lon, alt, heading, pitch and the recall method in `preset`.
+4. For each site, choose VP1 (street, about 2 m), VP2 (oblique, about 150 m), VP3 (approach, about 600 m), pointing at the palms. Record lat, lon, alt, heading, pitch and the recall method in `preset`.
 5. Set each site's `status: defined`. Run the loader; fix any range errors.
 6. Add a 3-line `tests/sites/<site>/README.md` per site: what to look at, and anything odd (construction, seasonal changes).
 
@@ -64,3 +64,4 @@ Manual: reload T1's flight after a sim restart, recall VP1-VP3, and confirm the 
 
 - 2026-11-21 [bootstrap] Anchor stub created.
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [reconcile] VP3 approach viewpoint standardized at ~600 m (was ~500 m) to match the asset acceptance checks and Phase 3 exit criteria: the three viewpoints are street level (~2 m), low oblique (~150 m) and approach (~600 m). Cross-area reconciliation.

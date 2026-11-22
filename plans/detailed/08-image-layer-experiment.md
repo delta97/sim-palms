@@ -227,7 +227,7 @@ Task FX-007, using FX-005's effect and FX-006's logger. Written up in `palmfx/do
 - View: the one FX-006 picks as reconstructable, zoom fixed and recorded. Paint `calib/static_occluder.png` once per session if any cockpit or aircraft pixels are visible.
 - Motion: slow helicopter, autopilot, or slew mode on a straight line past at least 5 known blobs. Sim rate 0.25× (VERIFY that 2024 offers it).
 - Capture cadence: target sim-time step `sim_step_ms` ≤ 33 ms (≥ 30 fps equivalent). At 0.25× that is a trigger interval of about 133 ms. If ReShade can't save two PNGs that fast (missing files in `raw/reshade/`), raise the interval and record the real `sim_step_ms`. Larger steps make temporal reuse harder, so results stay conservative.
-- Sessions: at least `low` (30-60 m AGL) and `obl` (about 150 m AGL), 60 frames each, at the DEC-004 block. Optional `far` (about 500 m).
+- Sessions: at least `low` (30-60 m AGL) and `obl` (about 150 m AGL), 60 frames each, at the DEC-004 block. Optional `far` (about 600 m, the standard approach viewpoint).
 
 **Command:** `palmfx capture --session data/fx/<sid> --frames 60 --interval-ms 133 --key <ReShade screenshot key>`, started when the aircraft is about 10 s before the first blob. After the run, copy (or point ReShade's screenshot path at) `raw/reshade/`.
 
@@ -429,7 +429,7 @@ Known blockers (all VERIFY, none assumed):
 | ID | Title | Phase | Depends on | Requires | Est h |
 |---|---|---|---|---|---|
 | FX-001 | Verify ReShade depth access in MSFS 2024 (incl. multiplayer lockout) | 7 | none | windows-sim, human | 3 |
-| FX-002 | Scaffold palmfx.offline package, session I/O and CLI | 7 | ARCH-001 | none | 3 |
+| FX-002 | Scaffold palmfx.offline package, session I/O and CLI | 7 | ARCH-009, SCAN-001 | none | 3 |
 | FX-003 | Camera model: geodesy, attitude, pinhole projection | 7 | FX-002 | none | 4 |
 | FX-004 | Synthetic test scene generator and fixtures | 7 | FX-003, FX-005 | none | 3 |
 | FX-005 | ReShade depth-pack effect and depth decoder | 7 | FX-002 | none | 3 |
@@ -463,7 +463,8 @@ Stage A: 77 h. Stage B (coarse): 26 h.
 
 ```mermaid
 flowchart TD
-    ARCH001[ARCH-001] --> FX002
+    ARCH009[ARCH-009] --> FX002
+    SCAN001[SCAN-001] --> FX002
     ARCH002[ARCH-002] --> FX010
     DEC004[DEC-004] --> FX007
     SCAN100[SCAN-100] --> FX007
@@ -518,7 +519,7 @@ flowchart TD
 ## Parallelization notes
 
 - **Linux container, no sim, no GPU:** FX-002 to FX-005 and FX-008 to FX-012, FX-015 to FX-018. They test against the synthetic scene (FX-004), so they don't wait for real captures. Once FX-002 is in, FX-003, FX-005, FX-012, FX-014 can run in parallel; FX-004 needs FX-003 and FX-005; FX-018 needs FX-014 (it inpaints control patches); after FX-004, FX-010, FX-011, FX-015 can run in parallel. Each subcommand is its own file in `commands/`, so these tasks never edit the same file.
-- **Windows sim:** FX-001 and FX-006 can start any time (FX-006 after FX-002). FX-007 waits on DEC-004 (which block) and SCAN-100 (real palms.geojson to plan the pass).
+- **Windows sim:** FX-001 and FX-006 can start any time (FX-006 after FX-002). FX-007 waits on DEC-004 (which block) and SCAN-100 (real `build/scan/<region>/palms.geojson` to plan the pass; a SCAN-101 LiDAR run is preferred because Phase 1 output has `ground_elev_m: null`).
 - **Network:** FX-014 downloads LaMa weights once; its unit tests use Telea and need no network.
 - **GPU:** FX-019 runs LaMa at full resolution on the machine holding `data/fx/` (normally the user's PC). CPU works but is slow.
 - **Human:** FX-001, FX-007 (flying), FX-013 (painting, clicking), FX-020 (scoring), FX-100 (decision).
@@ -558,11 +559,18 @@ flowchart TD
 | VERIFY: standard ReShade build loads third-party add-ons in MSFS 2024 | FX-021 |
 | VERIFY: LaMa FFT ops through ONNX / DirectML / TensorRT; MI-GAN licence and ONNX availability | FX-022 |
 | VERIFY: where DLSS frame generation and DLSS 5 sit relative to ReShade's present hook | FX-025 |
-| Open: vertical datum of `palms.geojson` `ground_elev_m` (not stated in plan 01) | ask SCAN / ARCH-002; FX-003 assumes MSL |
+| Resolved 2026-11-22: `ground_elev_m` is metres, orthometric (`VERIFY:` 3DEP vertical datum, usually NAVD88), null in Phase 1 (ARCH-002). FX-003 treats it as MSL; FX-010 has a fallback for null | FX-003, FX-010 |
 | Open: Phase 1 palms may lack `height_m` / `crown_diam_m`; FX-010 uses defaults 12 m / 4 m and flags them | FX-010 |
 | Open: source plan estimates Stage A at 10-20 h; this breakdown is about 77 h | FX-100 report notes actual hours |
 
 ---
+
+## Reconciliation notes (2026-11-22)
+
+- `pyproject.toml` ordering: FX-002 now depends on ARCH-009 and SCAN-001 (was ARCH-001 only), and adds `palmfx` to the hatch `packages` list (ARCH Q18).
+- Palms input: the canonical palmscan output `build/scan/<region>/palms.geojson` (FX-007, FX-010), read with `palmcore.palms.read_palms`.
+- `ground_elev_m`: datum documented by ARCH-002 (metres, orthometric, `VERIFY:` 3DEP); null in Phase 1, so FX-010 gained a fallback and FX-007 prefers a SCAN-101 run.
+- Optional `far` capture session moved from about 500 m to about 600 m, the standard approach viewpoint.
 
 ## Recap
 

@@ -14,7 +14,7 @@ touches: [schemas/asset-manifest.schema.json, palmcore/assets/__init__.py, palmc
 owner: ""
 branch: ""
 worktree: ""
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -26,18 +26,19 @@ updated: 2026-11-21
 - The contract (fields, rules, example) is in `#manifest-contract`. The GUID rule is in `#guid-policy`. Naming is in `#naming-conventions`.
 - This task only uses the species yaml and computed values. Measured fields (`native_height_m`, `crown_diam_m`, `lods[].triangles`) take the yaml target values or `null` until ASSET-006 fills them from glTF, and `lods[].min_size` stays `null` until ASSET-007. Make the generator pluggable: a function that takes a model directory and returns measured stats, defaulting to 'not measured'.
 - ARCH-001 provides `pyproject.toml` and the `palmcore` package. If `jsonschema` or `PyYAML` aren't declared dependencies, log a request to the ARCH owner and don't edit `pyproject.toml` yourself.
-- Species keys must match the `species` values of the palms.geojson schema (ARCH-002). If that schema has an enum, `validate` should check against it when present. Find its path in `schemas/`.
+- Species keys: the ARCH-002 palms schema uses a pattern (`^[a-z]+(_[a-z]+)+$`), not an enum. The canonical list of keys is `palmscan/data/species_keys.yaml` (SCAN-002). `validate_manifest` checks every species key and `species_fallback` key/target against that registry, read by path relative to the repo root (palmcore must not import palmscan); if the file doesn't exist yet, fall back to the pattern check and print a warning.
+- `palmcore/assets/` and `schemas/asset-manifest.schema.json` are ASSET's (no ARCH task touches them). GEN loads the manifest only through `load_manifest` from this module (GEN-011).
 - Synthetic fixtures only. No real exports exist yet.
 
 ## Steps
 
 1. Write `schemas/asset-manifest.schema.json` (JSON Schema draft 2020-12) for every field in the contract. `model_guid` uses pattern `^[0-9a-f]{8}-[0-9a-f]{4}-5[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$`. `variant` uses pattern `^(short|medium|tall)(_b)?$`. `lods` has exactly 4 items.
-2. In `palmcore/assets/manifest.py`: frozen dataclasses `Manifest`, `Species`, `Variant`, `Lod`; `NAMESPACE`; `model_name(species, variant)`; `model_guid(model_name)`; `simobject_title(species, variant)`; `load_species_specs(assets_dir)`; `load_library(assets_dir)`; `build_manifest(assets_dir, measure=None) -> dict`; `dump_manifest(dict) -> str` (sorted keys, indent 2, trailing newline); `load_manifest(path) -> Manifest`; `validate_manifest(path) -> list[str]` (schema, unique GUIDs, GUID == uuid5(name), fallback targets exist, package version matches the package definition if present).
+2. In `palmcore/assets/manifest.py`: frozen dataclasses `Manifest`, `Species`, `Variant`, `Lod`; `NAMESPACE`; `model_name(species, variant)`; `model_guid(model_name)`; `simobject_title(species, variant)`; `load_species_specs(assets_dir)`; `load_library(assets_dir)`; `build_manifest(assets_dir, measure=None) -> dict`; `dump_manifest(dict) -> str` (sorted keys, indent 2, trailing newline); `load_manifest(path) -> Manifest`; `validate_manifest(path) -> list[str]` (schema, unique GUIDs, GUID == uuid5(name), fallback targets exist, species keys in the registry, package version matches the package definition if present).
 3. Leave out species with `status: draft`. Sort variants by `native_height_m`, then `variant`.
 4. In `palmcore/assets/__main__.py`: argparse CLI with `build-manifest [--assets-dir] [--out] [--check] [--include-draft]` and `validate [--manifest]`. `--include-draft` keeps draft species, for preview manifests in `build/` only. Exit codes: 0 ok, 1 failures, 2 usage or IO error.
 5. Create `assets/library.yaml` with the values in the plan_ref (`package_version: 0.1.0`, scale limits 0.85/1.15, fallbacks).
 6. Fixtures in `tests/fixtures/palmcore/assets/manifest/`: a mini assets dir with `library.yaml` and two species yamls (one draft), and an expected `manifest.json`.
-7. Tests in `tests/unit/palmcore/test_asset_manifest.py`: GUID determinism and a hard-coded expected value for one name; title formatting incl. `_b`; draft exclusion; byte-identical output across two runs; `--check` returns 1 on a stale file; `validate` catches duplicate GUID, wrong GUID, bad fallback target, schema violation.
+7. Tests in `tests/unit/palmcore/test_asset_manifest.py`: GUID determinism and a hard-coded expected value for one name; title formatting incl. `_b`; draft exclusion; byte-identical output across two runs; `--check` returns 1 on a stale file; `validate` catches duplicate GUID, wrong GUID, bad fallback target, schema violation, species key missing from a fixture registry.
 
 ## Acceptance criteria
 
@@ -58,3 +59,4 @@ python -m palmcore.assets validate --manifest tests/fixtures/palmcore/assets/man
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [reconcile] Species keys are validated against the canonical registry palmscan/data/species_keys.yaml (SCAN-002), read by path (palmcore must not import palmscan); the ARCH-002 schema uses a pattern, not an enum. Loader path palmcore.assets.manifest.load_manifest confirmed as the one GEN uses; palmcore/assets/ is ASSET-owned (no ARCH task touches it). Cross-area reconciliation.

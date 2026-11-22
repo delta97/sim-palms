@@ -14,7 +14,7 @@ touches: [assets/blender/_pipeline_test/, assets/TOOLCHAIN.md, tests/fixtures/pa
 owner: ""
 branch: ""
 worktree: ""
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -25,7 +25,7 @@ Prove that a model goes from Blender through the 2024 exporter into a model-libr
 
 - This is the cheapest way to learn the exporter's actual behavior before anything real is modeled. Facts found here change the naming table, the GUID policy and the tooling (ASSET-007), so record them precisely.
 - Follow `#w4-blender-scene-conventions` (origin at trunk base, meters, Z up, collection naming) for the test scene, so the fixtures look like real assets.
-- The SPIKE-003 template for a scenery object is in `palmgen/templates/`. Copy it into the throwaway project; don't edit it in place.
+- The SPIKE-003 template for a scenery object is in `palmgen/templates/captured/`. Copy it into the throwaway project; don't edit it in place.
 - The throwaway package lives under `build/pipeline-test/`, which is gitignored. Only the `.blend`, the captured fixtures and TOOLCHAIN.md are committed.
 - The VERIFY items to answer are #2-#9 and #12 in `#open-questions-and-verify-items`.
 
@@ -69,3 +69,4 @@ grep -n '^## ' assets/TOOLCHAIN.md   # Versions, Install steps, Known issues, Ex
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [integrator] Template path corrected to palmgen/templates/captured/ per plans/detailed/05-phases.md.

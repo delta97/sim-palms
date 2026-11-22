@@ -10,11 +10,11 @@ depends_on: [TEST-008, TEST-104]
 requires: [windows-sim]
 agent: test-engineer
 estimate_h: 2
-touches: [tests/visual/diff_thresholds.yaml, tests/visual/T1/, tests/visual/test_log.md]
+touches: [tests/visual/diff_thresholds.yaml, tests/visual/T1/<date>_calib-a/, tests/visual/T1/<date>_calib-b/, tests/visual/T1/<date>_calib-c/, tests/visual/T1/mask_<VP>.png, tests/visual/test_log.md]
 owner: ""
 branch: ""
 worktree: ""
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -49,3 +49,4 @@ python -m tests.visual.diff_score tests/visual/T1/<date>_calib-a tests/visual/T1
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [reconcile] Narrowed touches from tests/visual/T1/ to the three labelled calibration runs and the mask files, so it no longer overlaps GEN-019. Cross-area reconciliation.

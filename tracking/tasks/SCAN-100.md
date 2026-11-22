@@ -6,15 +6,15 @@ phase: 1
 area: SCAN
 kind: test
 plan_ref: "plans/detailed/02-detection-pipeline.md#w12-phase-1-deliverable-run"
-depends_on: [SCAN-007, SCAN-013, TEST-100]
+depends_on: [SCAN-007, SCAN-013, TEST-100, ARCH-008]
 requires: [network, human]
 agent: geo-data-engineer
 estimate_h: 2
-touches: [tracking/logs/SCAN-100-run.md, palmscan/data/species_aliases.csv]
+touches: [tracking/logs/SCAN-100-run.md, palmscan/data/species_aliases.csv, palmscan/data/species_keys.yaml]
 owner: ""
 branch: ""
 worktree: ""
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -54,3 +54,5 @@ Manual: QGIS procedure in Steps 4-5; reviewer checks the counts in `tracking/log
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [reconcile] Added palmscan/data/species_keys.yaml to touches: any new species key added to the alias table must also be added to the canonical species-key registry (SCAN-002). Cross-area reconciliation.
+- 2026-11-22 [integrator] Added ARCH-008: the example region YAML that contains the test block is the Phase 1 test region (no other task owns it).

@@ -14,7 +14,7 @@ touches: [schemas/region.schema.json, palmcore/config.py, tests/unit/palmcore/te
 owner: ""
 branch: ""
 worktree: ""
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -25,7 +25,9 @@ updated: 2026-11-21
 
 - Key tables (top level, inventory item, mask item), defaults, ranges, dataclasses, signatures, path rule, parsing rules and fixtures: plan_ref section WS7.
 - The key set merges the source plan with requests from SCAN (`plans/detailed/02-detection-pipeline.md`, Inputs: inventory keys, `buildings_path`, `overpass_url`, the `palmscan:` block, mask shape) and GEN (`plans/detailed/04-fs2024-integration.md`, Region config keys palmgen reads: extra `exclusion.*` keys, `placement.scale_clamp`, `masks.airports.*`, mask `kind`/`geometry`). Where they disagreed, WS7 records the choice (open questions Q13–Q15).
-- `palmscan` and `palmgen` are free-form mappings. Validate only that they are objects; SCAN and GEN check their own keys.
+- `palmscan` and `palmgen` are free-form mappings. Validate only that they are objects; SCAN and GEN check their own keys. The `palmscan:` keys SCAN defines (`output_dir`, `allow_large_bbox`, `palm_filter`, `inventory`, `dedupe_radius_m`, `exclusion.building_overlap_min_m2`, `lidar`, `peaks`, `rules`, `merge`, `classify`, `qa`) are listed in WS7 for reference; `id_prefix` and the radius clamps are **not** in that block.
+- Single source of defaults: `id_prefix` (top level) and the `exclusion:` block (`margin_m` 1.5, `radius_min_m` 1.0, `radius_max_m` 8.0, and GEN's other keys) are defined only here. SCAN computes `exclusion_radius_m` from them; GEN reads the same values (open question Q14, resolved).
+- Airport masks: `masks.airports.{enabled, buffer_m, path}`. `path` defaults to `docs/compat/airports-mask.geojson`, the default airport polygons produced by RISK-004 (repo-root relative, like every path). Manual cases are `mask_out` entries with `kind: airport`. The loader does not check that the file exists; GEN does.
 - Versioning: `config_version: 1`; rules in `plans/detailed/01-architecture.md#ws10-data-contract-versioning-policy`. The CHANGELOG entry is written by ARCH-002; do not touch `schemas/CHANGELOG.md`.
 - Uses `palmcore.geo.Bbox` and `local_crs_for` (ARCH-005), and `load_schema("region")`, `make_validator` and `ConfigError` (ARCH-001).
 - `load_region` takes `regions_dir`/`base_dir` arguments rather than `palmcore.paths.Paths`, so this task doesn't depend on ARCH-004.
@@ -62,6 +64,7 @@ updated: 2026-11-21
 
 ## Acceptance criteria
 
+- [ ] `masks.airports.path` defaults to the absolute path of `docs/compat/airports-mask.geojson`; `full.yaml` sets it explicitly.
 - [ ] Every error names the file and the dotted key path.
 - [ ] Duplicate YAML keys are rejected.
 - [ ] Defaults are defined once in Python, and a test checks the schema `default` values against them.
@@ -79,3 +82,4 @@ ruff check palmcore tests && mypy
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [reconcile] Spec now lists every cross-area key: masks.airports.path (default docs/compat/airports-mask.geojson from RISK-004), the SCAN-owned palmscan: block keys (without id_prefix and radius clamps, which are top-level/exclusion here), and states that exclusion.margin_m/radius_min_m/radius_max_m (1.5/1.0/8.0) are the single defaults SCAN and GEN read. Cross-area reconciliation.

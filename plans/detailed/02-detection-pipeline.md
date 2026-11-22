@@ -35,6 +35,7 @@ palmscan/
   output.py                # assign palm_id, build FeatureCollection, validate, write
   pipeline.py              # run(): orchestrates stages
   data/
+    species_keys.yaml      # canonical species-key registry (ARCH-002 pattern, ASSET manifest check)
     species_aliases.csv    # name normalization table (data, not code)
     palm_genera.yaml       # genus sets (socal, florida) + genus default species
     species_defaults.yaml  # default height and crown per species key
@@ -66,7 +67,7 @@ palmscan/
     summary.py             # qa_summary.md
     gpkg.py                # qa_map.gpkg
     rejects.py             # qa_rejects.csv
-    accuracy.py            # metrics vs ground truth (Phase 4)
+    accuracy.py            # runs the TEST-010 evaluator, fallback height error (Phase 4)
 tests/unit/palmscan/test_scan_*.py   # prefix avoids name clashes with other packages
 tests/fixtures/palmscan/<adapter or case>/
 ```
@@ -77,14 +78,17 @@ Keys already in the architecture example (schema owned by ARCH-003):
 
 | Key | Used for |
 |---|---|
-| `region` | Output folder name, `region` property, default `id_prefix` |
+| `region` | Output folder name, `region` property |
+| `id_prefix` | Top-level key (ARCH-003; default: initials of `region`), prefix of `palm_id`. Not in the `palmscan:` block |
 | `bbox` | `[lon_min, lat_min, lon_max, lat_max]`, EPSG:4326 |
 | `sources.inventory[]` | One entry per inventory adapter |
 | `sources.lidar` | `3dep_ept` or absent (Phase 4) |
 | `sources.buildings` | `osm`, `microsoft_footprints`, or absent |
 | `sources.osm_trees` | `true` / `false` |
 | `species_priors` | Fallback species mix (map species key -> weight) |
-| `exclusion.margin_m` | Added to crown radius. Default 1.5 |
+| `exclusion.margin_m` | Added to crown radius. Default 1.5 (ARCH-003) |
+| `exclusion.radius_min_m` / `exclusion.radius_max_m` | Radius clamp. Defaults 1.0 / 8.0 (ARCH-003; single definition shared with palmgen) |
+| `exclusion.radius_max_m`, `exclusion.clip_buffer_m` | Also set the search radius for `buildings.geojson` (W11 stage 9) |
 | `mask_out` | Areas to drop palms from |
 
 Keys this plan proposes; ARCH-003 must accept them (see [Cross-area interfaces](#cross-area-interfaces)):
@@ -94,7 +98,7 @@ Keys this plan proposes; ARCH-003 must accept them (see [Cross-area interfaces](
 | Key | Default | Meaning |
 |---|---|---|
 | `type` | required | `arcgis_rest` or `geojson_file` |
-| `name` | `<type>_<index>` | Source name used in `source_ids` and QA, e.g. `sd_street_trees` |
+| `name` | required (ARCH-003 Q13: an index default would change every `palm_id` on reorder) | Source name used in `source_ids` and QA, e.g. `sd_street_trees` |
 | `url` / `path` | one required | Service URL, or file URL / local path |
 | `format` | from extension | `geojson` or `csv` (geojson_file only) |
 | `species_field` | required | Field with the species name |
@@ -108,13 +112,12 @@ Keys this plan proposes; ARCH-003 must accept them (see [Cross-area interfaces](
 | `where` | `1=1` | ArcGIS where clause |
 | `vintage` | derived | Override vintage year string, e.g. `"2021"` |
 
-Other proposed keys: `sources.buildings_path` (local file for `microsoft_footprints`), `sources.overpass_url` (default `https://overpass-api.de/api/interpreter`), and `mask_out` items as `{name: str, bbox: [4 floats]}` or `{name: str, path: str}` (GeoJSON polygon file).
+Other proposed keys: `sources.buildings_path` (local file for `microsoft_footprints`), `sources.overpass_url` (default `https://overpass-api.de/api/interpreter`), and `mask_out` items in the ARCH-003 shape `{name, kind: mod|airport|other, bbox | geometry | path, note}` (paths resolve against the repo root). All accepted by ARCH-003 (WS7).
 
 The `palmscan:` block holds every detection parameter. All keys optional; defaults live in `palmscan/config.py`:
 
 ```yaml
 palmscan:
-  id_prefix: null            # default: initials of region name (san-diego-coastal -> sdc)
   output_dir: null           # default build/scan/<region>
   palm_filter:
     genus_sets: [socal]      # keys of palm_genera.yaml: socal, florida
@@ -124,9 +127,7 @@ palmscan:
     height_max_m: 40.0
   dedupe_radius_m: 2.0
   exclusion:
-    radius_min_m: 1.5
-    radius_max_m: 8.0
-    building_overlap_min_m2: 0.1
+    building_overlap_min_m2: 0.1   # radius_min_m/radius_max_m are region exclusion: keys (ARCH-003), not here
   lidar:                     # Phase 4
     datasets: []             # force EPT dataset names; empty = auto-select
     tile_size_m: 500
@@ -175,13 +176,14 @@ Default output directory `build/scan/<region>/` (gitignored; override with `--ou
 | File | Written by | Contents |
 |---|---|---|
 | `palms.geojson` | SCAN-011 | FeatureCollection, one Point per palm, contract fields only |
-| `buildings.geojson` | SCAN-013 | Building polygons that intersect at least one exclusion circle (input to palmgen clipping). Properties: `building_id`, `source` |
+| `buildings.geojson` | SCAN-013 | Secondary contract (ARCH-002 `schemas/buildings.geojson.schema.json`): building polygons within `exclusion.radius_max_m + exclusion.clip_buffer_m` of any palm (input to palmgen clipping, also when GEN tunes `--margin-m`). Properties: `building_id`, `source` |
 | `species_priors.yaml` | SCAN-013 | Priors computed from this run's inventory, ready to paste into the region YAML |
 | `qa_summary.md` | SCAN-012 | Counts, vintage, warnings, classifier and accuracy sections |
 | `qa_map.gpkg` | SCAN-012 | Layers listed in [W10](#w10-qa-outputs) |
 | `qa_rejects.csv` | SCAN-012 | Every rejected record or candidate with a reason |
 | `species_tree.json` | SCAN-027/028 | Trained decision tree (Phase 4), when used |
-| `accuracy.json` | SCAN-029/028 | Metrics, when `--truth` is given |
+| `accuracy.json` | SCAN-029/028 | TEST-010 evaluator results per profile, when `--eval-site` is given |
+| `eval/<site>/chm.tif` | SCAN-028 | CHM clipped to the eval site, input for TEST-009 `gt.py fill-heights` |
 | `run.json` | SCAN-013 | Run metadata: version, git sha, config hash, timings per stage, exit status |
 
 ### palms.geojson field mapping
@@ -198,7 +200,7 @@ Default output directory `build/scan/<region>/` (gitignored; override with `--ou
 | `ground_elev_m` | `null` (see Q3) | DTM sample at the palm point |
 | `detected_by` | `inventory`, `osm` | plus `lidar`, `inventory+lidar`, `osm+lidar` |
 | `source_ids` | `["<source name>:<record id>", ...]` sorted | plus `lidar:<dataset>:<candidate id>` |
-| `exclusion_radius_m` | `clamp(crown/2 + margin_m)` | same |
+| `exclusion_radius_m` | `clamp(crown/2 + exclusion.margin_m, exclusion.radius_min_m, exclusion.radius_max_m)`, all from the region `exclusion:` block | same |
 | `building_conflict` | circle overlaps a building > 0.1 m² | same |
 | `data_vintage` | `{inventory: "YYYY"}` or `{osm: "YYYY-MM"}` | plus `lidar: "YYYY"` |
 | `region` | `cfg.region` | same |
@@ -214,10 +216,9 @@ Entry point `palmscan = "palmscan.cli:main"` (registered in `pyproject.toml`; fo
 ```
 palmscan run    --region NAME [--regions-dir regions] [--out DIR] [--data-dir data]
                 [--offline] [--refresh] [--no-lidar] [--only inventory|lidar]
-                [--truth PATH] [-v|-vv]
+                [--eval-site SITE] [-v|-vv]
 palmscan priors --region NAME [--regions-dir regions] [--data-dir data] [--offline]
-palmscan eval   --palms PATH --truth PATH [--site-bbox LON_MIN,LAT_MIN,LON_MAX,LAT_MAX]
-                [--match-radius-m 3.0] [--out PATH]
+palmscan eval   --palms PATH --site SITE [--profile NAME] [--match-radius-m 3.0] [--out PATH]
 ```
 
 - `--offline`: never touch the network; a missing cache entry is an error.
@@ -306,11 +307,15 @@ class SourceVintage:
 | Other area | What palmscan needs or gives | Assumed id |
 |---|---|---|
 | ARCH | Repo scaffold, `pyproject.toml`, `palmcore` package, lint/test config | ARCH-001 |
-| ARCH | Palms JSON Schema at `schemas/palms.geojson.schema.json` and a validator in `palmcore` (VERIFY function name) | ARCH-002 |
+| ARCH | Palms JSON Schema at `schemas/palms.geojson.schema.json`, `palmcore.contract.validate_palms`, and the `buildings.geojson` schema + `validate_buildings` | ARCH-002 |
+| ARCH | `palmcore.cache` (SCAN `Cache` builds on it), `palmcore.log`, `palmcore.errors` | ARCH-004, ARCH-001 |
+| ARCH | `palmcore.palms.write_palms_doc` (canonical writer; SCAN-011 delegates) | ARCH-007 |
+| ARCH | `pyproject.toml` order: SCAN-001 after ARCH-009 | ARCH-009 |
 | ARCH | Region YAML loader in `palmcore` that returns the raw mapping, and a schema that accepts the keys in [Inputs](#inputs-region-config-keys) (`palmscan:` block, extra inventory keys, `mask_out` item shape) | ARCH-003 |
-| ARCH | Deterministic id helper in `palmcore` (VERIFY name); fallback in [W9](#w9-output-writer-and-palm-ids) | ARCH-001 |
+| ARCH | `palmcore.ids.palm_id` (16 hex; schema pattern) | ARCH-006 |
 | TEST | Test site bboxes T1 to T5 | TEST-100 |
-| TEST | Ground truth points for two sites; format assumed in [W19](#w19-accuracy-metrics) | TEST-101 |
+| TEST | Ground truth points for two sites in the TEST-009 format | TEST-101 |
+| TEST | The accuracy evaluator (single implementation, gates Phase 4) | TEST-010 |
 | GEN | Reads `build/scan/<region>/palms.geojson` and `buildings.geojson` | GEN-100 |
 | REGION | Owns `regions/<name>.yaml` files; palmscan only reads them | (none) |
 
@@ -330,7 +335,7 @@ Task: SCAN-001.
 - `scan_config_from_mapping(raw: dict) -> ScanConfig` for tests (no file).
 - `ScanConfig.config_hash() -> str`: sha256 of the canonical JSON of the resolved config; written to `run.json` and the QA summary.
 - Validation: bbox has `lon_min < lon_max`, `lat_min < lat_max`, within [-180, 180] / [-90, 90]; bbox larger than 1.0 deg in either axis raises `ConfigError` unless `palmscan.allow_large_bbox: true` (guards against pulling a whole county by typo); every `species_priors` weight >= 0 and the sum > 0 (normalized on load).
-- `id_prefix` default: first letter of each `-`-separated part of `region` (`san-diego-coastal` -> `sdc`).
+- `id_prefix`, inventory sources, masks, priors and the `exclusion:` block come from `RegionConfig` (ARCH-003), which already applies defaults and normalizes priors. `ScanConfig` holds the `RegionConfig` plus the `palmscan:` blocks; `palmscan: {id_prefix: ...}` or `palmscan: {exclusion: {radius_min_m: ...}}` is an unknown-key error.
 
 **`palmscan/cache.py`**
 ```python
@@ -342,6 +347,7 @@ class Cache:
                      suffix: str = "", meta: dict | None = None) -> Path: ...
     def read_meta(self, path: Path) -> dict: ...
 ```
+- Built on `palmcore.cache` (ARCH-004): layout, key hashing, atomic writes and the meta sidecar are palmcore's; `Cache` adds `get_or_fetch`, offline and refresh. `CacheMiss` is `palmcore.errors.CacheMiss`.
 - Layout: `data/<namespace>/<key[:2]>/<key><suffix>` where `key` is a sha1 hex of the request identity (URL + sorted params or query text) unless the caller passes a readable key (LiDAR tiles).
 - Writes go to `<path>.tmp` then `os.replace` (atomic). A sidecar `<path>.meta.json` holds `{url, params, fetched_at, bytes, sha256}`.
 - `offline=True` and missing file -> `CacheMiss(path)`. `refresh=True` ignores existing files.
@@ -369,13 +375,16 @@ class HttpClient:
 
 **Package dirs**: create empty `palmscan/sources/__init__.py`, `palmscan/detect/__init__.py`, `palmscan/classify/__init__.py`, `palmscan/qa/__init__.py` so later tasks never touch them.
 
-**Dependencies**: make sure `pyproject.toml` has, for palmscan: `geopandas`, `shapely>=2`, `pyproj`, `pyogrio`, `numpy`, `scipy`, `requests`, `pyyaml`; and an optional extra `lidar` with `pdal`, `rasterio`, `scikit-image`, `scikit-learn`. Add only what ARCH-001 left out; this is the only SCAN task that edits `pyproject.toml`.
+**Dependencies**: ARCH-001 already declares, for palmscan: `geopandas`, `shapely>=2`, `pyproj`, `pyogrio`, `numpy`, `scipy`, `requests`, `pyyaml`; the extra `lidar` with `rasterio`, `scikit-image`, `scikit-learn`; and `pdal` as its own extra (ARCH Q4, so CI installs the raster stack without native PDAL). SCAN-001 runs after ARCH-009 and adds only what is still missing; it is the only SCAN task that may edit `pyproject.toml`, and FX-002 edits it after SCAN-001.
 
 ### W2. Species normalization and palm filter
 
 Task: SCAN-002.
 
 **Data files**
+
+`palmscan/data/species_keys.yaml`: the one canonical list of species keys (`version: 1`, `keys: [{key, genus, set, level}]`, sorted). Every key normalization can emit (species keys, `<genus>_sp`, `palm_unknown`) is listed; every key matches the ARCH-002 `species` pattern; ASSET-005 validates manifest species against this file. New species (Florida, DEC-006) are added here first.
+
 
 `palmscan/data/species_aliases.csv` (UTF-8, header row, sorted by `alias`):
 ```
@@ -604,12 +613,12 @@ Task: SCAN-009.
 ```python
 def parse_height(raw: str | None, units: str = "ft") -> float | None: ...
 def assign_sizes(palms, cfg, region_medians: dict[str, float] | None = None) -> None: ...
-def assign_exclusion(palms, margin_m, radius_min_m, radius_max_m) -> None: ...
+def assign_exclusion(palms, exclusion: ExclusionConfig) -> None: ...   # RegionConfig.exclusion (ARCH-003)
 def flag_building_conflicts(palms, buildings: GeoDataFrame, crs, overlap_min_m2=0.1) -> GeoDataFrame: ...
 ```
 - `parse_height`: numbers (`"35"`, `"35.5"`), ranges (`"30-45"`, `"30 to 45"` -> midpoint), with optional unit suffix (`ft`, `'`, `m`) overriding `units`; class labels that do not parse -> `None`. Converted to metres. VERIFY in SCAN-007 whether any inventory has a height field and its units.
 - `assign_sizes` order, per palm that has no LiDAR height: inventory height within `[height_min_m, height_max_m]` -> `height_source="inventory"`; else `region_medians[species]` -> `"region_median"` (Phase 4 only passes this); else `species_defaults.yaml` species row, else genus row, else `_default` -> `"species_default"`. `crown_diam_m` from the same defaults table unless LiDAR set it. Palms with species `None` at this point use `_default`.
-- `assign_exclusion`: `r = crown_diam_m / 2 + margin_m`, clamped to `[radius_min_m, radius_max_m]`, rounded to 0.01.
+- `assign_exclusion`: `r = crown_diam_m / 2 + exclusion.margin_m`, clamped to `[exclusion.radius_min_m, exclusion.radius_max_m]` (defaults 1.5, 1.0, 8.0 live only in ARCH-003), rounded to 0.01. palmgen treats this value as authoritative; its `--margin-m` override recomputes from `crown_diam_m` with the same clamps.
 - `flag_building_conflicts`: buffer each palm (local CRS, 32-segment circle) by its radius; spatial join against buildings reprojected to the local CRS (`STRtree`); `building_conflict = True` when any intersection area > `overlap_min_m2`. Returns the conflicting buildings (EPSG:4326), deduplicated, sorted by `building_id`, for `buildings.geojson` and the QA layer.
 
 **`palmscan/mask.py`**
@@ -617,7 +626,7 @@ def flag_building_conflicts(palms, buildings: GeoDataFrame, crs, overlap_min_m2=
 def load_masks(mask_out: list[MaskArea], base_dir: Path) -> list[tuple[str, BaseGeometry]]: ...
 def apply_masks(palms, masks) -> tuple[list[PalmRecord], list[Reject]]: ...
 ```
-A palm whose point is inside any mask polygon is removed with `Reject(stage="mask", reason=f"mask_out:{name}")`. Airport masks are just `mask_out` entries (see Q6).
+A palm whose point is inside any mask polygon is removed with `Reject(stage="mask", reason=f"mask_out:{name}")`. `mask_out` items are `palmcore.config.MaskArea` (`kind`, one of `bbox`/`geometry`/`path`). The default airport masks (`masks.airports`, RISK-004 polygons) are applied by palmgen, not palmscan (Q6).
 
 ### W8. Species priors
 
@@ -648,7 +657,8 @@ def validate_palms(fc: dict) -> list[str]: ...      # wraps the ARCH-002 validat
 def write_palms(fc: dict, path: Path) -> None: ...
 ```
 - Stable key: inventory/OSM palms use the lexicographically smallest of their `source_ids`; LiDAR-only palms use `lidar:<dataset>:<round(x)>:<round(y)>` (local metres). Stable across reruns as long as the source record ids do not change.
-- `palm_id`: use the palmcore deterministic id helper if ARCH-001 provides one (VERIFY name and format; the schema pattern wins). Fallback: `f"{prefix}-{sha1(stable_key).hexdigest()[:10]}"`. On a collision (two different keys, same id) lengthen to 12, then 16 hex characters for the colliding pair only, and log it. The contract example `sdc-000123` is a sequential id; sequential ids are not stable when data changes, so this plan uses hashes (see Q4).
+- `palm_id`: `palmcore.ids.palm_id(prefix, stable_key)` (ARCH-006, `<prefix>-<16 hex>`). No local fallback. The contract example `sdc-000123` is a sequential id; sequential ids are not stable when data changes, so this plan uses hashes (see Q4).
+- `write_palms` delegates to `palmcore.palms.write_palms_doc` (ARCH-007), which owns rounding, key order, layout and the atomic write; SCAN does not reimplement them.
 - `to_feature_collection`: properties in contract order, rounding from [field mapping](#palmsgeojson-field-mapping), `ground_elev_m` as `null` when unknown, `source_ids` sorted. Features sorted by `palm_id`.
 - Validation failure: write `palms.invalid.geojson`, print the first 20 errors, exit 3. Never write an invalid `palms.geojson`.
 - Byte-identical output for identical input (golden test with a fixed list of `PalmRecord`s in `tests/fixtures/palmscan/output/expected_palms.geojson`).
@@ -687,7 +697,7 @@ Buffers are built in the local CRS and written in EPSG:4326. Empty layers are st
 8. **Unmatched names containing "palm"**: top 20 with counts (to extend the alias table).
 9. **Species priors**: computed vs configured, and which one was used.
 10. **Classifier** (Phase 4): rules vs tree CV accuracy, chosen model, confusion matrix.
-11. **Accuracy** (when `--truth`): metrics from W19.
+11. **Accuracy** (when `--eval-site`): TEST-010 results via W19.
 12. **Warnings**: every warning collected during the run.
 Tests mask the timestamp line and compare to `tests/fixtures/palmscan/qa/expected_summary.md`.
 
@@ -704,7 +714,7 @@ class RunOptions:
     refresh: bool = False
     no_lidar: bool = False
     only: str | None = None          # None | "inventory" | "lidar"
-    truth_path: Path | None = None
+    eval_site: str | None = None
 
 @dataclass(slots=True)
 class RunResult:
@@ -725,7 +735,7 @@ Stage order (Phase 1; Phase 4 inserts the LiDAR stages in SCAN-028):
 6. Priors: `compute_priors` + `merge_priors`; species `None` -> `sample_species`.
 7. `assign_sizes`, `assign_exclusion`, `flag_building_conflicts`.
 8. `assign_palm_ids`, `to_feature_collection`, `validate_palms`, `write_palms`.
-9. Write `buildings.geojson`, `species_priors.yaml`, QA files, `run.json`.
+9. Write `buildings.geojson` (ARCH-002 secondary contract, `validate_buildings`; footprints within `exclusion.radius_max_m + exclusion.clip_buffer_m` of any kept palm), `species_priors.yaml`, QA files, `run.json`.
 - Logging through the palmcore logger (ARCH-001) or stdlib `logging`: one INFO line per stage with counts and seconds.
 - Phase 1 behaviour when `sources.lidar` is set: warning "LiDAR stage not implemented yet; inventory only" and continue.
 - `palmscan priors`: runs stages 2 to 4 and prints `priors_yaml`.
@@ -949,32 +959,26 @@ def train(training: list[tuple[PalmRecord, LidarCandidate]], params: ClassifyPar
 
 ### W19. Accuracy metrics
 
-Task: SCAN-029. Ground truth itself is TEST-101.
+Task: SCAN-029 (rescoped 2026-11-22). Ground truth itself is TEST-101 (format TEST-009); the metrics are TEST-010.
+
+TEST-010 (`tests/accuracy/metrics.py`) is the single implementation of matching, metrics and thresholds, and the one that gates Phase 4 (TEST-012). palmscan does not reimplement it. SCAN-029 produces the inputs and runs the evaluation for palmscan's own QA:
 
 **`palmscan/qa/accuracy.py`**
 ```python
-@dataclass(slots=True)
-class AccuracyReport:
-    site: str | None
-    tp: int; fp: int; fn: int
-    precision: float; recall: float; f1: float
-    median_position_error_m: float | None
-    median_height_error_m: float | None        # vs truth height_m, when present
-    height_class_agreement: float | None       # vs truth height_class, when present
-    species_accuracy: float | None             # vs truth species, when present
-    by_detected_by: dict[str, dict[str, float]]   # precision per detected_by value
-    fallback_height_error_m: float | None      # see below
-
-def evaluate(palms: GeoDataFrame, truth: GeoDataFrame, area: BaseGeometry | None = None,
-             match_radius_m: float = 3.0) -> AccuracyReport: ...
+def load_evaluator(repo_root: Path): ...                     # imports tests.accuracy.metrics and tests.accuracy.gt, or None
+def evaluate_site(palms_fc: dict, site: str, *, repo_root: Path, sites_root: Path | None = None,
+                  profiles: list[str] | None = None, radius_m: float | None = None) -> dict: ...
 def fallback_height_error(palms: GeoDataFrame) -> float | None: ...
+def write_accuracy(results: dict, out_dir: Path) -> Path: ...  # accuracy.json
+def accuracy_section_md(results: dict) -> str: ...
 ```
-- Truth format assumed: GeoJSON points (EPSG:4326) with optional properties `site`, `height_m`, `height_class` (`short` < 10 m, `medium` 10 to 18 m, `tall` > 18 m), `species`. VERIFY with TEST-101 and adapt the loader, not the metric code.
-- Evaluation area: `--site-bbox`, else the convex hull of the truth points buffered by 10 m. Only predictions inside the area count.
-- Matching: one-to-one greedy by distance within `match_radius_m`, as in W17.
-- `fallback_height_error`: on palms with `height_source=lidar`, the median of |species region median - LiDAR height|, i.e. how wrong heights are for palms without LiDAR. Reported because "height error vs LiDAR on matched palms" in `plans/06-testing.md` is ambiguous (Q9).
-- Output: `accuracy.json` (dataclass as dict) and the Accuracy section in `qa_summary.md`, with the targets from `plans/06-testing.md#2-data-accuracy` (precision >= 0.90; recall >= 0.80 LiDAR-only, >= 0.90 with inventory; median position error < 2 m; median height error < 2 m) and pass/fail per metric.
-- Tests: hand-built truth and prediction sets with known TP/FP/FN, ties, empty prediction set (precision undefined -> `None`, not a crash).
+- Ground truth: `tests/accuracy/<site>/ground_truth.geojson`, `labeled_area.geojson`, `meta.yaml`, loaded with TEST-009's `gt.py`. Height classes are TEST's: `S` < 8 m, `M` 8 to < 15, `T` 15 to < 25, `X` >= 25, `unknown`.
+- Per profile (`lidar_only`, `combined`, `phase1_inventory`; `tests/accuracy/thresholds.yaml`), `evaluate_site` calls TEST-010's `load_thresholds`, `evaluate` and `check_thresholds` and returns their output unchanged. No formula or numeric target lives in palmscan.
+- `tests/` is not in the wheel: the evaluator is importable only from a repo checkout. If it is not, the run logs a QA warning and skips accuracy.
+- `fallback_height_error`: on palms with `height_source=lidar`, the median of |species region median - LiDAR height|, i.e. how wrong heights are for palms without LiDAR. SCAN-only, reported next to TEST-010's numbers (Q9).
+- Inputs palmscan produces for TEST: `build/scan/<region>/palms.geojson` and, with `--eval-site`, `eval/<site>/chm.tif` for `python -m tests.accuracy.gt fill-heights` (TEST-009).
+- Output: `accuracy.json` (TEST-010 results per profile plus `fallback_height_error_m`) and the Accuracy section in `qa_summary.md`.
+- Tests: `evaluate_site` on a fixture site equals a direct TEST-010 `evaluate` call; missing evaluator is a warning; empty predictions do not raise.
 
 ### W20. LiDAR pipeline integration
 
@@ -986,7 +990,7 @@ Changes to `palmscan/pipeline.py`, `palmscan/cli.py` and `palmscan/qa/*`:
 3. Train or load the species tree (`classify.use_tree`); write `species_tree.json` when used; `classify(palms, priors, model)`.
 4. `assign_sizes(..., region_medians)`; `ground_elev_m` for palms without LiDAR: `sample_ground` from the CHM of the tile containing the palm, when available.
 5. QA: `lidar_candidates` and optional `crowns` layers; LiDAR rejects in `qa_rejects.csv` (stage `lidar_rules` with metrics); Classifier section; `data_vintage.lidar` per grid cell.
-6. `--truth PATH` on `run` and the `eval` subcommand both call `evaluate` and write `accuracy.json`.
+6. `--eval-site SITE` on `run` and the `eval` subcommand both call `evaluate_site` (W19, i.e. TEST-010) and write `accuracy.json`; `run` also writes `eval/<site>/chm.tif` for TEST-009 `fill-heights`.
 7. Memory: process one tile at a time; keep only candidates, not rasters (except with `-vv`, which writes debug GeoTIFFs to `<out>/debug/`).
 - End-to-end test with a fake `PointSource` serving synthetic points (flat ground, three isolated palm-like cones, one wide canopy blob, one pole, one cone inside a building footprint) plus a two-record inventory fixture. Asserts the detected_by mix, reject reasons, schema validity and that `accuracy.json` is written with a tiny truth file.
 
@@ -1009,7 +1013,7 @@ Deliverable (SCAN-101): full LiDAR-enriched run on the Phase 1 test region and t
 
 | ID | Title | Phase | Depends on | Requires | Est h |
 |---|---|---|---|---|---|
-| SCAN-001 | Create palmscan package core: config, cache, HTTP, models, CLI skeleton | 1 | ARCH-001, ARCH-003 | none | 3 |
+| SCAN-001 | Create palmscan package core: config, cache, HTTP, models, CLI skeleton | 1 | ARCH-001, ARCH-003, ARCH-004, ARCH-009 | none | 3 |
 | SCAN-002 | Species normalization table, normalizer and palm filter | 1 | SCAN-001 | none | 3 |
 | SCAN-003 | Source adapter base and geojson_file adapter | 1 | SCAN-001 | none | 3 |
 | SCAN-004 | ArcGIS REST inventory adapter with paging and cache | 1 | SCAN-003 | none | 3 |
@@ -1019,7 +1023,7 @@ Deliverable (SCAN-101): full LiDAR-enriched run on the Phase 1 test region and t
 | SCAN-008 | Inventory ingest stage and cross-source dedupe | 1 | SCAN-002, SCAN-004, SCAN-005 | none | 3 |
 | SCAN-009 | Palm sizes, exclusion radius, building conflict, mask_out | 1 | SCAN-002 | none | 3 |
 | SCAN-010 | Species priors and deterministic prior sampling | 1 | SCAN-001 | none | 2 |
-| SCAN-011 | palms.geojson writer, palm IDs and schema validation | 1 | SCAN-001, ARCH-002 | none | 2 |
+| SCAN-011 | palms.geojson writer, palm IDs and schema validation | 1 | SCAN-001, ARCH-002, ARCH-006, ARCH-007 | none | 2 |
 | SCAN-012 | QA outputs: qa_summary.md, qa_map.gpkg, qa_rejects.csv | 1 | SCAN-001 | none | 3 |
 | SCAN-013 | palmscan run pipeline and CLI, end-to-end on fixtures | 1 | SCAN-006, SCAN-008, SCAN-009, SCAN-010, SCAN-011, SCAN-012 | none | 3 |
 | SCAN-100 | Deliverable: Phase 1 live run and QA map check | 1 | SCAN-007, SCAN-013, TEST-100 | network, human | 2 |
@@ -1031,7 +1035,7 @@ Deliverable (SCAN-101): full LiDAR-enriched run on the Phase 1 test region and t
 | SCAN-025 | Inventory-to-LiDAR matching and merge | 4 | SCAN-008 | none | 3 |
 | SCAN-026 | Species shape rules and classification order | 4 | SCAN-010 | none | 2 |
 | SCAN-027 | Decision tree species classifier with rules fallback | 4 | SCAN-026 | none | 4 |
-| SCAN-029 | Accuracy metrics against ground truth | 4 | SCAN-001 | none | 2 |
+| SCAN-029 | Run the TEST-010 accuracy evaluation from palmscan (in-run QA) | 4 | SCAN-001, TEST-010 | none | 2 |
 | SCAN-028 | Wire LiDAR stages into palmscan run, QA and eval | 4 | SCAN-013, SCAN-020, SCAN-024, SCAN-025, SCAN-027, SCAN-029 | none | 4 |
 | SCAN-030 | Tune LiDAR palm thresholds on test sites | 4 | SCAN-021, SCAN-028, TEST-101 | network, human | 4 |
 | SCAN-101 | Deliverable: LiDAR-enriched run with accuracy report | 4 | SCAN-030, SCAN-100 | network, human | 3 |
@@ -1044,7 +1048,11 @@ Totals: Phase 1 about 37 h, Phase 4 about 36 h (see Q10).
 flowchart TD
   ARCH001[ARCH-001] --> S001[SCAN-001 core]
   ARCH003[ARCH-003] --> S001
+  ARCH009[ARCH-009] --> S001
   ARCH002[ARCH-002] --> S011
+  ARCH007[ARCH-007] --> S011
+  ARCH006[ARCH-006] --> S011
+  TEST010[TEST-010] --> S029
   S001 --> S002[SCAN-002 species]
   S001 --> S003[SCAN-003 base + geojson]
   S001 --> S010[SCAN-010 priors]
@@ -1094,7 +1102,7 @@ flowchart TD
 
 ## Parallelization notes
 
-- After SCAN-001: SCAN-002, SCAN-003, SCAN-010, SCAN-011 (once ARCH-002 is done), SCAN-012, SCAN-022 and SCAN-029 touch disjoint files and can run at the same time.
+- After SCAN-001: SCAN-002, SCAN-003, SCAN-010, SCAN-011 (once ARCH-002, ARCH-006 and ARCH-007 are done), SCAN-012, SCAN-022 and SCAN-029 (once TEST-010 is done) touch disjoint files and can run at the same time.
 - After SCAN-003: SCAN-004, SCAN-005 and SCAN-020 can run together. SCAN-006 waits for SCAN-005 (shares `overpass.py`).
 - Phase 4 code (SCAN-020, SCAN-022 to SCAN-027, SCAN-029) needs no data and no network, so cloud agents can build it during Phases 2 and 3. Only SCAN-021, SCAN-030 and SCAN-101 need the network.
 - Serialized by shared files, already ordered through `depends_on`:
@@ -1102,7 +1110,7 @@ flowchart TD
   - `palmscan/pipeline.py`, `palmscan/qa/{summary,gpkg,rejects}.py`: SCAN-012/013 -> SCAN-028.
   - `palmscan/config.py`: SCAN-001 -> SCAN-030.
   - `palmscan/data/species_aliases.csv`, `non_tree_markers.yaml`: SCAN-002 -> SCAN-007 -> SCAN-100.
-  - `pyproject.toml`: only SCAN-001 (after ARCH-001).
+  - `pyproject.toml`: only SCAN-001 (after ARCH-009; FX-002 after SCAN-001).
 - Network tasks: SCAN-007, SCAN-021, SCAN-030, SCAN-100, SCAN-101. Human tasks: SCAN-030, SCAN-100, SCAN-101 (QGIS review over imagery).
 - External waits: SCAN-100 and SCAN-021 need TEST-100 bboxes; SCAN-030 needs TEST-101 labels.
 
@@ -1123,16 +1131,16 @@ Questions (need an answer from the plan owner or another area):
 
 - **Q1. Ratio rule vs Canary Island date palm.** The palm test requires height / crown > 2.0, but Canary Island date palms (12 to 20 m, crown 8 to 12 m) have ratios of 1 to 2.5, and the species rules expect to find them (crown >= 7 m). This plan adds an exemption (`ratio_exempt_large_crown`, crown >= 7 m and ratio > 1.0 if isolated), on by default. Confirm, or tune in SCAN-030.
 - **Q2. California fan palm in priors.** The example priors give `washingtonia_filifera` 0.05, but the source plan says to default to *W. robusta* without inventory data. This plan folds filifera into robusta when sampling priors.
-- **Q3. `ground_elev_m` in Phase 1.** No DTM exists before Phase 4. This plan writes `null`; the ARCH-002 schema must allow it (palmgen uses sim altitude anyway).
-- **Q4. `palm_id` format.** The contract example `sdc-000123` looks sequential; sequential ids change when data changes. This plan uses a hash of a stable key. ARCH-002/palmcore should fix the pattern.
+- **Q3. `ground_elev_m` in Phase 1.** No DTM exists before Phase 4. This plan writes `null`; the ARCH-002 schema must allow it (palmgen uses sim altitude anyway). Resolved 2026-11-22: ARCH-002 allows `null` and documents metres, orthometric, `VERIFY:` 3DEP datum (SCAN-101 confirms).
+- **Q4. `palm_id` format.** The contract example `sdc-000123` looks sequential; sequential ids change when data changes. This plan uses a hash of a stable key. ARCH-002/palmcore should fix the pattern. Resolved: `palmcore.ids.palm_id`, 16 hex.
 - **Q5. Shrub palms.** The genus list includes *Chamaerops*, *Dypsis* and *Phoenix roebelenii*, which rarely exceed 4 m and may not be blobs; cutting them could leave holes. `palm_filter.exclude_species` exists, empty by default. Decide after the first in-sim review.
-- **Q6. Airport masks.** `plans/04-fs2024-integration.md#7-compatibility` says to mask airports by default. Nothing in palmscan generates those masks; they are `mask_out` entries in region YAMLs (REGION area).
+- **Q6. Airport masks.** `plans/04-fs2024-integration.md#7-compatibility` says to mask airports by default. Nothing in palmscan generates those masks. Resolved 2026-11-22 (ARCH-003): `masks.airports.{enabled, buffer_m, path}` with default polygons from RISK-004 (`docs/compat/airports-mask.geojson`), applied by palmgen; manual cases are `mask_out` entries with `kind: airport`.
 - **Q7. Region YAML ownership.** Phase 1 task 1 creates the test region YAML, but no anchor owns it. palmscan only reads `regions/*.yaml`; SCAN-100 blocks if the file is missing.
 - **Q8. Palm point for leaning palms.** Inventory points are trunk bases; the photogrammetry blob sits under the crown. Kept the inventory point; if Phase 2 shows offset cuts for leaning fan palms, consider an exclusion centre field.
-- **Q9. "Height error vs LiDAR on matched palms."** Ambiguous in `plans/06-testing.md`; ground truth has only a rough height class. SCAN-029 reports height-class agreement vs truth and the fallback (region median) error vs LiDAR.
+- **Q9. "Height error vs LiDAR on matched palms."** Ambiguous in `plans/06-testing.md`; ground truth has only a rough height class. Resolved 2026-11-22: TEST-010 defines height error vs `height_ref_m` (CHM) and height-class agreement (TEST classes); SCAN-029 runs it and adds the fallback (region median) error vs LiDAR.
 - **Q10. Effort.** The source phase plan gives 8 to 15 h for Phase 1 and 10 to 20 h for Phase 4; this breakdown, with tests and fixtures, sums to about 37 h and 36 h.
-- **Q11. Building polygons for palmgen.** The contract has only `building_conflict`; palmgen needs the polygons to clip. This plan writes `buildings.geojson` next to `palms.geojson`. GEN must confirm.
-- **Q12. Enum values** for `species_source`, `height_source`, `detected_by` and `data_vintage` keys (adds `osm`) must match the ARCH-002 schema.
+- **Q11. Building polygons for palmgen.** The contract has only `building_conflict`; palmgen needs the polygons to clip. This plan writes `buildings.geojson` next to `palms.geojson`. Resolved 2026-11-22: canonical `build/scan/<region>/buildings.geojson`, a secondary contract specified by ARCH-002; GEN defaults to it.
+- **Q12. Enum values** for `species_source`, `height_source`, `detected_by` and `data_vintage` keys (adds `osm`) must match the ARCH-002 schema. Resolved: the ARCH-002 enums include `osm`.
 
 VERIFY items (assigned to network tasks):
 
@@ -1148,8 +1156,18 @@ VERIFY items (assigned to network tasks):
 | EPT native SRS (`srs` in `ept.json`, believed EPSG:3857) | SCAN-021 |
 | Classification availability in SoCal 3DEP datasets (class 2 ground, class 6 building, noise 7/18) | SCAN-021 |
 | Collection year source (name vs metadata) for `data_vintage.lidar` | SCAN-021 |
-| palmcore validator and id helper names; region loader return type | SCAN-001, SCAN-011 |
-| TEST-101 ground truth file path and properties | SCAN-029, SCAN-030 |
+| palmcore validator and id helper names; region loader return type (resolved: `validate_palms`, `palm_id`, `RegionConfig`; check the merged code) | SCAN-001, SCAN-011 |
+| TEST-101 ground truth file path and properties (resolved: TEST-009 format under `tests/accuracy/<site>/`) | SCAN-029, SCAN-030 |
+
+## Reconciliation notes (2026-11-22)
+
+- Canonical outputs confirmed: `build/scan/<region>/palms.geojson` and `build/scan/<region>/buildings.geojson`; GEN, TEST and FX now default to them.
+- `buildings.geojson` is a secondary contract (ARCH-002 schema, `validate_buildings`) and now includes every footprint within `exclusion.radius_max_m + exclusion.clip_buffer_m` of a palm, so GEN's `--margin-m` tuning has the footprints it needs (SCAN-013).
+- `id_prefix` and the exclusion clamps moved out of the `palmscan:` block; SCAN reads `RegionConfig.id_prefix` and `RegionConfig.exclusion` (ARCH-003 defaults margin 1.5, clamps 1.0/8.0; SCAN's 1.5 m minimum dropped). Inventory `name` is required; `mask_out` uses the ARCH-003 shape (SCAN-001, SCAN-009).
+- SCAN-001 depends on ARCH-004 and ARCH-009: the cache builds on `palmcore.cache`, `pyproject.toml` is only topped up if needed, `pdal` is its own extra.
+- SCAN-011 depends on ARCH-006 and ARCH-007: ids from `palmcore.ids.palm_id`, writing through `palmcore.palms.write_palms_doc`; the local sha1 fallback and serializer are gone.
+- Species-key registry `palmscan/data/species_keys.yaml` added to SCAN-002 (also in SCAN-007/SCAN-100 touches); the ARCH-002 pattern, SCAN normalization and ASSET-005 manifest validation all reference it.
+- Accuracy: SCAN-029 rescoped to run TEST-010 (depends on TEST-010); height classes follow TEST (S/M/T/X). CLI `--truth PATH` replaced by `--eval-site SITE` / `eval --site SITE` (SCAN-028, SCAN-030, SCAN-101).
 
 ## Recap
 

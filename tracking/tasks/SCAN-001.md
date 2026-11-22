@@ -6,7 +6,7 @@ phase: 1
 area: SCAN
 kind: build
 plan_ref: "plans/detailed/02-detection-pipeline.md#w1-package-core"
-depends_on: [ARCH-001, ARCH-003]
+depends_on: [ARCH-001, ARCH-003, ARCH-004, ARCH-009]
 requires: [none]
 agent: python-architect
 estimate_h: 3
@@ -14,7 +14,7 @@ touches: [pyproject.toml, palmscan/__init__.py, palmscan/config.py, palmscan/cac
 owner: ""
 branch: ""
 worktree: ""
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -24,23 +24,24 @@ The `palmscan` package exists with its typed config (every detection threshold a
 ## Context
 
 - Spec: plan_ref section W1, plus "Inputs: region config keys", "Internal data model" and "CLI" in the same file.
-- ARCH-001 provides `pyproject.toml`, the `palmcore` package and test tooling; ARCH-003 provides the region YAML loader. Read both before starting and reuse their conventions (CLI library, logging, palmcore geo helpers). If `palmcore` already has local-CRS helpers, `palmscan/geo.py` wraps them.
-- This is the only SCAN task allowed to edit `pyproject.toml`: add the palmscan dependencies and the `lidar` extra listed in W1 if ARCH-001 left them out, and the `palmscan = "palmscan.cli:main"` script entry.
+- ARCH-001 provides `pyproject.toml`, the `palmcore` package and test tooling; ARCH-003 provides the region YAML loader (`palmcore.config.load_region` -> `RegionConfig`); ARCH-004 provides `palmcore.cache` and `palmcore.log`; ARCH-005 provides `palmcore.geo`. Reuse them: `palmscan/geo.py` wraps `palmcore.geo` (`local_crs_for`, `to_local`, `to_wgs84`), `palmscan/cache.py` builds `Cache` on `palmcore.cache` (layout, `cache_key`, atomic writes, meta sidecar) and adds only `get_or_fetch`, offline and refresh. `CacheMiss` and `ConfigError` are imported from `palmcore.errors`, not redefined.
+- Region-level keys are read from `RegionConfig`, not from the `palmscan:` block: `id_prefix` (top level, ARCH-003 default from region initials) and `exclusion.margin_m` / `radius_min_m` / `radius_max_m` (ARCH-003 defaults 1.5 / 1.0 / 8.0). `palmscan.exclusion` keeps only `building_overlap_min_m2`. Mask entries come from `RegionConfig.mask_out` (`palmcore.config.MaskArea`).
+- `pyproject.toml`: ARCH-001 already declares every palmscan dependency, the `scan`/`lidar`/`pdal` extras and the `palmscan` script; ARCH-009 then adds `palmfix`. This task depends on ARCH-009 and edits `pyproject.toml` only if something is still missing (log what). `pdal` stays its own extra (ARCH Q4); `lidar` = rasterio, scikit-image, scikit-learn. FX-002 edits `pyproject.toml` after this task.
 - Test file names use the `test_scan_` prefix to avoid clashes with other packages' tests. `tests/conftest.py` belongs to TEST; do not edit it.
 
 ## Steps
 
 1. Read `plans/detailed/02-detection-pipeline.md` sections W1, Inputs, Internal data model, CLI.
-2. `pyproject.toml`: add missing deps (`geopandas`, `shapely>=2`, `pyproj`, `pyogrio`, `numpy`, `scipy`, `requests`, `pyyaml`), extra `lidar = [pdal, rasterio, scikit-image, scikit-learn]`, and the `palmscan` console script.
+2. `pyproject.toml`: check that ARCH-001/009 cover `geopandas`, `shapely>=2`, `pyproj`, `pyogrio`, `numpy`, `scipy`, `requests`, `pyyaml`, the `lidar` extra (rasterio, scikit-image, scikit-learn), the separate `pdal` extra and the `palmscan` script. Add only what is missing; otherwise leave the file untouched and say so in the Log.
 3. `palmscan/__init__.py` with `__version__ = "0.1.0"`.
 4. `palmscan/model.py`: `TreeRecord`, `LidarCandidate`, `PalmRecord`, `Reject`, `SourceVintage` exactly as in the plan.
-5. `palmscan/config.py`: frozen dataclasses for every block (`ScanConfig`, `InventorySourceCfg`, `MaskArea`, `PalmFilterParams`, `InventoryParams`, `ExclusionParams`, `LidarParams`, `PeakParams`, `RuleParams`, `MergeParams`, `ClassifyParams`, `QaParams`) with the plan's defaults; `ConfigError`; `scan_config_from_mapping(raw)`; `load_scan_config(region, regions_dir)` via the ARCH-003 loader; unknown keys in `palmscan:` raise `ConfigError`; bbox checks incl. the 1.0 deg guard and `allow_large_bbox`; priors normalized; `id_prefix` default from region initials; `config_hash()`.
-6. `palmscan/cache.py`: `Cache`, `CacheMiss`, layout `data/<namespace>/<key[:2]>/<key><suffix>`, atomic write via `.tmp` + `os.replace`, `.meta.json` sidecar, `offline` and `refresh` flags.
+5. `palmscan/config.py`: frozen dataclasses for every `palmscan:` block (`ScanConfig`, `PalmFilterParams`, `InventoryParams`, `ExclusionParams` with only `building_overlap_min_m2`, `LidarParams`, `PeakParams`, `RuleParams`, `MergeParams`, `ClassifyParams`, `QaParams`) with the plan's defaults; `ScanConfig.region` holds the `RegionConfig` (inventory sources, masks, `id_prefix`, `exclusion`, priors, bbox come from it); `scan_config_from_mapping(raw)` (via `palmcore.config.load_region_dict`); `load_scan_config(region, regions_dir)` via `palmcore.config.load_region`; unknown keys in `palmscan:` raise `palmcore.errors.ConfigError` (so `palmscan: {id_prefix: ...}` is rejected with a hint to use the top-level key); the 1.0 deg bbox guard and `allow_large_bbox`; `config_hash()`.
+6. `palmscan/cache.py`: `Cache` on top of `palmcore.cache` (layout `data/<namespace>/<key[:2]>/<key><suffix>`, atomic write and `.meta.json` sidecar come from palmcore; do not reimplement them), adding `get_or_fetch`, `offline` (raises `palmcore.errors.CacheMiss`) and `refresh`.
 7. `palmscan/http.py`: `HttpClient` (`get_json`, `post_text`, `download`), retries on connection errors and 429/5xx with exponential backoff and `Retry-After`, `HttpError`, generic User-Agent `palmscan/<version>`.
-8. `palmscan/geo.py`: `local_crs(bbox)` (UTM zone of bbox centre), `to_local`, `to_wgs84` on numpy arrays.
+8. `palmscan/geo.py`: thin wrappers over `palmcore.geo`: `local_crs(bbox)` (UTM zone of bbox centre), `to_local`, `to_wgs84` on numpy arrays.
 9. `palmscan/cli.py`: `main(argv=None) -> int` with subcommands `run`, `priors`, `eval` and all flags from the CLI section; handlers print "not implemented" and return 1 for now.
 10. Create empty `__init__.py` in `palmscan/sources`, `palmscan/detect`, `palmscan/classify`, `palmscan/qa`.
-11. Tests: config defaults and overrides, typo key rejected, bad bbox rejected, prefix derivation, hash stable; cache hit/miss/offline/refresh/atomic write (use `tmp_path`); HTTP retry logic with a monkeypatched `requests.Session.request` (no sockets); `local_crs` returns EPSG:32611 for a San Diego bbox and round-trips a point within 1 mm.
+11. Tests: config defaults and overrides, typo key rejected, `palmscan: {id_prefix: x}` and `palmscan: {exclusion: {radius_min_m: 1}}` rejected, large bbox rejected, prefix and clamps read from `RegionConfig`, hash stable; cache hit/miss/offline/refresh/atomic write (use `tmp_path`); HTTP retry logic with a monkeypatched `requests.Session.request` (no sockets); `local_crs` returns EPSG:32611 for a San Diego bbox and round-trips a point within 1 mm.
 
 ## Acceptance criteria
 
@@ -62,3 +63,4 @@ python -c "from palmscan.config import scan_config_from_mapping as f; c=f({'regi
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [reconcile] Depends on ARCH-009 (pyproject order) and ARCH-004 (cache helpers). Cache now delegates layout/atomic write/meta to palmcore.cache, errors come from palmcore.errors, geo wraps palmcore.geo; id_prefix and exclusion clamps read from RegionConfig (ARCH-003), removed from the palmscan: block; pdal stays a separate extra per ARCH; script entry already declared by ARCH-001. Cross-area reconciliation.

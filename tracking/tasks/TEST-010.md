@@ -14,7 +14,7 @@ touches: [tests/accuracy/metrics.py, tests/accuracy/thresholds.yaml, tests/unit/
 owner: ""
 branch: ""
 worktree: ""
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -26,6 +26,8 @@ updated: 2026-11-21
 - Spec: `plans/detailed/06-testing.md#matching-algorithm`, `#metric-definitions`, `#thresholds`. Follow the formulas exactly.
 - Ground-truth loaders come from `tests/accuracy/gt.py` (TEST-009).
 - Uses numpy, scipy (`linear_sum_assignment`), shapely, pyproj.
+- This is the single implementation of matching, metrics and thresholds, and the one that gates Phase 4 (TEST-012). SCAN-029 imports `evaluate`, `load_thresholds` and `check_thresholds` from here for palmscan's in-run QA, so keep those signatures stable and documented; never duplicate them in `palmscan`.
+- Predictions normally come from the canonical palmscan output `build/scan/<region>/palms.geojson`.
 - Thresholds live only in `tests/accuracy/thresholds.yaml` (and per-site `meta.yaml` overrides). No hard-coded targets in Python.
 
 ## Steps
@@ -59,3 +61,4 @@ python3 scripts/tasks.py validate
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [reconcile] Confirmed as the single accuracy-metrics implementation and the one that gates Phase 4: SCAN-029 now calls this module's evaluate/load_thresholds/check_thresholds instead of reimplementing them, so those functions are a public API. Example --pred path is the canonical build/scan/<region>/palms.geojson. Cross-area reconciliation.

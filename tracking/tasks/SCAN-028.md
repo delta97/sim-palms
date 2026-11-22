@@ -14,7 +14,7 @@ touches: [palmscan/pipeline.py, palmscan/cli.py, palmscan/qa/summary.py, palmsca
 owner: ""
 branch: ""
 worktree: ""
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -24,7 +24,7 @@ updated: 2026-11-21
 ## Context
 
 - Spec: plan_ref section W20 (steps 1-7) and the stage order in W11.
-- Flags: `--no-lidar`, `--only inventory|lidar`, `--truth PATH`; `eval` subcommand per "CLI".
+- Flags: `--no-lidar`, `--only inventory|lidar`, `--eval-site SITE`; `eval` subcommand per "CLI" (`eval --palms PATH --site SITE [--profile NAME] [--out PATH]`). Accuracy is computed by TEST-010 via SCAN-029; palmscan only produces inputs and runs it.
 - The e2e test injects a fake `PointSource` with synthetic points (no PDAL, no network).
 - Do not change module APIs from SCAN-020 to SCAN-027; if one is insufficient, note it in the Log and add a minimal backwards-compatible parameter.
 
@@ -35,25 +35,26 @@ updated: 2026-11-21
 3. `assign_sizes(..., region_medians)`; `data_vintage.lidar` and `ground_elev_m` set.
 4. `--only lidar`: skip ingest; `--only inventory` or `--no-lidar`: skip LiDAR.
 5. QA: pass candidates/crowns to `write_qa_gpkg`; add LiDAR rejects to CSV; Classifier section from `TrainReport`; LiDAR vintage in grid.
-6. `--truth`: `evaluate` + `accuracy.json` + Accuracy section. `cli eval`: load palms and truth, print the targets table, write `--out` JSON.
+6. `--eval-site SITE`: `evaluate_site` (SCAN-029) + `accuracy.json` + Accuracy section; also write `<out>/eval/<site>/chm.tif` (CHM clipped to the site bbox) as the input for `python -m tests.accuracy.gt fill-heights <site> --chm ...` (TEST-009). `cli eval`: read palms, call `evaluate_site`, print the per-profile table, write `--out` JSON.
 7. `-vv`: debug GeoTIFFs under `<out>/debug/`.
-8. Fixtures in `tests/fixtures/palmscan/pipeline_lidar/`: region YAML, two-record inventory, buildings file, tiny truth file. Synthetic point generator in the test module.
+8. Fixtures in `tests/fixtures/palmscan/pipeline_lidar/`: region YAML, two-record inventory, buildings file, a tiny site folder in the TEST-009 format. Synthetic point generator in the test module.
 9. Tests: mixed `detected_by` counts, reject reasons (`not_isolated`, `crown_small`, `building`), schema validity, rerun determinism, `--only lidar` drops inventory palms, `eval` exit 0 with expected numbers.
 
 ## Acceptance criteria
 
 - [ ] E2E with fake `PointSource` yields `inventory+lidar`, `inventory` and `lidar` palms as designed, and the expected rejects in `qa_rejects.csv`.
 - [ ] `qa_map.gpkg` has `lidar_candidates`; `qa_summary.md` has Classifier and Accuracy sections.
-- [ ] `palmscan eval --palms ... --truth ...` prints the targets table and writes JSON.
+- [ ] `palmscan eval --palms ... --site ...` prints the per-profile table (from TEST-010) and writes JSON.
 - [ ] Phase 1 tests (SCAN-013) still pass unchanged.
 
 ## Verification
 
 ```bash
 pytest tests/unit/palmscan -q
-palmscan eval --palms tests/fixtures/palmscan/accuracy/pred.geojson --truth tests/fixtures/palmscan/accuracy/truth.geojson --out /tmp/acc.json; echo "exit=$?"
+palmscan eval --palms tests/fixtures/palmscan/accuracy/pred.geojson --site TX --out /tmp/acc.json; echo "exit=$?"   # site TX resolved under tests/fixtures/palmscan/accuracy/ in the test; real sites under tests/accuracy/
 ```
 
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [reconcile] Accuracy now runs through SCAN-029/TEST-010: --truth PATH replaced by --eval-site SITE on run and eval --palms PATH --site SITE; the pipeline also writes the eval site's CHM GeoTIFF as input for TEST-009 fill-heights. Cross-area reconciliation.

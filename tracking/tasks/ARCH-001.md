@@ -6,7 +6,7 @@ phase: 1
 area: ARCH
 kind: build
 plan_ref: plans/detailed/01-architecture.md#ws1-tooling-and-ci
-depends_on: [GATE-P0]
+depends_on: []
 requires: [none]
 agent: python-architect
 estimate_h: 4
@@ -14,7 +14,7 @@ touches: [pyproject.toml, palmcore/__init__.py, palmcore/py.typed, palmcore/erro
 owner: ""
 branch: ""
 worktree: ""
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -30,7 +30,7 @@ A single installable Python project (`palmfix`) with the three package roots, ru
 - Do NOT edit `.gitignore` (bootstrap owns it). If `data/`, `build/` and the tool caches are not ignored yet, note it in the Log.
 - Do NOT create `tests/conftest.py`, `tests/__init__.py` or `tests/helpers/` (TEST-001 owns them). With `--import-mode=importlib` and `pythonpath = ["."]`, ARCH tests work without them.
 - The schema JSON files don't exist yet (ARCH-002, ARCH-003). Test `schemas.py` with a temporary directory via `PALMFIX_SCHEMA_DIR`.
-- Depends on GATE-P0 because plan 05 says nothing is built before Phase 0 passes.
+- No dependency on GATE-P0: code that runs in a Linux container (`requires: none` or `network`) may proceed in parallel with Phase 0; windows-sim build and validation work still waits for the relevant gates and SPIKE outputs (policy in `plans/detailed/01-architecture.md#parallelization-notes`; proposed ADR-0013).
 
 ## Steps
 
@@ -68,3 +68,4 @@ Then open the PR's Checks tab: `python / lint` and both `python / test` matrix j
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [reconcile] Removed depends_on GATE-P0: Linux-container code (requires none/network) may run in parallel with Phase 0 (policy in plans/detailed/01-architecture.md, proposed ADR-0013). Sim-facing work still waits for gates/SPIKE outputs.

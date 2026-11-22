@@ -10,11 +10,11 @@ depends_on: [TEST-100, TEST-102]
 requires: [windows-sim, human]
 agent: test-engineer
 estimate_h: 3
-touches: [tests/visual/T1/, tests/visual/T2/, tests/visual/T3/, tests/visual/T4/, tests/visual/T5/, tests/visual/test_log.md, tests/visual/graphics_profile.yaml]
+touches: [tests/visual/T1/<date>_baseline/, tests/visual/T2/<date>_baseline/, tests/visual/T3/<date>_baseline/, tests/visual/T4/<date>_baseline/, tests/visual/T5/<date>_baseline/, tests/visual/test_log.md, tests/visual/graphics_profile.yaml]
 owner: ""
 branch: ""
 worktree: ""
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -54,3 +54,4 @@ grep -c baseline tests/visual/test_log.md   # 5
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [reconcile] Narrowed touches from whole tests/visual/T1..T5/ trees to this task's labelled baseline runs (tests/visual/<site>/<date>_baseline/), so GEN and TEST visual tasks no longer overlap. Cross-area reconciliation.

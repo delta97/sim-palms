@@ -51,7 +51,7 @@ tests/visual/lineup-<species_key>/<YYYY-MM-DD>/   # screenshots from species lin
 
 | Thing | Pattern | Example |
 |---|---|---|
-| Species key | `genus_species`, lowercase. Same keys as `palms.geojson` `species` (ARCH-002) | `washingtonia_robusta` |
+| Species key | `genus_species`, lowercase. Same keys as `palms.geojson` `species` (ARCH-002 pattern); must be listed in the canonical registry `palmscan/data/species_keys.yaml` (SCAN-002), which `validate` checks | `washingtonia_robusta` |
 | Variant | `short`, `medium`, `tall`, optional alternate crown suffix `_b` | `medium`, `medium_b` |
 | Model name | `palmfix_<species_key>_<variant>` | `palmfix_washingtonia_robusta_tall` |
 | Model XML | `<model_name>.xml` | `palmfix_washingtonia_robusta_tall.xml` |
@@ -177,7 +177,7 @@ Field rules:
 
 ### Large file policy
 
-Proposal. VERIFY with the user in ASSET-008 before any binary is committed.
+Proposal. The user decides it in DEC-008 (ADR-0009), which also settles whether visual screenshots are committed as JPEG in plain git (TEST plan) or through LFS; ASSET-008 then implements the decision before any binary is committed.
 
 - Git LFS for `*.blend`, `*.png`, `*.bin` and `*.ktx2` under `assets/`, and for `*.png` under `tests/visual/`. Text glTF, XML, YAML and JSON stay in plain git.
 - Why commit the exports: the package can then be built on the sim PC without opening Blender.
@@ -202,7 +202,8 @@ Proposal. VERIFY with the user in ASSET-008 before any binary is committed.
   - Exact license clauses on redistributing the model inside a game mod.
   - Price, triangle counts, formats, and what work remains (LODs, MSFS materials).
   - Build-hour estimate from this plan's task index.
-  - DEC-002 (owned by plan 07) makes the decision. ASSET-002 only collects facts.
+  - DEC-002 (owned by plan 07, depends on ASSET-002) makes the decision. ASSET-002 only collects facts.
+  - Timing: DEC-002 opens at the start of Phase 3 with the default "build the Mexican fan palm first". The pilot (ASSET-010..015) runs under that default; the decision, informed by its hours, is needed before ASSET-016 and the other four species. ASSET-016 writes the `Decided (ADR-0003)` note here.
 
 ### W2 Toolchain and pipeline smoke test
 
@@ -355,7 +356,7 @@ Per species, in the sim (ASSET-015/016 for robusta, x3 for the others). It follo
 2. Build `palmfix-assets` locally, including this species.
 3. Lineup: in Dev Mode, place every variant of the species 15 m apart in a row on flat ground. Use a spot outside photogrammetry (test site T5 if suitable) so no blob gets in the way. Record the coordinates in the review file.
 4. Screenshot at street level (2 m), 150 m and 600 m, at noon and at golden hour. Save them under `tests/visual/lineup-<species_key>/<YYYY-MM-DD>/`.
-5. If the species occurs at a test site in `palms.geojson`, also review it there (via GEN's manifest-driven placement when that exists).
+5. If the species occurs at a test site in `palms.geojson`, also review it there via GEN's manifest-driven placement (GEN-011; ASSET-015 depends on it).
 6. Fill in the checklist:
    - [ ] Automated checks pass
    - [ ] Right at street level, 150 m and 600 m, noon and golden hour
@@ -400,14 +401,14 @@ Phase 6, low detail:
 | ASSET-005 | Manifest schema, species spec format, loader and generator | 3 | ARCH-001 | none | 5 |
 | ASSET-006 | glTF stats and automated asset checks | 3 | ASSET-005 | none | 5 |
 | ASSET-007 | Model XML parsing, GUID cross-check, LOD info in manifest | 3 | ASSET-006, ASSET-004 | none | 4 |
-| ASSET-008 | Agree and set up the large-file policy for assets | 3 | - | human | 1.5 |
-| ASSET-010 | Mexican fan palm: species spec, textures, materials | 3 | DEC-002, GATE-P2, ASSET-001, ASSET-004, ASSET-005 | blender | 4 |
+| ASSET-008 | Implement the asset large-file policy decided in DEC-008 | 3 | DEC-008 | none | 1.5 |
+| ASSET-010 | Mexican fan palm: species spec, textures, materials (pilot) | 3 | GATE-P2, ASSET-001, ASSET-004, ASSET-005 | blender | 4 |
 | ASSET-011 | Mexican fan palm: LOD0 medium variant | 3 | ASSET-010 | blender | 5 |
 | ASSET-012 | Mexican fan palm: LOD0 short and tall variants | 3 | ASSET-011 | blender | 3 |
 | ASSET-013 | Mexican fan palm: LOD1-LOD3 for all variants | 3 | ASSET-012 | blender | 4 |
 | ASSET-014 | Mexican fan palm: export, create palmfix-assets package, first manifest | 3 | ASSET-013, ASSET-007 | blender, windows-sim | 4 |
-| ASSET-015 | Mexican fan palm: in-sim review | 3 | ASSET-014, TEST-102 | windows-sim, human | 3 |
-| ASSET-016 | Mexican fan palm: fix pass, acceptance, pipeline lessons | 3 | ASSET-015 | blender, windows-sim, human | 4 |
+| ASSET-015 | Mexican fan palm: in-sim review | 3 | ASSET-014, TEST-102, GEN-011 | windows-sim, human | 3 |
+| ASSET-016 | Mexican fan palm: fix pass, acceptance, pipeline lessons, DEC-002 note | 3 | ASSET-015, DEC-002 | blender, windows-sim, human | 4 |
 | ASSET-020..023 | California fan palm: spec, LOD0, LODs+export, acceptance | 3 | ASSET-016 (chain) | blender (x0-x2); blender, windows-sim, human (x3) | 3+6+4+2 |
 | ASSET-030..033 | Canary Island date palm: same four steps | 3 | ASSET-016 (chain) | blender (x0-x2); blender, windows-sim, human (x3) | 3+6+4+2 |
 | ASSET-040..043 | Queen palm: same four steps | 3 | ASSET-016 (chain) | blender (x0-x2); blender, windows-sim, human (x3) | 3+6+4+2 |
@@ -441,15 +442,15 @@ That's far above the 20-40 h in `plans/05-phases.md` (see the open questions).
 flowchart TD
     SPIKE004[SPIKE-004] --> A003[ASSET-003 toolchain]
     A003 --> A004[ASSET-004 smoke test]
-    A008[ASSET-008 LFS policy] --> A004
+    DEC008[DEC-008] --> A008[ASSET-008 LFS policy]
+    A008 --> A004
     SPIKE003[SPIKE-003] --> A004
     ARCH001[ARCH-001] --> A005[ASSET-005 manifest]
     A005 --> A006[ASSET-006 checks]
     A006 --> A007[ASSET-007 model XML + GUID]
     A004 --> A007
     A001[ASSET-001 references] --> A010
-    A002[ASSET-002 license inputs] -.feeds.-> DEC002[DEC-002]
-    DEC002 --> A010
+    A002[ASSET-002 license inputs] --> DEC002[DEC-002]
     GATEP2[GATE-P2] --> A010
     A004 --> A010
     A005 --> A010
@@ -458,6 +459,8 @@ flowchart TD
     end
     A007 --> A014
     TEST102[TEST-102] --> A015
+    GEN011[GEN-011] --> A015
+    DEC002 --> A016
     A016 --> A020[020-023 filifera]
     A016 --> A030[030-033 phoenix]
     A016 --> A040[040-043 syagrus]
@@ -488,7 +491,7 @@ Each species node `0x0-0x3` is a chain: x0 → x1 → x2 → x3.
 - **Ready early, before Phase 3** (no GATE-P2 dependency):
   - ASSET-001 and 002 (network only, any agent)
   - ASSET-005 to 007 (code, `none`, cloud agents)
-  - ASSET-008 (user decision)
+  - DEC-008 (user decision), then ASSET-008 (`none`)
   - ASSET-003 and 004 (sim PC, once Phase 0 has installed the SDK)
 - **Serial on purpose:** the robusta chain ASSET-010 to 016. It proves the pipeline. Nothing else in Blender should start until ASSET-016 is done.
 - **Parallel after ASSET-016:** the four species chains share no files (separate `assets/blender/<key>/`, `assets/species/<key>.yaml`, `PackageSources/modelLib/<key>/`, `reviews/<key>.md`). In practice, Blender tasks are limited by how many people or Blender seats there are, not by the graph.
@@ -510,7 +513,7 @@ Each species node `0x0-0x3` is a chain: x0 → x1 → x2 → x3.
   | `network` | 001, 002, 060 |
   | `blender` | modeling tasks; Blender runs on the sim PC too, so x3 fixes can happen there |
   | `windows-sim` | 003, 004, 014, 015, 016, x3, 100, 070, 101, 065 |
-  | `human` | 008, 015, 016, all acceptance reviews |
+  | `human` | 015, 016, all acceptance reviews (008 is `none` now; the decision is DEC-008) |
 
 ---
 
@@ -541,16 +544,26 @@ Each species node `0x0-0x3` is a chain: x0 → x1 → x2 → x3.
 | 10 | VERIFY: whether scenery objects support pitch/bank (lean) and uniform scale | SPIKE-003 (template), noted in ASSET-015 |
 | 11 | VERIFY: SimObject container format in 2024; model reuse; scaling at spawn; title uniqueness | ASSET-070 |
 | 12 | VERIFY: how a region package declares a dependency on `palmfix-assets` | ASSET-014 (with GEN) |
-| 13 | Git LFS vs external store; LFS quota | ASSET-008 (user) |
-| 14 | Species keys must match the ARCH-002 schema enum (including the Florida keys) | ASSET-005 |
+| 13 | Git LFS vs external store; LFS quota; screenshot storage (JPEG vs LFS) | DEC-008 (user), implemented by ASSET-008 |
+| 14 | Species keys: ARCH-002 uses a pattern, not an enum. Resolved 2026-11-22: keys (including Florida) must be in `palmscan/data/species_keys.yaml` (SCAN-002) | ASSET-005 |
 | 15 | Estimate: this breakdown totals about 120 h for Phase 3 vs 20-40 h in `plans/05-phases.md`. Licensing or fewer variants (1-2 per species) would cut it | User, at DEC-002 |
-| 16 | `plans/05-phases.md` lists build-vs-license as Phase 3 task 1 but in the decision table as "after phase 3", with the default "build one species first". This plan assumes DEC-002 resolves at the start of Phase 3, possibly as "build robusta, then re-decide" | DEC-002 owner |
+| 16 | `plans/05-phases.md` lists build-vs-license as Phase 3 task 1 but in the decision table as "after phase 3", with the default "build one species first". This plan assumes DEC-002 resolves at the start of Phase 3, possibly as "build robusta, then re-decide". Resolved 2026-11-22: DEC-002 opens at the start of Phase 3 with that default; the pilot (ASSET-010..015) runs under it; ASSET-016 and later species wait for the decision | DEC-002 owner |
 | 17 | Frond wind animation: out of v1. Worth a later look if static fronds look dead | User |
 | 18 | Alternate crowns (`_b` variants): in the contract, but no task yet. Add after ASSET-100 if rows look copy-pasted | User, after ASSET-100 |
 | 19 | Florida fallbacks before Florida models exist: use the nearest SoCal model, or leave those blobs alone? | User |
 | 20 | Young palms below the shortest variant get clamped scale. Add an `xshort` variant if histograms show many | ASSET-010 / x0 tasks |
 
 ---
+
+## Reconciliation notes (2026-11-22)
+
+- Species keys: validated against the canonical registry `palmscan/data/species_keys.yaml` (SCAN-002); the ARCH-002 schema keeps a pattern (ASSET-005, open question 14).
+- Asset storage: DEC-008 is the decision (ADR-0009), including whether visual screenshots are committed as JPEG or via LFS (folded in from TEST). ASSET-008 is now the implementation, depends on DEC-008, `requires: none`.
+- DEC-002 timing: depends on ASSET-002; opens at the start of Phase 3 with the "build one species first" default; ASSET-010 no longer waits for it (pilot); ASSET-016 depends on DEC-002 and writes its `Decided (ADR-0003)` note into this plan, so DEC-002 no longer edits this file (removes the unordered overlap with ASSET-004/ASSET-007).
+- GEN loads the manifest only through `palmcore.assets.manifest.load_manifest` (GEN-011 depends on ASSET-005). `palmcore/assets/` stays ASSET's; no ARCH task touches it.
+- ASSET-015 depends on GEN-011 (manifest-driven placement for the T1 review). Viewpoints are the standard street level (~2 m), low oblique (~150 m), approach (~600 m), now also in the TEST plan.
+- ASSET-010/020/030/040/050 read palm heights from the canonical palmscan output `build/scan/<region>/palms.geojson` (was `data/`).
+- Open, not resolved here: `library.yaml` `scale_limits` (0.85/1.15) and `species_fallback` overlap GEN's `placement.scale_clamp` (0.15) and priors-based fallback; GEN and ASSET owners should pick one source (see plan 04 reconciliation notes).
 
 ## Recap
 

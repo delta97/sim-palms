@@ -77,8 +77,8 @@ Entry point: `palmgen` console script (ARCH-001 owns `pyproject.toml`), and alwa
 ```
 palmgen build --region NAME
     [--config PATH]          default regions/NAME.yaml
-    [--palms PATH]           default data/NAME/palms.geojson
-    [--buildings PATH]       default data/NAME/buildings.geojson
+    [--palms PATH]           default build/scan/NAME/palms.geojson      (canonical palmscan output)
+    [--buildings PATH]       default build/scan/NAME/buildings.geojson  (canonical palmscan output)
     [--manifest PATH]        default assets/manifest.json
     [--models library|placeholder]          default library
     [--placement static|exclusions-only]    default static
@@ -97,7 +97,7 @@ palmgen index --region NAME [--config] [--palms] [--manifest] [--out DIR]
     [--data-version YYYY-MM] [--allow-missing-titles]
 
 palmgen masks airports --region NAME [--config]
-    [--out PATH]             default data/NAME/masks/airports.geojson
+    [--out PATH]             default data/NAME/masks/airports.geojson  (a build uses masks.airports.path; point it here to use the fetched file)
     [--endpoint URL]         default https://overpass-api.de/api/interpreter
 ```
 
@@ -202,7 +202,7 @@ def resolve_data_version(collection_meta: dict, override: str | None) -> str
 # palmgen/variants.py
 Variant(species: str, variant: str, model_guid: str, native_height_m: float, simobject_title: str | None)
 Selection(variant: Variant, scale: float, scale_clamped: bool, species_fallback: bool, height_missing: bool)
-def load_manifest(path: Path) -> list[Variant]
+def load_manifest(path: Path) -> list[Variant]     # wraps palmcore.assets.manifest.load_manifest (ASSET-005); never parses JSON itself
 def select_variant(p: Palm, variants: list[Variant], priors: dict[str, float], clamp: float) -> Selection
 def heading_deg(palm_id: str) -> float
 
@@ -233,7 +233,7 @@ def run_index(opts) -> int
 
 ### Region config keys palmgen reads
 
-ARCH-003 owns the schema. palmgen reads these keys; defaults apply when a key is absent. ARCH is asked to add the ones marked *new*.
+ARCH-003 owns the schema and is the only place the defaults below are defined (palmgen reads them from `RegionConfig`; SCAN reads the same `exclusion.*` values). Every key marked *new* is now in ARCH-003 (WS7). Relative paths resolve against the repo root (ARCH rule), not the region file.
 
 | Key | Default | Use |
 |---|---|---|
@@ -250,9 +250,10 @@ ARCH-003 owns the schema. palmgen reads these keys; defaults apply when a key is
 | `exclusion.default_radius_m` *new* | 3.0 | radius when crown and radius are both missing |
 | `exclusion.max_cluster_extent_m` *new* | 150 | split longer clusters |
 | `exclusion.max_vertices` *new* | 256 | per polygon (VERIFY: sim limit) |
-| `mask_out` | `[]` | list of `{name, kind: mod\|airport\|other, geometry: <GeoJSON geometry>}` or `{name, kind, path: <geojson file>}` |
+| `mask_out` | `[]` | list of `{name, kind: mod\|airport\|other, bbox \| geometry \| path, note}` (ARCH-003 mask item; `path` relative to the repo root) |
 | `masks.airports.enabled` *new* | true | default airport mask |
 | `masks.airports.buffer_m` *new* | 100 | buffer around aerodrome polygons |
+| `masks.airports.path` *new* | `docs/compat/airports-mask.geojson` | default airport polygons, produced by RISK-004; may point at a `palmgen masks airports` output |
 | `placement.scale_clamp` *new* | 0.15 | ±15% |
 
 ### Asset manifest fields palmgen reads
@@ -521,7 +522,7 @@ GEN-001. Creates the package, every CLI subcommand and flag above, `errors.py` w
 
 #### GEN deterministic ids
 
-GEN-002. Name strings fed to the UUIDv5 helper (root namespace from `palmcore`, or `uuid5(NAMESPACE_URL, "https://palmfix.invalid/ns/v1")` if palmcore exposes none):
+GEN-002. Name strings fed to the UUIDv5 helper (root namespace `palmcore.ids.NAMESPACE`, ARCH-006; GEN-002 depends on ARCH-006):
 
 | Item | Name string |
 |---|---|
@@ -548,9 +549,9 @@ GEN-003. Grid of 0.01°, tile named by its south-west corner.
 
 GEN-004.
 
-- `load_palms`: validate with the ARCH-002 validator; `InputError` listing the first 20 schema errors. Duplicate `palm_id` → `InputError`. Features whose `region` differs from `--region` → `InputError`. Returns palms sorted by `palm_id` plus collection-level metadata for `resolve_data_version`.
-- `load_buildings`: GeoJSON FeatureCollection of Polygon/MultiPolygon in EPSG:4326; MultiPolygons exploded; invalid geometries repaired with `shapely.make_valid`, empty ones dropped. File missing while `clip_buildings` is true → `InputError` with a hint to pass `--buildings` or set `clip_buildings: false`.
-- `load_gen_config`: loads the region YAML through `palmcore` and maps the keys in [Region config keys palmgen reads](#region-config-keys-palmgen-reads) into a frozen `GenConfig` with the defaults listed. Unknown keys under `exclusion` produce a warning, not an error.
+- `load_palms`: read with `palmcore.palms.read_palms` (ARCH-007, validates with ARCH-002; GEN-004 depends on ARCH-007); `InputError` listing the first 20 schema errors. Duplicate `palm_id` → `InputError`. Features whose `region` differs from `--region` → `InputError`. Returns palms sorted by `palm_id` plus collection-level metadata for `resolve_data_version`.
+- `load_buildings`: the ARCH-002 secondary contract `buildings.geojson` (checked with `palmcore.contract.validate_buildings`), Polygon/MultiPolygon in EPSG:4326; MultiPolygons exploded; invalid geometries repaired with `shapely.make_valid`, empty ones dropped. File missing while `clip_buildings` is true → `InputError` with a hint to pass `--buildings` or set `clip_buildings: false`.
+- `load_gen_config`: loads the region YAML through `palmcore` and maps the keys in [Region config keys palmgen reads](#region-config-keys-palmgen-reads) into a frozen `GenConfig`; defaults come from `RegionConfig` (ARCH-003), not from GEN code. Unknown keys under `exclusion` produce a warning, not an error.
 - Fixtures created here and reused by later tasks: `tests/fixtures/palmgen/palms_small.geojson` (12 palms over 2 tiles: one 5-palm row 3 m apart, one pair 10 m apart, one palm touching a building, one palm inside a building, one palm inside a mod mask, one palm near an airport polygon, one with null height, one with an unknown species, one with null crown and null radius), `buildings_small.geojson`, `region_small.yaml`.
 
 #### GEN geometry
@@ -585,7 +586,7 @@ Tests: circle half over a building → one valid part, no overlap with the buffe
 
 GEN-007.
 
-- `load_masks`: inline `mask_out` geometries and `path` files (relative to the region YAML), plus the airport file when `masks.airports.enabled` and not `--no-airport-mask`. Airport polygons are buffered by `masks.airports.buffer_m` in local metres. Airport mask enabled but file missing → `InputError` with the hint `palmgen masks airports --region NAME`.
+- `load_masks`: inline `mask_out` `bbox`/`geometry` entries and `path` files (already absolute in `RegionConfig`; ARCH-003 resolves against the repo root), plus the airport file `masks.airports.path` (default `docs/compat/airports-mask.geojson` from RISK-004) when `masks.airports.enabled` and not `--no-airport-mask`. Airport polygons are buffered by `masks.airports.buffer_m` in local metres. Airport mask enabled but file missing → `InputError` with the hint (RISK-004 output, or `palmgen masks airports --region NAME --out <path>`).
 - Order in the pipeline: point masks first (palm inside any mask → dropped, warning `MASKED`), then after clipping, exclusion polygons are differenced with `airport` masks only (mod overlaps are harmless, airport scenery is not). Counts per mask go to the report.
 - `fetch_airports`: Overpass QL `[out:json][timeout:60];(way["aeroway"="aerodrome"](S,W,N,E);relation["aeroway"="aerodrome"](S,W,N,E););out geom;`, converted by `overpass_to_geojson` (closed ways → Polygon; multipolygon relations → polygonize outer members). Writes a FeatureCollection with `name`, `icao` (from `icao` tag, may be null) and `osm_id`. Credit OSM (ODbL) in the file's `attribution` member. HTTP is injectable; unit tests use `tests/fixtures/palmgen/overpass_airports.json` (hand-written, 1 way + 1 relation). The live fetch is run during region setup, not in tests.
 
@@ -609,7 +610,7 @@ GEN-010. Converts `captured/project.xml` and `captured/package_definition.xml` i
 GEN-011.
 
 - `--models placeholder`: every placement uses `templates.yaml` `placeholder_model`, scale 1.0.
-- `--models library`: variants from `load_manifest`.
+- `--models library`: variants from `load_manifest`, which wraps ASSET's `palmcore.assets.manifest.load_manifest` (GEN-011 depends on ASSET-005).
   1. Species with no variant: use the species with the highest `species_priors` value that has variants (ties alphabetical); warning `SPECIES_FALLBACK`. No priors match → first species alphabetically.
   2. Height missing: target = median `native_height_m` of the species' variants; warning `HEIGHT_MISSING`.
   3. Pick the variant minimising `abs(ln(h / native_height_m))`; ties → lower native height. Several variants with the same native height (alternate crowns): pick index `floor(unit_hash(palm_id, "alt") * k)` among them sorted by `variant`.
@@ -661,8 +662,8 @@ GEN-015. `run_build`: lock, `generate`, then unless `--skip-compile`: sim check,
 All `windows-sim`; they serialize on the Windows PC.
 
 - **GEN-016 first Windows build:** run `palmgen build` on the Phase 1 test region; fix `expected_bgl_name`, log patterns and `SIM_PROCESS_NAMES` from reality; save real logs as fixtures; open the project in Dev Mode and confirm it loads.
-- **GEN-017 Dev Mode review and margin tuning:** iterate with `--margin-m` in the Dev Mode loop (open project, build, slew to T1/T3, inspect, regenerate). Try 0.5, 1.0, 1.5, 2.0, 2.5 m; pick the smallest margin with no visible blob remnant; write it to the test region YAML; screenshots per TEST-102.
-- **GEN-100 deliverable:** clean `palmgen build`, link or copy the compiled package into Community, restart the sim, run the visual protocol at T1 and T3, check Phase 2 exit criteria (≥ 90% of visible blobs gone, no wall cuts, no autogen trees in holes).
+- **GEN-017 Dev Mode review and margin tuning:** iterate with `--margin-m` in the Dev Mode loop (open project, build, slew to T1/T3, inspect, regenerate). Try 0.5, 1.0, 1.5, 2.0, 2.5 m; pick the smallest margin with no visible blob remnant; write it to the test region YAML (`exclusion.margin_m`, the single key palmscan also reads, so the next `palmscan run` uses it); screenshots per TEST-102 into `tests/visual/<site>/<date>_gen017-margin/`.
+- **GEN-100 deliverable:** palmscan rerun with the tuned margin, clean `palmgen build`, link or copy the compiled package into Community, restart the sim, run the visual protocol at T1 and T3 (street ~2 m, oblique ~150 m, approach ~600 m; runs `tests/visual/<site>/<date>_gen100/`), check Phase 2 exit criteria (≥ 90% of visible blobs gone, no wall cuts, no autogen trees in holes).
 - **GEN-019 real model library (Phase 3):** `--models library` with ASSET-100's manifest; confirm cross-package model GUIDs resolve (if not, add the dependency declaration to `package_definition.xml.j2`, VERIFY), palm bases on the ground, scale and heading applied.
 
 #### GEN spatial index export
@@ -760,11 +761,11 @@ LIVE-009 (`windows-sim`, `gpu`, `human`). Three setups over the densest test are
 2. static: `palmgen build --placement static --models library --out build/bakeoff-static`;
 3. live: `palmgen build --placement exclusions-only --out build/bakeoff-live`, `palmgen index`, `PalmLive.App spawn`.
 
-Run TEST-103's fixed flight 3 times each. Compare average FPS, 1% low, p99 frametime, stutter events, live object count, and visual notes (pop-in at spawn radius, LOD transitions). Decision rule: live wins only if it beats static on frametime or stutter beyond run-to-run noise, with no worse visuals; otherwise static (plan default). Output: `tests/perf/bakeoff/<date>/report.md` and `tracking/decisions/ADR-placement-bakeoff.md`. GATE-P5 reads it.
+Run TEST-103's fixed flight 3 times each. Compare average FPS, 1% low, p99 frametime, stutter events, live object count, and visual notes (pop-in at spawn radius, LOD transitions). Decision rule: live wins only if it beats static on frametime or stutter beyond run-to-run noise, with no worse visuals; otherwise static (plan default). Output: `tests/perf/bakeoff/<date>/report.md` (raw) and `docs/findings/LIVE-009.md` (measurements, rule applied, recommendation). LIVE-009 writes no ADR: DEC-007 depends on it and writes ADR-0008, then drops or keeps LIVE-010, LIVE-011, LIVE-101 and ASSET-101. GATE-P5 reads both.
 
 #### LIVE cleanup ledger and app integration
 
-Only if LIVE-009 picks live; otherwise LIVE-010, LIVE-011 and LIVE-101 are set to `dropped`.
+Only if DEC-007 (ADR-0008, from the LIVE-009 bake-off) picks live; otherwise DEC-007 sets LIVE-010, LIVE-011 and LIVE-101 to `dropped`. LIVE-010 depends on DEC-007.
 
 - **LIVE-010:** `JsonSpawnLedger` at `%LOCALAPPDATA%\PalmLive\spawned.json` (or `ledgerPath`): object ids saved after every tick that changed the live set (temp file + rename). On start: if the ledger is non-empty and SPIKE-005 showed objects survive a disconnect and ids stay valid, remove them; if ids are not valid across connections, record that leftovers need a sim restart and show it to the user. `CleanupCommand` filled. `Shutdown` empties the ledger.
 - **LIVE-011:** `LiveSession` opens indexes for active regions with `index_file`, owns the `SpawnManager` and a 1 Hz timer; window gets a "Live palms" toggle and the live count; `spawn` verb uses `LiveSession`; options from config.
@@ -773,6 +774,10 @@ Only if LIVE-009 picks live; otherwise LIVE-010, LIVE-011 and LIVE-101 are set t
 
 - **LIVE-100 (region manager deliverable):** on the Windows PC, activate the GEN-100 region via the window, start the sim, confirm the package loads and blobs are gone at T1; deactivate, restart, confirm they're back; check the sim-running banner and the process names; check the junction leaves the build folder untouched; export a real `.pln` as a fixture.
 - **LIVE-101 (live spawner deliverable):** with ASSET-101 SimObjects, 1-hour soak flight: object count stays ≤ cap, returns to zero after shutdown, no leftover objects after a forced kill + restart + `cleanup`; tune radius and cap; log CPU/frametime notes.
+
+#### LIVE build a region from the app
+
+LIVE-012 (optional, Phase 5 item 2 of plan 05; `none` for Core, `windows-sim` for the final check). A `build NAME [--skip-scan] [--models library|placeholder] [--offline]` verb and a "Rebuild" button run `python -m palmscan run --region NAME` and then `python -m palmgen build --region NAME` through an injectable `IProcessRunner`, log output to `<buildRoot>/logs/`, map a failing stage to exit 5 (palmgen 6 → "close the sim first"), and refresh the catalog. New optional config keys `pythonExe` and `repoRoot`. Depends on LIVE-100 and SCAN-100, and on LIVE-011 only to serialize `MainForm.cs` (satisfied when LIVE-011 is dropped).
 
 #### LIVE if Python wins DEC-003
 
@@ -838,23 +843,23 @@ Record in the spike findings note:
 
 | ID | Title | Phase | Depends on | Requires | Est h |
 |---|---|---|---|---|---|
-| GEN-001 | Scaffold palmgen package, CLI surface and data model | 2 | ARCH-001, GATE-P0 | none | 2 |
-| GEN-002 | Deterministic GUIDs and per-palm hashes | 2 | GEN-001 | none | 1 |
+| GEN-001 | Scaffold palmgen package, CLI surface and data model | 2 | ARCH-001 | none | 2 |
+| GEN-002 | Deterministic GUIDs and per-palm hashes | 2 | GEN-001, ARCH-006 | none | 1 |
 | GEN-003 | 0.01 degree tiling and tile naming | 2 | GEN-001 | none | 1 |
-| GEN-004 | Load palms, buildings and region config | 2 | GEN-001, ARCH-002, ARCH-003 | none | 2 |
+| GEN-004 | Load palms, buildings and region config | 2 | GEN-001, ARCH-002, ARCH-003, ARCH-007 | none | 2 |
 | GEN-005 | Exclusion circles, merging and simplification | 2 | GEN-001 | none | 3 |
 | GEN-006 | Building footprint clipping | 2 | GEN-005 | none | 2 |
 | GEN-007 | Mod and airport masks, Overpass airport fetch | 2 | GEN-004, GEN-005 | none | 3 |
 | GEN-008 | Template engine and XML writer on fake templates | 2 | GEN-001 | none | 3 |
 | GEN-009 | Convert captured scene XML into real templates | 2 | GEN-008, SPIKE-003 | none | 2 |
 | GEN-010 | Project file, PackageDefinitions and version scheme | 2 | GEN-009 | none | 2 |
-| GEN-011 | Variant selection, scaling and heading | 2 | GEN-002, GEN-004 | none | 2 |
+| GEN-011 | Variant selection, scaling and heading | 2 | GEN-002, GEN-004, ASSET-005 | none | 2 |
 | GEN-012 | Generate pipeline and golden tests | 2 | GEN-003, GEN-006, GEN-007, GEN-010, GEN-011 | none | 3 |
 | GEN-013 | fspackagetool wrapper and output checks | 2 | GEN-001, SPIKE-004 | none | 3 |
 | GEN-014 | build_report.md and build_report.json | 2 | GEN-001 | none | 1 |
 | GEN-015 | Wire palmgen build end to end | 2 | GEN-012, GEN-013, GEN-014 | none | 2 |
-| GEN-016 | First Windows build and output check calibration | 2 | GEN-015, SCAN-100 | windows-sim | 2 |
-| GEN-017 | Dev Mode review and margin tuning | 2 | GEN-016, TEST-100, TEST-102 | windows-sim, human | 3 |
+| GEN-016 | First Windows build and output check calibration | 2 | GEN-015, SCAN-100, RISK-004 | windows-sim | 2 |
+| GEN-017 | Dev Mode review and margin tuning | 2 | GEN-016, TEST-100, TEST-102, ARCH-008 | windows-sim, human | 3 |
 | GEN-100 | Deliverable: palmgen build produces a working Community region package (Phase 2) | 2 | GEN-017 | windows-sim, human | 2 |
 | GEN-018 | Spatial index export (palmgen index) | 5 | GEN-012 | none | 2 |
 | GEN-019 | Integrate the real model library into region builds | 3 | GEN-100, ASSET-100 | windows-sim, human | 3 |
@@ -868,11 +873,12 @@ Record in the spike findings note:
 | LIVE-007 | Spawn manager on fake adapter and flight tracks | 5 | LIVE-006 | none | 5 |
 | LIVE-008 | SimConnect adapter, spawn and record-track verbs | 5 | LIVE-005, LIVE-007, SPIKE-005 | windows-sim | 4 |
 | LIVE-009 | Static vs live placement bake-off | 5 | LIVE-008, GEN-019, ASSET-101, TEST-103, DEC-005 | windows-sim, gpu, human | 5 |
-| LIVE-010 | Spawn ledger and crash-safe cleanup | 5 | LIVE-009 | none | 2 |
+| LIVE-010 | Spawn ledger and crash-safe cleanup | 5 | DEC-007 | none | 2 |
 | LIVE-011 | Live palms in the app (LiveSession) | 5 | LIVE-010 | none | 3 |
-| LIVE-101 | Deliverable: palmlive live spawner (only if the Phase 5 bake-off picks live placement) | 5 | LIVE-011, LIVE-100, ASSET-101 | windows-sim, human | 3 |
+| LIVE-101 | Deliverable: palmlive live spawner (only if the Phase 5 bake-off picks live placement) | 5 | LIVE-011, LIVE-100, ASSET-101, TEST-014, DEC-007 | windows-sim, human | 3 |
+| LIVE-012 | Build a region from the app (calls palmscan and palmgen), optional | 5 | LIVE-100, SCAN-100, LIVE-011 | none, windows-sim | 4 |
 
-Totals: GEN about 44 h, LIVE about 38 h.
+Totals: GEN about 44 h, LIVE about 42 h (with the optional LIVE-012).
 
 ---
 
@@ -881,7 +887,11 @@ Totals: GEN about 44 h, LIVE about 38 h.
 ```mermaid
 flowchart TD
   ARCH001[ARCH-001] --> G1[GEN-001]
-  P0[GATE-P0] --> G1
+  ARCH006[ARCH-006] --> G2
+  ARCH007[ARCH-007] --> G4
+  A005[ASSET-005] --> G11
+  R004[RISK-004] --> G16
+  ARCH008[ARCH-008] --> G17
   G1 --> G2[GEN-002] & G3[GEN-003] & G4[GEN-004] & G5[GEN-005] & G8[GEN-008] & G14[GEN-014]
   ARCH002[ARCH-002] --> G4
   ARCH003[ARCH-003] --> G4
@@ -921,9 +931,14 @@ flowchart TD
   A101[ASSET-101] --> L9
   T103[TEST-103] --> L9
   D5[DEC-005] --> L9
-  L9 --> L10[LIVE-010] --> L11[LIVE-011] --> L101[LIVE-101]
+  L9 --> D7[DEC-007] --> L10[LIVE-010] --> L11[LIVE-011] --> L101[LIVE-101]
+  D7 --> L101
   L100 --> L101
   A101 --> L101
+  T014[TEST-014] --> L101
+  L100 --> L12[LIVE-012]
+  SCAN100 --> L12
+  L11 --> L12
 ```
 
 ---
@@ -934,7 +949,7 @@ flowchart TD
 - **First parallel wave after GEN-001:** GEN-002, GEN-003, GEN-004, GEN-005, GEN-008, GEN-014 touch disjoint files. GEN-013 joins once SPIKE-004 is done, GEN-009 once SPIKE-003 is done.
 - **Serial chains by shared files:** `geometry.py` GEN-005 → GEN-006; `templates.yaml` GEN-009 → GEN-010 → GEN-019; `pipeline.py` GEN-012 → GEN-015; `build.py` GEN-013 → GEN-016; `SpawnManager.cs` LIVE-007 → LIVE-010; `SpawnCommand.cs` LIVE-008 → LIVE-011; `MainForm.cs` LIVE-005 → LIVE-011.
 - **LIVE in parallel:** after LIVE-001, the region track (LIVE-002/003/005) and the spawn track (LIVE-006/007) run in parallel. LIVE-004 is optional and touches only `Core/FlightPlans/`.
-- **Windows PC, one at a time:** GEN-016 → GEN-017 → GEN-100 → GEN-019; LIVE-100; LIVE-008 → LIVE-009 → LIVE-101. These also compete with SPIKE, ASSET, TEST and REGION tasks for the same PC.
+- **Windows PC, one at a time:** GEN-016 → GEN-017 → GEN-100 → GEN-019; LIVE-100; LIVE-008 → LIVE-009 → (DEC-007) → LIVE-101; LIVE-012's final check. Visual runs use labelled folders (`tests/visual/<site>/<date>_<label>/`), so GEN and TEST visual tasks don't share paths. These also compete with SPIKE, ASSET, TEST and REGION tasks for the same PC.
 - `cli.py` is written once (GEN-001); later GEN tasks fill the functions it calls. The same pattern applies to `CommandRouter` (LIVE-005).
 
 ---
@@ -973,15 +988,28 @@ flowchart TD
 10. Does the sim have a polygon vertex limit or a per-tile object limit → SPIKE-003/004; `max_vertices` default 256 until known.
 
 **Questions for other areas:**
-1. ARCH-002: the collection-level key that carries the data version (`YYYY-MM`) used for `data2026-11`.
-2. ARCH-003: add the *new* keys in [Region config keys palmgen reads](#region-config-keys-palmgen-reads), and the `mask_out` entry shape.
-3. SCAN: palmgen defaults to `data/<region>/palms.geojson` and `data/<region>/buildings.geojson` (building footprints as GeoJSON). Confirm or give the real paths; only `palmgen/paths.py` changes.
-4. SCAN/ARCH: the source plans have both `exclusion_radius_m` (per palm, from palmscan) and `exclusion.margin_m` (region config). This plan treats `exclusion_radius_m` as authoritative and adds `--margin-m` for tuning without rerunning palmscan. GEN-017's tuned margin must also reach palmscan's radius calculation.
-5. ASSET-100: the manifest fields in [Asset manifest fields palmgen reads](#asset-manifest-fields-palmgen-reads).
+1. ARCH-002: the collection-level key that carries the data version (`YYYY-MM`) used for `data2026-11`. Resolved: `data_version` (required, file level).
+2. ARCH-003: add the *new* keys in [Region config keys palmgen reads](#region-config-keys-palmgen-reads), and the `mask_out` entry shape. Resolved: all in WS7, plus `masks.airports.path`.
+3. SCAN: palmgen defaults to `data/<region>/palms.geojson` and `data/<region>/buildings.geojson` (building footprints as GeoJSON). Confirm or give the real paths; only `palmgen/paths.py` changes. Resolved: canonical `build/scan/<region>/palms.geojson` and `buildings.geojson`; GEN-001 defaults changed.
+4. SCAN/ARCH: the source plans have both `exclusion_radius_m` (per palm, from palmscan) and `exclusion.margin_m` (region config). This plan treats `exclusion_radius_m` as authoritative and adds `--margin-m` for tuning without rerunning palmscan. GEN-017's tuned margin must also reach palmscan's radius calculation. Resolved: SCAN computes `exclusion_radius_m = crown_diam_m/2 + exclusion.margin_m` with the `exclusion.radius_min_m`/`radius_max_m` clamps, all from the ARCH-003 `exclusion:` block (1.5, 1.0, 8.0); GEN treats `exclusion_radius_m` as authoritative and `--margin-m` recomputes from crown; GEN-017 writes the tuned `exclusion.margin_m`, which palmscan reads on its next run.
+5. ASSET-100: the manifest fields in [Asset manifest fields palmgen reads](#asset-manifest-fields-palmgen-reads). Resolved: GEN loads through ASSET's `palmcore.assets.manifest.load_manifest` (ASSET-005).
 6. Plan 05 estimates Phase 2 at 8-12 h; this breakdown is about 39 h for Phase 2 GEN work. The gap is tests, golden files and in-sim tuning that the source estimate didn't itemise.
-7. Not tasked: "build a region from the app" (Phase 5 optional item 2). Add later if wanted.
+7. "Build a region from the app" (Phase 5 optional item 2): now LIVE-012.
 
 ---
+
+## Reconciliation notes (2026-11-22)
+
+- Inputs: palmgen defaults to the canonical palmscan outputs `build/scan/<region>/palms.geojson` and `buildings.geojson` (GEN-001, GEN-016). `buildings.geojson` is an ARCH-002 secondary contract (`validate_buildings`, GEN-004) and SCAN now writes every footprint within `radius_max_m + clip_buffer_m`, so `--margin-m` tuning never lacks a footprint.
+- Paths: mask and airport paths resolve against the repo root (ARCH-003 rule), not the region file (GEN-007).
+- Region config: every GEN key is in ARCH-003; defaults (margin 1.5, clamps 1.0/8.0) are defined only there and shared with SCAN. Airport masks: `masks.airports.path` defaults to RISK-004's `docs/compat/airports-mask.geojson`; GEN-016 depends on RISK-004.
+- ARCH deps: GEN-002 → ARCH-006, GEN-004 → ARCH-007. GEN-001 no longer depends on GATE-P0 (Phase 0 policy, ARCH plan / proposed ADR-0013).
+- Manifest: GEN-011 loads through `palmcore.assets.manifest.load_manifest` and depends on ASSET-005; ASSET-015 depends on GEN-011.
+- Visual runs: GEN-017, GEN-100 and GEN-019 write labelled run folders (`<date>_gen017-margin`, `<date>_gen100`, `<date>_gen019-library`) instead of the whole `tests/visual/T1/` tree; approach viewpoint is ~600 m.
+- Bake-off: LIVE-009 writes `docs/findings/LIVE-009.md`; DEC-007 depends on LIVE-009 and writes ADR-0008; LIVE-010 depends on DEC-007; LIVE-101 depends on ASSET-101, TEST-014 and DEC-007.
+- Cycle removed: DEC-003 depended on DEC-007, which now depends on LIVE-009 → LIVE-008 → LIVE-001 → DEC-003. DEC-003 now depends on SPIKE-005 and is decided before LIVE-001; DEC-007 may reopen the language choice later.
+- New task LIVE-012 (optional): build a region from the app.
+- Open: `assets/library.yaml` `scale_limits` (0.85/1.15) and `species_fallback` duplicate `placement.scale_clamp` (0.15) and GEN's priors-based species fallback. Both say ±15% today; GEN and ASSET owners should pick one source before GEN-019.
 
 ## Recap
 

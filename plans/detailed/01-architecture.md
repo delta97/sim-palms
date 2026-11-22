@@ -98,7 +98,8 @@ Consumers import submodules (`from palmcore.palms import read_palms`). `palmcore
 | Artifact | Producer | Consumers | Location |
 |---|---|---|---|
 | Region YAML | human (REGION tasks) | palmscan, palmgen, palmlive | `regions/<region>.yaml` |
-| `palms.geojson` | palmscan via `palmcore.palms` | palmgen, palmlive, TEST | `build/scan/<region>/palms.geojson` (SCAN default) |
+| `palms.geojson` | palmscan via `palmcore.palms` | palmgen, palmlive, TEST, FX | `build/scan/<region>/palms.geojson` (canonical; `Paths.palms_path`) |
+| `buildings.geojson` | palmscan | palmgen (clipping) | `build/scan/<region>/buildings.geojson` (canonical; secondary contract, WS5) |
 | Download cache | SCAN `Cache` on `palmcore.cache` | SCAN | `data/<namespace>/<key[:2]>/<key><suffix>` |
 | Run logs | `palmcore.log` | humans | `build/logs/<tool>-<run_id>.log` |
 | Package project | GEN | fspackagetool | `build/palmfix-<region>/` (plan 04 §1) |
@@ -384,13 +385,13 @@ Task: **ARCH-002**.
 | Property | Type | Required | Rule | Notes |
 |---|---|---|---|---|
 | `palm_id` | string | yes | `^[a-z]{2,6}-[0-9a-f]{16}$` | WS4 |
-| `species` | string | yes | `^[a-z]+(_[a-z]+)+$` | pattern, not an enum, so new species (Florida) need no schema change |
+| `species` | string | yes | `^[a-z]+(_[a-z]+)+$` | pattern, not an enum, so new species (Florida) need no schema change; the canonical key list is the registry `palmscan/data/species_keys.yaml` (SCAN-002) |
 | `species_confidence` | number | yes | 0..1 | |
 | `species_source` | string | yes | enum `inventory`, `osm`, `prior`, `lidar_rules`, `lidar_tree` | SCAN field mapping |
 | `height_m` | number | yes | 0.5..60 | metres above ground |
 | `height_source` | string | yes | enum `inventory`, `species_default`, `lidar`, `region_median` | SCAN field mapping |
 | `crown_diam_m` | number | yes | 0.3..20 | |
-| `ground_elev_m` | number or null | yes | −100..4000 | null in Phase 1; informational, GEN does not use it |
+| `ground_elev_m` | number or null | yes | −100..4000 | metres, orthometric ground height at the point (`VERIFY:` 3DEP vertical datum, usually NAVD88; SCAN-101); null in Phase 1; informational, GEN does not use it |
 | `detected_by` | string | yes | enum `inventory`, `osm`, `lidar`, `inventory+osm`, `inventory+lidar`, `osm+lidar`, `inventory+osm+lidar` | fixed order inventory, osm, lidar |
 | `source_ids` | array of string | yes | minItems 1, uniqueItems, item `^[a-z0-9_]+:.+$` | `<source name>:<record id>`, sorted |
 | `exclusion_radius_m` | number | yes | 0.3..15 | |
@@ -462,6 +463,8 @@ Validation order:
 
 - Performance target: 100,000 features in under 60 s on a CI runner. A `slow` test checks 10,000 synthetic features in under 15 s.
 - Schema file: Draft 2020-12, `$id: "urn:palmfix:schema:palms:1"`, feature under `$defs/feature`, `$comment` pointing to `schemas/CHANGELOG.md`.
+
+**Secondary contract: `buildings.geojson`** (ARCH-002, `schemas/buildings.geojson.schema.json`, `$id: "urn:palmfix:schema:buildings:1"`, checked by `palmcore.contract.validate_buildings(doc) -> ValidationReport`). Written by palmscan next to `palms.geojson`, read by palmgen for clipping. Minimal: `type` `"FeatureCollection"`; `schema_version` `"1.0"`; `region` slug; features with Polygon or MultiPolygon geometry (WGS84 lon/lat); required properties `building_id` (string, unique in the file, e.g. `way/123`, `msbf:42`) and `source` (string, e.g. `osm`, `microsoft_footprints`); other properties allowed. Same MAJOR/MINOR rules as WS10.
 
 **Fixtures** in `tests/fixtures/palmcore/palms/`:
 - `valid_minimal.geojson` (1 feature), `valid_small.geojson` (10 features, every `detected_by` value, one `x_note` field), `valid_empty.geojson`.
@@ -573,7 +576,8 @@ This merges the source plan's example with the keys requested in `plans/detailed
 | `mask_out` | list | no | `[]` | items below |
 | `masks.airports.enabled` | boolean | no | `true` | plan 04 §7; GEN builds the airport file (`palmgen masks airports`) |
 | `masks.airports.buffer_m` | number | no | `100` | 0..2000 |
-| `palmscan` | object | no | `{}` | free-form; keys and defaults owned by SCAN (`palmscan/config.py`) |
+| `masks.airports.path` | string | no | `docs/compat/airports-mask.geojson` | default airport polygons produced by RISK-004 (`kind: airport` features); repo-root relative; a region may point at a `palmgen masks airports` output instead. Manual extras are `mask_out` entries with `kind: airport` |
+| `palmscan` | object | no | `{}` | free-form; keys and defaults owned by SCAN (`palmscan/config.py`): `output_dir`, `allow_large_bbox`, `palm_filter`, `inventory`, `dedupe_radius_m`, `exclusion.building_overlap_min_m2`, `lidar`, `peaks`, `rules`, `merge`, `classify`, `qa` (see `plans/detailed/02-detection-pipeline.md#inputs-region-config-keys`). `id_prefix` and the radius clamps are top-level/`exclusion` keys, not here |
 | `palmgen` | object | no | `{}` | free-form; reserved for GEN-only knobs |
 
 **Inventory item** (union of the source plan and SCAN Inputs):
@@ -636,7 +640,7 @@ class MaskArea:
     geometry: Mapping[str, Any] | None; path: Path | None; note: str | None
 @dataclass(frozen=True)
 class AirportMasks:
-    enabled: bool = True; buffer_m: float = 100.0
+    enabled: bool = True; buffer_m: float = 100.0; path: Path | None = None   # None -> repo root / docs/compat/airports-mask.geojson
 @dataclass(frozen=True)
 class RegionConfig:
     config_version: int; region: str; id_prefix: str; name: str; bbox: Bbox; local_crs: str | None
@@ -809,8 +813,8 @@ The region field is an integer because YAML reads an unquoted `1.0` as a float.
 
 | ID | Title | Phase | Depends on | Requires | Est h |
 |---|---|---|---|---|---|
-| ARCH-001 | Scaffold the Python monorepo (pyproject, package layout, lint/test tooling, CI) | 1 | GATE-P0 | none | 4 |
-| ARCH-002 | Define the palms.geojson JSON Schema and a shared validator | 1 | ARCH-001 | none | 5 |
+| ARCH-001 | Scaffold the Python monorepo (pyproject, package layout, lint/test tooling, CI) | 1 | - | none | 4 |
+| ARCH-002 | Define the palms.geojson JSON Schema (and the buildings.geojson secondary schema) and a shared validator | 1 | ARCH-001 | none | 6 |
 | ARCH-003 | Define the region YAML config schema and loader | 1 | ARCH-001, ARCH-005 | none | 5 |
 | ARCH-004 | Add palmcore logging, path resolution and download-cache helpers | 1 | ARCH-001 | none | 3 |
 | ARCH-005 | Add palmcore geo helpers (Bbox, distances, UTM, transforms) | 1 | ARCH-001 | none | 3 |
@@ -825,7 +829,7 @@ Total about 32 h.
 
 ```mermaid
 flowchart TD
-    P0[GATE-P0] --> A1[ARCH-001 scaffold + CI]
+    A1[ARCH-001 scaffold + CI]
     A1 --> A2[ARCH-002 palms schema + validator]
     A1 --> A4[ARCH-004 log, paths, cache]
     A1 --> A5[ARCH-005 geo]
@@ -837,11 +841,12 @@ flowchart TD
     A3 --> A9[ARCH-009 CLI plumbing + palmfix]
     A4 --> A9
     A7 --> A9
-    A1 -.-> S1[SCAN-001]
-    A3 -.-> S1
+    A9 -.-> S1[SCAN-001]
+    A9 -.-> FX2[FX-002]
     A2 -.-> S11[SCAN-011]
     A6 -.-> S11
     A7 -.-> S11
+    A4 -.-> S1
     A1 -.-> G1[GEN-001]
     A6 -.-> G2[GEN-002 ids]
     A2 -.-> G4[GEN-004 inputs]
@@ -858,10 +863,10 @@ Dotted edges are what other areas should depend on. Those areas own their own `d
 - **Wave 3:** ARCH-003 (after ARCH-005) and ARCH-007 (after ARCH-002 and ARCH-004). Disjoint.
 - **Wave 4:** ARCH-008 and ARCH-009. Disjoint (`regions/` + one test vs `palmcore/cli*`, `context.py`, `pyproject.toml`).
 - **Serialized on purpose:** `pyproject.toml` (ARCH-001 → ARCH-009 → any later edit by another area).
-- **Outside ARCH:** SCAN-001 and GEN-001 can start right after ARCH-001 (they own their packages). TEST-001 too.
+- **Outside ARCH:** GEN-001 and TEST-001 can start right after ARCH-001 (they own their packages). SCAN-001 and FX-002 wait for ARCH-009 because they may edit `pyproject.toml`; FX-002 is also ordered after SCAN-001.
 - **Environment:** all `none` except ARCH-008 (`network`). Nothing needs the Windows sim PC, Blender or a human. The Windows CI runner covers Windows paths.
 - **Critical path:** ARCH-001 → ARCH-005 → ARCH-003 → ARCH-009, about 15 h.
-- **Early start option:** ARCH-001 depends on GATE-P0 because plan 05 says nothing is built before Phase 0 passes. To keep cloud agents busy during Phase 0, remove that one edge. The risk is about 32 h of wasted work if Phase 0 is a no-go.
+- **Phase 0 policy:** ARCH-001 does not depend on GATE-P0. Code work that runs in a Linux container (`requires: none` or `network`) may proceed in parallel with Phase 0; windows-sim build and validation work still waits for the relevant gates and SPIKE outputs. The proposed ADR (ADR-0013, written by the bootstrap session) records this. The risk is about 32 h of parked work if Phase 0 is a no-go.
 
 ## Verification strategy
 
@@ -878,24 +883,38 @@ Dotted edges are what other areas should depend on. Those areas own their own `d
 |---|---|---|
 | Q1 | `palm_id` = `<prefix>-<16 hex>`, not the plan's sequential `sdc-000123`. SCAN's fallback (10 hex, lengthen on collision) should use `palmcore.ids.palm_id` instead; the schema pattern requires 16. | SCAN-011, ARCH-006 |
 | Q2 | `VERIFY:` GUID spelling in Scenery Editor XML (braces, case). | SPIKE-003, GEN |
-| Q3 | `VERIFY:` `ground_elev_m` vertical datum (3DEP is usually NAVD88; varies by project). Informational only. | SCAN-101 |
-| Q4 | `VERIFY:` `pdal` needs native PDAL (conda may be required, also on Windows). It is a separate `pdal` extra, not part of `lidar` as SCAN W1 asked, so CI can install the raster stack. | SCAN-101, ARCH-001 |
+| Q3 | `VERIFY:` `ground_elev_m` vertical datum (3DEP is usually NAVD88; varies by project). Informational only. Datum now documented in the schema (metres, orthometric, `VERIFY:`). | SCAN-101 |
+| Q4 | `VERIFY:` `pdal` needs native PDAL (conda may be required, also on Windows). It is a separate `pdal` extra, not part of `lidar` as SCAN W1 asked, so CI can install the raster stack. SCAN's plan and SCAN-001 now follow this (`lidar` = rasterio, scikit-image, scikit-learn; `pdal` separate). | SCAN-101, ARCH-001 |
 | Q5 | **CLI ownership conflict.** The ARCH brief lists "CLI skeletons for palmscan and palmgen", but SCAN-001 and GEN-001 already plan `palmscan/cli.py` and `palmgen/cli.py` (with full flag sets and exit codes), and depend only on ARCH-001. To avoid two tasks writing the same file, ARCH declares the entry points and supplies shared plumbing; SCAN and GEN own their `cli.py`. | caller / SCAN-001 / GEN-001 |
-| Q6 | Airport masks: resolved as `masks.airports.{enabled, buffer_m}` (GEN builds the file with `palmgen masks airports`), plus `kind: airport` entries in `mask_out` for manual cases. SCAN's Q6 assumed `mask_out` only. | SCAN, GEN, RISK-004 |
+| Q6 | Airport masks: resolved as `masks.airports.{enabled, buffer_m}` (GEN builds the file with `palmgen masks airports`), plus `kind: airport` entries in `mask_out` for manual cases. SCAN's Q6 assumed `mask_out` only. Resolved 2026-11-22: default polygons come from RISK-004 via `masks.airports.path` (`docs/compat/airports-mask.geojson`). | SCAN, GEN, RISK-004 |
 | Q7 | Overlapping regions: the same tree in two regions gets two `palm_id`s (different prefixes), so two palms would be placed. Regions must not overlap or must `mask_out` each other. | REGION, GEN |
 | Q8 | Plan 01 says the JSON Schema lives in `tests/`. Repo convention is `schemas/`, which this plan follows. | resolved |
 | Q9 | Plan 05 estimates Phase 1 at 8–15 h in total. ARCH alone is about 32 h before any SCAN work. | user / GATE-P1 |
 | Q10 | `read_palms` loads the whole file. A streaming reader may be needed past about 500,000 palms per region. | later ARCH task, if measured |
-| Q11 | Default palms path: SCAN writes `build/scan/<region>/palms.geojson`; GEN's plan defaults to `data/<region>/palms.geojson`. `palmcore.paths.Paths.palms_path` follows SCAN. GEN should change `palmgen/paths.py` (GEN Q3 asks exactly this). | GEN-001 |
-| Q12 | Writer duplication: SCAN-011 plans its own `write_palms(fc, path)`. The canonical form here copies SCAN's rounding and `indent=1` layout, so SCAN-011 can delegate to `palmcore.palms.write_palms_doc`, and the file is defined in one place. | SCAN-011 |
+| Q11 | Default palms path: SCAN writes `build/scan/<region>/palms.geojson`; GEN's plan defaults to `data/<region>/palms.geojson`. `palmcore.paths.Paths.palms_path` follows SCAN. GEN should change `palmgen/paths.py` (GEN Q3 asks exactly this). Resolved 2026-11-22: GEN-001 defaults to `build/scan/<region>/`. | GEN-001 |
+| Q12 | Writer duplication: SCAN-011 plans its own `write_palms(fc, path)`. The canonical form here copies SCAN's rounding and `indent=1` layout, so SCAN-011 can delegate to `palmcore.palms.write_palms_doc`, and the file is defined in one place. Resolved 2026-11-22: SCAN-011 delegates (depends on ARCH-006, ARCH-007). | SCAN-011 |
 | Q13 | Inventory `name` is required here; SCAN defaults it to `<type>_<index>`. An index-based default changes every `source_id`, and therefore every `palm_id`, if sources are reordered. | SCAN-001 |
-| Q14 | Radius clamp is defined twice: GEN wants top-level `exclusion.radius_min_m/radius_max_m` = 1.0/8.0; SCAN has `palmscan.exclusion.radius_min_m/radius_max_m` = 1.5/8.0. This plan puts them top-level with GEN's defaults. SCAN should read `RegionConfig.exclusion` instead. `id_prefix` is the same case: top-level here, inside `palmscan:` in SCAN's plan. | SCAN-001, GEN-004 |
-| Q15 | Relative paths: GEN says mask paths are relative to the region YAML; this plan resolves every relative path against the repo root and stores absolute paths in `RegionConfig`. | GEN-004 |
-| Q16 | ASSET plan expects a species **enum** in the ARCH-002 schema. The schema uses a pattern; the list of valid species keys belongs to SCAN (`palm_genera.yaml`/normalisation tables), which ASSET should validate against. | ASSET-005, SCAN |
+| Q14 | Radius clamp is defined twice: GEN wants top-level `exclusion.radius_min_m/radius_max_m` = 1.0/8.0; SCAN has `palmscan.exclusion.radius_min_m/radius_max_m` = 1.5/8.0. This plan puts them top-level with GEN's defaults. SCAN should read `RegionConfig.exclusion` instead. `id_prefix` is the same case: top-level here, inside `palmscan:` in SCAN's plan. Resolved 2026-11-22: the ARCH-003 values (margin 1.5, clamps 1.0/8.0) and top-level `id_prefix` are the only definitions; SCAN reads `RegionConfig.exclusion`/`id_prefix`. | SCAN-001, GEN-004 |
+| Q15 | Relative paths: GEN says mask paths are relative to the region YAML; this plan resolves every relative path against the repo root and stores absolute paths in `RegionConfig`. Resolved 2026-11-22: GEN-007 follows the repo-root rule. | GEN-004 |
+| Q16 | ASSET plan expects a species **enum** in the ARCH-002 schema. The schema uses a pattern; the list of valid species keys belongs to SCAN (`palm_genera.yaml`/normalisation tables), which ASSET should validate against. Resolved 2026-11-22: registry is `palmscan/data/species_keys.yaml` (SCAN-002); ASSET-005 validates manifest species against it. | ASSET-005, SCAN |
 | Q17 | `VERIFY:` San Diego layer id field (`OBJECTID`?) and the LA compilation's URL and fields. | ARCH-008 |
-| Q18 | `pyproject.toml` races: SCAN-001 and FX-002 touch it but depend only on ARCH-001, so either can run alongside ARCH-009. Each should depend on ARCH-009. SCAN-001 may not need the edit at all, since ARCH-001 already carries its dependencies. FX-002 must add `palmfx` to the hatch `packages` list. | SCAN-001, FX-002 |
+| Q18 | `pyproject.toml` races: SCAN-001 and FX-002 touch it but depend only on ARCH-001, so either can run alongside ARCH-009. Each should depend on ARCH-009. SCAN-001 may not need the edit at all, since ARCH-001 already carries its dependencies. FX-002 must add `palmfx` to the hatch `packages` list. Resolved 2026-11-22: SCAN-001 and FX-002 depend on ARCH-009; FX-002 also depends on SCAN-001. | SCAN-001, FX-002 |
 
-**Cross-area dependencies** this plan assumes (owners set them in their own task files): SCAN-001 → ARCH-001, ARCH-003, ARCH-009 (pyproject); FX-002 → ARCH-009 (pyproject); ASSET-005 → ARCH-001; SCAN-011 → ARCH-002, ARCH-006, ARCH-007; GEN-001 → ARCH-001; GEN-002 → ARCH-006; GEN-004 → ARCH-002, ARCH-003, ARCH-007; TEST-001 → ARCH-001; TEST-004 → ARCH-002, ARCH-003.
+**Cross-area dependencies** this plan assumes (owners set them in their own task files; all applied 2026-11-22): SCAN-001 → ARCH-001, ARCH-003, ARCH-009 (pyproject); FX-002 → ARCH-009 (pyproject), SCAN-001; ASSET-005 → ARCH-001; SCAN-011 → ARCH-002, ARCH-006, ARCH-007; GEN-001 → ARCH-001; GEN-002 → ARCH-006; GEN-004 → ARCH-002, ARCH-003, ARCH-007; TEST-001 → ARCH-001; TEST-004 → ARCH-002, ARCH-003.
+
+## Reconciliation notes (2026-11-22)
+
+Cross-area reconciliation after the seven parallel breakdowns:
+
+- Canonical palmscan outputs: `build/scan/<region>/palms.geojson` and `build/scan/<region>/buildings.geojson` (data table, Q11). GEN, TEST and FX references updated in their plans.
+- WS5: `ground_elev_m` datum documented (metres, orthometric, `VERIFY:` 3DEP); `data_version` confirmed as the GEN data-version key; `buildings.geojson` secondary contract added to ARCH-002 (`schemas/buildings.geojson.schema.json`, `validate_buildings`).
+- Species key registry: `palmscan/data/species_keys.yaml` (SCAN-002), referenced by the `species` pattern row, SCAN normalization and ASSET manifest validation (Q16).
+- WS7: added `masks.airports.path` (default RISK-004 file); listed the SCAN `palmscan:` keys; `id_prefix` and `exclusion.*` defaults defined only here (Q14). Path rule applies to GEN masks too (Q15).
+- ARCH-001 no longer depends on GATE-P0 (Phase 0 policy in Parallelization notes; proposed ADR-0013 from the bootstrap session).
+- `pyproject.toml` order: ARCH-001 → ARCH-009 → SCAN-001 → FX-002 (Q18). The `pdal` extra stays separate from `lidar` (Q4).
+- CLI ownership unchanged: no ARCH task touches `palmscan/cli.py` or `palmgen/cli.py` (Q5).
+- `palmcore/assets/` stays ASSET's (ASSET-005 onward); no ARCH task touches it. GEN loads the manifest through `palmcore.assets.manifest.load_manifest`.
+- DEC-008 records the asset-binary storage decision here when it lands (repo layout); ASSET-008 implements it.
 
 ## Recap
 

@@ -14,7 +14,7 @@ touches: [palmlive/PalmLive.Core/Spawning/LiveSession.cs, palmlive/PalmLive.Core
 owner: ""
 branch: ""
 worktree: ""
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -23,7 +23,7 @@ The PalmLive window has a "Live palms" toggle that runs the spawner for all acti
 
 ## Context
 
-- Only if LIVE-009 picked live placement; otherwise `dropped`.
+- Only if DEC-007 (ADR-0008) picked live placement; otherwise DEC-007 sets it to `dropped`.
 - Plan section [LIVE cleanup ledger and app integration](../../plans/detailed/04-fs2024-integration.md#live-cleanup-ledger-and-app-integration).
 - Spawn options come from `palmlive.json` `spawn` (LIVE-003 config).
 
@@ -51,3 +51,4 @@ dotnet build palmlive/PalmLive.App/PalmLive.App.csproj
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [reconcile] Live-only condition now refers to DEC-007/ADR-0008 (the decision task), not LIVE-009 (the measurement). Cross-area reconciliation.

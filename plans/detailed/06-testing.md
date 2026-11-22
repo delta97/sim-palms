@@ -171,10 +171,10 @@ sites:
     viewpoints:
       - {id: VP1, kind: street,   lat: 0, lon: 0, alt_m_agl: 2,   heading_deg: 0, pitch_deg: 0,   preset: null}
       - {id: VP2, kind: oblique,  lat: 0, lon: 0, alt_m_agl: 150, heading_deg: 0, pitch_deg: -30, preset: null}
-      - {id: VP3, kind: approach, lat: 0, lon: 0, alt_m_agl: 500, heading_deg: 0, pitch_deg: -15, preset: null}
+      - {id: VP3, kind: approach, lat: 0, lon: 0, alt_m_agl: 600, heading_deg: 0, pitch_deg: -15, preset: null}
 ```
 
-Rules: exactly VP1 (street, about 2 m), VP2 (oblique, about 150 m), VP3 (approach, about 500 m) per site. `preset` records how to reach the viewpoint reproducibly (camera slot, SimConnect teleport file, etc., per TEST-006 findings). Site purposes:
+Rules: exactly VP1 (street, about 2 m), VP2 (oblique, about 150 m), VP3 (approach, about 600 m) per site. These are the project's three standard viewpoints (street level, low oblique, approach), shared with the asset acceptance checks and Phase 3 exit criteria. `preset` records how to reach the viewpoint reproducibly (camera slot, SimConnect teleport file, etc., per TEST-006 findings). Site purposes:
 
 | Site | Purpose | Notes |
 |---|---|---|
@@ -320,15 +320,15 @@ TEST-004. Two levels:
    - `palm_id` unique within the file.
    - Every feature's `region` equals the region config's `region` (when given) and is the same across the file.
    - Every point lies inside the region `bbox` (when given).
-   - `exclusion_radius_m ≥ crown_diam_m / 2` and `> 0`. VERIFY with SCAN: whether the radius is exactly `crown_diam_m/2 + margin_m` or clamped; tighten if exact.
+   - `exclusion_radius_m ≥ crown_diam_m / 2` and `> 0`; with a region given, `exclusion_radius_m == clamp(crown_diam_m/2 + exclusion.margin_m, exclusion.radius_min_m, exclusion.radius_max_m)` ± 0.01 m (formula and defaults from ARCH-003/SCAN, resolved 2026-11-22).
    - `height_m > 0`; `species_confidence` in [0, 1].
    - `detected_by` consistent with `height_source`: `height_source == "lidar"` implies `detected_by` contains `lidar`.
 
-Test sources: hand-written fixtures in `tests/fixtures/contract/` (one valid, one invalid per rule; the valid one may start as a copy of `tests/fixtures/palmcore/palms_io/sample_10.geojson`, never edited in place), and any local `data/**/palms.geojson` (parametrized; skipped when none exist).
+Test sources: hand-written fixtures in `tests/fixtures/contract/` (one valid, one invalid per rule; the valid one may start as a copy of `tests/fixtures/palmcore/palms_io/sample_10.geojson`, never edited in place), and any local palmscan output at the canonical `build/scan/<region>/palms.geojson` (parametrized; skipped when none exist).
 
 ### Data accuracy
 
-TEST-009 (ground-truth tooling), TEST-010 (metrics), TEST-101 and TEST-011 (labeling), TEST-012 (Phase 4 evaluation).
+TEST-009 (ground-truth tooling), TEST-010 (metrics), TEST-101 and TEST-011 (labeling), TEST-012 (Phase 4 evaluation). TEST-010 is the single implementation of the metrics and the one that gates Phase 4; palmscan's in-run accuracy (SCAN-029) imports `tests.accuracy.metrics` rather than reimplementing it, and its height classes are the ones defined here.
 
 #### Matching algorithm
 
@@ -392,7 +392,7 @@ species_accuracy_min: null        # report only until Phase 4 sets a target
 
 Precedence: CLI flag (`--radius`, `--profile`) > `tests/accuracy/<site>/meta.yaml` `thresholds:` > `thresholds.yaml`. A `null` threshold is reported, never checked. T4 (few palms) normally overrides `recall_min: null`, because the site exists to measure false positives.
 
-CLI: `python -m tests.accuracy.metrics evaluate --site T1 --pred data/<region>/palms.geojson --profile lidar_only [--label phase4] [--write]`. Exit codes: 0 all checked thresholds pass, 1 a threshold failed, 2 input error. `--write` saves `results/<date>_<label>.json`, `.md` and `_errors.geojson` (FP and FN points with an `error` property, for review in QGIS).
+CLI: `python -m tests.accuracy.metrics evaluate --site T1 --pred build/scan/<region>/palms.geojson --profile lidar_only [--label phase4] [--write]`. Exit codes: 0 all checked thresholds pass, 1 a threshold failed, 2 input error. `--write` saves `results/<date>_<label>.json`, `.md` and `_errors.geojson` (FP and FN points with an `error` property, for review in QGIS).
 
 #### Labeling procedure
 
@@ -679,28 +679,38 @@ How the test tooling itself is tested:
 | V8 | VERIFY: XML element names for exclusion polygons and scenery objects | TEST-016 (from SPIKE-003) |
 | V9 | Resolved by GEN's plan: `build_report.json` fields. VERIFY only that GEN-100 ships them as planned | TEST-016 |
 | V10 | VERIFY: independent way to count leftover spawned SimObjects after palmlive shuts down | TEST-014 (answered in LIVE-101's run) |
-| V11 | VERIFY: path of the Phase 0 single-blob project | TEST-104 |
+| V11 | Resolved 2026-11-22: Phase 0 project is `spikes/palmfix-spike/` | TEST-104 |
 | V12 | Mostly resolved: `palmcore.contract.validate_palms(doc, mode=...) -> ValidationReport`, `palmcore.config.load_region()` per `plans/detailed/01-architecture.md`. VERIFY against the merged code | TEST-004 |
-| V13 | VERIFY: exact `exclusion_radius_m` formula (clamping) | TEST-004 (with SCAN) |
+| V13 | Resolved: `clamp(crown_diam_m/2 + exclusion.margin_m, radius_min_m, radius_max_m)`, values from the region `exclusion:` block (ARCH-003) | TEST-004 |
 | V14 | VERIFY: NAIP WMS/WMTS endpoint for QGIS | TEST-009 |
-| V15 | VERIFY: palmscan output paths (`palms.geojson`, CHM GeoTIFF) | TEST-012 |
+| V15 | Resolved: `build/scan/<region>/palms.geojson`; CHM for `fill-heights` at `build/scan/<region>/eval/<site>/chm.tif` (SCAN-028) | TEST-012 |
 
 Questions and inconsistencies in the source plans:
 
-1. **Approach viewpoint height:** `06-testing.md` says approach at about 500 m; Phase 3 exit and the asset acceptance checks say 600 m. This plan uses 500 m for VP3. Should Phase 3 add a fourth viewpoint at 600 m, or use 500 m?
+1. **Approach viewpoint height:** `06-testing.md` says approach at about 500 m; Phase 3 exit and the asset acceptance checks say 600 m. Resolved 2026-11-22: VP3 is ~600 m everywhere (street ~2 m, oblique ~150 m, approach ~600 m).
 2. **Height error "vs LiDAR"** while ground truth only has a height class: resolved here with `height_ref_m` sampled from the CHM. It checks palmscan's extraction, not true height.
 3. **"Recall ≥ 80% LiDAR-only"** is defined here as the `lidar_only` profile (predictions whose `detected_by` includes `lidar`), not a separate LiDAR-only palmscan run. Confirm.
 4. **Matching radius:** task brief says 2 to 3 m; Phase 1 exit uses 3 m. Default 3.0, configurable.
 5. **1% low and stutter** definitions are ambiguous in the source; defined above.
 6. **`01-architecture.md` says the JSON Schema lives in `tests/`;** repo convention puts it in `schemas/` (ARCH). This plan follows the convention.
 7. **Ground truth phase:** the stub put labeling in Phase 4, but T1 labels would make the Phase 1 exit measurable. Recommend labeling T1 early.
-8. **Screenshot storage in Git:** this plan commits JPEG q90 and gitignores raw PNGs. Git LFS is the alternative; user decision.
-9. **Bake-off and soak ownership:** the 3 × 3 perf runs are LIVE-009 and the 1-hour soak is LIVE-101 (`plans/detailed/04-fs2024-integration.md`); TEST supplies TEST-103 and TEST-014. LIVE-101 should list TEST-014 in `depends_on` (LIVE owns that file).
+8. **Screenshot storage in Git:** this plan commits JPEG q90 and gitignores raw PNGs. Git LFS is the alternative; user decision, now folded into DEC-008 (ADR-0009, asset binary storage) and implemented by ASSET-008.
+9. **Bake-off and soak ownership:** the 3 × 3 perf runs are LIVE-009 and the 1-hour soak is LIVE-101 (`plans/detailed/04-fs2024-integration.md`); TEST supplies TEST-103 and TEST-014. LIVE-101 should list TEST-014 in `depends_on` (LIVE owns that file). Done 2026-11-22.
 10. **Spawn-manager recorded flight tracks** for the C# tests (plan 06 section 1) are LIVE-owned fixtures in `palmlive/PalmLive.Tests`; TEST provides no C# harness.
-11. **Duplicate accuracy metrics:** SCAN-029 (`palmscan/qa/accuracy.py`, `plans/detailed/02-detection-pipeline.md#w19-accuracy-metrics`) also computes precision/recall against ground truth, with a different assumed height-class scheme (short < 10, medium 10-18, tall > 18 m). Proposal: TEST-010 is the gating evaluator (independent of palmscan, like the build checker); SCAN-029 reads the TEST-009 ground-truth format and uses the same definitions and `thresholds.yaml` values, for its in-run QA section. Needs agreement between SCAN and TEST.
+11. **Duplicate accuracy metrics:** SCAN-029 (`palmscan/qa/accuracy.py`, `plans/detailed/02-detection-pipeline.md#w19-accuracy-metrics`) also computes precision/recall against ground truth, with a different assumed height-class scheme (short < 10, medium 10-18, tall > 18 m). Proposal: TEST-010 is the gating evaluator (independent of palmscan, like the build checker); SCAN-029 reads the TEST-009 ground-truth format and uses the same definitions and `thresholds.yaml` values, for its in-run QA section. Needs agreement between SCAN and TEST. Resolved 2026-11-22: TEST-010 is the single implementation and gates Phase 4; SCAN-029 depends on TEST-010 and only runs it (and adds its fallback height error); height classes are TEST's.
 12. **Region config tests:** ARCH already tests every `regions/*.yaml` (`tests/unit/palmcore/test_region_files.py`), so TEST-004 does not repeat it.
 
 ---
+
+## Reconciliation notes (2026-11-22)
+
+- Viewpoints: VP3 approach is ~600 m (was 500 m); the three standard viewpoints are street (~2 m), low oblique (~150 m), approach (~600 m) (TEST-100, site registry example, question 1).
+- Palmscan output path: canonical `build/scan/<region>/palms.geojson` (contract conformance glob in TEST-004, accuracy CLI example, TEST-012, TEST-104). V15 resolved, including the CHM path from SCAN-028.
+- Accuracy: TEST-010 is the single metrics implementation and gates Phase 4; SCAN-029 now depends on TEST-010 and calls its `evaluate`/`load_thresholds`/`check_thresholds` (question 11).
+- V13 resolved: the radius formula and clamps come from the region `exclusion:` block (ARCH-003); TEST-004 checks equality when a region is given.
+- Screenshot storage moved into DEC-008 (question 8); TEST-102 follows ADR-0009.
+- LIVE-101 now depends on TEST-014 (question 9).
+- Visual run touches: TEST-007, TEST-018 and TEST-104 now list their labelled run folders (`tests/visual/<site>/<date>_<label>/`) instead of whole site trees, as do the GEN visual tasks, so `tasks.py conflicts` no longer reports `tests/visual/T1/` overlaps.
 
 ## Recap
 

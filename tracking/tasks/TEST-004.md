@@ -14,7 +14,7 @@ touches: [tests/helpers/contract.py, tests/unit/contract/test_palms_contract.py,
 owner: ""
 branch: ""
 worktree: ""
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -27,7 +27,8 @@ Every `palms.geojson` (fixtures and any local palmscan output) is checked agains
 - Schemas and validators belong to ARCH: `schemas/palms.geojson.schema.json` + `palmcore.contract.validate_palms(doc, mode="read") -> ValidationReport` (ARCH-002), `palmcore.config.load_region()` (ARCH-003), per `plans/detailed/01-architecture.md`. VERIFY (V12) against the merged code; adapt the wrapper, not the tests.
 - ARCH already tests every `regions/*.yaml` (`tests/unit/palmcore/test_region_files.py`). Don't repeat that here.
 - ARCH's shared fixture `tests/fixtures/palmcore/palms_io/sample_10.geojson` may be copied as the starting valid fixture. Never edit it in place.
-- VERIFY (V13): whether `exclusion_radius_m` is exactly `crown_diam_m/2 + margin_m` or clamped. Check `plans/detailed/02-detection-pipeline.md`. If exact, add an equality check (tolerance 0.01 m) when a region is given; otherwise keep `≥ crown_diam_m/2`.
+- V13 resolved (2026-11-22): `exclusion_radius_m = clamp(crown_diam_m/2 + exclusion.margin_m, exclusion.radius_min_m, exclusion.radius_max_m)`, all three from the region config `exclusion:` block (ARCH-003; defaults 1.5, 1.0, 8.0). When a region is given, check equality (tolerance 0.01 m); otherwise keep `≥ crown_diam_m/2` (note: the clamp max can make the radius smaller than `crown/2 + margin` but never smaller than `radius_min_m`).
+- Local palmscan output lives at the canonical `build/scan/<region>/palms.geojson`.
 
 ## Steps
 
@@ -37,12 +38,12 @@ Every `palms.geojson` (fixtures and any local palmscan output) is checked agains
    - `assert_palms_ok(path_or_fc, *, region=None)`: load path or dict, load region via `palmcore.config.load_region` if a path, raise `AssertionError` listing at most 50 errors plus a count.
    - CLI `python -m tests.helpers.contract <palms.geojson> [--region <yaml>]`: print errors, exit 0 if none, 1 otherwise.
 2. Fixtures in `tests/fixtures/contract/`: `valid_minimal.geojson` (3 palms, all fields, using the example from `plans/01-architecture.md` as a pattern), `region_minimal.yaml`, and one invalid file per invariant (`dup_palm_id.geojson`, `outside_bbox.geojson`, `radius_too_small.geojson`, `region_mismatch.geojson`, `lidar_height_without_lidar.geojson`), plus `schema_missing_field.geojson`.
-3. `tests/unit/contract/test_palms_contract.py`: valid fixture passes; each invalid fixture fails with an error that names the rule; a parametrized test over `REPO_ROOT.glob("data/**/palms.geojson")` that skips with reason "no local palmscan output" when the list is empty.
+3. `tests/unit/contract/test_palms_contract.py`: valid fixture passes; each invalid fixture fails with an error that names the rule; a parametrized test over `REPO_ROOT.glob("build/scan/*/palms.geojson")` that skips with reason "no local palmscan output" when the list is empty.
 
 ## Acceptance criteria
 
 - [ ] Valid fixture passes; every invalid fixture fails with a rule-specific message.
-- [ ] Local `data/**/palms.geojson` files are tested when present and skipped cleanly when not.
+- [ ] Local `build/scan/*/palms.geojson` files are tested when present and skipped cleanly when not.
 - [ ] CLI exits 0 on the valid fixture and 1 on an invalid one.
 
 ## Verification
@@ -57,3 +58,4 @@ python3 scripts/tasks.py validate
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [reconcile] Local palmscan output is globbed at the canonical build/scan/**/palms.geojson (was data/**). V13 resolved: exclusion_radius_m = clamp(crown_diam_m/2 + exclusion.margin_m, radius_min_m, radius_max_m) from the region exclusion: block, so the equality check applies when a region is given. Cross-area reconciliation.
