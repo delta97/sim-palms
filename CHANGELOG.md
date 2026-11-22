@@ -5,6 +5,7 @@ Format: `- TASK-ID: what changed (PR link)`.
 
 ## Unreleased
 
+- SCAN-025: Added deterministic inventory-to-LiDAR matching and merge with LiDAR-only palm keys (local merge).
 - SCAN-024: Added the LiDAR palm rule filter with reject reasons feeding qa_rejects.csv (local merge).
 - SCAN-007: Recorded small live fixtures from San Diego, OSM and la-trees; found the San Diego status field (25% removed trees), null species names and source format facts (local merge).
 - ASSET-001: Added reference sheets for the five SoCal palm species (`assets/reference/`), with cited proportions and licensed photo links (local merge).
