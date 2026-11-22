@@ -7,14 +7,17 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 207 | 3 | 0 | 1 | 2 | 0 | 213 |
+| 203 | 6 | 0 | 1 | 3 | 0 | 213 |
 
 ## In progress / in review
 
 | Task | Status | Owner | Branch | Title |
 |---|---|---|---|---|
+| [ARCH-002](tasks/ARCH-002.md) | in_progress | claude-agent | task/arch-002-define-the-palms-geojson-json-schema-and | Define the palms.geojson JSON Schema and a shared validator |
+| [ARCH-004](tasks/ARCH-004.md) | in_progress | claude-agent | task/arch-004-add-palmcore-logging-path-resolution-and | Add palmcore logging, path resolution and download-cache helpers |
+| [ARCH-005](tasks/ARCH-005.md) | in_progress | claude-agent | task/arch-005-add-palmcore-geo-helpers-bbox-distances | Add palmcore geo helpers (Bbox, distances, UTM, transforms) |
+| [ARCH-006](tasks/ARCH-006.md) | in_progress | claude-agent | task/arch-006-add-deterministic-uuidv5-ids-and-seeded | Add deterministic UUIDv5 ids and seeded randomness to palmcore |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
-| [RISK-001](tasks/RISK-001.md) | in_progress | claude-agent | task/risk-001-audit-data-source-licenses-and-terms-inv | Audit data source licenses and terms (inventories, OSM, footprints, LiDAR) |
 | [RISK-004](tasks/RISK-004.md) | in_progress | claude-agent | task/risk-004-collect-airport-boundaries-and-known-air | Collect airport boundaries and known airport add-ons for default masks |
 | [SPIKE-009](tasks/SPIKE-009.md) | in_progress | claude-agent | task/spike-009-write-the-simconnect-spawn-and-disconnec | Write the SimConnect spawn-and-disconnect spike console app (C#) |
 
@@ -29,10 +32,6 @@ _None._
 | [DEC-004](tasks/DEC-004.md) | 0 | human, network | task-planner | Decide: first test block (a San Diego or LA street the user knows well) |
 | [SPIKE-001](tasks/SPIKE-001.md) | 0 | windows-sim, human | msfs-sdk-specialist | Install the MSFS 2024 SDK and create an empty Dev Mode scenery project |
 | [TEST-006](tasks/TEST-006.md) | 0 | windows-sim | msfs-sdk-specialist | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
-| [ARCH-002](tasks/ARCH-002.md) | 1 | none | python-architect | Define the palms.geojson JSON Schema and a shared validator |
-| [ARCH-004](tasks/ARCH-004.md) | 1 | none | python-architect | Add palmcore logging, path resolution and download-cache helpers |
-| [ARCH-005](tasks/ARCH-005.md) | 1 | none | geo-data-engineer | Add palmcore geo helpers (Bbox, distances, UTM, transforms) |
-| [ARCH-006](tasks/ARCH-006.md) | 1 | none | python-architect | Add deterministic UUIDv5 ids and seeded randomness to palmcore |
 | [RISK-003](tasks/RISK-003.md) | 1 | network, human | geo-data-engineer | Inventory other palm and tree mods and their coverage for mask_out defaults |
 | [TEST-001](tasks/TEST-001.md) | 1 | none | test-engineer | Build the shared pytest harness and fixture loaders |
 | [GEN-001](tasks/GEN-001.md) | 2 | none | scenery-generator-engineer | Scaffold palmgen package, CLI surface and data model |
@@ -65,22 +64,22 @@ _None._
 | [SPIKE-011](tasks/SPIKE-011.md) | todo | human | SPIKE-010, RISK-005 | Write the Phase 0 go/no-go proposal and get the user's decision |
 | [TEST-006](tasks/TEST-006.md) | todo | windows-sim |  | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
 
-## Phase 1 (1/31 done)
+## Phase 1 (2/31 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
 | [ARCH-001](tasks/ARCH-001.md) | done | none |  | Scaffold the Python monorepo (pyproject, package layout, lint/test tooling, CI) |
-| [ARCH-002](tasks/ARCH-002.md) | todo | none | ARCH-001 | Define the palms.geojson JSON Schema and a shared validator |
+| [ARCH-002](tasks/ARCH-002.md) | in_progress | none | ARCH-001 | Define the palms.geojson JSON Schema and a shared validator |
 | [ARCH-003](tasks/ARCH-003.md) | todo | none | ARCH-001, ARCH-005 | Define the region YAML config schema and loader |
-| [ARCH-004](tasks/ARCH-004.md) | todo | none | ARCH-001 | Add palmcore logging, path resolution and download-cache helpers |
-| [ARCH-005](tasks/ARCH-005.md) | todo | none | ARCH-001 | Add palmcore geo helpers (Bbox, distances, UTM, transforms) |
-| [ARCH-006](tasks/ARCH-006.md) | todo | none | ARCH-001 | Add deterministic UUIDv5 ids and seeded randomness to palmcore |
+| [ARCH-004](tasks/ARCH-004.md) | in_progress | none | ARCH-001 | Add palmcore logging, path resolution and download-cache helpers |
+| [ARCH-005](tasks/ARCH-005.md) | in_progress | none | ARCH-001 | Add palmcore geo helpers (Bbox, distances, UTM, transforms) |
+| [ARCH-006](tasks/ARCH-006.md) | in_progress | none | ARCH-001 | Add deterministic UUIDv5 ids and seeded randomness to palmcore |
 | [ARCH-007](tasks/ARCH-007.md) | todo | none | ARCH-002, ARCH-004 | Add the palms.geojson serializer, reader and writer |
 | [ARCH-008](tasks/ARCH-008.md) | todo | network | ARCH-003 | Write the two example region configs and verify their sources |
 | [ARCH-009](tasks/ARCH-009.md) | todo | none | ARCH-003, ARCH-004, ARCH-007 | Add shared CLI plumbing and the palmfix utility CLI |
 | [DEC-009](tasks/DEC-009.md) | todo | human, network | DEC-004, RISK-001 | Decide: building footprint source (OSM, Microsoft, both, or county data) |
 | [GATE-P1](tasks/GATE-P1.md) | todo | human | GATE-P0, ARCH-008, DEC-009, TEST-004, TEST-100, SCAN-100 | Phase 1 exit gate: palms.geojson for the test neighbourhood from inventory data |
-| [RISK-001](tasks/RISK-001.md) | in_progress | network |  | Audit data source licenses and terms (inventories, OSM, footprints, LiDAR) |
+| [RISK-001](tasks/RISK-001.md) | done | network |  | Audit data source licenses and terms (inventories, OSM, footprints, LiDAR) |
 | [RISK-003](tasks/RISK-003.md) | todo | network, human |  | Inventory other palm and tree mods and their coverage for mask_out defaults |
 | [SCAN-001](tasks/SCAN-001.md) | todo | none | ARCH-001, ARCH-003, ARCH-004, ARCH-009 | Create palmscan package core: config, cache, HTTP, models, CLI skeleton |
 | [SCAN-002](tasks/SCAN-002.md) | todo | none | SCAN-001 | Species normalization table, normalizer and palm filter |

@@ -1,7 +1,7 @@
 ---
 id: RISK-001
 title: Audit data source licenses and terms (inventories, OSM, footprints, LiDAR)
-status: review
+status: done
 phase: 1
 area: RISK
 kind: research
@@ -67,3 +67,4 @@ Read the file once and confirm no legal conclusions are stated.
 - 2026-11-22 [claude-agent] Wrote docs/licenses/data-sources.md (commit 9df9af6): 6 core sources + LARIAC/SanGIS, each with terms URL and date checked 2026-11-22; 9 date-checked rows; summary table 8 rows; 10 open questions. Verification greps all found. Acceptance criteria 1-4 ticked. Unreadable pages marked VERIFY (USGS copyrights page 403, LA city disclaimer, SanGIS 404, LA County terms read via ArcGIS item data not rendered page).
 - 2026-11-22 [claude-agent] Status in_progress -> review.
 - 2026-11-22 [claude-agent] validate: 213 tasks, 0 errors, 0 warnings; status set to review
+- 2026-11-22 [integrator] Status review -> done.
