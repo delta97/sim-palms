@@ -565,6 +565,7 @@ def fetch_buildings(cfg: ScanConfig, cache: Cache, http: HttpClient) -> geopanda
 - `microsoft_footprints`: read `sources.buildings_path` (GeoJSON, GeoJSON-lines, or GPKG) clipped to the bbox with `pyogrio`. `building_id` = `msbf:<row index>`. Download is manual for now (VERIFY in SCAN-007 how the Global ML Building Footprints are distributed and whether a per-quadkey URL can be automated; record the answer in the fixture README).
 - Absent `sources.buildings`: return an empty GeoDataFrame and add a QA warning "no building footprints; building_conflict is false everywhere".
 - Repair: `shapely.make_valid` on every polygon, drop empties, explode GeometryCollections to polygons.
+- Implemented (SCAN-006): returns `(gdf, warnings)`; `none` gives an empty frame plus the warning text. OSM relations with an outer member lacking inline geometry are skipped and counted. `msbf:<n>` is the GDAL feature id (0-based for GeoJSON and GeoJSON lines). Licence notices (OSM ODbL, Microsoft CDLA Permissive 2.0) are in `SOURCE_NOTICES` and `gdf.attrs`; the frame keeps exactly the three columns.
 
 ### W5. Recorded fixtures and source verification
 
