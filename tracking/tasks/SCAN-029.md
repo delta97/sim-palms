@@ -1,7 +1,7 @@
 ---
 id: SCAN-029
 title: Run the TEST-010 accuracy evaluation from palmscan (in-run QA)
-status: todo
+status: in_progress
 phase: 4
 area: SCAN
 kind: build
@@ -11,9 +11,9 @@ requires: [none]
 agent: test-engineer
 estimate_h: 2
 touches: [palmscan/qa/accuracy.py, tests/unit/palmscan/test_scan_accuracy.py, tests/fixtures/palmscan/accuracy/]
-owner: ""
-branch: ""
-worktree: ""
+owner: claude-agent
+branch: task/scan-029-run-the-test-010-accuracy-evaluation-fro
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-029"
 updated: 2026-11-22
 ---
 
@@ -54,3 +54,4 @@ pytest tests/unit/palmscan/test_scan_accuracy.py -q
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [reconcile] Rescoped: TEST-010 is the single accuracy-metrics implementation and the one that gates Phase 4. This task no longer reimplements matching/metrics; it loads the site ground truth through TEST-009/TEST-010, runs TEST-010's evaluate/check_thresholds for palmscan's in-run QA, and keeps only the SCAN-specific fallback height error. Height classes follow TEST (S/M/T/X, edges 8/15/25 m). Added depends_on TEST-010. Cross-area reconciliation.
+- 2026-11-22 [claude-agent] Claimed. branch=task/scan-029-run-the-test-010-accuracy-evaluation-fro worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-029
