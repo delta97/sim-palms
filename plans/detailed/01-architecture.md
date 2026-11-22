@@ -179,6 +179,9 @@ def schema_dir() -> Path
 def load_schema(name: str) -> dict[str, Any]   # functools.cache; callers must not mutate
     # name: a SCHEMA_FILES key ("palms", "region") or a file name matching ^[a-z0-9-]+\.schema\.json$
     # (e.g. "asset-manifest.schema.json" from ASSET-005), so other areas never edit this module
+    # Names that are SCHEMA_FILES keys map to their file and are exempt from the pattern, because
+    # "palms.geojson.schema.json" contains a dot the pattern rejects. Other files (e.g.
+    # buildings.geojson.schema.json) are read by their owner via schema_dir() / <file name>.
 def make_validator(schema: Mapping[str, Any]) -> jsonschema.Draft202012Validator
     # check_schema() first, then Draft202012Validator(schema, format_checker=Draft202012Validator.FORMAT_CHECKER)
 ```
