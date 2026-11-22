@@ -1,7 +1,7 @@
 ---
 id: SCAN-013
 title: "palmscan run pipeline and CLI, end-to-end on fixtures"
-status: in_progress
+status: review
 phase: 1
 area: SCAN
 kind: build
@@ -10,7 +10,7 @@ depends_on: [SCAN-006, SCAN-008, SCAN-009, SCAN-010, SCAN-011, SCAN-012]
 requires: [none]
 agent: geo-data-engineer
 estimate_h: 3
-touches: [palmscan/pipeline.py, palmscan/cli.py, tests/unit/palmscan/test_scan_pipeline.py, tests/fixtures/palmscan/regions/]
+touches: [palmscan/pipeline.py, palmscan/cli.py, tests/unit/palmscan/test_scan_pipeline.py, tests/unit/palmscan/test_scan_cli.py, tests/fixtures/palmscan/regions/]
 owner: claude-agent
 branch: task/scan-013-palmscan-run-pipeline-and-cli-end-to-end
 worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-013"
@@ -38,10 +38,10 @@ updated: 2026-11-22
 
 ## Acceptance criteria
 
-- [ ] `palmscan run --region e2e --regions-dir tests/fixtures/palmscan/regions --out <tmp> --offline` exits 0 and writes all nine outputs listed in the plan's Outputs table (except Phase 4 files).
-- [ ] Second run produces a byte-identical `palms.geojson`.
-- [ ] Exit codes 2, 3, 5 behave as specified.
-- [ ] `palmscan priors --region e2e ...` prints a valid `species_priors:` YAML block.
+- [x] `palmscan run --region e2e --regions-dir tests/fixtures/palmscan/regions --out <tmp> --offline` exits 0 and writes all nine outputs listed in the plan's Outputs table (except Phase 4 files).
+- [x] Second run produces a byte-identical `palms.geojson`.
+- [x] Exit codes 2, 3, 5 behave as specified.
+- [x] `palmscan priors --region e2e ...` prints a valid `species_priors:` YAML block.
 
 ## Verification
 
@@ -60,3 +60,7 @@ ls /tmp/scan-e2e   # palms.geojson buildings.geojson species_priors.yaml qa_summ
 - 2026-11-22 [integrator] integrator note from SCAN-006: look up building licence/attribution notices from SOURCE_NOTICES by the frame's 'source' column (frame.attrs may not survive pandas ops)
 - 2026-11-22 [integrator] integrator note from SCAN-008: call dedupe_cross_source(res.palms, cfg.dedupe_radius_m, res.source_order); ingest raises SourceError on inventory failure (exit 4); source names must not contain ':'; buildings adapter is not in ADAPTERS (hook comment in registry.py) — call fetch_buildings separately
 - 2026-11-22 [claude-agent] Claimed. branch=task/scan-013-palmscan-run-pipeline-and-cli-end-to-end worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-013
+- 2026-11-22 [claude-agent] Implemented palmscan/pipeline.py (run, inventory_stages, RunOptions/RunResult), cli run+priors, e2e fixtures in tests/fixtures/palmscan/regions. Verification: pytest tests/unit/palmscan/test_scan_pipeline.py 12 passed; full suite 1544 passed 5 skipped; ruff check/format clean; mypy clean. CLI run --region e2e --offline exit=0 with palms/buildings/priors/qa_summary/qa_map/qa_rejects/run.json; second run byte-identical palms.geojson+buildings.geojson (tested); exit 2/3/4/5 tested; priors prints valid species_priors YAML. All Acceptance boxes ticked.
+- 2026-11-22 [claude-agent] Decisions: added test_scan_cli.py to touches (run/priors placeholders tests removed, eval stays exit 1); RunOptions.generated_at added; wrapped CacheMiss re-raised for exit 5 (ingest wraps it as SourceError, ingest.py untouched); priors computed from species-level palms only (brahea_sp / genus defaults excluded); --only lidar in Phase 1 skips inventory, warns and writes an empty palms.geojson; buildings.geojson has extra top-level notices map.
+- 2026-11-22 [claude-agent] Correction: test_scan_pipeline.py has 10 tests (10 passed), not 12.
+- 2026-11-22 [claude-agent] Status in_progress -> review.
