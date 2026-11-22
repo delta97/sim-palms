@@ -1,7 +1,7 @@
 ---
 id: TEST-005
 title: Add the test-site registry schema and loader
-status: todo
+status: in_progress
 phase: 1
 area: TEST
 kind: build
@@ -11,10 +11,10 @@ requires: [none]
 agent: test-engineer
 estimate_h: 2
 touches: [tests/sites/sites.schema.json, tests/sites/sites.yaml, tests/helpers/sites.py, tests/unit/helpers/test_sites.py, tests/fixtures/helpers/sites/]
-owner: ""
-branch: ""
-worktree: ""
-updated: 2026-11-21
+owner: claude-agent
+branch: task/test-005-add-the-test-site-registry-schema-and-lo
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/TEST-005"
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -52,3 +52,4 @@ python3 scripts/tasks.py validate
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [claude-agent] Claimed. branch=task/test-005-add-the-test-site-registry-schema-and-lo worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/TEST-005
