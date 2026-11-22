@@ -36,5 +36,5 @@ Everything else that is ready needs you, the sim PC, or Blender:
 
 ## Next
 
-1. Phase 7 Stage A (offline image-layer experiment) has its scaffold, camera model, depth decoder (shader untested in ReShade), mask metrics, inpainting runner (Telea tested; LaMa untested; FX-014 blocked on FX-026, #215), synthetic scene generator and session ingest with pose interpolation. Capture formats are placeholders (VERIFY) until FX-001/FX-006/FX-007 on the sim.
+1. Phase 7 Stage A (offline image-layer experiment) has its scaffold, camera model, depth decoder (shader untested in ReShade), mask metrics, inpainting runner (Telea tested; LaMa untested; FX-014 blocked on FX-026, #215), synthetic scene generator and session ingest with pose interpolation. Capture formats are placeholders (VERIFY) until FX-001/FX-006/FX-007 on the sim. Now ready for an agent, held for the user's go-ahead: FX-009 (calibration), FX-010 (mask by projection), FX-011 (mask by depth and colour).
 2. The user does DEC-004, then SPIKE-001 on the sim PC. Phase 2 build and validation tasks unblock from the SPIKE results.
