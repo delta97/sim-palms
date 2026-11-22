@@ -7,14 +7,13 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 148 | 1 | 0 | 1 | 63 | 0 | 213 |
+| 148 | 0 | 0 | 1 | 64 | 0 | 213 |
 
 ## In progress / in review
 
 | Task | Status | Owner | Branch | Title |
 |---|---|---|---|---|
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
-| [TEST-014](tasks/TEST-014.md) | in_progress | claude-agent | task/test-014-build-soak-test-report-tooling-for-the-l | Build soak-test report tooling for the live spawner |
 
 ## Blocked
 
@@ -196,7 +195,7 @@ _None._
 | [TEST-012](tasks/TEST-012.md) | todo | network | TEST-010, TEST-101, TEST-011, SCAN-101 | Evaluate Phase 4 palmscan output against ground truth at T1, T2 and T4 |
 | [TEST-101](tasks/TEST-101.md) | todo | human | TEST-009, TEST-100 | Hand-label ground-truth palms at T1 and T2 (about 200 palms) |
 
-## Phase 5 (1/26 done)
+## Phase 5 (2/26 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -224,7 +223,7 @@ _None._
 | [LIVE-101](tasks/LIVE-101.md) | todo | windows-sim, human | LIVE-011, LIVE-100, ASSET-101, TEST-014, DEC-007 | Deliverable: palmlive live spawner (only if the Phase 5 bake-off picks live placement) |
 | [RISK-008](tasks/RISK-008.md) | todo | none | RISK-007, GATE-P5 | Risk review after Phase 5 (before scale-out and any publishing) |
 | [TEST-013](tasks/TEST-013.md) | done | none | TEST-001 | Build the frametime capture parser and run comparison report |
-| [TEST-014](tasks/TEST-014.md) | in_progress | none | TEST-013 | Build soak-test report tooling for the live spawner |
+| [TEST-014](tasks/TEST-014.md) | done | none | TEST-013 | Build soak-test report tooling for the live spawner |
 | [TEST-103](tasks/TEST-103.md) | todo | windows-sim, gpu | TEST-013, TEST-100, DEC-005 | Performance flight harness: fixed route, capture procedure, dry-run capture |
 
 ## Phase 6 (1/27 done)

@@ -1,7 +1,7 @@
 ---
 id: TEST-014
 title: Build soak-test report tooling for the live spawner
-status: review
+status: done
 phase: 5
 area: TEST
 kind: build
@@ -58,3 +58,4 @@ python3 scripts/tasks.py validate
 - 2026-11-22 [claude-agent] Built tests/perf/soak.py (S1-S6, least-squares slope via numpy.polyfit, read_palmlive_log adapter seam, Markdown report, exit 0/1/2); soak_config.yaml limits provisional; SOAK.md procedure with V10 as VERIFY. Config loader and CLI mirror tests/perf/frametimes.py; validators are local copies because the merged ones hard-code 'perf_config.yaml' in messages.
 - 2026-11-22 [claude-agent] Tests: tests/unit/perf/test_soak.py 25 passed (passing 61-min run, one failing case per check S1-S6, S2 audit-missing and --no-audit, input errors, config, report, --help). Fixture tests/fixtures/perf/soak/format_example.jsonl is synthetic.
 - 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] Status review -> done.
