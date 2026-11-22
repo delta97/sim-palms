@@ -5,6 +5,7 @@ Format: `- TASK-ID: what changed (PR link)`.
 
 ## Unreleased
 
+- TEST-010: Added the accuracy metrics script with configurable thresholds (`tests/accuracy/metrics.py`), the single implementation SCAN-029 will call (local merge).
 - SCAN-022: Added the canopy height model (DTM, DSM, CHM) on numpy, with fast deterministic gap filling (local merge).
 - SCAN-008: Added the inventory ingest stage (adapter registry, cache freshness) and deterministic cross-source dedupe (local merge).
 - SCAN-006: Added the building footprints adapter (OSM multipolygons, Microsoft file) producing contract-valid buildings (local merge).

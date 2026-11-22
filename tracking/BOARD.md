@@ -7,7 +7,7 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 161 | 3 | 0 | 1 | 48 | 0 | 213 |
+| 160 | 3 | 0 | 1 | 49 | 0 | 213 |
 
 ## In progress / in review
 
@@ -16,7 +16,7 @@ Generated: 2026-11-22
 | [ASSET-001](tasks/ASSET-001.md) | in_progress | claude-agent | task/asset-001-write-reference-sheets-for-the-5-socal-p | Write reference sheets for the 5 SoCal palm species |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
 | [SCAN-007](tasks/SCAN-007.md) | in_progress | claude-agent | task/scan-007-record-live-source-fixtures-and-confirm | Record live source fixtures and confirm source fields |
-| [TEST-010](tasks/TEST-010.md) | in_progress | claude-agent | task/test-010-build-the-accuracy-metrics-script-with-c | Build the accuracy metrics script with configurable thresholds |
+| [SCAN-013](tasks/SCAN-013.md) | in_progress | claude-agent | task/scan-013-palmscan-run-pipeline-and-cli-end-to-end | palmscan run pipeline and CLI, end-to-end on fixtures |
 
 ## Blocked
 
@@ -30,13 +30,13 @@ _None._
 | [SPIKE-001](tasks/SPIKE-001.md) | 0 | windows-sim, human | msfs-sdk-specialist | Install the MSFS 2024 SDK and create an empty Dev Mode scenery project |
 | [TEST-006](tasks/TEST-006.md) | 0 | windows-sim | msfs-sdk-specialist | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
 | [RISK-003](tasks/RISK-003.md) | 1 | network, human | geo-data-engineer | Inventory other palm and tree mods and their coverage for mask_out defaults |
-| [SCAN-013](tasks/SCAN-013.md) | 1 | none | geo-data-engineer | palmscan run pipeline and CLI, end-to-end on fixtures |
 | [DEC-002](tasks/DEC-002.md) | 3 | human | task-planner | Decide: build or license the palm models |
 | [DEC-008](tasks/DEC-008.md) | 3 | human | task-planner | Decide: storage for large asset binaries (Git LFS or external) |
 | [SCAN-020](tasks/SCAN-020.md) | 4 | none | lidar-analyst | USGS 3DEP EPT LiDAR adapter (PDAL pipeline, tiles, cache) |
 | [SCAN-023](tasks/SCAN-023.md) | 4 | none | lidar-analyst | Peak detection and watershed crown segmentation |
 | [SCAN-025](tasks/SCAN-025.md) | 4 | none | lidar-analyst | Inventory-to-LiDAR matching and merge |
 | [SCAN-026](tasks/SCAN-026.md) | 4 | none | lidar-analyst | Species shape rules and classification order |
+| [SCAN-029](tasks/SCAN-029.md) | 4 | none | test-engineer | Run the TEST-010 accuracy evaluation from palmscan (in-run QA) |
 | [DEC-005](tasks/DEC-005.md) | 5 | human | test-engineer | Decide: performance budget and reference hardware/settings |
 | [TEST-013](tasks/TEST-013.md) | 5 | none | test-engineer | Build the frametime capture parser and run comparison report |
 | [TEST-008](tasks/TEST-008.md) | 6 | none | test-engineer | Add optional image-diff scoring for visual viewpoints |
@@ -94,7 +94,7 @@ _None._
 | [SCAN-010](tasks/SCAN-010.md) | done | none | SCAN-001 | Species priors and deterministic prior sampling |
 | [SCAN-011](tasks/SCAN-011.md) | done | none | SCAN-001, ARCH-002, ARCH-006, ARCH-007 | palms.geojson writer, palm IDs and schema validation |
 | [SCAN-012](tasks/SCAN-012.md) | done | none | SCAN-001 | QA outputs: qa_summary.md, qa_map.gpkg, qa_rejects.csv |
-| [SCAN-013](tasks/SCAN-013.md) | todo | none | SCAN-006, SCAN-008, SCAN-009, SCAN-010, SCAN-011, SCAN-012 | palmscan run pipeline and CLI, end-to-end on fixtures |
+| [SCAN-013](tasks/SCAN-013.md) | in_progress | none | SCAN-006, SCAN-008, SCAN-009, SCAN-010, SCAN-011, SCAN-012 | palmscan run pipeline and CLI, end-to-end on fixtures |
 | [SCAN-100](tasks/SCAN-100.md) | todo | network, human | SCAN-007, SCAN-013, TEST-100, ARCH-008 | Deliverable: palmscan run produces validated palms.geojson from inventory data (Phase 1) |
 | [TEST-001](tasks/TEST-001.md) | done | none | ARCH-001 | Build the shared pytest harness and fixture loaders |
 | [TEST-004](tasks/TEST-004.md) | done | none | TEST-001, ARCH-002, ARCH-003 | Add contract conformance tests for palms.geojson |
@@ -178,7 +178,7 @@ _None._
 | [GEN-019](tasks/GEN-019.md) | todo | windows-sim, human | GEN-100, ASSET-100 | Integrate the real model library into region builds |
 | [RISK-007](tasks/RISK-007.md) | todo | none | RISK-006, GATE-P3 | Risk review after Phase 3 (mid-project) |
 
-## Phase 4 (2/18 done)
+## Phase 4 (3/18 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -196,7 +196,7 @@ _None._
 | [SCAN-030](tasks/SCAN-030.md) | todo | network, human | SCAN-021, SCAN-028, TEST-101 | Tune LiDAR palm thresholds on test sites |
 | [SCAN-101](tasks/SCAN-101.md) | todo | network, human | SCAN-030, SCAN-100 | Deliverable: LiDAR-enriched palmscan run with heights and LiDAR-only palms (Phase 4) |
 | [TEST-009](tasks/TEST-009.md) | done | none | TEST-005 | Define the ground-truth format and write the labeling guide and tooling |
-| [TEST-010](tasks/TEST-010.md) | in_progress | none | TEST-009 | Build the accuracy metrics script with configurable thresholds |
+| [TEST-010](tasks/TEST-010.md) | done | none | TEST-009 | Build the accuracy metrics script with configurable thresholds |
 | [TEST-011](tasks/TEST-011.md) | todo | human | TEST-009, TEST-100 | Hand-label the false-positive site T4 |
 | [TEST-012](tasks/TEST-012.md) | todo | network | TEST-010, TEST-101, TEST-011, SCAN-101 | Evaluate Phase 4 palmscan output against ground truth at T1, T2 and T4 |
 | [TEST-101](tasks/TEST-101.md) | todo | human | TEST-009, TEST-100 | Hand-label ground-truth palms at T1 and T2 (about 200 palms) |

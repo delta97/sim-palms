@@ -1,7 +1,7 @@
 ---
 id: TEST-010
 title: Build the accuracy metrics script with configurable thresholds
-status: review
+status: done
 phase: 4
 area: TEST
 kind: build
@@ -66,3 +66,4 @@ python3 scripts/tasks.py validate
 - 2026-11-22 [claude-agent] Claimed. branch=task/test-010-build-the-accuracy-metrics-script-with-c worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/TEST-010
 - 2026-11-22 [claude-agent] Implemented tests/accuracy/metrics.py (match, evaluate, load_thresholds, check_thresholds, unchecked_thresholds, CLI), thresholds.yaml, synthetic fixtures, 37 tests. Full suite 1464 passed 4 skipped (rasterio absent); ruff, format, mypy clean; grep for 0.9/0.8/2.0 in metrics.py empty. Acceptance ticked: formulas, thresholds-from-yaml, --write (3 files), exit codes 0/1/2. Decisions: precision/recall/position undefined with a set threshold fails; height/species undefined is 'not checked'; species registry check is report-only (unregistered_species). load_thresholds gained keyword-only root; predictions validated with palmcore.contract (invalid -> exit 2). Added make_fixtures.py under the fixtures dir (in touches).
 - 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] Status review -> done.
