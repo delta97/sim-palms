@@ -1,7 +1,7 @@
 ---
 id: TEST-010
 title: Build the accuracy metrics script with configurable thresholds
-status: todo
+status: in_progress
 phase: 4
 area: TEST
 kind: build
@@ -11,9 +11,9 @@ requires: [none]
 agent: test-engineer
 estimate_h: 4
 touches: [tests/accuracy/metrics.py, tests/accuracy/thresholds.yaml, tests/unit/accuracy/test_metrics.py, tests/fixtures/accuracy/metrics/]
-owner: ""
-branch: ""
-worktree: ""
+owner: claude-agent
+branch: task/test-010-build-the-accuracy-metrics-script-with-c
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/TEST-010"
 updated: 2026-11-22
 ---
 
@@ -63,3 +63,4 @@ python3 scripts/tasks.py validate
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [reconcile] Confirmed as the single accuracy-metrics implementation and the one that gates Phase 4: SCAN-029 now calls this module's evaluate/load_thresholds/check_thresholds instead of reimplementing them, so those functions are a public API. Example --pred path is the canonical build/scan/<region>/palms.geojson. Cross-area reconciliation.
 - 2026-11-22 [integrator] integrator note from TEST-009: import height classes from gt.height_class (S<8, M 8-<15, T 15-<25, X>=25). GT species check is pattern-only; palmscan/data/species_keys.yaml is now on main (SCAN-002) and can be used for a registry check
+- 2026-11-22 [claude-agent] Claimed. branch=task/test-010-build-the-accuracy-metrics-script-with-c worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/TEST-010
