@@ -1,0 +1,38 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "note": "SYNTHETIC area"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -0.0001797,
+       -0.0001809
+      ],
+      [
+       0.001078,
+       -0.0001809
+      ],
+      [
+       0.001078,
+       0.0001809
+      ],
+      [
+       -0.0001797,
+       0.0001809
+      ],
+      [
+       -0.0001797,
+       -0.0001809
+      ]
+     ]
+    ]
+   }
+  }
+ ]
+}

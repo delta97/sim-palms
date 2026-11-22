@@ -1,0 +1,65 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.0,
+     0.0
+    ]
+   },
+   "properties": {
+    "gt_id": "T9-gt-0001",
+    "height_ref_m": null,
+    "species_basis": "inventory",
+    "context": "street",
+    "confidence": "high",
+    "note": "SYNTHETIC fixture point, not a real palm label",
+    "height_class": "M",
+    "species": "washingtonia_robusta"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     2.69e-05,
+     0.0
+    ]
+   },
+   "properties": {
+    "gt_id": "T9-gt-0002",
+    "height_ref_m": null,
+    "species_basis": "inventory",
+    "context": "street",
+    "confidence": "high",
+    "note": "SYNTHETIC fixture point, not a real palm label",
+    "height_class": "M",
+    "species": "washingtonia_robusta"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     5.39e-05,
+     0.0
+    ]
+   },
+   "properties": {
+    "gt_id": "T9-gt-0003",
+    "height_ref_m": null,
+    "species_basis": "inventory",
+    "context": "street",
+    "confidence": "high",
+    "note": "SYNTHETIC fixture point, not a real palm label",
+    "height_class": "M",
+    "species": "washingtonia_robusta"
+   }
+  }
+ ]
+}
