@@ -5,6 +5,7 @@ Format: `- TASK-ID: what changed (PR link)`.
 
 ## Unreleased
 
+- FX-009: Added calibration (vfov, time offset, pose bias, depth model) from clicks, the click store and UI, and `palmfx calib`/`palmfx clicks`; click UI not yet run on a display (local merge).
 - FX-010: Added palm masks by projecting palms.geojson through the camera model, with depth-buffer occlusion (`palmfx mask-project`) (local merge).
 - FX-004: Added the synthetic test scene generator and session fixtures for palmfx (`palmfx/offline/synth.py`) (local merge).
 - FX-008: Added capture-session ingest, circular-heading pose interpolation and the sample-fixture builder (`palmfx ingest`, `palmfx fixture`); capture formats are VERIFY (local merge).
