@@ -7,7 +7,7 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 181 | 4 | 0 | 1 | 27 | 0 | 213 |
+| 180 | 4 | 0 | 1 | 28 | 0 | 213 |
 
 ## In progress / in review
 
@@ -15,8 +15,8 @@ Generated: 2026-11-22
 |---|---|---|---|---|
 | [ASSET-001](tasks/ASSET-001.md) | in_progress | claude-agent | task/asset-001-write-reference-sheets-for-the-5-socal-p | Write reference sheets for the 5 SoCal palm species |
 | [ASSET-006](tasks/ASSET-006.md) | in_progress | claude-agent | task/asset-006-gltf-stats-and-automated-asset-checks-tr | glTF stats and automated asset checks (triangle budgets, heights, alpha mode, textures, naming) |
-| [GEN-004](tasks/GEN-004.md) | in_progress | claude-agent | task/gen-004-load-palms-buildings-and-region-config | Load palms, buildings and region config |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
+| [SCAN-001](tasks/SCAN-001.md) | in_progress | claude-agent | task/scan-001-create-palmscan-package-core-config-cach | Create palmscan package core: config, cache, HTTP, models, CLI skeleton |
 | [TEST-015](tasks/TEST-015.md) | in_progress | claude-agent | task/test-015-write-the-post-update-regression-routine | Write the post-update regression routine, log and entry scaffolder |
 
 ## Blocked
@@ -31,7 +31,8 @@ _None._
 | [SPIKE-001](tasks/SPIKE-001.md) | 0 | windows-sim, human | msfs-sdk-specialist | Install the MSFS 2024 SDK and create an empty Dev Mode scenery project |
 | [TEST-006](tasks/TEST-006.md) | 0 | windows-sim | msfs-sdk-specialist | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
 | [RISK-003](tasks/RISK-003.md) | 1 | network, human | geo-data-engineer | Inventory other palm and tree mods and their coverage for mask_out defaults |
-| [SCAN-001](tasks/SCAN-001.md) | 1 | none | python-architect | Create palmscan package core: config, cache, HTTP, models, CLI skeleton |
+| [GEN-007](tasks/GEN-007.md) | 2 | none | geo-data-engineer | Mod and airport masks, Overpass airport fetch |
+| [GEN-011](tasks/GEN-011.md) | 2 | none | scenery-generator-engineer | Variant selection, scaling and heading |
 | [TEST-017](tasks/TEST-017.md) | 2 | none | test-engineer | Write the test runbook and CI wiring notes |
 | [TEST-102](tasks/TEST-102.md) | 2 | none | test-engineer | Visual test protocol tooling: run scaffolder, checklist template, test log |
 | [ASSET-002](tasks/ASSET-002.md) | 3 | network | asset-pipeline-artist | Collect build-vs-license inputs for DEC-002 (palm models) |
@@ -80,7 +81,7 @@ _None._
 | [GATE-P1](tasks/GATE-P1.md) | todo | human | GATE-P0, ARCH-008, DEC-009, TEST-004, TEST-100, SCAN-100 | Phase 1 exit gate: palms.geojson for the test neighbourhood from inventory data |
 | [RISK-001](tasks/RISK-001.md) | done | network |  | Audit data source licenses and terms (inventories, OSM, footprints, LiDAR) |
 | [RISK-003](tasks/RISK-003.md) | todo | network, human |  | Inventory other palm and tree mods and their coverage for mask_out defaults |
-| [SCAN-001](tasks/SCAN-001.md) | todo | none | ARCH-001, ARCH-003, ARCH-004, ARCH-009 | Create palmscan package core: config, cache, HTTP, models, CLI skeleton |
+| [SCAN-001](tasks/SCAN-001.md) | in_progress | none | ARCH-001, ARCH-003, ARCH-004, ARCH-009 | Create palmscan package core: config, cache, HTTP, models, CLI skeleton |
 | [SCAN-002](tasks/SCAN-002.md) | todo | none | SCAN-001 | Species normalization table, normalizer and palm filter |
 | [SCAN-003](tasks/SCAN-003.md) | todo | none | SCAN-001 | Source adapter base and geojson_file adapter |
 | [SCAN-004](tasks/SCAN-004.md) | todo | none | SCAN-003 | ArcGIS REST inventory adapter with paging and cache |
@@ -99,7 +100,7 @@ _None._
 | [TEST-005](tasks/TEST-005.md) | done | none | TEST-001 | Add the test-site registry schema and loader |
 | [TEST-100](tasks/TEST-100.md) | todo | human, windows-sim | TEST-005, TEST-006, DEC-004 | Define test sites T1-T5 (bbox, purpose, region, saved flights, three viewpoints each) |
 
-## Phase 2 (11/29 done)
+## Phase 2 (12/29 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -107,7 +108,7 @@ _None._
 | [GEN-001](tasks/GEN-001.md) | done | none | ARCH-001 | Scaffold palmgen package, CLI surface and data model |
 | [GEN-002](tasks/GEN-002.md) | done | none | GEN-001, ARCH-006 | Deterministic GUIDs and per-palm hashes |
 | [GEN-003](tasks/GEN-003.md) | done | none | GEN-001 | 0.01 degree tiling and tile naming |
-| [GEN-004](tasks/GEN-004.md) | in_progress | none | GEN-001, ARCH-002, ARCH-003, ARCH-007 | Load palms, buildings and region config |
+| [GEN-004](tasks/GEN-004.md) | done | none | GEN-001, ARCH-002, ARCH-003, ARCH-007 | Load palms, buildings and region config |
 | [GEN-005](tasks/GEN-005.md) | done | none | GEN-001 | Exclusion circles, merging and simplification |
 | [GEN-006](tasks/GEN-006.md) | done | none | GEN-005 | Building footprint clipping |
 | [GEN-007](tasks/GEN-007.md) | todo | none | GEN-004, GEN-005 | Mod and airport masks, Overpass airport fetch |
