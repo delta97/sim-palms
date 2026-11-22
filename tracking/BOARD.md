@@ -7,7 +7,7 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 157 | 4 | 0 | 1 | 51 | 0 | 213 |
+| 157 | 3 | 0 | 1 | 52 | 0 | 213 |
 
 ## In progress / in review
 
@@ -16,7 +16,6 @@ Generated: 2026-11-22
 | [ASSET-001](tasks/ASSET-001.md) | in_progress | claude-agent | task/asset-001-write-reference-sheets-for-the-5-socal-p | Write reference sheets for the 5 SoCal palm species |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
 | [SCAN-007](tasks/SCAN-007.md) | in_progress | claude-agent | task/scan-007-record-live-source-fixtures-and-confirm | Record live source fixtures and confirm source fields |
-| [SCAN-023](tasks/SCAN-023.md) | in_progress | claude-agent | task/scan-023-peak-detection-and-watershed-crown-segme | Peak detection and watershed crown segmentation |
 | [SCAN-029](tasks/SCAN-029.md) | in_progress | claude-agent | task/scan-029-run-the-test-010-accuracy-evaluation-fro | Run the TEST-010 accuracy evaluation from palmscan (in-run QA) |
 
 ## Blocked
@@ -34,6 +33,7 @@ _None._
 | [DEC-002](tasks/DEC-002.md) | 3 | human | task-planner | Decide: build or license the palm models |
 | [DEC-008](tasks/DEC-008.md) | 3 | human | task-planner | Decide: storage for large asset binaries (Git LFS or external) |
 | [SCAN-020](tasks/SCAN-020.md) | 4 | none | lidar-analyst | USGS 3DEP EPT LiDAR adapter (PDAL pipeline, tiles, cache) |
+| [SCAN-024](tasks/SCAN-024.md) | 4 | none | lidar-analyst | Palm rule filter with reject reasons |
 | [SCAN-025](tasks/SCAN-025.md) | 4 | none | lidar-analyst | Inventory-to-LiDAR matching and merge |
 | [SCAN-027](tasks/SCAN-027.md) | 4 | none | lidar-analyst | Decision tree species classifier with rules fallback |
 | [DEC-005](tasks/DEC-005.md) | 5 | human | test-engineer | Decide: performance budget and reference hardware/settings |
@@ -177,7 +177,7 @@ _None._
 | [GEN-019](tasks/GEN-019.md) | todo | windows-sim, human | GEN-100, ASSET-100 | Integrate the real model library into region builds |
 | [RISK-007](tasks/RISK-007.md) | todo | none | RISK-006, GATE-P3 | Risk review after Phase 3 (mid-project) |
 
-## Phase 4 (4/18 done)
+## Phase 4 (5/18 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -185,7 +185,7 @@ _None._
 | [SCAN-020](tasks/SCAN-020.md) | todo | none | SCAN-003 | USGS 3DEP EPT LiDAR adapter (PDAL pipeline, tiles, cache) |
 | [SCAN-021](tasks/SCAN-021.md) | todo | network | SCAN-020, TEST-100 | Record LiDAR fixtures and confirm 3DEP EPT facts |
 | [SCAN-022](tasks/SCAN-022.md) | done | none | SCAN-001 | Canopy height model (DTM, DSM, CHM) |
-| [SCAN-023](tasks/SCAN-023.md) | in_progress | none | SCAN-022 | Peak detection and watershed crown segmentation |
+| [SCAN-023](tasks/SCAN-023.md) | done | none | SCAN-022 | Peak detection and watershed crown segmentation |
 | [SCAN-024](tasks/SCAN-024.md) | todo | none | SCAN-023 | Palm rule filter with reject reasons |
 | [SCAN-025](tasks/SCAN-025.md) | todo | none | SCAN-008 | Inventory-to-LiDAR matching and merge |
 | [SCAN-026](tasks/SCAN-026.md) | done | none | SCAN-010 | Species shape rules and classification order |

@@ -1,7 +1,7 @@
 ---
 id: SCAN-023
 title: "Peak detection and watershed crown segmentation"
-status: review
+status: done
 phase: 4
 area: SCAN
 kind: build
@@ -54,3 +54,4 @@ pytest tests/unit/palmscan/test_scan_peaks.py -q
 - 2026-11-22 [claude-agent] Claimed. branch=task/scan-023-peak-detection-and-watershed-crown-segme worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-023
 - 2026-11-22 [claude-agent] Impl 5202721: peaks.py (find_peaks, segment_crowns, crown_stats); 11 tests pass; full suite 1588 passed 1 skipped; ruff, format, mypy clean. Deviations: peak picking is numpy/scipy not peak_local_max (it leaves several peaks on a plateau); crown_stats gained tile_bounds param (plan had no way to drop buffer peaks), plan W15 updated; embedded test uses a ring of 8 m crowns because a lone peak on a wide plateau gets most of it from the watershed.
 - 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] Status review -> done.
