@@ -7,13 +7,12 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 144 | 3 | 0 | 1 | 65 | 0 | 213 |
+| 144 | 2 | 0 | 1 | 66 | 0 | 213 |
 
 ## In progress / in review
 
 | Task | Status | Owner | Branch | Title |
 |---|---|---|---|---|
-| [FX-003](tasks/FX-003.md) | in_progress | claude-agent | task/fx-003-camera-model-geodesy-attitude-pinhole-pr | Camera model: geodesy, attitude, pinhole projection |
 | [FX-012](tasks/FX-012.md) | in_progress | claude-agent | task/fx-012-mask-comparison-metrics-pixel-iou-instan | Mask comparison metrics (pixel IoU, instance precision/recall) |
 | [FX-014](tasks/FX-014.md) | in_progress | claude-agent | task/fx-014-inpainting-runner-telea-baseline-lama-ba | Inpainting runner: Telea baseline, LaMa backend, tiling |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
@@ -34,7 +33,9 @@ _None._
 | [DEC-008](tasks/DEC-008.md) | 3 | human | task-planner | Decide: storage for large asset binaries (Git LFS or external) |
 | [DEC-005](tasks/DEC-005.md) | 5 | human | test-engineer | Decide: performance budget and reference hardware/settings |
 | [FX-001](tasks/FX-001.md) | 7 | windows-sim, human | render-fx-researcher | Verify ReShade depth access in MSFS 2024 (incl. multiplayer/online lockout) |
+| [FX-004](tasks/FX-004.md) | 7 | none | render-fx-researcher | Synthetic test scene generator and pytest fixtures |
 | [FX-006](tasks/FX-006.md) | 7 | windows-sim | simconnect-dotnet-engineer | SimConnect pose logger, screenshot trigger and camera SimVar check |
+| [FX-008](tasks/FX-008.md) | 7 | none | python-architect | Ingest, pose interpolation and sample-fixture builder |
 
 ## Phase 0 (2/17 done)
 
@@ -257,13 +258,13 @@ _None._
 | [TEST-008](tasks/TEST-008.md) | done | none | TEST-102 | Add optional image-diff scoring for visual viewpoints |
 | [TEST-018](tasks/TEST-018.md) | todo | windows-sim | TEST-008, TEST-104 | Calibrate the image-diff noise floor at T1 |
 
-## Phase 7 (2/27 done)
+## Phase 7 (3/27 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
 | [FX-001](tasks/FX-001.md) | todo | windows-sim, human |  | Verify ReShade depth access in MSFS 2024 (incl. multiplayer/online lockout) |
 | [FX-002](tasks/FX-002.md) | done | none | ARCH-009, SCAN-001 | Scaffold palmfx.offline package, session I/O and CLI |
-| [FX-003](tasks/FX-003.md) | in_progress | none | FX-002 | Camera model: geodesy, attitude, pinhole projection |
+| [FX-003](tasks/FX-003.md) | done | none | FX-002 | Camera model: geodesy, attitude, pinhole projection |
 | [FX-004](tasks/FX-004.md) | todo | none | FX-003, FX-005 | Synthetic test scene generator and pytest fixtures |
 | [FX-005](tasks/FX-005.md) | done | none | FX-002 | ReShade depth-pack effect and depth decoder |
 | [FX-006](tasks/FX-006.md) | todo | windows-sim | FX-002 | SimConnect pose logger, screenshot trigger and camera SimVar check |
