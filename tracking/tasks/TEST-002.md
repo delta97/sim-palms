@@ -1,7 +1,7 @@
 ---
 id: TEST-002
 title: Add the golden-file comparison helper with an update flag
-status: todo
+status: in_progress
 phase: 2
 area: TEST
 kind: build
@@ -11,10 +11,10 @@ requires: [none]
 agent: test-engineer
 estimate_h: 3
 touches: [tests/helpers/golden.py, tests/conftest.py, tests/unit/helpers/test_golden.py]
-owner: ""
-branch: ""
-worktree: ""
-updated: 2026-11-21
+owner: claude-agent
+branch: task/test-002-add-the-golden-file-comparison-helper-wi
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/TEST-002"
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -59,3 +59,4 @@ python3 scripts/tasks.py validate
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [claude-agent] Claimed. branch=task/test-002-add-the-golden-file-comparison-helper-wi worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/TEST-002
