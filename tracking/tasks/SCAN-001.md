@@ -1,7 +1,7 @@
 ---
 id: SCAN-001
 title: "Create palmscan package core: config, cache, HTTP, models, CLI skeleton"
-status: todo
+status: in_progress
 phase: 1
 area: SCAN
 kind: build
@@ -11,9 +11,9 @@ requires: [none]
 agent: python-architect
 estimate_h: 3
 touches: [pyproject.toml, palmscan/__init__.py, palmscan/config.py, palmscan/cache.py, palmscan/http.py, palmscan/geo.py, palmscan/model.py, palmscan/cli.py, palmscan/sources/__init__.py, palmscan/detect/__init__.py, palmscan/classify/__init__.py, palmscan/qa/__init__.py, tests/unit/palmscan/test_scan_config.py, tests/unit/palmscan/test_scan_cache.py, tests/unit/palmscan/test_scan_http.py, tests/unit/palmscan/test_scan_geo.py]
-owner: ""
-branch: ""
-worktree: ""
+owner: claude-agent
+branch: task/scan-001-create-palmscan-package-core-config-cach
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-001"
 updated: 2026-11-22
 ---
 
@@ -64,3 +64,4 @@ python -c "from palmscan.config import scan_config_from_mapping as f; c=f({'regi
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [reconcile] Depends on ARCH-009 (pyproject order) and ARCH-004 (cache helpers). Cache now delegates layout/atomic write/meta to palmcore.cache, errors come from palmcore.errors, geo wraps palmcore.geo; id_prefix and exclusion clamps read from RegionConfig (ARCH-003), removed from the palmscan: block; pdal stays a separate extra per ARCH; script entry already declared by ARCH-001. Cross-area reconciliation.
+- 2026-11-22 [claude-agent] Claimed. branch=task/scan-001-create-palmscan-package-core-config-cach worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-001
