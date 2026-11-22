@@ -1,7 +1,7 @@
 ---
 id: SCAN-012
 title: "QA outputs: qa_summary.md, qa_map.gpkg, qa_rejects.csv"
-status: in_progress
+status: review
 phase: 1
 area: SCAN
 kind: build
@@ -10,7 +10,7 @@ depends_on: [SCAN-001]
 requires: [none]
 agent: geo-data-engineer
 estimate_h: 3
-touches: [palmscan/qa/summary.py, palmscan/qa/gpkg.py, palmscan/qa/rejects.py, tests/unit/palmscan/test_scan_qa.py, tests/fixtures/palmscan/qa/]
+touches: [palmscan/qa/summary.py, palmscan/qa/gpkg.py, palmscan/qa/rejects.py, tests/unit/palmscan/test_scan_qa.py, tests/fixtures/palmscan/qa/, pyproject.toml]
 owner: claude-agent
 branch: task/scan-012-qa-outputs-qa-summary-md-qa-map-gpkg-qa
 worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-012"
@@ -37,10 +37,10 @@ Every run can write the three QA files from the source plan: a readable Markdown
 
 ## Acceptance criteria
 
-- [ ] `qa_map.gpkg` contains layers `palms`, `exclusion_circles`, `check_radius_3m`, `rejects`, `building_conflicts`, `vintage_grid` (plus Phase 4 layers when given).
-- [ ] `qa_rejects.csv` columns match the plan exactly.
-- [ ] Summary golden test passes with the timestamp masked.
-- [ ] Tests pass offline.
+- [x] `qa_map.gpkg` contains layers `palms`, `exclusion_circles`, `check_radius_3m`, `rejects`, `building_conflicts`, `vintage_grid` (plus Phase 4 layers when given).
+- [x] `qa_rejects.csv` columns match the plan exactly.
+- [x] Summary golden test passes with the timestamp masked.
+- [x] Tests pass offline.
 
 ## Verification
 
@@ -52,3 +52,5 @@ pytest tests/unit/palmscan/test_scan_qa.py -q
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [claude-agent] Claimed. branch=task/scan-012-qa-outputs-qa-summary-md-qa-map-gpkg-qa worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-012
+- 2026-11-22 [claude-agent] Implemented qa/rejects.py, gpkg.py, summary.py; 18 tests in test_scan_qa.py pass; full suite 900 passed, ruff check/format and mypy clean. Added pyproject.toml to touches (mypy ignore for pandas stubs, imported by gpkg.py). Plan W10 updated with signature additions (id_prefix, crs, ConflictBuilding, accuracy_md, ClassifierSummary). Reject reasons are accepted as data (no import of SCAN-002/024). Acceptance: all 4 boxes ticked.
+- 2026-11-22 [claude-agent] Status in_progress -> review.
