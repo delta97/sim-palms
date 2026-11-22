@@ -1,7 +1,7 @@
 ---
 id: SCAN-012
 title: "QA outputs: qa_summary.md, qa_map.gpkg, qa_rejects.csv"
-status: todo
+status: in_progress
 phase: 1
 area: SCAN
 kind: build
@@ -11,10 +11,10 @@ requires: [none]
 agent: geo-data-engineer
 estimate_h: 3
 touches: [palmscan/qa/summary.py, palmscan/qa/gpkg.py, palmscan/qa/rejects.py, tests/unit/palmscan/test_scan_qa.py, tests/fixtures/palmscan/qa/]
-owner: ""
-branch: ""
-worktree: ""
-updated: 2026-11-21
+owner: claude-agent
+branch: task/scan-012-qa-outputs-qa-summary-md-qa-map-gpkg-qa
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-012"
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -51,3 +51,4 @@ pytest tests/unit/palmscan/test_scan_qa.py -q
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [claude-agent] Claimed. branch=task/scan-012-qa-outputs-qa-summary-md-qa-map-gpkg-qa worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-012
