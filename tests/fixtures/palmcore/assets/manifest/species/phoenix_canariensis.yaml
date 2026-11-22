@@ -1,0 +1,9 @@
+species: phoenix_canariensis
+common_name: Canary Island date palm
+set: socal
+status: draft
+lean_max_deg: 0
+variants:
+  - variant: medium
+    native_height_m: 14.0
+    crown_diam_m: 8.0

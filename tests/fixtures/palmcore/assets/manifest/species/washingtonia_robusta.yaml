@@ -1,0 +1,18 @@
+species: washingtonia_robusta
+common_name: Mexican fan palm
+set: socal
+status: in_review
+lean_max_deg: 5
+variants:
+  - variant: tall
+    native_height_m: 28.0
+    crown_diam_m: 4.5
+  - variant: short
+    native_height_m: 15.0
+    crown_diam_m: 3.5
+  - variant: medium_b
+    native_height_m: 21.0
+    crown_diam_m: 4.0
+  - variant: medium
+    native_height_m: 21.0
+    crown_diam_m: 4.0

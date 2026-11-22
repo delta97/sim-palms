@@ -1,0 +1,10 @@
+# Asset library config (ASSET-005). Inputs to `python -m palmcore.assets build-manifest`.
+package_name: palmfix-assets
+package_version: 0.1.0
+# Allowed uniform scale range for a placed model: scale = clamp(height / native_height, min, max).
+# This is the single source for the clamp (see plans/detailed/03-palm-assets.md, "Scale limits and fallback").
+scale_limits: {min: 0.85, max: 1.15}
+# Species with no model yet -> species to use instead.
+species_fallback:
+  washingtonia_filifera: washingtonia_robusta
+  _default: washingtonia_robusta
