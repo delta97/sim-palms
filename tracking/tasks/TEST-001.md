@@ -1,7 +1,7 @@
 ---
 id: TEST-001
 title: Build the shared pytest harness and fixture loaders
-status: todo
+status: in_progress
 phase: 1
 area: TEST
 kind: build
@@ -11,10 +11,10 @@ requires: [none]
 agent: test-engineer
 estimate_h: 3
 touches: [tests/__init__.py, tests/conftest.py, tests/helpers/__init__.py, tests/helpers/fixtures.py, tests/unit/helpers/test_fixtures.py, tests/unit/helpers/test_conftest.py, tests/fixtures/helpers/]
-owner: ""
-branch: ""
-worktree: ""
-updated: 2026-11-21
+owner: claude-agent
+branch: task/test-001-build-the-shared-pytest-harness-and-fixt
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/TEST-001"
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -61,3 +61,4 @@ python3 scripts/tasks.py validate
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [claude-agent] Claimed. branch=task/test-001-build-the-shared-pytest-harness-and-fixt worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/TEST-001
