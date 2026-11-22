@@ -1,7 +1,7 @@
 ---
 id: ARCH-005
 title: "Add palmcore geo helpers (Bbox, distances, UTM, transforms)"
-status: in_progress
+status: review
 phase: 1
 area: ARCH
 kind: build
@@ -37,7 +37,7 @@ updated: 2026-11-22
 4. `local_crs_for(bbox, override)` validates an override with `pyproj.CRS.from_user_input` and raises `ValueError` if it doesn't parse.
 5. Write `tests/unit/palmcore/test_geo.py` with every WS3 test value:
    - UTM zones: San Diego → 32611, Sydney → 32756, lon 180 → zone 60;
-   - haversine: 0.001° lat at 32.79° N ≈ 110.9 m ± 0.2; symmetric; zero for identical points;
+   - haversine: 0.001° lat ≈ 111.2 m ± 0.2 on the sphere (110.9 m is `meters_per_degree(32.79)[1]/1000`, also tested); symmetric; zero for identical points;
    - `meters_per_degree(0)` ≈ (111320, 110574) within 5 m;
    - `Bbox`: rejects the four invalid shapes; `contains` on an edge is True; `intersects` with a touching bbox is True; `buffer_m(100)` grows each side by about 100 m ± 1 m;
    - `to_local` → `to_wgs84` round trip error < 1e-7°;
@@ -46,10 +46,10 @@ updated: 2026-11-22
 
 ## Acceptance criteria
 
-- [ ] All names and signatures match WS3.
-- [ ] Imports are limited to the standard library and `pyproj`.
-- [ ] Every WS3 test value is covered.
-- [ ] ruff, mypy (strict for palmcore) and pytest are green.
+- [x] All names and signatures match WS3.
+- [x] Imports are limited to the standard library and `pyproj`.
+- [x] Every WS3 test value is covered.
+- [x] ruff, mypy (strict for palmcore) and pytest are green.
 
 ## Verification
 
@@ -63,3 +63,6 @@ ruff check palmcore tests && mypy
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [claude-agent] Claimed. branch=task/arch-005-add-palmcore-geo-helpers-bbox-distances worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/ARCH-005
+- 2026-11-22 [claude-agent] Implemented palmcore/geo.py + tests (4fbbb07). pytest: 44 passed; ruff check/format clean; mypy: Success, no issues in 6 source files; local_crs_for(San Diego bbox) = EPSG:32611.
+- 2026-11-22 [claude-agent] Spec fix: WS3 said haversine of 0.001 deg lat = 110.9 m, but on the fixed sphere (R=6371008.8) it is 111.195 m; 110.9 m is meters_per_degree(32.79)[1]/1000. Both asserted in tests; WS3 and task text corrected.
+- 2026-11-22 [claude-agent] Status in_progress -> review.
