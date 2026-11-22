@@ -1,7 +1,7 @@
 ---
 id: SPIKE-009
 title: Write the SimConnect spawn-and-disconnect spike console app (C#)
-status: review
+status: done
 phase: 0
 area: SPIKE
 kind: build
@@ -69,3 +69,4 @@ Compiling is checked on the sim PC in SPIKE-005 step 1. If `dotnet` is installed
 - 2026-11-22 [code-reviewer] review: CHANGES_REQUESTED - Program.cs:99 Pump(1ms) blocks up to 100 ms per create (WaitOne(100) not clamped to remaining time), inflating step-9 total time by up to ~10 s for 100 objects and spacing sends; clamp wait to remaining span. Everything else covered: all SPIKE-005 questions map to modes/README, VERIFY marking is adequate, no obvious masked C# errors. Nits in review reply.
 - 2026-11-22 [claude-agent] Review changes addressed in ff36d2e (Pump clamp, drain, exit codes, timestamped spawned files, log fields, README, VERIFY). dotnet build -c Release: only MSB3245 (SimConnect assembly) + CS0246/CS0234 errors, as expected.
 - 2026-11-22 [integrator] integrator: re-review after ff36d2e; Pump clamp verified (Program.cs:245-248); reviewer found every SPIKE-005 question covered -> reviewer box ticked
+- 2026-11-22 [integrator] Status review -> done.

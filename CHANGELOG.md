@@ -5,6 +5,9 @@ Format: `- TASK-ID: what changed (PR link)`.
 
 ## Unreleased
 
+- SPIKE-009: Added the SimConnect spawn-and-disconnect spike console app (`spikes/simconnect-persist/`) for SPIKE-005 on the sim PC (local merge).
+- GEN-001: Scaffolded the palmgen package, CLI surface, error types and data model (local merge).
+- RISK-002: Audited palm model, texture and tool licenses (`docs/licenses/models-and-tools.md`), with 10 open questions (local merge).
 - TEST-001: Added the shared pytest harness (run flags, network guard, path fixtures) and fixture loaders (local merge).
 - RISK-004: Added `docs/compat/airports-mask.geojson` (60 SoCal airport boundaries from OSM) and `docs/compat/airports.md` with known add-ons (local merge).
 - ARCH-004: Added palmcore logging setup, repo path resolution and the download-cache helpers (local merge).

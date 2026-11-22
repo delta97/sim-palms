@@ -7,7 +7,7 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 198 | 6 | 0 | 1 | 8 | 0 | 213 |
+| 198 | 3 | 0 | 1 | 11 | 0 | 213 |
 
 ## In progress / in review
 
@@ -16,10 +16,7 @@ Generated: 2026-11-22
 | [ARCH-002](tasks/ARCH-002.md) | in_progress | claude-agent | task/arch-002-define-the-palms-geojson-json-schema-and | Define the palms.geojson JSON Schema and a shared validator |
 | [ARCH-003](tasks/ARCH-003.md) | in_progress | claude-agent | task/arch-003-define-the-region-yaml-config-schema-and | Define the region YAML config schema and loader |
 | [ASSET-005](tasks/ASSET-005.md) | in_progress | claude-agent | task/asset-005-asset-manifest-schema-species-spec-forma | Asset manifest schema, species spec format, loader and generator (palmcore.assets) |
-| [GEN-001](tasks/GEN-001.md) | in_progress | claude-agent | task/gen-001-scaffold-palmgen-package-cli-surface-and | Scaffold palmgen package, CLI surface and data model |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
-| [RISK-002](tasks/RISK-002.md) | in_progress | claude-agent | task/risk-002-audit-model-texture-and-tool-licenses-fo | Audit model, texture and tool licenses for palm assets |
-| [SPIKE-009](tasks/SPIKE-009.md) | in_progress | claude-agent | task/spike-009-write-the-simconnect-spawn-and-disconnec | Write the SimConnect spawn-and-disconnect spike console app (C#) |
 
 ## Blocked
 
@@ -34,16 +31,22 @@ _None._
 | [TEST-006](tasks/TEST-006.md) | 0 | windows-sim | msfs-sdk-specialist | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
 | [RISK-003](tasks/RISK-003.md) | 1 | network, human | geo-data-engineer | Inventory other palm and tree mods and their coverage for mask_out defaults |
 | [TEST-005](tasks/TEST-005.md) | 1 | none | test-engineer | Add the test-site registry schema and loader |
+| [GEN-002](tasks/GEN-002.md) | 2 | none | scenery-generator-engineer | Deterministic GUIDs and per-palm hashes |
+| [GEN-003](tasks/GEN-003.md) | 2 | none | scenery-generator-engineer | 0.01 degree tiling and tile naming |
+| [GEN-005](tasks/GEN-005.md) | 2 | none | scenery-generator-engineer | Exclusion circles, merging and simplification |
+| [GEN-008](tasks/GEN-008.md) | 2 | none | scenery-generator-engineer | Template engine and XML writer on fake templates |
+| [GEN-014](tasks/GEN-014.md) | 2 | none | scenery-generator-engineer | build_report.md and build_report.json |
 | [TEST-002](tasks/TEST-002.md) | 2 | none | test-engineer | Add the golden-file comparison helper with an update flag |
 | [TEST-003](tasks/TEST-003.md) | 2 | none | test-engineer | Add geometry assertion helpers for exclusion polygons |
 | [TEST-015](tasks/TEST-015.md) | 2 | none | test-engineer | Write the post-update regression routine, log and entry scaffolder |
 | [ASSET-001](tasks/ASSET-001.md) | 3 | network | asset-pipeline-artist | Write reference sheets for the 5 SoCal palm species |
 | [ASSET-002](tasks/ASSET-002.md) | 3 | network | asset-pipeline-artist | Collect build-vs-license inputs for DEC-002 (palm models) |
+| [DEC-008](tasks/DEC-008.md) | 3 | human | task-planner | Decide: storage for large asset binaries (Git LFS or external) |
 | [DEC-005](tasks/DEC-005.md) | 5 | human | test-engineer | Decide: performance budget and reference hardware/settings |
 | [TEST-013](tasks/TEST-013.md) | 5 | none | test-engineer | Build the frametime capture parser and run comparison report |
 | [FX-001](tasks/FX-001.md) | 7 | windows-sim, human | render-fx-researcher | Verify ReShade depth access in MSFS 2024 (incl. multiplayer/online lockout) |
 
-## Phase 0 (1/17 done)
+## Phase 0 (2/17 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -60,7 +63,7 @@ _None._
 | [SPIKE-006](tasks/SPIKE-006.md) | todo | windows-sim, human | SPIKE-002 | Place one default library tree as a stand-in in the cut hole |
 | [SPIKE-007](tasks/SPIKE-007.md) | todo | windows-sim, human | SPIKE-006 | Cut a palm blob right next to a building and record what happens to the walls |
 | [SPIKE-008](tasks/SPIKE-008.md) | todo | none | SPIKE-003 | Write the fspackagetool benchmark project generator (1 and 1,000 polygons, broken and CRLF variants) |
-| [SPIKE-009](tasks/SPIKE-009.md) | in_progress | none |  | Write the SimConnect spawn-and-disconnect spike console app (C#) |
+| [SPIKE-009](tasks/SPIKE-009.md) | done | none |  | Write the SimConnect spawn-and-disconnect spike console app (C#) |
 | [SPIKE-010](tasks/SPIKE-010.md) | todo | none | SPIKE-002, SPIKE-003, SPIKE-004, SPIKE-005, SPIKE-006, SPIKE-007 | Write the one-page Phase 0 findings note with screenshots |
 | [SPIKE-011](tasks/SPIKE-011.md) | todo | human | SPIKE-010, RISK-005 | Write the Phase 0 go/no-go proposal and get the user's decision |
 | [TEST-006](tasks/TEST-006.md) | todo | windows-sim |  | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
@@ -101,12 +104,12 @@ _None._
 | [TEST-005](tasks/TEST-005.md) | todo | none | TEST-001 | Add the test-site registry schema and loader |
 | [TEST-100](tasks/TEST-100.md) | todo | human, windows-sim | TEST-005, TEST-006, DEC-004 | Define test sites T1-T5 (bbox, purpose, region, saved flights, three viewpoints each) |
 
-## Phase 2 (1/29 done)
+## Phase 2 (3/29 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
 | [GATE-P2](tasks/GATE-P2.md) | todo | human | GATE-P1, GEN-012, GEN-100, TEST-002, TEST-007, TEST-016, TEST-102, TEST-104 | Phase 2 exit gate: generated package removes the test neighbourhood's blobs |
-| [GEN-001](tasks/GEN-001.md) | in_progress | none | ARCH-001 | Scaffold palmgen package, CLI surface and data model |
+| [GEN-001](tasks/GEN-001.md) | done | none | ARCH-001 | Scaffold palmgen package, CLI surface and data model |
 | [GEN-002](tasks/GEN-002.md) | todo | none | GEN-001, ARCH-006 | Deterministic GUIDs and per-palm hashes |
 | [GEN-003](tasks/GEN-003.md) | todo | none | GEN-001 | 0.01 degree tiling and tile naming |
 | [GEN-004](tasks/GEN-004.md) | todo | none | GEN-001, ARCH-002, ARCH-003, ARCH-007 | Load palms, buildings and region config |
@@ -124,7 +127,7 @@ _None._
 | [GEN-016](tasks/GEN-016.md) | todo | windows-sim | GEN-015, SCAN-100, RISK-004 | First Windows build and output check calibration |
 | [GEN-017](tasks/GEN-017.md) | todo | windows-sim, human | GEN-016, TEST-100, TEST-102, ARCH-008 | Dev Mode review and margin tuning |
 | [GEN-100](tasks/GEN-100.md) | todo | windows-sim, human | GEN-017 | Deliverable: palmgen build produces a working Community region package (Phase 2) |
-| [RISK-002](tasks/RISK-002.md) | in_progress | network |  | Audit model, texture and tool licenses for palm assets |
+| [RISK-002](tasks/RISK-002.md) | done | network |  | Audit model, texture and tool licenses for palm assets |
 | [RISK-004](tasks/RISK-004.md) | done | network |  | Collect airport boundaries and known airport add-ons for default masks |
 | [TEST-002](tasks/TEST-002.md) | todo | none | TEST-001 | Add the golden-file comparison helper with an update flag |
 | [TEST-003](tasks/TEST-003.md) | todo | none | TEST-001 | Add geometry assertion helpers for exclusion polygons |
