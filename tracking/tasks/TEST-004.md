@@ -1,7 +1,7 @@
 ---
 id: TEST-004
 title: Add contract conformance tests for palms.geojson
-status: todo
+status: in_progress
 phase: 1
 area: TEST
 kind: test
@@ -11,9 +11,9 @@ requires: [none]
 agent: test-engineer
 estimate_h: 3
 touches: [tests/helpers/contract.py, tests/unit/contract/test_palms_contract.py, tests/fixtures/contract/]
-owner: ""
-branch: ""
-worktree: ""
+owner: claude-agent
+branch: task/test-004-add-contract-conformance-tests-for-palms
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/TEST-004"
 updated: 2026-11-22
 ---
 
@@ -59,3 +59,4 @@ python3 scripts/tasks.py validate
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [reconcile] Local palmscan output is globbed at the canonical build/scan/**/palms.geojson (was data/**). V13 resolved: exclusion_radius_m = clamp(crown_diam_m/2 + exclusion.margin_m, radius_min_m, radius_max_m) from the region exclusion: block, so the equality check applies when a region is given. Cross-area reconciliation.
+- 2026-11-22 [claude-agent] Claimed. branch=task/test-004-add-contract-conformance-tests-for-palms worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/TEST-004
