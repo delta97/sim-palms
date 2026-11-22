@@ -1,8 +1,11 @@
 """The palmscan run pipeline (plan W11): inventory ingest to palms.geojson and the QA files.
 
-Phase 1 stages, in order: buildings, inventory ingest, cross-source dedupe, ``mask_out``,
-(Phase 4: LiDAR), species priors, sizes / exclusion radius / building conflicts, palms.geojson,
-then ``buildings.geojson``, ``species_priors.yaml``, the QA files and ``run.json``.
+Stages, in order: buildings, inventory ingest, cross-source dedupe, ``mask_out``, species priors,
+LiDAR (tiles: CHM, peaks, crowns; palm rules; merge with the inventory; species tree or rules),
+sizes / exclusion radius / building conflicts, palms.geojson, then ``buildings.geojson``,
+``species_priors.yaml``, ``species_tree.json`` (when a tree is used), the QA files, the accuracy
+files (``--eval-site``) and ``run.json``. The LiDAR stage runs when the region has
+``sources.lidar: 3dep_ept`` and neither ``--no-lidar`` nor ``--only inventory`` is given.
 
 Failures are raised as :class:`palmcore.errors.PalmfixError` subclasses; the CLI maps them to
 exit codes (config 2, contract 3, source 4, cache miss 5). ``run.json`` is written for failed
@@ -17,9 +20,10 @@ from collections import Counter
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, Final
+from typing import TYPE_CHECKING, Any, Final, cast
 
 import numpy as np
+import pyproj
 import shapely
 from shapely import STRtree
 from shapely.geometry import mapping
@@ -45,21 +49,41 @@ from palmscan.detect.dedupe import dedupe_cross_source, source_of
 from palmscan.http import HttpClient
 from palmscan.ingest import CONFIDENCE_SPECIES, IngestResult, ingest_inventory
 from palmscan.mask import apply_masks, load_masks
-from palmscan.model import PalmRecord, Reject
+from palmscan.model import LidarCandidate, PalmRecord, Reject, SourceVintage
 from palmscan.output import (
     to_feature_collection,
     validate_palms,
     write_invalid,
     write_palms,
 )
+from palmscan.qa.accuracy import (
+    accuracy_doc,
+    accuracy_section_md,
+    evaluate_site,
+    fallback_height_error,
+    load_evaluator,
+    write_accuracy,
+)
 from palmscan.qa.gpkg import ConflictBuilding, vintage_grid, write_qa_gpkg
 from palmscan.qa.rejects import write_rejects_csv
-from palmscan.qa.summary import QaContext, SourceCounts, git_sha, write_summary
+from palmscan.qa.summary import (
+    ClassifierSummary,
+    QaContext,
+    SourceCounts,
+    git_sha,
+    write_summary,
+)
 from palmscan.sources.base import InventoryAdapter
 from palmscan.sources.buildings import SOURCE_NOTICES, fetch_buildings
+from palmscan.sources.lidar_ept import EptPointSource, PointSource
 
 if TYPE_CHECKING:
     import geopandas as gpd
+    from shapely.geometry.base import BaseGeometry
+
+    from palmscan.classify.species import ShapeModel
+    from palmscan.classify.tree_model import TrainReport, TreeModel
+    from palmscan.detect.chm import ChmResult
 
 __all__ = [
     "BUILDINGS_FILENAME",
@@ -85,12 +109,20 @@ BUILDINGS_SCHEMA_VERSION: Final = "1.0"
 PRIOR_CONFIDENCE: Final = 0.3
 UNKNOWN_SPECIES: Final = "palm_unknown"
 _COORD_DECIMALS: Final = 7
-_LIDAR_WARNING: Final = "LiDAR stage not implemented yet; inventory only"
-_EVAL_WARNING: Final = "--eval-site needs the Phase 4 accuracy evaluator; ignored"
+TREE_FILENAME: Final = "species_tree.json"
+ACCURACY_FILENAME: Final = "accuracy.json"
+LIDAR_SOURCE: Final = "3dep_ept"
+EVAL_DIR: Final = "eval"
+DEBUG_DIR: Final = "debug"
+EVAL_NODATA: Final = -9999.0
+EVAL_CHM_PAD_M: Final = 3.0  # CHM margin around the site so fill-heights can search past its edge
+_OPTIONAL_OUTPUTS: Final = (TREE_FILENAME, ACCURACY_FILENAME)
 _OUTPUTS: Final = (
     "palms.geojson",
     BUILDINGS_FILENAME,
     PRIORS_FILENAME,
+    TREE_FILENAME,
+    ACCURACY_FILENAME,
     SUMMARY_FILENAME,
     GPKG_FILENAME,
     REJECTS_FILENAME,
@@ -107,6 +139,9 @@ class RunOptions:
     only: str | None = None  # None | "inventory" | "lidar"
     eval_site: str | None = None
     generated_at: datetime | None = None  # None: SOURCE_DATE_EPOCH, then now
+    debug: bool = False  # -vv: debug GeoTIFFs of every LiDAR tile under <out>/debug/
+    repo_root: Path | None = None  # checkout holding tests/accuracy; None: current directory
+    sites_root: Path | None = None  # ground-truth sites folder; None: <repo_root>/tests/accuracy
 
 
 @dataclass(slots=True)
@@ -339,6 +374,373 @@ def _write_run_json(
     atomic_write_text(out_dir / RUN_JSON_FILENAME, canonical_json(doc) + "\n")
 
 
+# ----------------------------------------------------------------------------- LiDAR stage
+
+
+@dataclass(slots=True)
+class _EvalSite:
+    """The labelled area (lon/lat polygon) of ``--eval-site`` and where its folder lives."""
+
+    site: str
+    root: Path
+    area: BaseGeometry
+
+
+class _EvalChm:
+    """CHM of the eval site, mosaicked from the tiles on one grid at the CHM resolution."""
+
+    def __init__(self, bounds: tuple[float, float, float, float], res: float, crs: pyproj.CRS):
+        from palmscan.detect.chm import grid_for_bounds
+
+        self.transform, height, width = grid_for_bounds(bounds, res)
+        self.crs = crs
+        self.res = res
+        self.data = np.full((height, width), EVAL_NODATA, dtype=np.float32)
+        self._xc = self.transform.c + (np.arange(width) + 0.5) * res
+        self._yc = self.transform.f - (np.arange(height) + 0.5) * res
+
+    def add(self, chm: ChmResult, tile_bounds: tuple[float, float, float, float]) -> None:
+        """Copy the cells whose centre is inside the (unbuffered) tile from its CHM."""
+        xmin, ymin, xmax, ymax = tile_bounds
+        cols = np.nonzero((self._xc >= xmin) & (self._xc < xmax))[0]
+        rows = np.nonzero((self._yc >= ymin) & (self._yc < ymax))[0]
+        if cols.size == 0 or rows.size == 0:
+            return
+        t = chm.transform
+        src_c = np.floor((self._xc[cols] - t.c) / chm.res).astype(np.int64)
+        src_r = np.floor((t.f - self._yc[rows]) / chm.res).astype(np.int64)
+        height, width = chm.chm.shape
+        ok_c = (src_c >= 0) & (src_c < width)
+        ok_r = (src_r >= 0) & (src_r < height)
+        cols, src_c, rows, src_r = cols[ok_c], src_c[ok_c], rows[ok_r], src_r[ok_r]
+        self.data[np.ix_(rows, cols)] = chm.chm[np.ix_(src_r, src_c)]
+
+    def covered(self) -> bool:
+        return bool((self.data != EVAL_NODATA).any())
+
+    def write(self, path: Path) -> None:
+        import rasterio
+
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with rasterio.open(
+            path,
+            "w",
+            driver="GTiff",
+            height=self.data.shape[0],
+            width=self.data.shape[1],
+            count=1,
+            dtype="float32",
+            crs=self.crs,
+            transform=self.transform,
+            nodata=EVAL_NODATA,
+            compress="deflate",
+        ) as dst:
+            dst.write(self.data, 1)
+
+
+@dataclass(slots=True)
+class _TileResult:
+    candidates: list[LidarCandidate] = field(default_factory=list)
+    crowns: list[tuple[str, BaseGeometry]] = field(default_factory=list)
+    ground: dict[str, float] = field(default_factory=dict)  # inventory stable_key -> DTM metres
+    vintages: dict[str, SourceVintage] = field(default_factory=dict)
+    n_tiles: int = 0  # tiles that produced a CHM
+    n_skipped: int = 0
+
+
+@dataclass(slots=True)
+class _LidarOutput:
+    palms: list[PalmRecord]
+    candidates: list[LidarCandidate]
+    crowns: list[tuple[str, BaseGeometry]] | None
+    rejects: list[Reject]
+    classifier: ClassifierSummary
+    region_medians: dict[str, float]
+    vintages: list[SourceVintage]
+    counts: dict[str, Any]
+
+
+def _prepare_eval(opts: RunOptions, warnings: list[str]) -> _EvalSite | None:
+    """Load the ``--eval-site`` labelled area up front, so a bad site fails before any work."""
+    if not opts.eval_site:
+        return None
+    repo_root = opts.repo_root if opts.repo_root is not None else Path.cwd()
+    evaluator = load_evaluator(repo_root)
+    if evaluator is None:
+        message = f"--eval-site {opts.eval_site}: tests.accuracy is not importable; skipped"
+        _log.warning(message)
+        warnings.append(message)
+        return None
+    root = opts.sites_root if opts.sites_root is not None else repo_root / "tests" / "accuracy"
+    area = evaluator.gt.load_labeled_area(opts.eval_site, root)  # raises on a missing site
+    return _EvalSite(opts.eval_site, root, area)
+
+
+def _local_bounds(
+    lon_lat: tuple[float, float, float, float], crs: pyproj.CRS, pad_m: float
+) -> tuple[float, float, float, float]:
+    lon_min, lat_min, lon_max, lat_max = lon_lat
+    xs, ys = geo.to_local(
+        [lon_min, lon_max, lon_min, lon_max], [lat_min, lat_min, lat_max, lat_max], crs
+    )
+    return (
+        float(np.min(xs)) - pad_m,
+        float(np.min(ys)) - pad_m,
+        float(np.max(xs)) + pad_m,
+        float(np.max(ys)) + pad_m,
+    )
+
+
+def _crown_polygons(
+    chm: ChmResult, labels: np.ndarray, candidates: list[LidarCandidate]
+) -> list[tuple[str, BaseGeometry]]:
+    """WGS84 crown polygon of each candidate (the watershed segment of its label)."""
+    import shapely
+    from rasterio import features
+    from shapely.geometry import shape
+    from shapely.ops import unary_union
+
+    wanted = {int(c.candidate_id.rsplit(":", 1)[1]): c.candidate_id for c in candidates}
+    pieces: dict[int, list[BaseGeometry]] = {}
+    for geom, value in features.shapes(
+        labels.astype(np.int32), mask=labels > 0, transform=chm.transform
+    ):
+        label = int(value)
+        if label in wanted:
+            pieces.setdefault(label, []).append(shape(geom))
+    to_wgs84 = pyproj.Transformer.from_crs(chm.crs, geo.WGS84, always_xy=True).transform
+
+    def project(coords: np.ndarray) -> np.ndarray:
+        lon, lat = to_wgs84(coords[:, 0], coords[:, 1])
+        return np.column_stack((lon, lat))
+
+    return [
+        (wanted[label], shapely.transform(unary_union(pieces[label]), project))
+        for label in sorted(pieces)
+    ]
+
+
+def _lidar_tiles(
+    source: PointSource,
+    cfg: ScanConfig,
+    inventory: list[PalmRecord],
+    crs: pyproj.CRS,
+    opts: RunOptions,
+    eval_chm: _EvalChm | None,
+    warnings: list[str],
+    moment: datetime,
+) -> _TileResult:
+    """One tile at a time: CHM, peaks, crowns, candidates. Rasters are dropped after each tile.
+
+    Only the candidates, the crown polygons (when ``qa.write_crowns``), the DTM elevation of the
+    inventory palms inside the tile and, for ``--eval-site``, the site's CHM cells are kept.
+    """
+    from palmscan.detect.chm import build_chm, sample_ground, write_debug_rasters
+    from palmscan.detect.peaks import crown_stats, find_peaks, segment_crowns
+
+    params = cfg.lidar
+    out = _TileResult()
+    inv_x = np.array([p.x for p in inventory], dtype=np.float64)
+    inv_y = np.array([p.y for p in inventory], dtype=np.float64)
+    fetched_at = moment.strftime("%Y-%m-%dT%H:%M:%SZ")
+    for ds, tile in source.tiles():
+        points = source.points(ds, tile)
+        if len(points) == 0:
+            message = f"LiDAR tile {tile.tile_id} of {ds.name} has no points; skipped"
+            _log.warning(message)
+            warnings.append(message)
+            out.n_skipped += 1
+            continue
+        try:
+            chm = build_chm(
+                points,
+                tile.buffered,
+                crs,
+                res=params.resolution_m,
+                smooth_sigma_px=params.smooth_sigma_px,
+                use_building_class=params.use_building_class,
+            )
+        except SourceError as exc:
+            message = f"LiDAR tile {tile.tile_id} of {ds.name} skipped: {exc}"
+            _log.warning(message)
+            warnings.append(message)
+            out.n_skipped += 1
+            continue
+        finally:
+            del points
+        peaks = find_peaks(chm, cfg.peaks.min_height_m, cfg.peaks.min_distance_m)
+        labels = segment_crowns(chm, peaks, cfg.peaks.crown_mask_height_m)
+        found = crown_stats(chm, labels, peaks, ds.name, tile.tile_id, tile_bounds=tile.bounds)
+        vintage = str(ds.year) if ds.year is not None else None
+        for cand in found:
+            cand.vintage = vintage
+        out.candidates.extend(found)
+        out.vintages.setdefault(
+            ds.name, SourceVintage(f"lidar:{ds.name}", vintage, "dataset_name", fetched_at)
+        )
+        if cfg.qa.write_crowns:
+            out.crowns.extend(_crown_polygons(chm, labels, found))
+        if len(inv_x):
+            xmin, ymin, xmax, ymax = tile.bounds
+            inside = np.nonzero(
+                (inv_x >= xmin) & (inv_x < xmax) & (inv_y >= ymin) & (inv_y < ymax)
+            )[0]
+            if inside.size:
+                ground = sample_ground(chm, inv_x[inside], inv_y[inside])
+                for i, g in zip(inside, ground, strict=True):
+                    if np.isfinite(g):
+                        out.ground[inventory[int(i)].stable_key] = float(g)
+        if eval_chm is not None:
+            eval_chm.add(chm, tile.bounds)
+        if opts.debug:
+            write_debug_rasters(chm, opts.out_dir / DEBUG_DIR / tile.tile_id)
+        out.n_tiles += 1
+        _log.info("LiDAR tile %s: %d candidates", tile.tile_id, len(found))
+    return out
+
+
+def _load_tree(cfg: ScanConfig) -> TreeModel:
+    from palmscan.classify.tree_model import load_model
+
+    path = Path(str(cfg.classify.tree_model_path))
+    try:
+        return load_model(path)
+    except OSError as exc:
+        raise ConfigError(f"classify.tree_model_path {path} cannot be read: {exc}") from exc
+    except ValueError as exc:
+        raise ConfigError(f"classify.tree_model_path {path} is not a species tree: {exc}") from exc
+
+
+def _classifier_summary(
+    model: TreeModel | None, report: TrainReport | None, loaded: str | None
+) -> ClassifierSummary:
+    if report is None:
+        return ClassifierSummary("lidar_tree", reason=f"loaded from {loaded}")
+    return ClassifierSummary(
+        chosen_model="lidar_tree" if model is not None else "shape_rules",
+        cv_acc_rules=report.cv_acc_rules if report.n_samples else None,
+        cv_acc_tree=report.cv_acc_tree,
+        n_samples=report.n_samples,
+        reason=report.reason,
+        confusion=report.confusion,
+    )
+
+
+def _lidar_stages(
+    cfg: ScanConfig,
+    opts: RunOptions,
+    source: PointSource,
+    inventory: list[PalmRecord],
+    buildings: gpd.GeoDataFrame,
+    priors: dict[str, float],
+    eval_site: _EvalSite | None,
+    clock: _Timings,
+    warnings: list[str],
+    moment: datetime,
+) -> _LidarOutput:
+    """Tiles, palm rules, merge with the inventory, species classification."""
+    from palmscan.classify.species import classify
+    from palmscan.classify.tree_model import save_model, train
+    from palmscan.detect.merge import merge
+    from palmscan.detect.palm_rules import apply_palm_rules
+
+    crs = pyproj.CRS.from_user_input(cfg.region.crs())
+    # Inventory x/y come from the bbox's UTM zone; matching needs the CRS of the point source.
+    if inventory:
+        xs, ys = geo.to_local([p.lon for p in inventory], [p.lat for p in inventory], crs)
+        for palm, x, y in zip(inventory, xs, ys, strict=True):
+            palm.x, palm.y = float(x), float(y)
+
+    eval_chm: _EvalChm | None = None
+    if eval_site is not None:
+        bounds = _local_bounds(eval_site.area.bounds, crs, EVAL_CHM_PAD_M)
+        eval_chm = _EvalChm(bounds, cfg.lidar.resolution_m, crs)
+
+    tiles = _lidar_tiles(source, cfg, inventory, crs, opts, eval_chm, warnings, moment)
+    if tiles.n_tiles == 0:
+        raise SourceError("LiDAR: no tile had usable points")
+    clock.mark("lidar_tiles", len(tiles.candidates))
+    if eval_chm is not None and eval_site is not None:
+        if eval_chm.covered():
+            eval_chm.write(opts.out_dir / EVAL_DIR / eval_site.site / "chm.tif")
+        else:
+            warnings.append(f"--eval-site {eval_site.site}: no LiDAR tile covers the site; no CHM")
+
+    buildings_local = None
+    if len(buildings):
+        frame = buildings if buildings.crs is not None else buildings.set_crs(geo.WGS84)
+        buildings_local = frame.to_crs(crs)
+    candidates, rule_rejects = apply_palm_rules(tiles.candidates, cfg.rules, buildings_local)
+    n_accepted = sum(c.accepted for c in candidates)
+    clock.mark("lidar_rules", n_accepted)
+
+    merged = merge(inventory, candidates, cfg.merge, cfg.dedupe_radius_m, cfg.peaks.min_height_m)
+    palms = merged.palms
+    for palm in palms:
+        if palm.ground_elev_m is None and palm.stable_key in tiles.ground:
+            palm.ground_elev_m = tiles.ground[palm.stable_key]
+    clock.mark("merge", len(palms))
+
+    model: TreeModel | None
+    report: TrainReport | None = None
+    loaded: str | None = None
+    if cfg.classify.use_tree and cfg.classify.tree_model_path:
+        model, loaded = _load_tree(cfg), str(cfg.classify.tree_model_path)
+    else:
+        model, report = train(merged.training, cfg.classify)
+    if model is not None:
+        save_model(model, opts.out_dir / TREE_FILENAME)
+    # TreeModel.name is a ClassVar, which the ShapeModel protocol's plain attribute rejects.
+    classify([p for p in palms if p.lidar is not None], priors, cast("ShapeModel | None", model))
+    clock.mark("classify", sum(p.lidar is not None for p in palms))
+
+    return _LidarOutput(
+        palms=palms,
+        candidates=candidates,
+        crowns=tiles.crowns if cfg.qa.write_crowns else None,
+        rejects=[*rule_rejects, *merged.rejects],
+        classifier=_classifier_summary(model, report, loaded),
+        region_medians=merged.region_medians,
+        vintages=sorted(tiles.vintages.values(), key=lambda v: v.source),
+        counts={
+            "lidar_tiles": tiles.n_tiles,
+            "lidar_tiles_skipped": tiles.n_skipped,
+            "lidar_candidates": len(candidates),
+            "lidar_accepted": n_accepted,
+            "lidar_matched": sum(p.detected_by.endswith("+lidar") for p in palms),
+            "lidar_only": sum(p.detected_by == "lidar" for p in palms),
+            "species_model": "lidar_tree" if model is not None else "shape_rules",
+        },
+    )
+
+
+def _accuracy(
+    fc: dict[str, Any], eval_site: _EvalSite, opts: RunOptions, warnings: list[str]
+) -> str | None:
+    """Run TEST-010 through SCAN-029; write ``accuracy.json``; return the Accuracy section."""
+    repo_root = opts.repo_root if opts.repo_root is not None else Path.cwd()
+    profiles = evaluate_site(
+        fc, eval_site.site, repo_root=repo_root, sites_root=eval_site.root, warnings=warnings
+    )
+    if not profiles:
+        return None
+    import geopandas as gpd
+
+    props = [f["properties"] for f in fc["features"]]
+    frame = gpd.GeoDataFrame(
+        {
+            "species": [p.get("species") for p in props],
+            "height_m": [p.get("height_m") for p in props],
+            "height_source": [p.get("height_source") for p in props],
+        }
+    )
+    doc = accuracy_doc(
+        eval_site.site, profiles, fallback_height_error_m=fallback_height_error(frame)
+    )
+    write_accuracy(doc, opts.out_dir)
+    return accuracy_section_md(doc)
+
+
 # --------------------------------------------------------------------------------- run
 
 
@@ -348,12 +750,12 @@ def run(
     cache: Cache,
     http: HttpClient,
     adapters: list[InventoryAdapter] | None = None,
-    point_source: Any = None,
+    point_source: PointSource | None = None,
 ) -> RunResult:
-    """Run stages 1 to 9 and write every Phase 1 output into ``opts.out_dir``.
+    """Run the pipeline and write every output into ``opts.out_dir``.
 
-    ``adapters`` replace the configured inventory adapters (tests). ``point_source`` is the hook
-    for the Phase 4 LiDAR stage (SCAN-028) and is unused until then.
+    ``adapters`` replace the configured inventory adapters and ``point_source`` replaces the 3DEP
+    EPT point source of the LiDAR stage (tests).
     """
     out_dir = opts.out_dir
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -362,7 +764,9 @@ def run(
     warnings: list[str] = []
     counts: dict[str, Any] = {}
     try:
-        result = _run(cfg, opts, cache, http, adapters, moment, clock, warnings, counts)
+        result = _run(
+            cfg, opts, cache, http, adapters, point_source, moment, clock, warnings, counts
+        )
     except PalmfixError as exc:
         _write_run_json(out_dir, cfg, moment, clock, counts, warnings, exc.exit_code, str(exc))
         raise
@@ -376,6 +780,7 @@ def _run(
     cache: Cache,
     http: HttpClient,
     adapters: list[InventoryAdapter] | None,
+    point_source: PointSource | None,
     moment: datetime,
     clock: _Timings,
     warnings: list[str],
@@ -387,11 +792,14 @@ def _run(
 
     if opts.only == "lidar" and opts.no_lidar:
         raise ConfigError("--only lidar and --no-lidar cannot be combined")
-    if _lidar_requested(cfg, opts):
-        _log.warning(_LIDAR_WARNING)
-        warnings.append(_LIDAR_WARNING)
-    if opts.eval_site:
-        warnings.append(_EVAL_WARNING)
+    lidar_type = cfg.region.sources.lidar.type
+    if opts.only == "lidar" and lidar_type == "none":
+        raise ConfigError("--only lidar needs sources.lidar in the region file")
+    if lidar_type not in ("none", LIDAR_SOURCE):
+        raise ConfigError(f"unknown sources.lidar type {lidar_type!r}; use {LIDAR_SOURCE!r}")
+    for name in _OPTIONAL_OUTPUTS:  # left over from an earlier run with other options
+        (out_dir / name).unlink(missing_ok=True)
+    eval_site = _prepare_eval(opts, warnings)
 
     # 1. buildings
     buildings, building_warnings = fetch_buildings(cfg, cache, http)
@@ -417,9 +825,7 @@ def _run(
         clock.counts.update(inv.stage_counts)
         warnings.extend(ingest.warnings)
         stages.extend(["ingest_inventory", "dedupe", "apply_masks"])
-    # 5. LiDAR (Phase 4, SCAN-028): tiles, CHM, peaks, rules, merge, classify. Uses point_source.
-
-    # 6. priors
+    # 5. priors (from the inventory only; the LiDAR classifier falls back to them)
     computed = compute_priors(species_level(palms))
     priors = merge_priors(computed, cfg.species_priors)
     if not priors:
@@ -428,12 +834,26 @@ def _run(
         priors_used = "computed"
     else:
         priors_used = "configured"
+
+    # 6. LiDAR: tiles, CHM, peaks, palm rules, merge with the inventory, species classification
+    lidar: _LidarOutput | None = None
+    region_medians: dict[str, float] = {}
+    if _lidar_requested(cfg, opts):
+        source = point_source if point_source is not None else EptPointSource(cfg, cache, http)
+        lidar = _lidar_stages(
+            cfg, opts, source, palms, buildings, dict(priors), eval_site, clock, warnings, moment
+        )
+        palms = lidar.palms
+        rejects = [*rejects, *lidar.rejects]
+        region_medians = lidar.region_medians
+        counts.update(lidar.counts)
+        stages.extend(["lidar_tiles", "lidar_rules", "merge", "classify"])
     sampled = _assign_species(palms, priors, warnings)
     clock.mark("priors", sampled)
     stages.append("priors")
 
     # 7. sizes, exclusion radius, building conflicts
-    assign_sizes(palms, cfg)
+    assign_sizes(palms, cfg, region_medians)
     assign_exclusion(palms, cfg.region.exclusion)
     conflicts = flag_building_conflicts(
         palms, buildings, crs, cfg.exclusion.building_overlap_min_m2
@@ -458,6 +878,11 @@ def _run(
     clock.mark("write_palms", len(palms))
     stages.append("write_palms")
 
+    accuracy_md = _accuracy(fc, eval_site, opts, warnings) if eval_site is not None else None
+    if accuracy_md is not None:
+        clock.mark("accuracy", 1)
+        stages.append("accuracy")
+
     # 9. buildings.geojson, priors, QA, run.json
     exclusion = cfg.region.exclusion
     near = _nearby_buildings(
@@ -467,7 +892,7 @@ def _run(
     atomic_write_text(out_dir / PRIORS_FILENAME, priors_yaml(computed))
     if not palms:
         warnings.append("no palms found; palms.geojson is empty")
-    qa = _QaInputs(stages, palms, rejects, ingest, source_counts, conflicts)
+    qa = _QaInputs(stages, palms, rejects, ingest, source_counts, conflicts, lidar, accuracy_md)
     _write_qa(cfg, out_dir, moment, qa, dict(computed), priors_used, warnings)
     clock.mark("write_outputs", len(near))
 
@@ -492,6 +917,8 @@ class _QaInputs:
     ingest: IngestResult
     source_counts: list[SourceCounts]
     conflicts: gpd.GeoDataFrame
+    lidar: _LidarOutput | None = None
+    accuracy_md: str | None = None
 
 
 def _write_qa(
@@ -503,7 +930,13 @@ def _write_qa(
     priors_used: str,
     warnings: list[str],
 ) -> None:
-    palms, rejects, ingest, conflicts = qa.palms, qa.rejects, qa.ingest, qa.conflicts
+    palms, rejects, ingest, conflicts, lidar = (
+        qa.palms,
+        qa.rejects,
+        qa.ingest,
+        qa.conflicts,
+        qa.lidar,
+    )
     grid = vintage_grid(palms, cfg.qa.vintage_grid_deg, moment.year, cfg.qa.stale_years)
     conflict_buildings = [
         ConflictBuilding(str(b), str(s), g)
@@ -517,6 +950,8 @@ def _write_qa(
         rejects,
         conflict_buildings,
         grid,
+        lidar.candidates if lidar else None,
+        lidar.crowns if lidar else None,
         id_prefix=cfg.id_prefix,
         crs=geo.local_crs(cfg.bbox),
     )
@@ -532,12 +967,14 @@ def _write_qa(
         git_sha=git_sha(),
         source_counts=qa.source_counts,
         conflict_building_count=len(conflict_buildings),
-        source_vintages=ingest.vintages,
+        source_vintages=[*ingest.vintages, *(lidar.vintages if lidar else [])],
         vintage_grid=grid,
         unmatched_palm_names=dict(ingest.unmatched_palm_names),
         priors_computed=computed,
         priors_configured=dict(cfg.species_priors),
         priors_used=priors_used,
+        classifier=lidar.classifier if lidar else None,
+        accuracy_md=qa.accuracy_md,
         warnings=warnings,
     )
     write_summary(ctx, out_dir / SUMMARY_FILENAME)

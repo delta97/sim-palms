@@ -1014,6 +1014,14 @@ Changes to `palmscan/pipeline.py`, `palmscan/cli.py` and `palmscan/qa/*`:
 7. Memory: process one tile at a time; keep only candidates, not rasters (except with `-vv`, which writes debug GeoTIFFs to `<out>/debug/`).
 - End-to-end test with a fake `PointSource` serving synthetic points (flat ground, three isolated palm-like cones, one wide canopy blob, one pole, one cone inside a building footprint) plus a two-record inventory fixture. Asserts the detected_by mix, reject reasons, schema validity and that `accuracy.json` is written with a tiny truth file.
 
+As built (SCAN-028):
+- Stage order in `run`: buildings, inventory, dedupe, masks, priors, LiDAR (tiles, rules, merge, classify), sizes, `palms.geojson`, accuracy, QA. The priors come first because `classify` falls back to them; palms the LiDAR stage does not shape-classify still get their prior in the Phase 1 step.
+- The LiDAR stage needs `sources.lidar: 3dep_ept` (any other value except `none` is a config error) and is skipped by `--no-lidar` and `--only inventory`. `--only lidar` with no LiDAR source is a config error. A tile with no ground points is skipped with a warning; a run where no tile is usable fails with a source error (exit 4).
+- Inventory x/y are recomputed in the region CRS (`RegionConfig.crs()`, the one the point source tiles in) before matching.
+- `classify.tree_model_path` (with `use_tree`) loads the model instead of training one; a model in use is written to `species_tree.json`.
+- Tile rasters are dropped after each tile. `-vv` writes `<out>/debug/<tile_id>/*.tif`. With `--eval-site`, the CHM of the site's labelled area plus 3 m is mosaicked from the tiles (cells by centre inside each unbuffered tile) into `<out>/eval/<site>/chm.tif` (float32, nodata -9999).
+- `--eval-site` and `eval` take `--sites-root DIR` (default `tests/accuracy`); `eval` exits 0 whenever the evaluation ran (threshold failures are in the table and the JSON), and `--match-radius-m` overrides the thresholds file only when given.
+
 ### W21. Threshold tuning and Phase 4 deliverable
 
 Tasks: SCAN-030 (tuning, `network, human`), SCAN-101 (deliverable, `network, human`).

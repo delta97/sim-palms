@@ -1,0 +1,100 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.2530898,
+     32.7887817
+    ]
+   },
+   "properties": {
+    "gt_id": "T8-gt-0001",
+    "height_class": "M",
+    "species": "washingtonia_robusta",
+    "species_basis": "inventory",
+    "context": "street",
+    "confidence": "high",
+    "height_ref_m": 14.0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.2520441,
+     32.7883327
+    ]
+   },
+   "properties": {
+    "gt_id": "T8-gt-0002",
+    "height_class": "M",
+    "species": "washingtonia_robusta",
+    "species_basis": "imagery",
+    "context": "street",
+    "confidence": "high",
+    "height_ref_m": 11.0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.2538463,
+     32.787427
+    ]
+   },
+   "properties": {
+    "gt_id": "T8-gt-0003",
+    "height_class": "T",
+    "species": "washingtonia_robusta",
+    "species_basis": "imagery",
+    "context": "street",
+    "confidence": "high",
+    "height_ref_m": 18.0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.2525659,
+     32.7877904
+    ]
+   },
+   "properties": {
+    "gt_id": "T8-gt-0004",
+    "height_class": "M",
+    "species": "phoenix_canariensis",
+    "species_basis": "inventory",
+    "context": "street",
+    "confidence": "high",
+    "height_ref_m": 9.0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.2514972,
+     32.787522
+    ]
+   },
+   "properties": {
+    "gt_id": "T8-gt-0005",
+    "height_class": "M",
+    "species": "unknown",
+    "species_basis": "unknown",
+    "context": "park",
+    "confidence": "high",
+    "height_ref_m": 10.0
+   }
+  }
+ ]
+}

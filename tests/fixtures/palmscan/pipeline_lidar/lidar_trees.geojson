@@ -1,0 +1,41 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "id": "1",
+    "species": "Washingtonia robusta",
+    "common_name": "Mexican Fan Palm",
+    "status": "Alive",
+    "height_ft": "",
+    "survey_date": "2021-03-15"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.2530898,
+     32.7887817
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": "2",
+    "species": "Phoenix canariensis",
+    "common_name": "Canary Island Date Palm",
+    "status": "Alive",
+    "height_ft": "",
+    "survey_date": "2021-03-15"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.2525659,
+     32.7877904
+    ]
+   }
+  }
+ ]
+}

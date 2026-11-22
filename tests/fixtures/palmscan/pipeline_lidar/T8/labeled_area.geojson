@@ -1,0 +1,39 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "site": "T8",
+    "note": "SYNTHETIC fixture, not a real site"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -117.2552333,
+       32.7869732
+      ],
+      [
+       -117.2507481,
+       32.7869822
+      ],
+      [
+       -117.2507557,
+       32.7896884
+      ],
+      [
+       -117.2552411,
+       32.7896794
+      ],
+      [
+       -117.2552333,
+       32.7869732
+      ]
+     ]
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,36 @@
+# LiDAR end-to-end fixture region (SCAN-028): synthetic data only, runs fully offline.
+# Paths resolve against tests/fixtures/palmscan (the parent of this directory); see README.md.
+config_version: 1
+region: lidar-e2e
+id_prefix: lde
+name: LiDAR end-to-end fixture
+bbox: [-117.2554467, 32.7868825, -117.2505459, 32.7910419]
+sources:
+  inventory:
+    - name: lidar_trees
+      type: geojson_file
+      path: pipeline_lidar/lidar_trees.geojson
+      format: geojson
+      species_field: species
+      common_name_field: common_name
+      status_field: status
+      id_field: id
+      height_field: height_ft
+      height_units: ft
+      date_field: survey_date
+      license: synthetic test data
+  buildings: microsoft_footprints
+  buildings_path: pipeline_lidar/lidar_buildings.geojson
+  lidar: 3dep_ept
+  osm_trees: false
+species_priors:
+  washingtonia_robusta: 0.6
+  phoenix_canariensis: 0.4
+exclusion:
+  margin_m: 1.5
+palmscan:
+  lidar:
+    tile_size_m: 200.0   # nine tiles; the 476400 / 3627800 / 3628000 tile edges cut the scene
+    tile_buffer_m: 10.0
+  rules:
+    crown_min_m: 3.5     # smoothing widens the thinnest synthetic crown to 3.2 m
