@@ -1,7 +1,7 @@
 ---
 id: ARCH-006
 title: "Add deterministic UUIDv5 ids and seeded randomness to palmcore"
-status: in_progress
+status: review
 phase: 1
 area: ARCH
 kind: build
@@ -55,10 +55,10 @@ updated: 2026-11-22
 
 ## Acceptance criteria
 
-- [ ] All names and signatures match WS4.
-- [ ] Golden vectors are committed and pass.
-- [ ] The module never uses `hash()`, `uuid1`, `uuid4` or an unseeded `random`.
-- [ ] ruff, mypy (strict for palmcore) and pytest are green.
+- [x] All names and signatures match WS4.
+- [x] Golden vectors are committed and pass.
+- [x] The module never uses `hash()`, `uuid1`, `uuid4` or an unseeded `random`.
+- [x] ruff, mypy (strict for palmcore) and pytest are green.
 
 ## Verification
 
@@ -72,3 +72,8 @@ ruff check palmcore tests && mypy
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [claude-agent] Claimed. branch=task/arch-006-add-deterministic-uuidv5-ids-and-seeded worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/ARCH-006
+- 2026-11-22 [claude-agent] Implemented palmcore/ids.py (NAMESPACE=1e4715d1-de00-51bf-a07a-679b67048e4f). Note: location_key uses the 'loc:' prefix from plan_ref WS4; task Step 3 omits it. Followed WS4. Flag for reviewer.
+- 2026-11-22 [claude-agent] Tests: tests/unit/palmcore/test_ids.py 28 passed (golden vectors, subprocess determinism, 100k uniqueness, AST check for hash/uuid1/uuid4/unseeded random). Full suite 51 passed.
+- 2026-11-22 [claude-agent] ruff check palmcore tests: clean; ruff format --check: clean; mypy (strict palmcore): no issues in 6 source files.
+- 2026-11-22 [claude-agent] Acceptance ticked: signatures match WS4 (ids.py); golden vectors pass (28 tests); AST test finds no hash/uuid1/uuid4/unseeded random calls; ruff/mypy/pytest green.
+- 2026-11-22 [claude-agent] Status in_progress -> review.
