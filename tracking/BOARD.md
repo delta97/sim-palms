@@ -7,15 +7,18 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 198 | 2 | 0 | 1 | 12 | 0 | 213 |
+| 194 | 5 | 0 | 1 | 13 | 0 | 213 |
 
 ## In progress / in review
 
 | Task | Status | Owner | Branch | Title |
 |---|---|---|---|---|
-| [ARCH-002](tasks/ARCH-002.md) | in_progress | claude-agent | task/arch-002-define-the-palms-geojson-json-schema-and | Define the palms.geojson JSON Schema and a shared validator |
+| [ARCH-008](tasks/ARCH-008.md) | in_progress | claude-agent | task/arch-008-write-the-two-example-region-configs-and | Write the two example region configs and verify their sources |
 | [ASSET-005](tasks/ASSET-005.md) | in_progress | claude-agent | task/asset-005-asset-manifest-schema-species-spec-forma | Asset manifest schema, species spec format, loader and generator (palmcore.assets) |
+| [GEN-002](tasks/GEN-002.md) | in_progress | claude-agent | task/gen-002-deterministic-guids-and-per-palm-hashes | Deterministic GUIDs and per-palm hashes |
+| [GEN-003](tasks/GEN-003.md) | in_progress | claude-agent | task/gen-003-0-01-degree-tiling-and-tile-naming | 0.01 degree tiling and tile naming |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
+| [TEST-005](tasks/TEST-005.md) | in_progress | claude-agent | task/test-005-add-the-test-site-registry-schema-and-lo | Add the test-site registry schema and loader |
 
 ## Blocked
 
@@ -28,11 +31,9 @@ _None._
 | [DEC-004](tasks/DEC-004.md) | 0 | human, network | task-planner | Decide: first test block (a San Diego or LA street the user knows well) |
 | [SPIKE-001](tasks/SPIKE-001.md) | 0 | windows-sim, human | msfs-sdk-specialist | Install the MSFS 2024 SDK and create an empty Dev Mode scenery project |
 | [TEST-006](tasks/TEST-006.md) | 0 | windows-sim | msfs-sdk-specialist | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
-| [ARCH-008](tasks/ARCH-008.md) | 1 | network | geo-data-engineer | Write the two example region configs and verify their sources |
+| [ARCH-007](tasks/ARCH-007.md) | 1 | none | python-architect | Add the palms.geojson serializer, reader and writer |
 | [RISK-003](tasks/RISK-003.md) | 1 | network, human | geo-data-engineer | Inventory other palm and tree mods and their coverage for mask_out defaults |
-| [TEST-005](tasks/TEST-005.md) | 1 | none | test-engineer | Add the test-site registry schema and loader |
-| [GEN-002](tasks/GEN-002.md) | 2 | none | scenery-generator-engineer | Deterministic GUIDs and per-palm hashes |
-| [GEN-003](tasks/GEN-003.md) | 2 | none | scenery-generator-engineer | 0.01 degree tiling and tile naming |
+| [TEST-004](tasks/TEST-004.md) | 1 | none | test-engineer | Add contract conformance tests for palms.geojson |
 | [GEN-005](tasks/GEN-005.md) | 2 | none | scenery-generator-engineer | Exclusion circles, merging and simplification |
 | [GEN-008](tasks/GEN-008.md) | 2 | none | scenery-generator-engineer | Template engine and XML writer on fake templates |
 | [GEN-014](tasks/GEN-014.md) | 2 | none | scenery-generator-engineer | build_report.md and build_report.json |
@@ -68,18 +69,18 @@ _None._
 | [SPIKE-011](tasks/SPIKE-011.md) | todo | human | SPIKE-010, RISK-005 | Write the Phase 0 go/no-go proposal and get the user's decision |
 | [TEST-006](tasks/TEST-006.md) | todo | windows-sim |  | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
 
-## Phase 1 (7/31 done)
+## Phase 1 (8/31 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
 | [ARCH-001](tasks/ARCH-001.md) | done | none |  | Scaffold the Python monorepo (pyproject, package layout, lint/test tooling, CI) |
-| [ARCH-002](tasks/ARCH-002.md) | in_progress | none | ARCH-001 | Define the palms.geojson JSON Schema and a shared validator |
+| [ARCH-002](tasks/ARCH-002.md) | done | none | ARCH-001 | Define the palms.geojson JSON Schema and a shared validator |
 | [ARCH-003](tasks/ARCH-003.md) | done | none | ARCH-001, ARCH-005 | Define the region YAML config schema and loader |
 | [ARCH-004](tasks/ARCH-004.md) | done | none | ARCH-001 | Add palmcore logging, path resolution and download-cache helpers |
 | [ARCH-005](tasks/ARCH-005.md) | done | none | ARCH-001 | Add palmcore geo helpers (Bbox, distances, UTM, transforms) |
 | [ARCH-006](tasks/ARCH-006.md) | done | none | ARCH-001 | Add deterministic UUIDv5 ids and seeded randomness to palmcore |
 | [ARCH-007](tasks/ARCH-007.md) | todo | none | ARCH-002, ARCH-004 | Add the palms.geojson serializer, reader and writer |
-| [ARCH-008](tasks/ARCH-008.md) | todo | network | ARCH-003 | Write the two example region configs and verify their sources |
+| [ARCH-008](tasks/ARCH-008.md) | in_progress | network | ARCH-003 | Write the two example region configs and verify their sources |
 | [ARCH-009](tasks/ARCH-009.md) | todo | none | ARCH-003, ARCH-004, ARCH-007 | Add shared CLI plumbing and the palmfix utility CLI |
 | [DEC-009](tasks/DEC-009.md) | todo | human, network | DEC-004, RISK-001 | Decide: building footprint source (OSM, Microsoft, both, or county data) |
 | [GATE-P1](tasks/GATE-P1.md) | todo | human | GATE-P0, ARCH-008, DEC-009, TEST-004, TEST-100, SCAN-100 | Phase 1 exit gate: palms.geojson for the test neighbourhood from inventory data |
@@ -101,7 +102,7 @@ _None._
 | [SCAN-100](tasks/SCAN-100.md) | todo | network, human | SCAN-007, SCAN-013, TEST-100, ARCH-008 | Deliverable: palmscan run produces validated palms.geojson from inventory data (Phase 1) |
 | [TEST-001](tasks/TEST-001.md) | done | none | ARCH-001 | Build the shared pytest harness and fixture loaders |
 | [TEST-004](tasks/TEST-004.md) | todo | none | TEST-001, ARCH-002, ARCH-003 | Add contract conformance tests for palms.geojson |
-| [TEST-005](tasks/TEST-005.md) | todo | none | TEST-001 | Add the test-site registry schema and loader |
+| [TEST-005](tasks/TEST-005.md) | in_progress | none | TEST-001 | Add the test-site registry schema and loader |
 | [TEST-100](tasks/TEST-100.md) | todo | human, windows-sim | TEST-005, TEST-006, DEC-004 | Define test sites T1-T5 (bbox, purpose, region, saved flights, three viewpoints each) |
 
 ## Phase 2 (3/29 done)
@@ -110,8 +111,8 @@ _None._
 |---|---|---|---|---|
 | [GATE-P2](tasks/GATE-P2.md) | todo | human | GATE-P1, GEN-012, GEN-100, TEST-002, TEST-007, TEST-016, TEST-102, TEST-104 | Phase 2 exit gate: generated package removes the test neighbourhood's blobs |
 | [GEN-001](tasks/GEN-001.md) | done | none | ARCH-001 | Scaffold palmgen package, CLI surface and data model |
-| [GEN-002](tasks/GEN-002.md) | todo | none | GEN-001, ARCH-006 | Deterministic GUIDs and per-palm hashes |
-| [GEN-003](tasks/GEN-003.md) | todo | none | GEN-001 | 0.01 degree tiling and tile naming |
+| [GEN-002](tasks/GEN-002.md) | in_progress | none | GEN-001, ARCH-006 | Deterministic GUIDs and per-palm hashes |
+| [GEN-003](tasks/GEN-003.md) | in_progress | none | GEN-001 | 0.01 degree tiling and tile naming |
 | [GEN-004](tasks/GEN-004.md) | todo | none | GEN-001, ARCH-002, ARCH-003, ARCH-007 | Load palms, buildings and region config |
 | [GEN-005](tasks/GEN-005.md) | todo | none | GEN-001 | Exclusion circles, merging and simplification |
 | [GEN-006](tasks/GEN-006.md) | todo | none | GEN-005 | Building footprint clipping |

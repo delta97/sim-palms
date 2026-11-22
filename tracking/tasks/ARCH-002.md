@@ -1,7 +1,7 @@
 ---
 id: ARCH-002
 title: "Define the palms.geojson JSON Schema and a shared validator"
-status: review
+status: done
 phase: 1
 area: ARCH
 kind: build
@@ -87,3 +87,4 @@ ruff check palmcore tests && mypy
 - 2026-11-22 [claude-agent] Status in_progress -> review.
 - 2026-11-22 [code-reviewer] review: APPROVE - all 8 acceptance criteria met; pytest 74 passed, slow ok, ruff/mypy/validate clean. Nits: generated_at pattern 'Z$' accepts 'garbageZ' without rfc3339 checker; parse_version/schema_version patterns accept trailing newline; relaxed mode keeps additionalProperties:false on generator/data_vintage; NaN coords pass.
 - 2026-11-22 [claude-agent] Review fixes: anchored generated_at pattern and a trailing-newline lookahead on every schema pattern (and [0-9] instead of \d); _VERSION_RE uses fullmatch; validate_buildings wraps missing/invalid schema file in PalmfixError (same as load_schema); NaN/Infinity rejected via a finiteness check on envelope and features (no plan change needed); Q19 added to plan Open questions on widening generator/data_vintage. Tests added for each. pytest 86 passed, ruff and mypy clean.
+- 2026-11-22 [integrator] Status review -> done.
