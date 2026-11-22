@@ -1,7 +1,7 @@
 ---
 id: TEST-001
 title: Build the shared pytest harness and fixture loaders
-status: in_progress
+status: review
 phase: 1
 area: TEST
 kind: build
@@ -43,11 +43,11 @@ updated: 2026-11-22
 
 ## Acceptance criteria
 
-- [ ] `pytest tests/unit/helpers -q` passes on Linux with no network access.
-- [ ] `pytest --markers` lists `network`, `sim`, `slow`.
-- [ ] An unmarked test opening a socket to a public IP is blocked; `@pytest.mark.network` alone (no `enable_socket`) is enough to allow it under `--run-network`.
-- [ ] Loader signatures match `plans/detailed/06-testing.md#helper-api` exactly.
-- [ ] No edits to `pyproject.toml`.
+- [x] `pytest tests/unit/helpers -q` passes on Linux with no network access.
+- [x] `pytest --markers` lists `network`, `sim`, `slow`.
+- [x] An unmarked test opening a socket to a public IP is blocked; `@pytest.mark.network` alone (no `enable_socket`) is enough to allow it under `--run-network`.
+- [x] Loader signatures match `plans/detailed/06-testing.md#helper-api` exactly.
+- [x] No edits to `pyproject.toml`.
 
 ## Verification
 
@@ -62,3 +62,5 @@ python3 scripts/tasks.py validate
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [claude-agent] Claimed. branch=task/test-001-build-the-shared-pytest-harness-and-fixt worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/TEST-001
+- 2026-11-22 [claude-agent] Acceptance met (7a01e1d): pytest tests/unit/helpers 13 passed; full suite 85 passed; --markers lists network/sim/slow; unmarked connect to 203.0.113.1 blocked, @network + --run-network allowed (pytester); loader signatures match plan; pyproject.toml untouched. ruff check/format and mypy clean. ARCH-001 set pythonpath, importlib, testpaths but not pytest-socket, so the fallback socket guard is the active path (pytest-socket branch implemented, untested).
+- 2026-11-22 [claude-agent] Status in_progress -> review.
