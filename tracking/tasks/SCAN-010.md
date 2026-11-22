@@ -1,7 +1,7 @@
 ---
 id: SCAN-010
 title: "Species priors and deterministic prior sampling"
-status: review
+status: done
 phase: 1
 area: SCAN
 kind: build
@@ -55,3 +55,4 @@ pytest tests/unit/palmscan/test_scan_priors.py -q
 - 2026-11-22 [claude-agent] Discrepancy: brief said use palmcore.ids stable_unit_float; plan W8 and task Step 2 specify sha1(key)[:12]. Followed the plan (deterministic, not hash()). Callers pass purpose-tagged keys e.g. species|<stable_key>. Plan W8 updated to document SpeciesMix/n_palms, needed for min_n.
 - 2026-11-22 [claude-agent] SCAN-002 (species keys) not used: prior keys validated by pattern ^[a-z]+(_[a-z]+)+$ only; palm_unknown excluded explicitly. Full suite 873 passed, 1 skipped; ruff check, ruff format --check, mypy clean.
 - 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] Status review -> done.

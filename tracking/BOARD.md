@@ -7,7 +7,7 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 172 | 5 | 0 | 1 | 35 | 0 | 213 |
+| 172 | 4 | 0 | 1 | 36 | 0 | 213 |
 
 ## In progress / in review
 
@@ -17,7 +17,6 @@ Generated: 2026-11-22
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
 | [SCAN-002](tasks/SCAN-002.md) | in_progress | claude-agent | task/scan-002-species-normalization-table-normalizer-a | Species normalization table, normalizer and palm filter |
 | [SCAN-003](tasks/SCAN-003.md) | in_progress | claude-agent | task/scan-003-source-adapter-base-and-geojson-file-ada | Source adapter base and geojson_file adapter |
-| [SCAN-010](tasks/SCAN-010.md) | in_progress | claude-agent | task/scan-010-species-priors-and-deterministic-prior-s | Species priors and deterministic prior sampling |
 | [TEST-017](tasks/TEST-017.md) | in_progress | claude-agent | task/test-017-write-the-test-runbook-and-ci-wiring-not | Write the test runbook and CI wiring notes |
 
 ## Blocked
@@ -37,6 +36,7 @@ _None._
 | [DEC-002](tasks/DEC-002.md) | 3 | human | task-planner | Decide: build or license the palm models |
 | [DEC-008](tasks/DEC-008.md) | 3 | human | task-planner | Decide: storage for large asset binaries (Git LFS or external) |
 | [SCAN-022](tasks/SCAN-022.md) | 4 | none | lidar-analyst | Canopy height model (DTM, DSM, CHM) |
+| [SCAN-026](tasks/SCAN-026.md) | 4 | none | lidar-analyst | Species shape rules and classification order |
 | [TEST-009](tasks/TEST-009.md) | 4 | none | test-engineer | Define the ground-truth format and write the labeling guide and tooling |
 | [DEC-005](tasks/DEC-005.md) | 5 | human | test-engineer | Decide: performance budget and reference hardware/settings |
 | [TEST-013](tasks/TEST-013.md) | 5 | none | test-engineer | Build the frametime capture parser and run comparison report |
@@ -65,7 +65,7 @@ _None._
 | [SPIKE-011](tasks/SPIKE-011.md) | todo | human | SPIKE-010, RISK-005 | Write the Phase 0 go/no-go proposal and get the user's decision |
 | [TEST-006](tasks/TEST-006.md) | todo | windows-sim |  | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
 
-## Phase 1 (15/31 done)
+## Phase 1 (16/31 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -91,7 +91,7 @@ _None._
 | [SCAN-007](tasks/SCAN-007.md) | todo | network | SCAN-002, SCAN-004, SCAN-006 | Record live source fixtures and confirm source fields |
 | [SCAN-008](tasks/SCAN-008.md) | todo | none | SCAN-002, SCAN-004, SCAN-005 | Inventory ingest stage and cross-source dedupe |
 | [SCAN-009](tasks/SCAN-009.md) | todo | none | SCAN-002 | Palm sizes, exclusion radius, building conflict, mask_out |
-| [SCAN-010](tasks/SCAN-010.md) | in_progress | none | SCAN-001 | Species priors and deterministic prior sampling |
+| [SCAN-010](tasks/SCAN-010.md) | done | none | SCAN-001 | Species priors and deterministic prior sampling |
 | [SCAN-011](tasks/SCAN-011.md) | done | none | SCAN-001, ARCH-002, ARCH-006, ARCH-007 | palms.geojson writer, palm IDs and schema validation |
 | [SCAN-012](tasks/SCAN-012.md) | todo | none | SCAN-001 | QA outputs: qa_summary.md, qa_map.gpkg, qa_rejects.csv |
 | [SCAN-013](tasks/SCAN-013.md) | todo | none | SCAN-006, SCAN-008, SCAN-009, SCAN-010, SCAN-011, SCAN-012 | palmscan run pipeline and CLI, end-to-end on fixtures |
