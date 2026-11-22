@@ -315,6 +315,14 @@ Task FX-011. Uses raw depth only. Gradients of `ln d` don't depend on the depth 
 
 If `reversed: false` in `session.json`, step 2 uses `−L`.
 
+Implementation notes (FX-011, `palmfx/offline/mask_heuristic.py`, `palmfx mask-heuristic --session DIR [--config YAML] [--occluder PNG] [--debug]`):
+
+- `heuristic_masks(color_rgb, depth_raw, params, reversed=True, occluder=None, debug=False) -> MaskSet`, `method="heuristic"`. `reversed` comes from the `session.json` key `reversed` (default true; VERIFY against FX-001). Sky pixels (`d <= 0`) are set to the far end before the opening. Needs only colour and raw depth, no calibration.
+- Added step 6b, **regrow** (`regrow_depth_tol`, 0.06, 0 disables): the low rows of a blob are barely nearer than the ground beside it, so protrusion drops them (synthetic IoU 0.59 without, 0.82 with). Colour-matching pixels in a kept component's column span within 6 % of its median depth are added back before dilation. Not in the original plan text; VERIFY on real captures (FX-019).
+- Sobel is scaled by `sobel_scale` (0.25) so a clean depth step of size D reads D, and a boundary pixel counts as an edge if one lies within `edge_tolerance_px` (2). Both were unspecified; VERIFY.
+- Every component is listed in `params.debug.components` with height, aspect, fill, edge support and `reasons`; `--debug` also writes `masks/heuristic/debug/NNNNNN.png` (yellow candidates, green kept, red rejected with reason initials H/A/F/E).
+- Synthetic result (FX-004 scene, 8 frames): pixel IoU 0.83 mean, precision 1.00, recall 0.80 at IoU 0.3. The farthest blob (about 190 m) is missed because only its top rows protrude (aspect fails). Blobs wider than the opening (61 px at 1440 p) are missed by design.
+
 ### A9. Mask comparison
 
 Task FX-012 (metric), FX-013 (hand masks).
