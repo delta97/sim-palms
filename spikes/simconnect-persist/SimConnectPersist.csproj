@@ -12,7 +12,9 @@
 
   <PropertyGroup>
     <!-- SDK root. Override with: dotnet build -p:MsfsSdk="C:\MSFS 2024 SDK"
-         VERIFY: the env var name MSFS_SDK and the install folder (SPIKE-001 records both). -->
+         Confirmed on the sim PC (SPIKE-001, SDK 1.8.2, 2026-11-22): the installer sets the machine
+         env var MSFS2024_SDK = C:\MSFS 2024 SDK\ . MSFS_SDK is kept as a fallback. -->
+    <MsfsSdk Condition="'$(MsfsSdk)' == ''">$(MSFS2024_SDK)</MsfsSdk>
     <MsfsSdk Condition="'$(MsfsSdk)' == ''">$(MSFS_SDK)</MsfsSdk>
     <!-- VERIFY: subfolder of the managed DLL under the SDK root (SPIKE-001). Common in the 2020 SDK:
          SimConnect SDK\lib\managed\Microsoft.FlightSimulator.SimConnect.dll -->

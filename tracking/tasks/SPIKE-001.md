@@ -1,7 +1,7 @@
 ---
 id: SPIKE-001
 title: Install the MSFS 2024 SDK and create an empty Dev Mode scenery project
-status: todo
+status: in_progress
 phase: 0
 area: SPIKE
 kind: spike
@@ -11,8 +11,8 @@ requires: [windows-sim, human]
 agent: msfs-sdk-specialist
 estimate_h: 2
 touches: [docs/findings/SPIKE-001.md, docs/findings/SPIKE-001/]
-owner: ""
-branch: ""
+owner: user
+branch: main
 worktree: ""
 updated: 2026-11-22
 ---
@@ -87,3 +87,6 @@ A reviewer checks that no row says "assumed".
 
 - 2026-11-22 [plan-breakdown] Task created.
 - 2026-11-22 [integrator] integrator pre-check on this PC (2026-11-22): MSFS 2024 is the Steam edition (app 2537590, buildid 26385953, last updated ~2026-11-07; public SU7.2 1.9.24.0 was 2026-11-05 - in-sim version still to read in step 1). Packages: %APPDATA%\Microsoft Flight Simulator 2024\Packages (Community, Community2024, Official2024, StreamedPackages). SDK not installed: no MSFS* env var, no SDK folder found. Next: the user follows steps 1-3 and 6-8; an agent can do steps 3-5 and 9 (paths, env var, tree listing) once the SDK is installed.
+- 2026-11-22 [integrator] Status todo -> in_progress. user started on the sim PC; SDK installed, project created, sim crashed before step 7
+- 2026-11-22 [integrator] integrator, read from disk 2026-11-22: SDK 1.8.2 (Core) at C:\MSFS 2024 SDK\, env MSFS2024_SDK (machine), fspackagetool at Tools\bin (not on PATH), SimConnect DLLs at SimConnect SDK\lib and lib\managed. Project palmfix-spike.xml saved in Documents\MyFSProjects (OneDrive) at 14:43:07 with <Packages/>, not built. Sim 1.9.24.0 crashed 14:43:32 (0xe06d7363 then 0xc0000005, WinMain, DevMode=1, world map). Partial findings: docs/findings/SPIKE-001.md. Steps 7-11 remain.
+- 2026-11-22 [user] Claimed. branch=main worktree=-

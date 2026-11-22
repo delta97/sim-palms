@@ -70,3 +70,4 @@ Compiling is checked on the sim PC in SPIKE-005 step 1. If `dotnet` is installed
 - 2026-11-22 [claude-agent] Review changes addressed in ff36d2e (Pump clamp, drain, exit codes, timestamped spawned files, log fields, README, VERIFY). dotnet build -c Release: only MSB3245 (SimConnect assembly) + CS0246/CS0234 errors, as expected.
 - 2026-11-22 [integrator] integrator: re-review after ff36d2e; Pump clamp verified (Program.cs:245-248); reviewer found every SPIKE-005 question covered -> reviewer box ticked
 - 2026-11-22 [integrator] Status review -> done.
+- 2026-11-22 [integrator] integrator 2026-11-22: built against the real SDK 1.8.2 on the sim PC: dotnet build -c Release -> 0 warnings, 0 errors; output has SimConnectPersist.exe, SimConnect.dll, Microsoft.FlightSimulator.SimConnect.dll. Confirms the managed API names at compile level. csproj default env var corrected to MSFS2024_SDK (MSFS_SDK kept as fallback). Runtime checks are SPIKE-005.
