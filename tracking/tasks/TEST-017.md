@@ -1,7 +1,7 @@
 ---
 id: TEST-017
 title: Write the test runbook and CI wiring notes
-status: review
+status: done
 phase: 2
 area: TEST
 kind: doc
@@ -62,3 +62,4 @@ python3 scripts/tasks.py validate
 - 2026-11-22 [claude-agent] Spec discrepancies: (a) the task Verification says python3 and 'pytest -q -ra' with sim/network skipped; python3 does not exist on the Windows box, so python was used; the skip line for sim and network does not appear because no such tests exist on main. (b) main is 19 commits ahead of the branch base 38b886d (palmscan and palmgen tests added); the files this README depends on are identical on main (c4f5b50), so the commands apply, but the pass count on main will be higher. The README does not pin counts. (c) tests/unit fixture dirs have no SOURCES.md yet (plans/detailed/06 fixture policy); noted in README, not fixed here, since fixtures are owned by their area tasks. (d) the plan's pytest-socket and junit proposal: the existing python.yml test job already runs the default gate; the junit upload is a proposal in README for ARCH, not applied.
 - 2026-11-22 [claude-agent] Acceptance: ticked 1 (README covers every layer), 2 (CI wiring section present; gaps logged on ARCH-001), 3 (Linux suite result in this Log: Ubuntu 24.04 Py 3.12.3 760 passed, 1 skipped, coverage 95.28%). Discrepancy handling: the README CI wiring section is the proposed job, not applied to python.yml (ARCH owns it).
 - 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] Status review -> done.

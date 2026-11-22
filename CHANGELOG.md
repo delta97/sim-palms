@@ -5,6 +5,7 @@ Format: `- TASK-ID: what changed (PR link)`.
 
 ## Unreleased
 
+- TEST-017: Added the test runbook and CI wiring notes (`tests/README.md`), verified on Windows and Ubuntu/Python 3.12 (local merge).
 - SCAN-010: Added species priors from inventory mixes and deterministic prior sampling (`palmscan/classify/priors.py`) (local merge).
 - SCAN-011: Added the palmscan palms.geojson writer, stable palm ids and contract validation (`palmscan/output.py`) (local merge).
 - GEN-007: Added mod and airport masks (buffered in local CRS) and the Overpass airport fetch (`palmgen masks airports`) (local merge).

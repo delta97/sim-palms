@@ -7,7 +7,7 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 172 | 4 | 0 | 1 | 36 | 0 | 213 |
+| 170 | 5 | 0 | 1 | 37 | 0 | 213 |
 
 ## In progress / in review
 
@@ -17,7 +17,8 @@ Generated: 2026-11-22
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
 | [SCAN-002](tasks/SCAN-002.md) | in_progress | claude-agent | task/scan-002-species-normalization-table-normalizer-a | Species normalization table, normalizer and palm filter |
 | [SCAN-003](tasks/SCAN-003.md) | in_progress | claude-agent | task/scan-003-source-adapter-base-and-geojson-file-ada | Source adapter base and geojson_file adapter |
-| [TEST-017](tasks/TEST-017.md) | in_progress | claude-agent | task/test-017-write-the-test-runbook-and-ci-wiring-not | Write the test runbook and CI wiring notes |
+| [SCAN-012](tasks/SCAN-012.md) | in_progress | claude-agent | task/scan-012-qa-outputs-qa-summary-md-qa-map-gpkg-qa | QA outputs: qa_summary.md, qa_map.gpkg, qa_rejects.csv |
+| [TEST-102](tasks/TEST-102.md) | in_progress | claude-agent | task/test-102-visual-test-protocol-tooling-run-scaffol | Visual test protocol tooling: run scaffolder, checklist template, test log |
 
 ## Blocked
 
@@ -31,8 +32,6 @@ _None._
 | [SPIKE-001](tasks/SPIKE-001.md) | 0 | windows-sim, human | msfs-sdk-specialist | Install the MSFS 2024 SDK and create an empty Dev Mode scenery project |
 | [TEST-006](tasks/TEST-006.md) | 0 | windows-sim | msfs-sdk-specialist | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
 | [RISK-003](tasks/RISK-003.md) | 1 | network, human | geo-data-engineer | Inventory other palm and tree mods and their coverage for mask_out defaults |
-| [SCAN-012](tasks/SCAN-012.md) | 1 | none | geo-data-engineer | QA outputs: qa_summary.md, qa_map.gpkg, qa_rejects.csv |
-| [TEST-102](tasks/TEST-102.md) | 2 | none | test-engineer | Visual test protocol tooling: run scaffolder, checklist template, test log |
 | [DEC-002](tasks/DEC-002.md) | 3 | human | task-planner | Decide: build or license the palm models |
 | [DEC-008](tasks/DEC-008.md) | 3 | human | task-planner | Decide: storage for large asset binaries (Git LFS or external) |
 | [SCAN-022](tasks/SCAN-022.md) | 4 | none | lidar-analyst | Canopy height model (DTM, DSM, CHM) |
@@ -93,7 +92,7 @@ _None._
 | [SCAN-009](tasks/SCAN-009.md) | todo | none | SCAN-002 | Palm sizes, exclusion radius, building conflict, mask_out |
 | [SCAN-010](tasks/SCAN-010.md) | done | none | SCAN-001 | Species priors and deterministic prior sampling |
 | [SCAN-011](tasks/SCAN-011.md) | done | none | SCAN-001, ARCH-002, ARCH-006, ARCH-007 | palms.geojson writer, palm IDs and schema validation |
-| [SCAN-012](tasks/SCAN-012.md) | todo | none | SCAN-001 | QA outputs: qa_summary.md, qa_map.gpkg, qa_rejects.csv |
+| [SCAN-012](tasks/SCAN-012.md) | in_progress | none | SCAN-001 | QA outputs: qa_summary.md, qa_map.gpkg, qa_rejects.csv |
 | [SCAN-013](tasks/SCAN-013.md) | todo | none | SCAN-006, SCAN-008, SCAN-009, SCAN-010, SCAN-011, SCAN-012 | palmscan run pipeline and CLI, end-to-end on fixtures |
 | [SCAN-100](tasks/SCAN-100.md) | todo | network, human | SCAN-007, SCAN-013, TEST-100, ARCH-008 | Deliverable: palmscan run produces validated palms.geojson from inventory data (Phase 1) |
 | [TEST-001](tasks/TEST-001.md) | done | none | ARCH-001 | Build the shared pytest harness and fixture loaders |
@@ -101,7 +100,7 @@ _None._
 | [TEST-005](tasks/TEST-005.md) | done | none | TEST-001 | Add the test-site registry schema and loader |
 | [TEST-100](tasks/TEST-100.md) | todo | human, windows-sim | TEST-005, TEST-006, DEC-004 | Define test sites T1-T5 (bbox, purpose, region, saved flights, three viewpoints each) |
 
-## Phase 2 (15/29 done)
+## Phase 2 (16/29 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -131,8 +130,8 @@ _None._
 | [TEST-007](tasks/TEST-007.md) | todo | windows-sim, human | TEST-100, TEST-102 | Capture a baseline no-fix visual run at T1-T5 |
 | [TEST-015](tasks/TEST-015.md) | done | none | TEST-001 | Write the post-update regression routine, log and entry scaffolder |
 | [TEST-016](tasks/TEST-016.md) | todo | none | TEST-015, SPIKE-003, SPIKE-004 | Build the independent build-output checker and build-time history |
-| [TEST-017](tasks/TEST-017.md) | in_progress | none | TEST-002, TEST-004, ARCH-001 | Write the test runbook and CI wiring notes |
-| [TEST-102](tasks/TEST-102.md) | todo | none | TEST-001, TEST-005 | Visual test protocol tooling: run scaffolder, checklist template, test log |
+| [TEST-017](tasks/TEST-017.md) | done | none | TEST-002, TEST-004, ARCH-001 | Write the test runbook and CI wiring notes |
+| [TEST-102](tasks/TEST-102.md) | in_progress | none | TEST-001, TEST-005 | Visual test protocol tooling: run scaffolder, checklist template, test log |
 | [TEST-104](tasks/TEST-104.md) | todo | windows-sim, human | TEST-015, TEST-016, TEST-007, GEN-100, GATE-P0 | Run the post-update regression routine once and record the baseline log entry |
 
 ## Phase 3 (3/38 done)
