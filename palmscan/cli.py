@@ -7,8 +7,15 @@ import sys
 from collections.abc import Callable, Sequence
 from pathlib import Path
 
-from palmcore.cli_common import add_common_args, add_region_arg, run_main
+from palmcore.cli_common import add_common_args, add_region_arg, build_context, run_main
+from palmcore.errors import EXIT_OK
+from palmcore.paths import ensure_dir
 from palmscan import __version__
+from palmscan.cache import Cache
+from palmscan.classify.priors import compute_priors, priors_yaml
+from palmscan.config import ScanConfig, scan_config_from_region
+from palmscan.http import HttpClient
+from palmscan.pipeline import RunOptions, inventory_stages, run, species_level
 
 TOOL = "palmscan"
 
@@ -20,12 +27,52 @@ def _not_implemented(name: str) -> int:
     return 1
 
 
+def _load(args: argparse.Namespace) -> tuple[ScanConfig, Cache, Path]:
+    """Config, download cache and the output directory for ``run``/``priors``."""
+    ctx = build_context(args, TOOL)
+    cfg = scan_config_from_region(ctx.require_region())
+    cache = Cache(
+        ctx.paths.data_dir,
+        offline=bool(getattr(args, "offline", False)),
+        refresh=bool(getattr(args, "refresh", False)),
+    )
+    out = getattr(args, "out", None)
+    if out is not None:
+        out_dir = Path(out)
+    elif cfg.output_dir is not None:
+        out_dir = Path(cfg.output_dir)
+        if not out_dir.is_absolute():
+            out_dir = ctx.paths.repo_root / out_dir
+    else:
+        out_dir = ctx.paths.scan_out_dir(cfg.region_name)
+    return cfg, cache, out_dir
+
+
 def _cmd_run(args: argparse.Namespace) -> int:
-    return _not_implemented("run")
+    cfg, cache, out_dir = _load(args)
+    opts = RunOptions(
+        out_dir=ensure_dir(out_dir),
+        offline=args.offline,
+        refresh=args.refresh,
+        no_lidar=args.no_lidar,
+        only=args.only,
+        eval_site=args.eval_site,
+    )
+    result = run(cfg, opts, cache, HttpClient())
+    for warning in result.warnings:
+        print(f"warning: {warning}", file=sys.stderr)
+    print(f"palmscan: wrote {result.counts['palms']} palms to {result.palms_path}")
+    return result.exit_code
 
 
 def _cmd_priors(args: argparse.Namespace) -> int:
-    return _not_implemented("priors")
+    cfg, cache, _ = _load(args)
+    stages = inventory_stages(cfg, cache, HttpClient())
+    computed = compute_priors(species_level(stages.palms))
+    for warning in stages.ingest.warnings:
+        print(f"warning: {warning}", file=sys.stderr)
+    sys.stdout.write(priors_yaml(computed))
+    return EXIT_OK
 
 
 def _cmd_eval(args: argparse.Namespace) -> int:

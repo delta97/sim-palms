@@ -17,14 +17,10 @@ def test_help_lists_subcommands(capsys: pytest.CaptureFixture[str]) -> None:
 @pytest.mark.parametrize(
     "argv",
     [
-        ["run", "--region", "san-diego-coastal", "--offline", "--only", "inventory", "-vv"],
-        ["priors", "--region", "san-diego-coastal", "--offline"],
         ["eval", "--palms", "p.geojson", "--site", "t1"],
     ],
 )
-def test_handlers_not_implemented_exit_1(
-    argv: list[str], capsys: pytest.CaptureFixture[str]
-) -> None:
+def test_eval_not_implemented_exit_1(argv: list[str], capsys: pytest.CaptureFixture[str]) -> None:
     assert main(argv) == 1
     assert "not implemented" in capsys.readouterr().err
 

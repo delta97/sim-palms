@@ -1,0 +1,275 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 1,
+    "species": "Washingtonia",
+    "common_name": "Fan Palm",
+    "status": "Alive",
+    "height_ft": "",
+    "survey_date": "2021-03-15"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.2531,
+     32.7893
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 2,
+    "species": "Washingtonia robusta",
+    "common_name": "Mexican Fan Palm",
+    "status": "Alive",
+    "height_ft": "60",
+    "survey_date": "2021-03-15"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.2527794,
+     32.7893
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 3,
+    "species": "Phoenix canariensis",
+    "common_name": "Canary Island Date Palm",
+    "status": "Alive",
+    "height_ft": "40",
+    "survey_date": "2021-03-15"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.2524589,
+     32.7896617
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 4,
+    "species": "Syagrus romanzoffiana",
+    "common_name": "Queen Palm",
+    "status": "Alive",
+    "height_ft": "30",
+    "survey_date": "2021-03-15"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.2534206,
+     32.7894809
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 5,
+    "species": "Brahea",
+    "common_name": "",
+    "status": "Alive",
+    "height_ft": "",
+    "survey_date": "2021-03-15"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.2537411,
+     32.7890287
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 6,
+    "species": "Archontophoenix cunninghamiana",
+    "common_name": "King Palm",
+    "status": "Alive",
+    "height_ft": "25",
+    "survey_date": "2021-03-15"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.2521383,
+     32.7893
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 7,
+    "species": "Vacant Site",
+    "common_name": "",
+    "status": "Vacant",
+    "height_ft": "",
+    "survey_date": "2021-03-15"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.2541686,
+     32.7893
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 8,
+    "species": "Quercus agrifolia",
+    "common_name": "Coast Live Oak",
+    "status": "Alive",
+    "height_ft": "30",
+    "survey_date": "2021-03-15"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.2531,
+     32.7897522
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 9,
+    "species": "Palm",
+    "common_name": "Palm",
+    "status": "Alive",
+    "height_ft": "",
+    "survey_date": "2021-03-15"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.2537411,
+     32.7898426
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 10,
+    "species": "Washingtonia robusta",
+    "common_name": "Mexican Fan Palm",
+    "status": "Alive",
+    "height_ft": "50",
+    "survey_date": "2021-03-15"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.2539549,
+     32.7902044
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 11,
+    "species": "Phoenix dactylifera",
+    "common_name": "Date Palm",
+    "status": "Alive",
+    "height_ft": "35",
+    "survey_date": "2021-03-15"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.2518177,
+     32.7898426
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 12,
+    "species": "Brahea armata",
+    "common_name": "Blue Hesper Palm",
+    "status": "Alive",
+    "height_ft": "15",
+    "survey_date": "2021-03-15"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.2514971,
+     32.7888478
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 13,
+    "species": "Syagrus romanzoffiana",
+    "common_name": "Queen Palm",
+    "status": "Alive",
+    "height_ft": "28",
+    "survey_date": "2015-06-01"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.2547029,
+     32.7900235
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 14,
+    "species": "Washingtonia robusta",
+    "common_name": "Mexican Fan Palm",
+    "status": "Alive",
+    "height_ft": "55",
+    "survey_date": "2021-03-15"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.2531,
+     32.7885765
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 15,
+    "species": "Phoenix canariensis",
+    "common_name": "Canary Island Date Palm",
+    "status": "Alive",
+    "height_ft": "38",
+    "survey_date": "2021-03-15"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.2543823,
+     32.7887574
+    ]
+   }
+  }
+ ]
+}

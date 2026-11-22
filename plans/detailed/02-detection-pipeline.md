@@ -730,6 +730,7 @@ class RunOptions:
     no_lidar: bool = False
     only: str | None = None          # None | "inventory" | "lidar"
     eval_site: str | None = None
+    generated_at: datetime | None = None   # None: SOURCE_DATE_EPOCH, then now (fixed value = byte-identical palms.geojson)
 
 @dataclass(slots=True)
 class RunResult:
@@ -753,7 +754,8 @@ Stage order (Phase 1; Phase 4 inserts the LiDAR stages in SCAN-028):
 9. Write `buildings.geojson` (ARCH-002 secondary contract, `validate_buildings`; footprints within `exclusion.radius_max_m + exclusion.clip_buffer_m` of any kept palm), `species_priors.yaml`, QA files, `run.json`.
 - Logging through the palmcore logger (ARCH-001) or stdlib `logging`: one INFO line per stage with counts and seconds.
 - Phase 1 behaviour when `sources.lidar` is set: warning "LiDAR stage not implemented yet; inventory only" and continue.
-- `palmscan priors`: runs stages 2 to 4 and prints `priors_yaml`.
+- `palmscan priors`: runs stages 2 to 4 and prints `priors_yaml`. Computed priors count species-level names only (`pipeline.species_level`: confidence 0.95, no `<genus>_sp`), so genus defaults do not inflate a species.
+- `ingest_inventory` wraps adapter errors in `SourceError`; the pipeline re-raises a wrapped `CacheMiss` as `CacheMiss` so the exit code is 5, not 4. `run.json` is also written for failed runs (with `exit_code` and `error`). `buildings.geojson` carries a top-level `notices` map (`source` -> licence, attribution) from `SOURCE_NOTICES`.
 - `cli.main(argv=None) -> int`: maps `ConfigError` -> 2, schema failure -> 3, `SourceError`/`HttpError` -> 4, `CacheMiss` -> 5.
 - End-to-end test: `tests/fixtures/palmscan/regions/e2e.yaml` (geojson_file source on a small synthetic GeoJSON, buildings from a local fixture via `microsoft_footprints` + `buildings_path`, one `mask_out` bbox, `osm_trees: false`), run through `cli.main(["run", "--region", "e2e", "--regions-dir", ..., "--out", tmp, "--offline", "--data-dir", tmp])`. Asserts: exit 0, schema-valid output, expected palm count, one masked palm, one building conflict, all QA files present, second run byte-identical `palms.geojson`.
 
