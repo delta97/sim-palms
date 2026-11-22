@@ -7,7 +7,7 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 153 | 4 | 0 | 1 | 55 | 0 | 213 |
+| 153 | 3 | 0 | 1 | 56 | 0 | 213 |
 
 ## In progress / in review
 
@@ -15,7 +15,6 @@ Generated: 2026-11-22
 |---|---|---|---|---|
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
 | [SCAN-020](tasks/SCAN-020.md) | in_progress | claude-agent | task/scan-020-usgs-3dep-ept-lidar-adapter-pdal-pipelin | USGS 3DEP EPT LiDAR adapter (PDAL pipeline, tiles, cache) |
-| [SCAN-024](tasks/SCAN-024.md) | in_progress | claude-agent | task/scan-024-palm-rule-filter-with-reject-reasons | Palm rule filter with reject reasons |
 | [SCAN-025](tasks/SCAN-025.md) | in_progress | claude-agent | task/scan-025-inventory-to-lidar-matching-and-merge | Inventory-to-LiDAR matching and merge |
 | [SCAN-027](tasks/SCAN-027.md) | in_progress | claude-agent | task/scan-027-decision-tree-species-classifier-with-ru | Decision tree species classifier with rules fallback |
 
@@ -174,7 +173,7 @@ _None._
 | [GEN-019](tasks/GEN-019.md) | todo | windows-sim, human | GEN-100, ASSET-100 | Integrate the real model library into region builds |
 | [RISK-007](tasks/RISK-007.md) | todo | none | RISK-006, GATE-P3 | Risk review after Phase 3 (mid-project) |
 
-## Phase 4 (6/18 done)
+## Phase 4 (7/18 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -183,7 +182,7 @@ _None._
 | [SCAN-021](tasks/SCAN-021.md) | todo | network | SCAN-020, TEST-100 | Record LiDAR fixtures and confirm 3DEP EPT facts |
 | [SCAN-022](tasks/SCAN-022.md) | done | none | SCAN-001 | Canopy height model (DTM, DSM, CHM) |
 | [SCAN-023](tasks/SCAN-023.md) | done | none | SCAN-022 | Peak detection and watershed crown segmentation |
-| [SCAN-024](tasks/SCAN-024.md) | in_progress | none | SCAN-023 | Palm rule filter with reject reasons |
+| [SCAN-024](tasks/SCAN-024.md) | done | none | SCAN-023 | Palm rule filter with reject reasons |
 | [SCAN-025](tasks/SCAN-025.md) | in_progress | none | SCAN-008 | Inventory-to-LiDAR matching and merge |
 | [SCAN-026](tasks/SCAN-026.md) | done | none | SCAN-010 | Species shape rules and classification order |
 | [SCAN-027](tasks/SCAN-027.md) | in_progress | none | SCAN-026 | Decision tree species classifier with rules fallback |

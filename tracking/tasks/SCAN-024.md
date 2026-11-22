@@ -1,7 +1,7 @@
 ---
 id: SCAN-024
 title: "Palm rule filter with reject reasons"
-status: review
+status: done
 phase: 4
 area: SCAN
 kind: build
@@ -53,3 +53,4 @@ pytest tests/unit/palmscan/test_scan_palm_rules.py -q
 - 2026-11-22 [claude-agent] Claimed. branch=task/scan-024-palm-rule-filter-with-reject-reasons worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-024
 - 2026-11-22 [claude-agent] Implemented palm_rules.py + tests; full suite 1655 passed, 5 skipped; ruff/format/mypy clean; all acceptance boxes pass
 - 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] Status review -> done.
