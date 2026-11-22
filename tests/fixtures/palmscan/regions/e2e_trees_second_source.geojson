@@ -1,0 +1,41 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 1,
+    "species": "Washingtonia robusta",
+    "common_name": "Mexican Fan Palm",
+    "status": "Alive",
+    "height_ft": "48",
+    "survey_date": "2022-01-10"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.2530893,
+     32.7893045
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "id": 2,
+    "species": "Syagrus romanzoffiana",
+    "common_name": "Queen Palm",
+    "status": "Alive",
+    "height_ft": "27",
+    "survey_date": "2022-01-10"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.2552371,
+     32.7883956
+    ]
+   }
+  }
+ ]
+}

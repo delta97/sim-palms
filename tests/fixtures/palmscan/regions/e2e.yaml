@@ -1,0 +1,47 @@
+# End-to-end fixture region (SCAN-013): synthetic data only, runs fully offline.
+# Paths resolve against tests/fixtures/palmscan (the parent of this regions/ directory).
+# Coordinates are metre offsets around (-117.2531, 32.7893); see README.md.
+config_version: 1
+region: e2e
+id_prefix: ete
+name: End-to-end fixture
+bbox: [-117.2560, 32.7870, -117.2500, 32.7915]
+sources:
+  inventory:
+    - name: e2e_trees
+      type: geojson_file
+      path: regions/e2e_trees.geojson
+      format: geojson
+      species_field: species
+      common_name_field: common_name
+      status_field: status
+      id_field: id
+      height_field: height_ft
+      height_units: ft
+      date_field: survey_date
+      license: synthetic test data
+    - name: e2e_second
+      type: geojson_file
+      path: regions/e2e_trees_second_source.geojson
+      format: geojson
+      species_field: species
+      common_name_field: common_name
+      status_field: status
+      id_field: id
+      height_field: height_ft
+      height_units: ft
+      date_field: survey_date
+      license: synthetic test data
+  buildings: microsoft_footprints
+  buildings_path: regions/e2e_buildings.geojson
+  osm_trees: false
+species_priors:
+  washingtonia_robusta: 0.6
+  phoenix_canariensis: 0.4
+exclusion:
+  margin_m: 1.5
+mask_out:
+  - name: e2e_no_go
+    kind: other
+    bbox: [-117.2541, 32.7900, -117.2538, 32.7903]
+palmscan: {}
