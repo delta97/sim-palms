@@ -526,6 +526,7 @@ class OverpassClient:
 ```
 - Bbox in Overpass order `(south, west, north, east)`. Bboxes larger than 0.05 deg per side are split into 0.05 deg tiles, queried separately and merged by element id.
 - HTTP 429 / 504 retried through `HttpClient`; a response with `remark` containing `runtime error` raises `SourceError`.
+- `bbox_tiles(bbox, max_deg=0.05)` splits into `ceil(span/max_deg)` equal tiles per side (0.12 deg -> 3 x 3 = 9); `query_bbox(template, bbox)` formats `{south}`, `{west}`, `{north}`, `{east}` or `{bbox}` per tile and merges elements by `(type, id)`. Runtime-error responses are not cached. Records carry `extra["license"]` and `extra["attribution"]` (ODbL, RISK-001). `OsmTreesAdapter.fetch(bbox, cache=None, http=None)` ignores `cache`/`http` because the client owns them.
 
 **`palmscan/sources/osm_overpass.py`**: `OsmTreesAdapter(overpass, name="osm")`
 ```

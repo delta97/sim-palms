@@ -1,7 +1,7 @@
 ---
 id: SCAN-005
 title: "Overpass client and OSM tree adapter"
-status: in_progress
+status: review
 phase: 1
 area: SCAN
 kind: build
@@ -37,10 +37,10 @@ A reusable `OverpassClient` (cached, tiled, retrying) and `OsmTreesAdapter`, whi
 
 ## Acceptance criteria
 
-- [ ] Fixture yields records only for tagged nodes, with `source_id` like `node/123`.
-- [ ] A bbox of 0.12 x 0.12 deg is split into 9 queries; duplicate elements across tiles appear once.
-- [ ] Runtime-error remark raises `SourceError`.
-- [ ] Tests pass offline.
+- [x] Fixture yields records only for tagged nodes, with `source_id` like `node/123`.
+- [x] A bbox of 0.12 x 0.12 deg is split into 9 queries; duplicate elements across tiles appear once.
+- [x] Runtime-error remark raises `SourceError`.
+- [x] Tests pass offline.
 
 ## Verification
 
@@ -53,3 +53,5 @@ pytest tests/unit/palmscan/test_scan_osm_overpass.py -q
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [integrator] integrator note from ARCH-008: Overpass returns HTTP 406 without a User-Agent header; send a generic client UA. Larger queries can 502 (at capacity): retry with backoff
 - 2026-11-22 [claude-agent] Claimed. branch=task/scan-005-overpass-client-and-osm-tree-adapter worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-005
+- 2026-11-22 [claude-agent] All 4 acceptance criteria met: pytest tests/unit/palmscan/test_scan_osm_overpass.py passes offline (fixture -> 5 tagged records node/<id>, 3 untagged dropped; 0.12 deg bbox -> 9 queries, duplicates merged; runtime-error remark -> SourceError, not cached). Full suite 937 passed; ruff and mypy clean. Plan W3 note added.
+- 2026-11-22 [claude-agent] Status in_progress -> review.
