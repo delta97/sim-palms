@@ -7,7 +7,7 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 162 | 5 | 0 | 1 | 45 | 0 | 213 |
+| 162 | 4 | 0 | 1 | 46 | 0 | 213 |
 
 ## In progress / in review
 
@@ -15,7 +15,6 @@ Generated: 2026-11-22
 |---|---|---|---|---|
 | [ASSET-001](tasks/ASSET-001.md) | in_progress | claude-agent | task/asset-001-write-reference-sheets-for-the-5-socal-p | Write reference sheets for the 5 SoCal palm species |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
-| [SCAN-006](tasks/SCAN-006.md) | in_progress | claude-agent | task/scan-006-building-footprints-adapter-osm-microsof | Building footprints adapter (OSM, Microsoft file) |
 | [SCAN-008](tasks/SCAN-008.md) | in_progress | claude-agent | task/scan-008-inventory-ingest-stage-and-cross-source | Inventory ingest stage and cross-source dedupe |
 | [SCAN-022](tasks/SCAN-022.md) | in_progress | claude-agent | task/scan-022-canopy-height-model-dtm-dsm-chm | Canopy height model (DTM, DSM, CHM) |
 | [TEST-010](tasks/TEST-010.md) | in_progress | claude-agent | task/test-010-build-the-accuracy-metrics-script-with-c | Build the accuracy metrics script with configurable thresholds |
@@ -32,6 +31,7 @@ _None._
 | [SPIKE-001](tasks/SPIKE-001.md) | 0 | windows-sim, human | msfs-sdk-specialist | Install the MSFS 2024 SDK and create an empty Dev Mode scenery project |
 | [TEST-006](tasks/TEST-006.md) | 0 | windows-sim | msfs-sdk-specialist | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
 | [RISK-003](tasks/RISK-003.md) | 1 | network, human | geo-data-engineer | Inventory other palm and tree mods and their coverage for mask_out defaults |
+| [SCAN-007](tasks/SCAN-007.md) | 1 | network | geo-data-engineer | Record live source fixtures and confirm source fields |
 | [DEC-002](tasks/DEC-002.md) | 3 | human | task-planner | Decide: build or license the palm models |
 | [DEC-008](tasks/DEC-008.md) | 3 | human | task-planner | Decide: storage for large asset binaries (Git LFS or external) |
 | [SCAN-020](tasks/SCAN-020.md) | 4 | none | lidar-analyst | USGS 3DEP EPT LiDAR adapter (PDAL pipeline, tiles, cache) |
@@ -64,7 +64,7 @@ _None._
 | [SPIKE-011](tasks/SPIKE-011.md) | todo | human | SPIKE-010, RISK-005 | Write the Phase 0 go/no-go proposal and get the user's decision |
 | [TEST-006](tasks/TEST-006.md) | todo | windows-sim |  | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
 
-## Phase 1 (22/31 done)
+## Phase 1 (23/31 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -86,7 +86,7 @@ _None._
 | [SCAN-003](tasks/SCAN-003.md) | done | none | SCAN-001 | Source adapter base and geojson_file adapter |
 | [SCAN-004](tasks/SCAN-004.md) | done | none | SCAN-003 | ArcGIS REST inventory adapter with paging and cache |
 | [SCAN-005](tasks/SCAN-005.md) | done | none | SCAN-003 | Overpass client and OSM tree adapter |
-| [SCAN-006](tasks/SCAN-006.md) | in_progress | none | SCAN-005 | Building footprints adapter (OSM, Microsoft file) |
+| [SCAN-006](tasks/SCAN-006.md) | done | none | SCAN-005 | Building footprints adapter (OSM, Microsoft file) |
 | [SCAN-007](tasks/SCAN-007.md) | todo | network | SCAN-002, SCAN-004, SCAN-006 | Record live source fixtures and confirm source fields |
 | [SCAN-008](tasks/SCAN-008.md) | in_progress | none | SCAN-002, SCAN-004, SCAN-005 | Inventory ingest stage and cross-source dedupe |
 | [SCAN-009](tasks/SCAN-009.md) | done | none | SCAN-002 | Palm sizes, exclusion radius, building conflict, mask_out |
