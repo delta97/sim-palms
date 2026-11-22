@@ -1,7 +1,7 @@
 ---
 id: SCAN-004
 title: "ArcGIS REST inventory adapter with paging and cache"
-status: review
+status: done
 phase: 1
 area: SCAN
 kind: build
@@ -60,3 +60,4 @@ pytest tests/unit/palmscan/test_scan_arcgis_rest.py -q
 - 2026-11-22 [claude-agent] Claimed. branch=task/scan-004-arcgis-rest-inventory-adapter-with-pagin worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-004
 - 2026-11-22 [claude-agent] Implemented ArcGisRestAdapter + synthetic fixtures + 22 offline tests; all 5 acceptance criteria pass (test_two_page_pull, test_no_pagination_fallback_matches, test_error_body_with_http_200_raises, test_warm_cache_makes_no_http_calls, socket guard on). Full suite 945 passed 1 skipped; ruff/format/mypy clean. Deviations: fallback id chunks min(page,500) for URL length; paging only when supportsPagination is explicitly true (plan W3 step 4 updated). Real layer 20 facts remain VERIFY for SCAN-007.
 - 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] Status review -> done.

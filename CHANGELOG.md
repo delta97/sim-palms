@@ -5,6 +5,7 @@ Format: `- TASK-ID: what changed (PR link)`.
 
 ## Unreleased
 
+- SCAN-004: Added the ArcGIS REST inventory adapter with paging, object-id fallback and cache (local merge).
 - SCAN-005: Added the cached, tiling Overpass client and the OSM tree adapter with ODbL attribution (local merge).
 - SCAN-012: Added palmscan QA outputs: qa_summary.md, qa_map.gpkg and qa_rejects.csv (local merge).
 - SCAN-002: Added the species key registry (63 keys), alias table (220 rows), normalizer and palm filter (local merge).

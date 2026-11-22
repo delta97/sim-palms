@@ -7,7 +7,7 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 165 | 6 | 0 | 1 | 41 | 0 | 213 |
+| 165 | 5 | 0 | 1 | 42 | 0 | 213 |
 
 ## In progress / in review
 
@@ -15,7 +15,6 @@ Generated: 2026-11-22
 |---|---|---|---|---|
 | [ASSET-001](tasks/ASSET-001.md) | in_progress | claude-agent | task/asset-001-write-reference-sheets-for-the-5-socal-p | Write reference sheets for the 5 SoCal palm species |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
-| [SCAN-004](tasks/SCAN-004.md) | in_progress | claude-agent | task/scan-004-arcgis-rest-inventory-adapter-with-pagin | ArcGIS REST inventory adapter with paging and cache |
 | [SCAN-009](tasks/SCAN-009.md) | in_progress | claude-agent | task/scan-009-palm-sizes-exclusion-radius-building-con | Palm sizes, exclusion radius, building conflict, mask_out |
 | [SCAN-022](tasks/SCAN-022.md) | in_progress | claude-agent | task/scan-022-canopy-height-model-dtm-dsm-chm | Canopy height model (DTM, DSM, CHM) |
 | [TEST-009](tasks/TEST-009.md) | in_progress | claude-agent | task/test-009-define-the-ground-truth-format-and-write | Define the ground-truth format and write the labeling guide and tooling |
@@ -34,6 +33,7 @@ _None._
 | [TEST-006](tasks/TEST-006.md) | 0 | windows-sim | msfs-sdk-specialist | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
 | [RISK-003](tasks/RISK-003.md) | 1 | network, human | geo-data-engineer | Inventory other palm and tree mods and their coverage for mask_out defaults |
 | [SCAN-006](tasks/SCAN-006.md) | 1 | none | geo-data-engineer | Building footprints adapter (OSM, Microsoft file) |
+| [SCAN-008](tasks/SCAN-008.md) | 1 | none | geo-data-engineer | Inventory ingest stage and cross-source dedupe |
 | [DEC-002](tasks/DEC-002.md) | 3 | human | task-planner | Decide: build or license the palm models |
 | [DEC-008](tasks/DEC-008.md) | 3 | human | task-planner | Decide: storage for large asset binaries (Git LFS or external) |
 | [SCAN-020](tasks/SCAN-020.md) | 4 | none | lidar-analyst | USGS 3DEP EPT LiDAR adapter (PDAL pipeline, tiles, cache) |
@@ -65,7 +65,7 @@ _None._
 | [SPIKE-011](tasks/SPIKE-011.md) | todo | human | SPIKE-010, RISK-005 | Write the Phase 0 go/no-go proposal and get the user's decision |
 | [TEST-006](tasks/TEST-006.md) | todo | windows-sim |  | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
 
-## Phase 1 (20/31 done)
+## Phase 1 (21/31 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -85,7 +85,7 @@ _None._
 | [SCAN-001](tasks/SCAN-001.md) | done | none | ARCH-001, ARCH-003, ARCH-004, ARCH-009 | Create palmscan package core: config, cache, HTTP, models, CLI skeleton |
 | [SCAN-002](tasks/SCAN-002.md) | done | none | SCAN-001 | Species normalization table, normalizer and palm filter |
 | [SCAN-003](tasks/SCAN-003.md) | done | none | SCAN-001 | Source adapter base and geojson_file adapter |
-| [SCAN-004](tasks/SCAN-004.md) | in_progress | none | SCAN-003 | ArcGIS REST inventory adapter with paging and cache |
+| [SCAN-004](tasks/SCAN-004.md) | done | none | SCAN-003 | ArcGIS REST inventory adapter with paging and cache |
 | [SCAN-005](tasks/SCAN-005.md) | done | none | SCAN-003 | Overpass client and OSM tree adapter |
 | [SCAN-006](tasks/SCAN-006.md) | todo | none | SCAN-005 | Building footprints adapter (OSM, Microsoft file) |
 | [SCAN-007](tasks/SCAN-007.md) | todo | network | SCAN-002, SCAN-004, SCAN-006 | Record live source fixtures and confirm source fields |
