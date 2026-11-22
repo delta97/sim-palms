@@ -1,4 +1,7 @@
-"""CLI: python -m palmcore.assets (build-manifest, validate). Exit 0 ok, 1 failures, 2 usage."""
+"""CLI: python -m palmcore.assets (build-manifest, validate, check).
+
+Exit 0 ok, 1 failures, 2 usage or IO error.
+"""
 
 from __future__ import annotations
 
@@ -6,6 +9,13 @@ import argparse
 import sys
 from pathlib import Path
 
+from palmcore.assets.checks import (
+    find_budgets,
+    format_results,
+    load_budgets,
+    measure_models,
+    run_checks,
+)
 from palmcore.assets.manifest import build_manifest, dump_manifest, validate_manifest
 from palmcore.errors import PalmfixError
 from palmcore.log import setup_logging
@@ -29,13 +39,23 @@ def _build_parser() -> argparse.ArgumentParser:
 
     val = sub.add_parser("validate", help="check a manifest")
     val.add_argument("--manifest", type=Path, default=Path("assets/manifest.json"))
+
+    chk = sub.add_parser("check", help="run the automated asset checks on exported glTF and PNG")
+    chk.add_argument("--assets-dir", type=Path, default=Path("assets"))
+    chk.add_argument("--species", default=None, help="check one species key only")
+    chk.add_argument(
+        "--budgets", type=Path, default=None, help="default: <assets-dir>/budgets.yaml"
+    )
     return parser
 
 
 def _build(args: argparse.Namespace) -> int:
     assets_dir: Path = args.assets_dir
     out: Path = args.out or assets_dir / "manifest.json"
-    text = dump_manifest(build_manifest(assets_dir, include_draft=args.include_draft))
+    # Measured fields (height, crown, triangles) come from the LOD glTF files where they exist.
+    measure = measure_models(load_budgets(find_budgets(assets_dir)))
+    manifest = build_manifest(assets_dir, measure, include_draft=args.include_draft)
+    text = dump_manifest(manifest)
     if args.check:
         try:
             # A Windows checkout with autocrlf turns LF into CRLF; that is not staleness.
@@ -65,12 +85,22 @@ def _validate(args: argparse.Namespace) -> int:
     return EXIT_OK
 
 
+def _check(args: argparse.Namespace) -> int:
+    budgets = load_budgets(args.budgets or find_budgets(args.assets_dir))
+    results = run_checks(args.assets_dir, args.species, budgets)
+    for line in format_results(results):
+        print(line)
+    return EXIT_FAIL if any(r.level == "ERROR" for r in results) else EXIT_OK
+
+
 def main(argv: list[str] | None = None) -> int:
     args = _build_parser().parse_args(argv)
     setup_logging(-1)
     try:
         if args.command == "build-manifest":
             return _build(args)
+        if args.command == "check":
+            return _check(args)
         return _validate(args)
     except PalmfixError as exc:
         print(f"error: {exc}", file=sys.stderr)

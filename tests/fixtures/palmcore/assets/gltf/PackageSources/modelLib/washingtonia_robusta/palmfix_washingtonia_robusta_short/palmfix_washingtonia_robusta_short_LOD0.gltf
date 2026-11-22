@@ -1,0 +1,57 @@
+{
+  "asset": {
+    "version": "2.0"
+  },
+  "scenes": [
+    {
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "mesh": 0
+    }
+  ],
+  "meshes": [
+    {
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0
+          },
+          "material": 0
+        }
+      ]
+    }
+  ],
+  "accessors": [
+    {
+      "componentType": 5126,
+      "count": 12,
+      "type": "VEC3",
+      "min": [
+        -1,
+        0,
+        -1
+      ],
+      "max": [
+        1,
+        3,
+        1
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "name": "mat_washingtonia_robusta_fronds",
+      "alphaMode": "BLEND"
+    }
+  ],
+  "images": [
+    {
+      "uri": "../texture/tx_washingtonia_robusta_fronds_albedo.png"
+    }
+  ]
+}

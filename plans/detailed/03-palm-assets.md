@@ -232,7 +232,7 @@ Pure Python 3.12, plus `jsonschema` and `PyYAML`. glTF is parsed as JSON; no `.b
 |---|---|---|
 | `build-manifest [--assets-dir assets] [--out PATH] [--check] [--include-draft]` | 005, 006, 007 | Builds the manifest. `--check` compares against the committed file. Species tasks write a preview with `--include-draft --out build/manifest.preview.json`, so they never touch the committed manifest |
 | `validate [--manifest PATH]` | 005, 007 | Schema, unique GUIDs, files exist, GUID matches model XML, package version matches |
-| `check [--species KEY] [--assets-dir assets]` | 006, 007 | Asset checks below. Prints one row per check; exit 1 on any ERROR |
+| `check [--species KEY] [--assets-dir assets] [--budgets PATH]` | 006, 007 | Asset checks below. Prints one row per finding (ERROR or WARN) and a `N errors, M warnings` line; exit 1 on any ERROR. Budgets default to `<assets-dir>/budgets.yaml`, then the repo's `assets/budgets.yaml`. `build-manifest` fills `native_height_m` (LOD0 top), `crown_diam_m` (LOD0 horizontal extent) and `lods[].triangles` from the LOD glTFs when they exist (006) |
 | `stamp-guids [--species KEY]` | 007 | Only if the exporter can't take a fixed GUID |
 | `simobjects --out DIR` | 071 | Generates SimObject wrappers from the manifest |
 
