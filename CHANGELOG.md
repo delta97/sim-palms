@@ -5,6 +5,7 @@ Format: `- TASK-ID: what changed (PR link)`.
 
 ## Unreleased
 
+- ASSET-002: Collected build-vs-license inputs for DEC-002 (`assets/reference/build-vs-license.md`) (local merge).
 - SCAN-001: Added the palmscan package core: config, cache, HTTP client with retries and User-Agent, models, CLI skeleton (local merge).
 - GEN-011: Added variant selection, scaling and heading (`palmgen/variants.py`) with manifest-owned scale limits and species fallback; aligned plan 04 (local merge).
 - TEST-015: Added the post-update regression routine (`tests/regression/ROUTINE.md`), its log and the entry scaffolder (local merge).

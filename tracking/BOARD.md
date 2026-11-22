@@ -7,14 +7,13 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 176 | 4 | 0 | 1 | 32 | 0 | 213 |
+| 176 | 3 | 0 | 1 | 33 | 0 | 213 |
 
 ## In progress / in review
 
 | Task | Status | Owner | Branch | Title |
 |---|---|---|---|---|
 | [ASSET-001](tasks/ASSET-001.md) | in_progress | claude-agent | task/asset-001-write-reference-sheets-for-the-5-socal-p | Write reference sheets for the 5 SoCal palm species |
-| [ASSET-002](tasks/ASSET-002.md) | in_progress | claude-agent | task/asset-002-collect-build-vs-license-inputs-for-dec | Collect build-vs-license inputs for DEC-002 (palm models) |
 | [GEN-007](tasks/GEN-007.md) | in_progress | claude-agent | task/gen-007-mod-and-airport-masks-overpass-airport-f | Mod and airport masks, Overpass airport fetch |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
 | [TEST-017](tasks/TEST-017.md) | in_progress | claude-agent | task/test-017-write-the-test-runbook-and-ci-wiring-not | Write the test runbook and CI wiring notes |
@@ -37,6 +36,7 @@ _None._
 | [SCAN-011](tasks/SCAN-011.md) | 1 | none | python-architect | palms.geojson writer, palm IDs and schema validation |
 | [SCAN-012](tasks/SCAN-012.md) | 1 | none | geo-data-engineer | QA outputs: qa_summary.md, qa_map.gpkg, qa_rejects.csv |
 | [TEST-102](tasks/TEST-102.md) | 2 | none | test-engineer | Visual test protocol tooling: run scaffolder, checklist template, test log |
+| [DEC-002](tasks/DEC-002.md) | 3 | human | task-planner | Decide: build or license the palm models |
 | [DEC-008](tasks/DEC-008.md) | 3 | human | task-planner | Decide: storage for large asset binaries (Git LFS or external) |
 | [SCAN-022](tasks/SCAN-022.md) | 4 | none | lidar-analyst | Canopy height model (DTM, DSM, CHM) |
 | [TEST-009](tasks/TEST-009.md) | 4 | none | test-engineer | Define the ground-truth format and write the labeling guide and tooling |
@@ -137,12 +137,12 @@ _None._
 | [TEST-102](tasks/TEST-102.md) | todo | none | TEST-001, TEST-005 | Visual test protocol tooling: run scaffolder, checklist template, test log |
 | [TEST-104](tasks/TEST-104.md) | todo | windows-sim, human | TEST-015, TEST-016, TEST-007, GEN-100, GATE-P0 | Run the post-update regression routine once and record the baseline log entry |
 
-## Phase 3 (2/38 done)
+## Phase 3 (3/38 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
 | [ASSET-001](tasks/ASSET-001.md) | in_progress | network |  | Write reference sheets for the 5 SoCal palm species |
-| [ASSET-002](tasks/ASSET-002.md) | in_progress | network |  | Collect build-vs-license inputs for DEC-002 (palm models) |
+| [ASSET-002](tasks/ASSET-002.md) | done | network |  | Collect build-vs-license inputs for DEC-002 (palm models) |
 | [ASSET-003](tasks/ASSET-003.md) | todo | blender, windows-sim | SPIKE-004, SPIKE-001 | Install and pin Blender and the MSFS 2024 glTF exporter plugin |
 | [ASSET-004](tasks/ASSET-004.md) | todo | blender, windows-sim | ASSET-003, ASSET-008, SPIKE-003 | Smoke-test the asset pipeline end to end with a throwaway model |
 | [ASSET-005](tasks/ASSET-005.md) | done | none | ARCH-001 | Asset manifest schema, species spec format, loader and generator (palmcore.assets) |

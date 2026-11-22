@@ -1,7 +1,7 @@
 ---
 id: ASSET-002
 title: "Collect build-vs-license inputs for DEC-002 (palm models)"
-status: review
+status: done
 phase: 3
 area: ASSET
 kind: research
@@ -57,3 +57,4 @@ python3 scripts/tasks.py show DEC-002 | grep build-vs-license
 - 2026-11-22 [claude-agent] Claimed. branch=task/asset-002-collect-build-vs-license-inputs-for-dec worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/ASSET-002
 - 2026-11-22 [claude-agent] Done: assets/reference/build-vs-license.md. 8 sources with quoted clauses and yes/no/unclear; build/license/hybrid with hours and cost; DEC-002 log points to file. Unmet: none. Paid listing prices remain VERIFY.
 - 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] Status review -> done.
