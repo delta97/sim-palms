@@ -1,0 +1,13 @@
+<RPTInputs>
+	<RPTInput Path="C:\Users\colep\OneDrive\Documents\MyFSProjects\palmfix-spike\PackageSources\Scenery\palmfix\Scene\Scene.xml">
+		<Package Name="cole-palmfix">
+			<AssetGroup Name="Scene"/>
+		</Package>
+	</RPTInput>
+	<RPTInput Path="C:\Users\colep\OneDrive\Documents\MyFSProjects\palmfix-spike\PackageDefinitions\cole-palmfix\ContentInfo\Thumbnail.jpg">
+		<Package Name="cole-palmfix">
+			<AssetGroup Name="ContentInfo"/>
+		</Package>
+	</RPTInput>
+</RPTInputs>
+

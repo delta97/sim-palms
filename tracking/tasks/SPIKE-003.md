@@ -92,3 +92,4 @@ Every XML file parses; the diff is small and explained in the notes.
 
 - 2026-11-21 [bootstrap] Anchor stub created.
 - 2026-11-22 [plan-breakdown] Stub detailed.
+- 2026-11-22 [integrator] integrator note from SPIKE-001: scene source is PackageSources\Scenery\<name>\Scene\Scene.xml with root <FSData version="9.0"/>; compile schema at C:\MSFS 2024 SDK\Tools\bin\bglcomp.xsd. Project palmfix-spike / package cole-palmfix already builds; add the Exclude TIN polygon there.

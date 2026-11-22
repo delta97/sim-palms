@@ -1,0 +1,61 @@
+﻿Folder PATH listing for volume Windows
+Volume serial number is BE1A-8A47
+C:\USERS\COLEP\ONEDRIVE\DOCUMENTS\MYFSPROJECTS\PALMFIX-SPIKE
+|   palmfix-spike.xml
+|   palmfix-spike.xml.user
+|   
++---PackageDefinitions
+|   |   cole-palmfix.xml
+|   |   
+|   \---cole-palmfix
+|       \---ContentInfo
+|               thumbnail.jpg
+|               
++---Packages
+|   \---cole-palmfix
+|       |   bglIndex.bout
+|       |   layout.json
+|       |   manifest.json
+|       |   
+|       +---ContentInfo
+|       |   \---cole-palmfix
+|       |           ContentHistory.json
+|       |           Thumbnail.jpg
+|       |           
+|       \---Scenery
+|           \---palmfix
+|               \---Scene
+|                       Scene.bgl
+|                       
++---PackagesMetadata
+|   \---cole-palmfix
+|           cole-palmfix.json
+|           
++---PackageSources
+|   \---Scenery
+|       \---palmfix
+|           \---Scene
+|                   Scene.xml
+|                   
+\---_PackageInt
+    |   _RPTErrors.xml
+    |   _RPTInputs.xml
+    |   _RPTInputsRO.xml
+    |   _TimeStampID.xml
+    |   
+    +---_metadata
+    |   \---cole-palmfix
+    |           ContentInfo.xml
+    |           Scene.xml
+    |           _Package.xml
+    |           
+    \---_timestamps
+        \---Output_0
+            \---cole-palmfix
+                    ContentInfo.xml
+                    ContentInfo_output.xml
+                    Scene.xml
+                    Scene_output.xml
+                    _Package.xml
+                    _Package_output.xml
+                    

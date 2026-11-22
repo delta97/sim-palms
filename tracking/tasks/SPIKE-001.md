@@ -69,8 +69,8 @@ Results table (copy into the findings note):
 ## Acceptance criteria
 
 - [ ] `docs/findings/SPIKE-001.md` exists with date, sim version, SDK version and every row of the results table filled (or "not found" with what was tried).
-- [ ] The empty `palmfix-spike` project builds from the editor, or the note records the exact error.
-- [ ] `docs/findings/SPIKE-001/tree.txt` shows the project folder layout.
+- [x] The empty `palmfix-spike` project builds from the editor, or the note records the exact error.
+- [x] `docs/findings/SPIKE-001/tree.txt` shows the project folder layout.
 - [ ] Each SDK UI step in the note says which `VERIFY:` it confirmed or corrected.
 
 ## Verification
@@ -90,3 +90,4 @@ A reviewer checks that no row says "assumed".
 - 2026-11-22 [integrator] Status todo -> in_progress. user started on the sim PC; SDK installed, project created, sim crashed before step 7
 - 2026-11-22 [integrator] integrator, read from disk 2026-11-22: SDK 1.8.2 (Core) at C:\MSFS 2024 SDK\, env MSFS2024_SDK (machine), fspackagetool at Tools\bin (not on PATH), SimConnect DLLs at SimConnect SDK\lib and lib\managed. Project palmfix-spike.xml saved in Documents\MyFSProjects (OneDrive) at 14:43:07 with <Packages/>, not built. Sim 1.9.24.0 crashed 14:43:32 (0xe06d7363 then 0xc0000005, WinMain, DevMode=1, world map). Partial findings: docs/findings/SPIKE-001.md. Steps 7-11 remain.
 - 2026-11-22 [user] Claimed. branch=main worktree=-
+- 2026-11-22 [integrator] integrator 2026-11-22: user built package cole-palmfix (scenery, one BGL asset group) in project palmfix-spike at 14:55; _RPTErrors.xml empty. Captured project/package XML, Scene.xml, manifest/layout JSON and tree.txt under docs/findings/SPIKE-001/. Open: Dev Mode menu path and editor click steps not recorded (user reports Dev Mode often freezes/crashes the sim on entry), on-screen version check. Boxes 2 and 3 ticked; 1 and 4 wait on those.

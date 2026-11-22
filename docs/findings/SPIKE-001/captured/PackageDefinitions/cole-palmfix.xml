@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AssetPackage Version="0.1.0">
+	<ItemSettings>
+		<ContentType>SCENERY</ContentType>
+		<Title>palmfix</Title>
+		<Manufacturer/>
+		<Creator>Cole</Creator>
+	</ItemSettings>
+	<Flags>
+		<VisibleInStore>false</VisibleInStore>
+		<CanBeReferenced>false</CanBeReferenced>
+	</Flags>
+	<PackageOrderHint>CUSTOM_SCENERY_PATCH</PackageOrderHint>
+	<AssetGroups>
+		<AssetGroup Name="ContentInfo">
+			<Type Version="0">ContentInfo</Type>
+			<Flags>
+				<FSXCompatibility>false</FSXCompatibility>
+			</Flags>
+			<AssetDir>PackageDefinitions\cole-palmfix\ContentInfo</AssetDir>
+			<OutputDir>ContentInfo\cole-palmfix</OutputDir>
+		</AssetGroup>
+		<AssetGroup Name="Scene">
+			<Type Version="0">BGL</Type>
+			<Flags>
+				<FSXCompatibility>false</FSXCompatibility>
+			</Flags>
+			<AssetDir>PackageSources\Scenery\palmfix\Scene\</AssetDir>
+			<OutputDir>Scenery\palmfix\Scene\</OutputDir>
+		</AssetGroup>
+	</AssetGroups>
+</AssetPackage>
+

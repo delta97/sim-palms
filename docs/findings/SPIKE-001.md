@@ -1,9 +1,9 @@
-# SPIKE-001 findings: SDK install and empty Dev Mode project (in progress)
+# SPIKE-001 findings: SDK install and empty Dev Mode project
 
 - **Date:** 2026-11-22
 - **Sim version:** 1.9.24.0 (Steam edition, app 2537590, Steam buildid 26385953; read from the sim's own crash report, `BuildID "1.9.24.0"`, branch `LIVE1.0`; still to confirm on screen)
 - **SDK version:** 1.8.2 (Core), `C:\MSFS 2024 SDK\version.txt` = `1.8.2` / `2634044`; Windows uninstall entry "Microsoft Flight Simulator 2024 SDK 1.8.2 (Core)", installed 2026-11-22
-- **Status:** steps 1-6 done by the user; steps 7-11 not done (the sim crashed right after the project was created). Paths below were read from disk by the integrator, not assumed.
+- **Status:** the empty project with one scenery package **built cleanly** (user, 14:55-14:56). Paths and files below were read from disk by the integrator, not assumed. Still open: the Dev Mode menu path and the editor click steps (the user did them in the sim; Dev Mode freezes or crashes the sim on entry, see below). The on-screen sim version check is also still open.
 
 ## Results table
 
@@ -19,11 +19,24 @@
 | SimConnect managed DLL path | `C:\MSFS 2024 SDK\SimConnect SDK\lib\managed\Microsoft.FlightSimulator.SimConnect.dll` (172,032 bytes) |
 | SimConnect native DLL path | `C:\MSFS 2024 SDK\SimConnect SDK\lib\SimConnect.dll` (84,480 bytes) |
 | Project folder | `C:\Users\colep\OneDrive\Documents\MyFSProjects\palmfix-spike\` (the editor's default location; inside OneDrive) |
-| Project Editor steps to create the project (numbered) | not recorded yet |
-| Empty project build: ok / error text | **not built**: the project has no package yet (`<Packages/>`) and no build output folders |
-| Build output folder | none yet; the project file sets `<OutputDirectory>.</OutputDirectory>`, `<TemporaryOutputDirectory>_PackageInt</TemporaryOutputDirectory>`, `FolderName="Packages"`, `MetadataFolderName="PackagesMetadata"` |
-| Name `palmfix-spike` accepted and built? | accepted (project saved with `Name="palmfix-spike"`); not built yet |
-| Project reopens after restart? | not checked yet |
+| Project Editor steps to create the project (numbered) | not recorded (done by the user in the sim); the resulting files are captured in `SPIKE-001/captured/` |
+| Empty project build: ok / error text | **ok**: `_PackageInt\_RPTErrors.xml` is `<RPTErrors/>` (no errors); output written 14:55:57 |
+| Build output folder | `<project>\Packages\cole-palmfix\` (manifest.json, layout.json, bglIndex.bout, ContentInfo, `Scenery\palmfix\Scene\Scene.bgl`); intermediates in `<project>\_PackageInt\`; metadata in `<project>\PackagesMetadata\`. The build does **not** write into the sim's Community folder; it also **exported a zip** to `<export path>\Community\cole-palmfix.zip` (6,166 bytes, same 6 files as the output folder). The export path comes from Dev Mode settings: `%APPDATA%\Microsoft Flight Simulator 2024\DevMode.xml` `User_Export_Package_Path` (here set to the repo folder; `User_Export_Package_Mode` = 2). |
+| Name `palmfix-spike` accepted and built? | yes: project `palmfix-spike` (lowercase + hyphen) and package `cole-palmfix` both built |
+| Project reopens after restart? | yes in practice: the user reopened `palmfix-spike` after the 14:43 crash, added the package and built it at 14:55 |
+
+## Confirmed file formats (captured in `SPIKE-001/captured/`, folder tree in `SPIKE-001/tree.txt`)
+
+- **Project** `palmfix-spike.xml`: `<Project Version="2" Name=... FolderName="Packages" MetadataFolderName="PackagesMetadata">`, `<Packages><Package>PackageDefinitions\cole-palmfix.xml</Package></Packages>`.
+- **Package definition** `PackageDefinitions\cole-palmfix.xml`: `<AssetPackage Version="0.1.0">` with `ContentType SCENERY`, `Title`, `Creator`,
+  `PackageOrderHint CUSTOM_SCENERY_PATCH`, and two asset groups: `ContentInfo` (type `ContentInfo`, AssetDir
+  `PackageDefinitions\cole-palmfix\ContentInfo`, OutputDir `ContentInfo\cole-palmfix`) and `Scene` (type `BGL`, AssetDir
+  `PackageSources\Scenery\palmfix\Scene\`, OutputDir `Scenery\palmfix\Scene\`). This is `scene_dir` for plan 04.
+- **Scene source** `PackageSources\Scenery\palmfix\Scene\Scene.xml`: empty `<FSData version="9.0"/>`, compiled to a 56-byte `Scene.bgl`.
+  The compile schema is `C:\MSFS 2024 SDK\Toolsinglcomp.xsd` (also `bglcomp_gltfv1_1.xsd`).
+- **manifest.json** (generated): `content_type SCENERY`, `package_version 0.1.0`, `minimum_game_version 1.9.24`,
+  `minimum_compatibility_version 9.21.0.251`, `export_type Community`, `builder "Microsoft Flight Simulator 2024"`.
+- The package's thumbnail is an SDK default (not copied into the repo).
 
 ## What happened
 
@@ -48,14 +61,14 @@
   (`dotnet build -c Release`, .NET 8.0.428), which confirms at compile level the managed SimConnect API names it uses. Its `.csproj`
   now defaults to `MSFS2024_SDK`. Runtime behaviour is still for SPIKE-005.
 
-## Still to do (user, in the sim)
+5. The user reopened the project, added package `cole-palmfix` with a scenery asset group and built it at 14:55-14:56. The build is clean.
+6. The user reports that entering Dev Mode often freezes and then crashes the sim. One crash is documented above; the cause is not known.
 
-1. Reopen the sim, turn on Dev Mode, reopen `palmfix-spike` (record the menu path and whether it reopened cleanly: rows "Dev Mode menu path", "Project reopens after restart?").
-2. Add a package and a scenery asset group (step 7; write each click down).
-3. Build the project (step 8) and note the result and output folder.
-4. If it crashes again at the same point, note what you clicked last; a second crash at the same step is a finding for RISK-005.
+## Still open
 
-After the build, an agent records the tree listing (step 9) and finishes this note.
+1. Dev Mode menu path and the editor click steps were not written down (they are not needed to go on: the captured files are the reference).
+2. **Dev Mode instability** (freeze/crash on entry, sim 1.9.24.0, SDK 1.8.2): track under RISK-005. Later spikes should prefer
+   command-line builds (`fspackagetool`, SPIKE-004) and keep Dev Mode sessions short.
 
 Note: the project sits inside OneDrive (`Documents\MyFSProjects`). Build output (`Packages\`, `_PackageInt\`) will sync to
 OneDrive and sync can lock files mid-build. If a build fails with file-in-use errors, move the project to a local folder such

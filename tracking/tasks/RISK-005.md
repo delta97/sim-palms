@@ -69,3 +69,4 @@ grep -E "^\| 20[0-9]{2}-" tracking/logs/sim-update-watch.md | head -1   # a date
 - 2026-11-22 [claude-agent] Verification: files exist; https count >=4 (6 sources); TEST-104 referenced; dated row present. Acceptance ticked. First pass: latest public sim SU7.2 1.9.24.0 (2026-11-05, third party), SDK docs 1.8.2; SU6 thread 18156 tagged fixed (water polygon fix in SU7 beta 1.9.12.0, unconfirmed); installed versions VERIFY on user's PC.
 - 2026-11-22 [claude-agent] Status in_progress -> review.
 - 2026-11-22 [integrator] Status review -> done.
+- 2026-11-22 [integrator] integrator, sim PC 2026-11-22: sim 1.9.24.0 + SDK 1.8.2: entering Dev Mode often freezes then crashes the sim (user report). One crash logged 14:43:32: 0xe06d7363 then 0xc0000005, WinMain, DevMode=1, world map; dumps in %LOCALAPPDATA%\CrashDumps. Details in docs/findings/SPIKE-001.md. Search DevSupport for Dev Mode crashes on 1.9.24 at the next weekly check.
