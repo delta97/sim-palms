@@ -7,15 +7,15 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 208 | 3 | 0 | 1 | 1 | 0 | 213 |
+| 207 | 3 | 0 | 1 | 2 | 0 | 213 |
 
 ## In progress / in review
 
 | Task | Status | Owner | Branch | Title |
 |---|---|---|---|---|
-| [ARCH-001](tasks/ARCH-001.md) | in_progress | claude-agent | task/arch-001-scaffold-the-python-monorepo-pyproject-p | Scaffold the Python monorepo (pyproject, package layout, lint/test tooling, CI) |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
 | [RISK-001](tasks/RISK-001.md) | in_progress | claude-agent | task/risk-001-audit-data-source-licenses-and-terms-inv | Audit data source licenses and terms (inventories, OSM, footprints, LiDAR) |
+| [RISK-004](tasks/RISK-004.md) | in_progress | claude-agent | task/risk-004-collect-airport-boundaries-and-known-air | Collect airport boundaries and known airport add-ons for default masks |
 | [SPIKE-009](tasks/SPIKE-009.md) | in_progress | claude-agent | task/spike-009-write-the-simconnect-spawn-and-disconnec | Write the SimConnect spawn-and-disconnect spike console app (C#) |
 
 ## Blocked
@@ -29,11 +29,17 @@ _None._
 | [DEC-004](tasks/DEC-004.md) | 0 | human, network | task-planner | Decide: first test block (a San Diego or LA street the user knows well) |
 | [SPIKE-001](tasks/SPIKE-001.md) | 0 | windows-sim, human | msfs-sdk-specialist | Install the MSFS 2024 SDK and create an empty Dev Mode scenery project |
 | [TEST-006](tasks/TEST-006.md) | 0 | windows-sim | msfs-sdk-specialist | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
+| [ARCH-002](tasks/ARCH-002.md) | 1 | none | python-architect | Define the palms.geojson JSON Schema and a shared validator |
+| [ARCH-004](tasks/ARCH-004.md) | 1 | none | python-architect | Add palmcore logging, path resolution and download-cache helpers |
+| [ARCH-005](tasks/ARCH-005.md) | 1 | none | geo-data-engineer | Add palmcore geo helpers (Bbox, distances, UTM, transforms) |
+| [ARCH-006](tasks/ARCH-006.md) | 1 | none | python-architect | Add deterministic UUIDv5 ids and seeded randomness to palmcore |
 | [RISK-003](tasks/RISK-003.md) | 1 | network, human | geo-data-engineer | Inventory other palm and tree mods and their coverage for mask_out defaults |
+| [TEST-001](tasks/TEST-001.md) | 1 | none | test-engineer | Build the shared pytest harness and fixture loaders |
+| [GEN-001](tasks/GEN-001.md) | 2 | none | scenery-generator-engineer | Scaffold palmgen package, CLI surface and data model |
 | [RISK-002](tasks/RISK-002.md) | 2 | network | scribe | Audit model, texture and tool licenses for palm assets |
-| [RISK-004](tasks/RISK-004.md) | 2 | network | geo-data-engineer | Collect airport boundaries and known airport add-ons for default masks |
 | [ASSET-001](tasks/ASSET-001.md) | 3 | network | asset-pipeline-artist | Write reference sheets for the 5 SoCal palm species |
 | [ASSET-002](tasks/ASSET-002.md) | 3 | network | asset-pipeline-artist | Collect build-vs-license inputs for DEC-002 (palm models) |
+| [ASSET-005](tasks/ASSET-005.md) | 3 | none | python-architect | Asset manifest schema, species spec format, loader and generator (palmcore.assets) |
 | [DEC-005](tasks/DEC-005.md) | 5 | human | test-engineer | Decide: performance budget and reference hardware/settings |
 | [FX-001](tasks/FX-001.md) | 7 | windows-sim, human | render-fx-researcher | Verify ReShade depth access in MSFS 2024 (incl. multiplayer/online lockout) |
 
@@ -59,11 +65,11 @@ _None._
 | [SPIKE-011](tasks/SPIKE-011.md) | todo | human | SPIKE-010, RISK-005 | Write the Phase 0 go/no-go proposal and get the user's decision |
 | [TEST-006](tasks/TEST-006.md) | todo | windows-sim |  | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
 
-## Phase 1 (0/31 done)
+## Phase 1 (1/31 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
-| [ARCH-001](tasks/ARCH-001.md) | in_progress | none |  | Scaffold the Python monorepo (pyproject, package layout, lint/test tooling, CI) |
+| [ARCH-001](tasks/ARCH-001.md) | done | none |  | Scaffold the Python monorepo (pyproject, package layout, lint/test tooling, CI) |
 | [ARCH-002](tasks/ARCH-002.md) | todo | none | ARCH-001 | Define the palms.geojson JSON Schema and a shared validator |
 | [ARCH-003](tasks/ARCH-003.md) | todo | none | ARCH-001, ARCH-005 | Define the region YAML config schema and loader |
 | [ARCH-004](tasks/ARCH-004.md) | todo | none | ARCH-001 | Add palmcore logging, path resolution and download-cache helpers |
@@ -119,7 +125,7 @@ _None._
 | [GEN-017](tasks/GEN-017.md) | todo | windows-sim, human | GEN-016, TEST-100, TEST-102, ARCH-008 | Dev Mode review and margin tuning |
 | [GEN-100](tasks/GEN-100.md) | todo | windows-sim, human | GEN-017 | Deliverable: palmgen build produces a working Community region package (Phase 2) |
 | [RISK-002](tasks/RISK-002.md) | todo | network |  | Audit model, texture and tool licenses for palm assets |
-| [RISK-004](tasks/RISK-004.md) | todo | network |  | Collect airport boundaries and known airport add-ons for default masks |
+| [RISK-004](tasks/RISK-004.md) | in_progress | network |  | Collect airport boundaries and known airport add-ons for default masks |
 | [TEST-002](tasks/TEST-002.md) | todo | none | TEST-001 | Add the golden-file comparison helper with an update flag |
 | [TEST-003](tasks/TEST-003.md) | todo | none | TEST-001 | Add geometry assertion helpers for exclusion polygons |
 | [TEST-007](tasks/TEST-007.md) | todo | windows-sim, human | TEST-100, TEST-102 | Capture a baseline no-fix visual run at T1-T5 |

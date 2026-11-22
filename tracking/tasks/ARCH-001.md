@@ -1,7 +1,7 @@
 ---
 id: ARCH-001
 title: "Scaffold the Python monorepo (pyproject, package layout, lint/test tooling, CI)"
-status: review
+status: done
 phase: 1
 area: ARCH
 kind: build
@@ -76,3 +76,5 @@ Then open the PR's Checks tab: `python / lint` and both `python / test` matrix j
 - 2026-11-22 [claude-agent] Not verified locally: Python 3.12 install, CI green on ubuntu/windows (branch not pushed), VERIFY Q4 windows extras install. Left those acceptance boxes unticked.
 - 2026-11-22 [claude-agent] Status in_progress -> review.
 - 2026-11-22 [code-reviewer] review: APPROVE - all WS1 values match; ruff/mypy/pytest (23 passed, 97% cov) green locally; CI unrun (3.12, ubuntu+windows) and 3 acceptance boxes remain until pushed
+- 2026-11-22 [integrator] merged to main locally; CI run pending until the branch is pushed (gh not yet authenticated)
+- 2026-11-22 [integrator] Status review -> done.
