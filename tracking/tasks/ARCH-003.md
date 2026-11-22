@@ -1,7 +1,7 @@
 ---
 id: ARCH-003
 title: "Define the region YAML config schema and loader"
-status: todo
+status: in_progress
 phase: 1
 area: ARCH
 kind: build
@@ -11,9 +11,9 @@ requires: [none]
 agent: python-architect
 estimate_h: 5
 touches: [schemas/region.schema.json, palmcore/config.py, tests/unit/palmcore/test_config.py, tests/fixtures/palmcore/regions/]
-owner: ""
-branch: ""
-worktree: ""
+owner: claude-agent
+branch: task/arch-003-define-the-region-yaml-config-schema-and
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/ARCH-003"
 updated: 2026-11-22
 ---
 
@@ -83,3 +83,4 @@ ruff check palmcore tests && mypy
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [reconcile] Spec now lists every cross-area key: masks.airports.path (default docs/compat/airports-mask.geojson from RISK-004), the SCAN-owned palmscan: block keys (without id_prefix and radius clamps, which are top-level/exclusion here), and states that exclusion.margin_m/radius_min_m/radius_max_m (1.5/1.0/8.0) are the single defaults SCAN and GEN read. Cross-area reconciliation.
+- 2026-11-22 [claude-agent] Claimed. branch=task/arch-003-define-the-region-yaml-config-schema-and worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/ARCH-003
