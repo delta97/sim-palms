@@ -182,7 +182,7 @@ class TemplateSet:
     def load(cls, directory: Path) -> "TemplateSet"
     format: FormatSpec                                 # parsed templates.yaml "format"
     placeholder_model: dict | None
-    def render(self, name: str, item_name: str, **values) -> str
+    def render(self, name: str, item_name: str, /, **values) -> str   # positional-only: `name` is also a placeholder
     def count_xpath(self, name: str) -> str | None
 
 # palmgen/xml_writer.py
@@ -597,6 +597,10 @@ GEN-008 builds the engine on fake templates; GEN-009 converts the real captures.
 - `TemplateSet.load` reads `templates.yaml`, checks every listed file exists, compiles templates, and checks each declares only the allowed constructs (regex scan for `{%` other than `for`/`endfor`, and for `|`).
 - `render_tile`: polygons sorted by name, then placements sorted by `palm_id`; each rendered with its own `item_name` (the GUID name string), joined into `scene_file` `body`. Number formatting: fixed decimals from `format`, `-0` normalised to `0`, heading in `[0, 360)`.
 - After rendering, the text is parsed with lxml (`XMLParser(resolve_entities=False)`) to prove it is well-formed; a parse failure is a `GenerationError` naming the template.
+- Number format (`xml_writer.format_fixed`, `format_heading`): fixed decimals; a value that rounds to zero loses its sign (`-0.0` at 3 decimals prints `0.000`, at 0 decimals `0`). Fragments are checked one by one inside a dummy root first, so a parse failure names the template; the assembled `scene_file` is checked last. `render_tile` joins fragments with no separator (each is ended with a newline if the template did not).
+- A comment at the top of a template that precedes an XML declaration must use `{#- ... -#}` style trailing dash (`-#}`), or the newline after it lands before `<?xml`.
+- `format.line_ending` (`lf` or `crlf`) sets Jinja's `newline_sequence`; `write_if_changed` writes the text's UTF-8 bytes with no newline translation.
+- The template scan is stricter than "no `{%` except for/endfor, no `|`": a `{{ }}` may hold only `name`, `a.b` or `guid("role")`, and a `for` tag must be exactly `for x in name`. Arithmetic, conditionals, calls and `for ... if` are rejected at load.
 - `write_if_changed` compares bytes; writes via temp file + rename.
 - `count_elements(xml, xpath)` uses lxml XPath; used by output checks and tests.
 - GEN-009 steps: read `captured/CAPTURE_NOTES.md`; diff `scene_two_polygons.xml` to split instance vs constant GUIDs; cut fragments into `scene_file`, `exclusion_polygon`, `scenery_object`; fill `format` and `placeholder_model` in `templates.yaml`; write round-trip tests (see [Template placeholder conventions](#template-placeholder-conventions)).

@@ -1,0 +1,4 @@
+{# FAKE fixture, not MSFS XML. -#}
+<FixturePolygon name="{{ name }}" id="{{ guid("self") }}" extra="{{ guid("extra") }}">
+{% for v in vertices %}  <FixtureVertex lat="{{ v.lat }}" lon="{{ v.lon }}"/>
+{% endfor %}</FixturePolygon>
