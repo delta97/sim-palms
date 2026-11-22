@@ -7,18 +7,19 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 144 | 1 | 0 | 1 | 67 | 0 | 213 |
+| 144 | 0 | 1 | 1 | 67 | 0 | 213 |
 
 ## In progress / in review
 
 | Task | Status | Owner | Branch | Title |
 |---|---|---|---|---|
-| [FX-014](tasks/FX-014.md) | in_progress | claude-agent | task/fx-014-inpainting-runner-telea-baseline-lama-ba | Inpainting runner: Telea baseline, LaMa backend, tiling |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
 
 ## Blocked
 
-_None._
+| Task | Title | Depends on |
+|---|---|---|
+| [FX-014](tasks/FX-014.md) | Inpainting runner: Telea baseline, LaMa backend, tiling | FX-002 |
 
 ## Ready now (all dependencies done)
 
@@ -274,7 +275,7 @@ _None._
 | [FX-011](tasks/FX-011.md) | todo | none | FX-004 | Mask by depth and colour heuristics |
 | [FX-012](tasks/FX-012.md) | done | none | FX-002 | Mask comparison metrics (pixel IoU, instance precision/recall) |
 | [FX-013](tasks/FX-013.md) | todo | human | FX-007, FX-008, FX-009 | Hand labels: ground-truth blob masks, correspondences, committed sample fixture |
-| [FX-014](tasks/FX-014.md) | in_progress | network | FX-002 | Inpainting runner: Telea baseline, LaMa backend, tiling |
+| [FX-014](tasks/FX-014.md) | blocked | network | FX-002 | Inpainting runner: Telea baseline, LaMa backend, tiling |
 | [FX-015](tasks/FX-015.md) | todo | none | FX-004, FX-014 | Temporal stabilisation baselines (flow fill, previous-frame reuse, temporal blending) |
 | [FX-016](tasks/FX-016.md) | todo | none | FX-015 | Flicker metric with pseudo-mask baseline |
 | [FX-017](tasks/FX-017.md) | todo | none | FX-010, FX-014 | Palm sprite compositing scaled by depth |
