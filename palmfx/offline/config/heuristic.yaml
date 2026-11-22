@@ -1,0 +1,38 @@
+# Thresholds for `palmfx mask-heuristic` (plan 08, A8). Pixel sizes are for 1440 p and are
+# scaled by H / reference_height_px. Every value is a starting point: VERIFY: none of them has
+# been checked against a real capture; tuning happens in FX-019 and is recorded there.
+reference_height_px: 1440
+
+# Step 2: protrusion = ln d minus its horizontal grey opening (reversed-Z: near = larger d).
+protrusion_min: 0.10        # candidate if about 10 % nearer than the surroundings
+opening_width_px: 61        # horizontal structuring element; blobs wider than this are missed
+
+# Step 3: colour, OpenCV HSV (H 0-179, S and V 0-255). Olive green to brown, not sky or paint.
+hue_min: 15
+hue_max: 85
+sat_min: 40
+val_min: 25
+val_max: 200
+
+# Step 4: depth-edge support. Sobel of ln d, scaled so that a clean step of size D reads D.
+edge_min: 0.08
+sobel_scale: 0.25
+edge_tolerance_px: 2        # an edge counts if within this distance of the boundary pixel
+
+# Step 5: closing of the candidate mask (elliptical kernel, side in pixels).
+close_px: 5
+
+# Step 6: component filters.
+min_height_px: 24
+min_aspect: 1.2             # height / width of the bounding box
+min_fill: 0.4               # area / bounding-box area
+min_edge_support: 0.3       # share of left+right boundary pixels with a depth edge
+
+# Step 7.
+dilate_px: 3
+
+# Added refinement (not in the plan A8 text): the low rows of a blob are barely nearer than
+# the ground beside them, so protrusion alone drops them. Pixels of a kept component's column
+# span that match the colour test and whose depth is within this relative tolerance of the
+# component's median are added back. 0 disables it. VERIFY: tune on real captures (FX-019).
+regrow_depth_tol: 0.06
