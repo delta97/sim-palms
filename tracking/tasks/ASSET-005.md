@@ -1,7 +1,7 @@
 ---
 id: ASSET-005
 title: "Asset manifest schema, species spec format, loader and generator (palmcore.assets)"
-status: todo
+status: in_progress
 phase: 3
 area: ASSET
 kind: build
@@ -11,9 +11,9 @@ requires: [none]
 agent: python-architect
 estimate_h: 5
 touches: [schemas/asset-manifest.schema.json, palmcore/assets/__init__.py, palmcore/assets/manifest.py, palmcore/assets/__main__.py, assets/library.yaml, tests/unit/palmcore/test_asset_manifest.py, tests/fixtures/palmcore/assets/manifest/]
-owner: ""
-branch: ""
-worktree: ""
+owner: claude-agent
+branch: task/asset-005-asset-manifest-schema-species-spec-forma
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/ASSET-005"
 updated: 2026-11-22
 ---
 
@@ -60,3 +60,4 @@ python -m palmcore.assets validate --manifest tests/fixtures/palmcore/assets/man
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [reconcile] Species keys are validated against the canonical registry palmscan/data/species_keys.yaml (SCAN-002), read by path (palmcore must not import palmscan); the ARCH-002 schema uses a pattern, not an enum. Loader path palmcore.assets.manifest.load_manifest confirmed as the one GEN uses; palmcore/assets/ is ASSET-owned (no ARCH task touches it). Cross-area reconciliation.
+- 2026-11-22 [claude-agent] Claimed. branch=task/asset-005-asset-manifest-schema-species-spec-forma worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/ASSET-005
