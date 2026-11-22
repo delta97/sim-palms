@@ -1,7 +1,7 @@
 ---
 id: ASSET-006
 title: "glTF stats and automated asset checks (triangle budgets, heights, alpha mode, textures, naming)"
-status: todo
+status: in_progress
 phase: 3
 area: ASSET
 kind: build
@@ -11,10 +11,10 @@ requires: [none]
 agent: python-architect
 estimate_h: 5
 touches: [palmcore/assets/gltf_stats.py, palmcore/assets/checks.py, palmcore/assets/__main__.py, assets/budgets.yaml, tests/unit/palmcore/test_asset_checks.py, tests/fixtures/palmcore/assets/gltf/]
-owner: ""
-branch: ""
-worktree: ""
-updated: 2026-11-21
+owner: claude-agent
+branch: task/asset-006-gltf-stats-and-automated-asset-checks-tr
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/ASSET-006"
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -55,3 +55,4 @@ python -m palmcore.assets check --assets-dir tests/fixtures/palmcore/assets/gltf
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [claude-agent] Claimed. branch=task/asset-006-gltf-stats-and-automated-asset-checks-tr worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/ASSET-006
