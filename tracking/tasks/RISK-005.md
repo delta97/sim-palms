@@ -1,7 +1,7 @@
 ---
 id: RISK-005
 title: Set up the sim/SDK update watch and do the first pass on exclusion bugs
-status: in_progress
+status: review
 phase: 0
 area: RISK
 kind: research
@@ -48,10 +48,10 @@ A short written process says where to look for MSFS 2024 sim and SDK changes, ho
 
 ## Acceptance criteria
 
-- [ ] `docs/process/sim-update-watch.md` lists at least 4 sources with URLs and the 4 trigger rules above.
-- [ ] `tracking/logs/sim-update-watch.md` exists with the table header and at least one dated entry.
-- [ ] The first entry states the status of the SU6 exclusion thread with a link.
-- [ ] TEST-104 is referenced as the routine that runs on a trigger; no regression steps are copied into this doc.
+- [x] `docs/process/sim-update-watch.md` lists at least 4 sources with URLs and the 4 trigger rules above.
+- [x] `tracking/logs/sim-update-watch.md` exists with the table header and at least one dated entry.
+- [x] The first entry states the status of the SU6 exclusion thread with a link.
+- [x] TEST-104 is referenced as the routine that runs on a trigger; no regression steps are copied into this doc.
 
 ## Verification
 
@@ -66,3 +66,5 @@ grep -E "^\| 20[0-9]{2}-" tracking/logs/sim-update-watch.md | head -1   # a date
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [claude-agent] Claimed. branch=task/risk-005-set-up-the-sim-sdk-update-watch-and-do-t worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/RISK-005
+- 2026-11-22 [claude-agent] Verification: files exist; https count >=4 (6 sources); TEST-104 referenced; dated row present. Acceptance ticked. First pass: latest public sim SU7.2 1.9.24.0 (2026-11-05, third party), SDK docs 1.8.2; SU6 thread 18156 tagged fixed (water polygon fix in SU7 beta 1.9.12.0, unconfirmed); installed versions VERIFY on user's PC.
+- 2026-11-22 [claude-agent] Status in_progress -> review.
