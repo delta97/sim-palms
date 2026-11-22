@@ -7,7 +7,7 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 181 | 5 | 0 | 1 | 26 | 0 | 213 |
+| 181 | 4 | 0 | 1 | 27 | 0 | 213 |
 
 ## In progress / in review
 
@@ -16,7 +16,6 @@ Generated: 2026-11-22
 | [ASSET-001](tasks/ASSET-001.md) | in_progress | claude-agent | task/asset-001-write-reference-sheets-for-the-5-socal-p | Write reference sheets for the 5 SoCal palm species |
 | [ASSET-006](tasks/ASSET-006.md) | in_progress | claude-agent | task/asset-006-gltf-stats-and-automated-asset-checks-tr | glTF stats and automated asset checks (triangle budgets, heights, alpha mode, textures, naming) |
 | [GEN-004](tasks/GEN-004.md) | in_progress | claude-agent | task/gen-004-load-palms-buildings-and-region-config | Load palms, buildings and region config |
-| [GEN-006](tasks/GEN-006.md) | in_progress | claude-agent | task/gen-006-building-footprint-clipping | Building footprint clipping |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
 | [TEST-015](tasks/TEST-015.md) | in_progress | claude-agent | task/test-015-write-the-post-update-regression-routine | Write the post-update regression routine, log and entry scaffolder |
 
@@ -100,7 +99,7 @@ _None._
 | [TEST-005](tasks/TEST-005.md) | done | none | TEST-001 | Add the test-site registry schema and loader |
 | [TEST-100](tasks/TEST-100.md) | todo | human, windows-sim | TEST-005, TEST-006, DEC-004 | Define test sites T1-T5 (bbox, purpose, region, saved flights, three viewpoints each) |
 
-## Phase 2 (10/29 done)
+## Phase 2 (11/29 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -110,7 +109,7 @@ _None._
 | [GEN-003](tasks/GEN-003.md) | done | none | GEN-001 | 0.01 degree tiling and tile naming |
 | [GEN-004](tasks/GEN-004.md) | in_progress | none | GEN-001, ARCH-002, ARCH-003, ARCH-007 | Load palms, buildings and region config |
 | [GEN-005](tasks/GEN-005.md) | done | none | GEN-001 | Exclusion circles, merging and simplification |
-| [GEN-006](tasks/GEN-006.md) | in_progress | none | GEN-005 | Building footprint clipping |
+| [GEN-006](tasks/GEN-006.md) | done | none | GEN-005 | Building footprint clipping |
 | [GEN-007](tasks/GEN-007.md) | todo | none | GEN-004, GEN-005 | Mod and airport masks, Overpass airport fetch |
 | [GEN-008](tasks/GEN-008.md) | done | none | GEN-001 | Template engine and XML writer on fake templates |
 | [GEN-009](tasks/GEN-009.md) | todo | none | GEN-008, SPIKE-003 | Convert captured scene XML into real templates |
