@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import functools
-from collections.abc import Sequence
+from collections.abc import Mapping, Sequence
 
 import yaml
 
@@ -25,13 +25,33 @@ def _markers() -> tuple[tuple[str, tuple[str, ...]], ...]:
     )
 
 
+@functools.cache
+def _status_codes() -> Mapping[str, str]:
+    """Cleaned whole-status code -> reason (``status_codes`` in non_tree_markers.yaml)."""
+    data = yaml.safe_load(read_data_text("non_tree_markers.yaml"))
+    raw = data.get("status_codes") if isinstance(data, dict) else None
+    if raw is None:
+        return {}
+    if not isinstance(raw, dict):
+        raise ConfigError("non_tree_markers.yaml: 'status_codes' must be a mapping")
+    return {
+        clean_name(str(code)): str(reason)
+        for reason, codes in raw.items()
+        for code in codes
+        if clean_name(str(code))
+    }
+
+
 def non_tree_reason(species_raw: str | None, status_raw: str | None) -> str | None:
     """``stump``, ``vacant`` or ``removed`` for a row that is not a standing tree, else ``None``.
 
-    Species text matches a marker exactly or as a leading phrase; status text matches by substring.
+    Species text matches a marker exactly or as a leading phrase; status text matches by substring,
+    and a status that equals a short ``status_codes`` entry (for example ``RM``) matches as a whole.
     """
     species = clean_name(species_raw)
     status = clean_name(status_raw)
+    if status and (code_reason := _status_codes().get(status)):
+        return code_reason
     for reason, markers in _markers():
         for marker in markers:
             if not marker:
