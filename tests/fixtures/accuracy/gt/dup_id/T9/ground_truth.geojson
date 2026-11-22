@@ -1,0 +1,187 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.0012,
+          0.0013
+        ]
+      },
+      "properties": {
+        "gt_id": "T9-gt-0001",
+        "height_class": "S",
+        "species": "washingtonia_robusta",
+        "species_basis": "inventory",
+        "context": "street",
+        "confidence": "high",
+        "note": "SYNTHETIC fixture point, not a real palm label"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.0022,
+          0.00135
+        ]
+      },
+      "properties": {
+        "gt_id": "T9-gt-0001",
+        "height_class": "M",
+        "species": "washingtonia_filifera",
+        "species_basis": "imagery",
+        "context": "street",
+        "confidence": "high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.0032,
+          0.0014
+        ]
+      },
+      "properties": {
+        "gt_id": "T9-gt-0003",
+        "height_class": "T",
+        "species": "washingtonia_robusta",
+        "species_basis": "streetview",
+        "context": "park",
+        "confidence": "high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.0042,
+          0.0013
+        ]
+      },
+      "properties": {
+        "gt_id": "T9-gt-0004",
+        "height_class": "X",
+        "species": "washingtonia_robusta",
+        "species_basis": "inventory",
+        "context": "street",
+        "confidence": "low",
+        "note": "possible palm, shadowed"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.0014,
+          0.0042
+        ]
+      },
+      "properties": {
+        "gt_id": "T9-gt-0005",
+        "height_class": "unknown",
+        "species": "unknown",
+        "species_basis": "unknown",
+        "context": "beach",
+        "confidence": "high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.0024,
+          0.0043
+        ]
+      },
+      "properties": {
+        "gt_id": "T9-gt-0006",
+        "height_class": "M",
+        "species": "washingtonia_robusta",
+        "species_basis": "imagery",
+        "context": "yard",
+        "confidence": "high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.0034,
+          0.0044
+        ]
+      },
+      "properties": {
+        "gt_id": "T9-gt-0007",
+        "height_class": "S",
+        "species": "washingtonia_filifera",
+        "species_basis": "streetview",
+        "context": "parking",
+        "confidence": "high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.0044,
+          0.00425
+        ]
+      },
+      "properties": {
+        "gt_id": "T9-gt-0008",
+        "height_class": "T",
+        "species": "washingtonia_robusta",
+        "species_basis": "inventory",
+        "context": "beach",
+        "confidence": "high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.006,
+          0.006
+        ]
+      },
+      "properties": {
+        "gt_id": "T9-gt-0009",
+        "height_class": "M",
+        "species": "washingtonia_robusta",
+        "species_basis": "imagery",
+        "context": "park",
+        "confidence": "high"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.008,
+          0.0075
+        ]
+      },
+      "properties": {
+        "gt_id": "T9-gt-0010",
+        "height_class": "S",
+        "species": "washingtonia_robusta",
+        "species_basis": "imagery",
+        "context": "other",
+        "confidence": "low"
+      }
+    }
+  ]
+}

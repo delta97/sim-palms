@@ -1,7 +1,7 @@
 ---
 id: TEST-009
 title: Define the ground-truth format and write the labeling guide and tooling
-status: in_progress
+status: review
 phase: 4
 area: TEST
 kind: build
@@ -44,9 +44,9 @@ A schema, a QGIS labeling guide and a small CLI (`init-site`, `validate`, `fill-
 
 ## Acceptance criteria
 
-- [ ] Schema, CLI and LABELING.md exist; LABELING.md is usable without this task file.
-- [ ] `validate` catches the three invalid fixtures.
-- [ ] `fill-heights` test passes (or skips cleanly without rasterio).
+- [x] Schema, CLI and LABELING.md exist; LABELING.md is usable without this task file.
+- [x] `validate` catches the three invalid fixtures.
+- [x] `fill-heights` test passes (or skips cleanly without rasterio).
 
 ## Verification
 
@@ -60,3 +60,8 @@ python3 scripts/tasks.py validate
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [claude-agent] Claimed. branch=task/test-009-define-the-ground-truth-format-and-write worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/TEST-009
+- 2026-11-22 [claude-agent] Schema tests/accuracy/ground_truth.schema.json, CLI tests/accuracy/gt.py (init-site, validate, fill-heights, next-id) and load_ground_truth/load_labeled_area/load_meta written. LABELING.md written. Fixtures: valid T9 (10 points, Null Island, synthetic) and dup_id, outside_area, bad_enum variants.
+- 2026-11-22 [claude-agent] Verification: pytest tests/unit/accuracy/test_gt.py -q -ra: 38 passed (fill-heights tests run with rasterio 1.5.2, not skipped). Full suite -m 'not network and not sim': 920 passed, 1 skipped (pre-existing palmscan build check). ruff check, ruff format --check, mypy: clean.
+- 2026-11-22 [claude-agent] Spec notes: gt_id pattern is the task's ^T[0-9]+-gt-[0-9]{4}$ (same as plan <site>-gt-NNNN for T1..T5). Species checked by pattern only; palmscan/data/species_keys.yaml (SCAN-002) is not on main, so the registry check is not wired yet. VERIFY V14: NAIP WMS GetCapabilities returned 200 on 2026-11-22 at imagery.nationalmap.gov/arcgis/services/USGSNAIPImagery/ImageServer/WMSServer, layer USGSNAIPImagery:NaturalColor. Drawing it in QGIS is still VERIFY on first use (LABELING.md).
+- 2026-11-22 [claude-agent] Plan note: plan step 4 (optional CHM at 50% opacity to help height class) kept, but LABELING.md step 7 asks for height classes from imagery first, because height-class agreement is the independent check (plan 'Resolved' notes). No plan text changed.
+- 2026-11-22 [claude-agent] Status in_progress -> review.
