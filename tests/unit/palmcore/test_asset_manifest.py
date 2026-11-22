@@ -110,7 +110,9 @@ def test_output_is_byte_identical_across_runs() -> None:
 
 
 def test_fixture_manifest_reproduced_byte_for_byte() -> None:
-    assert dump_manifest(_built()).encode("utf-8") == EXPECTED.read_bytes()
+    # Normalise CRLF: Windows checkouts with autocrlf rewrite line endings.
+    expected = EXPECTED.read_bytes().replace(b"\r\n", b"\n")
+    assert dump_manifest(_built()).encode("utf-8") == expected
 
 
 def test_no_timestamps_or_absolute_paths() -> None:
@@ -263,7 +265,7 @@ def test_validate_catches_non_decreasing_triangles(tmp_path: Path) -> None:
 def test_cli_build_and_check(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
     out = tmp_path / "m.json"
     assert main(["build-manifest", "--assets-dir", str(FIXTURES), "--out", str(out)]) == 0
-    assert out.read_bytes() == EXPECTED.read_bytes()
+    assert out.read_bytes() == EXPECTED.read_bytes().replace(b"\r\n", b"\n")
     assert (
         main(["build-manifest", "--assets-dir", str(FIXTURES), "--out", str(out), "--check"]) == 0
     )

@@ -175,6 +175,16 @@ Field rules:
 - **TEST** reads `lods[].triangles` and the budgets for performance reports.
 - Loader API for Python consumers: `palmcore.assets.manifest.load_manifest(path) -> Manifest`, with typed dataclasses. GEN should import this rather than parse the JSON itself.
 
+### Scale limits and species fallback
+
+Plan 04 has `placement.scale_clamp` (0.15) and a priors-based species fallback; this plan has `scale_limits` (0.85/1.15) and `species_fallback`. Both describe the same two rules, so one side must own each. Decision (ASSET-005):
+
+- **The manifest owns the defaults.** How far a model can be scaled before it looks wrong, and which model stands in for a species that has none, are properties of the library: they change when models are added or reviewed, not per region, and a region config cannot know them. The generated `scale_limits` and `species_fallback` travel with the models they describe, and `validate` checks that every fallback target exists in the manifest.
+- **Region config overrides, it does not duplicate.** `placement.scale_clamp` becomes optional (no default). When unset, GEN uses the manifest `scale_limits`. When set, it replaces the manifest limits for that region (a tuning knob for GEN-017/GEN-019, not a second default).
+- **Fallback order for a palm's species**: (1) the species has variants in the manifest; (2) `species_fallback[species]`; (3) region `species_priors`, only if non-empty (an explicit per-region choice outranks the library default); (4) `species_fallback["_default"]`. Today's step 1 in plan 04 (priors, then first species alphabetically) is replaced by this order. `SPECIES_FALLBACK` is still warned for steps 2 to 4.
+- Why not region-owned: with two copies the values drift (0.85/1.15 vs 0.15 are only the same by luck), and ASSET cannot validate a region file.
+- This is an interface change to plan 04 (GEN-011 text and the `placement.scale_clamp` row), which ASSET-005 does not own. GEN-011 applies it; if its owner disagrees, the fallback is to keep the manifest fields as informational only and delete them in a manifest version bump. No user decision is needed unless the owners disagree.
+
 ### Large file policy
 
 Proposal. The user decides it in DEC-008 (ADR-0009), which also settles whether visual screenshots are committed as JPEG in plain git (TEST plan) or through LFS; ASSET-008 then implements the decision before any binary is committed.
@@ -551,6 +561,7 @@ Each species node `0x0-0x3` is a chain: x0 → x1 → x2 → x3.
 | 17 | Frond wind animation: out of v1. Worth a later look if static fronds look dead | User |
 | 18 | Alternate crowns (`_b` variants): in the contract, but no task yet. Add after ASSET-100 if rows look copy-pasted | User, after ASSET-100 |
 | 19 | Florida fallbacks before Florida models exist: use the nearest SoCal model, or leave those blobs alone? | User |
+| 21 | Scale limits and species fallback: manifest owns the defaults, region `placement.scale_clamp` and `species_priors` only override (see [Scale limits and species fallback](#scale-limits-and-species-fallback)). GEN-011 must apply it in plan 04 and the loader | GEN-011 owner (ASSET-005 proposes) |
 | 20 | Young palms below the shortest variant get clamped scale. Add an `xshort` variant if histograms show many | ASSET-010 / x0 tasks |
 
 ---
@@ -563,7 +574,7 @@ Each species node `0x0-0x3` is a chain: x0 → x1 → x2 → x3.
 - GEN loads the manifest only through `palmcore.assets.manifest.load_manifest` (GEN-011 depends on ASSET-005). `palmcore/assets/` stays ASSET's; no ARCH task touches it.
 - ASSET-015 depends on GEN-011 (manifest-driven placement for the T1 review). Viewpoints are the standard street level (~2 m), low oblique (~150 m), approach (~600 m), now also in the TEST plan.
 - ASSET-010/020/030/040/050 read palm heights from the canonical palmscan output `build/scan/<region>/palms.geojson` (was `data/`).
-- Open, not resolved here: `library.yaml` `scale_limits` (0.85/1.15) and `species_fallback` overlap GEN's `placement.scale_clamp` (0.15) and priors-based fallback; GEN and ASSET owners should pick one source (see plan 04 reconciliation notes).
+- Resolved by ASSET-005 (2026-11-22), pending GEN-011 confirmation: `library.yaml` `scale_limits` and `species_fallback` overlap GEN's `placement.scale_clamp` (0.15) and priors-based fallback. The manifest is the single source for both defaults; see [Scale limits and species fallback](#scale-limits-and-species-fallback). Plan 04 still needs a matching edit in GEN-011 (see open question 21).
 
 ## Recap
 

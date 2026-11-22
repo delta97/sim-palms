@@ -1,7 +1,7 @@
 ---
 id: ASSET-005
 title: "Asset manifest schema, species spec format, loader and generator (palmcore.assets)"
-status: in_progress
+status: review
 phase: 3
 area: ASSET
 kind: build
@@ -42,10 +42,10 @@ updated: 2026-11-22
 
 ## Acceptance criteria
 
-- [ ] `pytest tests/unit/palmcore/test_asset_manifest.py -q` passes.
-- [ ] `build-manifest` on the fixture dir reproduces the expected fixture `manifest.json` byte for byte.
-- [ ] `load_manifest` returns typed objects. GEN can call `manifest.species['washingtonia_robusta'].variants[0].model_guid`.
-- [ ] No timestamps or absolute paths appear in the output.
+- [x] `pytest tests/unit/palmcore/test_asset_manifest.py -q` passes.
+- [x] `build-manifest` on the fixture dir reproduces the expected fixture `manifest.json` byte for byte.
+- [x] `load_manifest` returns typed objects. GEN can call `manifest.species['washingtonia_robusta'].variants[0].model_guid`.
+- [x] No timestamps or absolute paths appear in the output.
 
 ## Verification
 
@@ -61,3 +61,7 @@ python -m palmcore.assets validate --manifest tests/fixtures/palmcore/assets/man
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [reconcile] Species keys are validated against the canonical registry palmscan/data/species_keys.yaml (SCAN-002), read by path (palmcore must not import palmscan); the ARCH-002 schema uses a pattern, not an enum. Loader path palmcore.assets.manifest.load_manifest confirmed as the one GEN uses; palmcore/assets/ is ASSET-owned (no ARCH task touches it). Cross-area reconciliation.
 - 2026-11-22 [claude-agent] Claimed. branch=task/asset-005-asset-manifest-schema-species-spec-forma worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/ASSET-005
+- 2026-11-22 [claude-agent] Implemented palmcore.assets (manifest.py, __main__.py, __init__.py), schemas/asset-manifest.schema.json, assets/library.yaml, fixtures. Commit ff5c63b plus follow-up. Verification: test_asset_manifest.py 35 passed; full suite 149 passed; ruff check and format clean; mypy strict clean. build-manifest on fixture dir diffs SAME against expected manifest.json; validate exits 0 (warning: palmscan/data/species_keys.yaml absent, pattern check only). All 4 acceptance boxes ticked.
+- 2026-11-22 [claude-agent] Schema not registered in palmcore/schemas.py SCHEMA_FILES (not in touches): loaded as load_schema('asset-manifest.schema.json') via schema_dir(). Integrator may add an 'asset-manifest' key later. Registry file format is unknown (SCAN-002 not here): _load_registry accepts a list, a mapping, or {species|keys|species_keys: list|mapping}; confirm when SCAN-002 lands. VERIFY (ASSET-004): package definition version location; validate reads a Version element/attribute from PackageDefinitions/palmfix-assets.xml if present.
+- 2026-11-22 [claude-agent] Resolved scale/fallback overlap: manifest (library.yaml) owns scale_limits and species_fallback defaults; region placement.scale_clamp and species_priors only override. Order: species variants, species_fallback[species], region species_priors if non-empty, species_fallback._default. Documented in plans/detailed/03-palm-assets.md ('Scale limits and species fallback', open question 21). Plan 04 / GEN-011 needs the matching edit (not my section). Note for integrator: no .gitattributes and autocrlf=true here; --check and the byte-for-byte test normalise CRLF, but consider eol=lf for assets/manifest.json.
+- 2026-11-22 [claude-agent] Status in_progress -> review.

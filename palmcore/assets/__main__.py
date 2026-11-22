@@ -38,7 +38,8 @@ def _build(args: argparse.Namespace) -> int:
     text = dump_manifest(build_manifest(assets_dir, include_draft=args.include_draft))
     if args.check:
         try:
-            current = out.read_bytes().decode("utf-8")
+            # A Windows checkout with autocrlf turns LF into CRLF; that is not staleness.
+            current = out.read_bytes().decode("utf-8").replace("\r\n", "\n")
         except OSError as exc:
             print(f"error: cannot read {out}: {exc}", file=sys.stderr)
             return EXIT_FAIL
