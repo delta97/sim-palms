@@ -1,7 +1,7 @@
 ---
 id: SCAN-022
 title: "Canopy height model (DTM, DSM, CHM)"
-status: todo
+status: in_progress
 phase: 4
 area: SCAN
 kind: build
@@ -11,10 +11,10 @@ requires: [none]
 agent: lidar-analyst
 estimate_h: 3
 touches: [palmscan/detect/chm.py, tests/unit/palmscan/test_scan_chm.py]
-owner: ""
-branch: ""
-worktree: ""
-updated: 2026-11-21
+owner: claude-agent
+branch: task/scan-022-canopy-height-model-dtm-dsm-chm
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-022"
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -56,3 +56,4 @@ pytest tests/unit/palmscan/test_scan_chm.py -q -m slow   # perf check, optional
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [claude-agent] Claimed. branch=task/scan-022-canopy-height-model-dtm-dsm-chm worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-022
