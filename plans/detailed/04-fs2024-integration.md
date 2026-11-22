@@ -564,9 +564,9 @@ GEN-005. All metric work happens in `LocalProjection` (pyproj transverse Mercato
   - Singleton: polygon unchanged.
   - Component: minimum spanning tree over member centres (Euclidean, ties broken by palm_id); polygon = `unary_union(circles + [convex_hull(c_i ∪ c_j) for each MST edge])`. Always one connected polygon that covers every member circle.
   - **Split:** if the component's bbox diagonal exceeds `max_cluster_extent_m` (150 m), remove MST edges longest first (ties by palm_id) until every sub-component's diagonal is within the limit; warning `CLUSTER_SPLIT`.
-- **Simplify:** `simplify(0.1 m, preserve_topology=True)`; while vertices > `max_vertices`, double the tolerance (max 5 times); warning `VERTICES_SIMPLIFIED`; still over → `GenerationError`.
+- **Simplify:** `simplify(0.1 m, preserve_topology=True)`; while vertices > `max_vertices`, double the tolerance (max 5 times); warning `VERTICES_SIMPLIFIED` (flag is true only when the doubling happened); still over → `GenerationError`.
 - **Normalise for output (`normalize_ring`):** to lon/lat, round to `lat_decimals`/`lon_decimals`, drop consecutive duplicate vertices, orient per `vertex_order`, rotate so the ring starts at the smallest `(lon, lat)` vertex, add the closing vertex only if `ring_closed`.
-- Tests: circle closed, valid, vertex count N, contains a true circle of radius r; a 5-palm row at 3 m spacing with gap 2 m (radius 1 m) stays 5 polygons, at 1.5 m spacing becomes 1; every member circle is covered (area difference < 1e-6 m²); split rule on a 400 m row yields 3+ clusters each ≤ 150 m; output stable when input order is shuffled.
+- Tests: circle closed, valid, vertex count N, contains a true circle of radius r; a 5-palm row at 3 m spacing stays 5 polygons and at 1.5 m spacing becomes 1 (radius 1 m, gap 0.5 m; the gap is measured between circle edges, so at gap 2 m the 3 m row would merge); every member circle is covered (area difference < 1e-6 m²); split rule on a 400 m row yields 3+ clusters each ≤ 150 m; output stable when input order is shuffled.
 
 #### GEN building clipping
 
