@@ -14,7 +14,7 @@ touches: [palmscan/sources/lidar_ept.py, tests/unit/palmscan/test_scan_lidar_ept
 owner: ""
 branch: ""
 worktree: ""
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -57,3 +57,4 @@ python -c "import pdal" 2>/dev/null && echo "pdal present" || echo "pdal absent:
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [integrator] integrator note from SCAN-001: palmscan Cache.get_or_fetch reads the fetched file fully into memory (reuses palmcore.write_cache); revisit for large LiDAR tiles (stream to disk)
