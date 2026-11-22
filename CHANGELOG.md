@@ -5,6 +5,7 @@ Format: `- TASK-ID: what changed (PR link)`.
 
 ## Unreleased
 
+- SCAN-029: Added in-run accuracy evaluation from palmscan QA, calling the TEST-010 metrics (local merge).
 - SCAN-023: Added CHM peak detection and watershed crown segmentation (`palmscan/detect/peaks.py`) (local merge).
 - SCAN-013: Added the `palmscan run` pipeline and `run`/`priors` CLI, end to end on offline fixtures with contract-valid, byte-reproducible output (local merge).
 - SCAN-026: Added species shape rules and the four-step classification order (`palmscan/classify/species.py`) (local merge).

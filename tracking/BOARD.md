@@ -7,7 +7,7 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 157 | 3 | 0 | 1 | 52 | 0 | 213 |
+| 157 | 2 | 0 | 1 | 53 | 0 | 213 |
 
 ## In progress / in review
 
@@ -16,7 +16,6 @@ Generated: 2026-11-22
 | [ASSET-001](tasks/ASSET-001.md) | in_progress | claude-agent | task/asset-001-write-reference-sheets-for-the-5-socal-p | Write reference sheets for the 5 SoCal palm species |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
 | [SCAN-007](tasks/SCAN-007.md) | in_progress | claude-agent | task/scan-007-record-live-source-fixtures-and-confirm | Record live source fixtures and confirm source fields |
-| [SCAN-029](tasks/SCAN-029.md) | in_progress | claude-agent | task/scan-029-run-the-test-010-accuracy-evaluation-fro | Run the TEST-010 accuracy evaluation from palmscan (in-run QA) |
 
 ## Blocked
 
@@ -177,7 +176,7 @@ _None._
 | [GEN-019](tasks/GEN-019.md) | todo | windows-sim, human | GEN-100, ASSET-100 | Integrate the real model library into region builds |
 | [RISK-007](tasks/RISK-007.md) | todo | none | RISK-006, GATE-P3 | Risk review after Phase 3 (mid-project) |
 
-## Phase 4 (5/18 done)
+## Phase 4 (6/18 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -191,7 +190,7 @@ _None._
 | [SCAN-026](tasks/SCAN-026.md) | done | none | SCAN-010 | Species shape rules and classification order |
 | [SCAN-027](tasks/SCAN-027.md) | todo | none | SCAN-026 | Decision tree species classifier with rules fallback |
 | [SCAN-028](tasks/SCAN-028.md) | todo | none | SCAN-013, SCAN-020, SCAN-024, SCAN-025, SCAN-027, SCAN-029 | Wire LiDAR stages into palmscan run, QA and eval |
-| [SCAN-029](tasks/SCAN-029.md) | in_progress | none | SCAN-001, TEST-010 | Run the TEST-010 accuracy evaluation from palmscan (in-run QA) |
+| [SCAN-029](tasks/SCAN-029.md) | done | none | SCAN-001, TEST-010 | Run the TEST-010 accuracy evaluation from palmscan (in-run QA) |
 | [SCAN-030](tasks/SCAN-030.md) | todo | network, human | SCAN-021, SCAN-028, TEST-101 | Tune LiDAR palm thresholds on test sites |
 | [SCAN-101](tasks/SCAN-101.md) | todo | network, human | SCAN-030, SCAN-100 | Deliverable: LiDAR-enriched palmscan run with heights and LiDAR-only palms (Phase 4) |
 | [TEST-009](tasks/TEST-009.md) | done | none | TEST-005 | Define the ground-truth format and write the labeling guide and tooling |

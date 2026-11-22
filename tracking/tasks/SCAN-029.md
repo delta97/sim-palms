@@ -1,7 +1,7 @@
 ---
 id: SCAN-029
 title: Run the TEST-010 accuracy evaluation from palmscan (in-run QA)
-status: review
+status: done
 phase: 4
 area: SCAN
 kind: build
@@ -63,3 +63,4 @@ pytest tests/unit/palmscan/test_scan_accuracy.py -q
 - 2026-11-22 [claude-agent] Verification: pytest tests/unit/palmscan/test_scan_accuracy.py -q -> 10 passed. Full: pytest -q -> 1587 passed, 1 skipped; ruff check clean; ruff format --check 141 files formatted; mypy 66 files no issues.
 - 2026-11-22 [claude-agent] Commit f2934ca scan(SCAN-029): run TEST-010 accuracy evaluation from palmscan QA.
 - 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] Status review -> done.
