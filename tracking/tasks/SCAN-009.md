@@ -1,7 +1,7 @@
 ---
 id: SCAN-009
 title: "Palm sizes, exclusion radius, building conflict, mask_out"
-status: todo
+status: in_progress
 phase: 1
 area: SCAN
 kind: build
@@ -11,9 +11,9 @@ requires: [none]
 agent: geo-data-engineer
 estimate_h: 3
 touches: [palmscan/attributes.py, palmscan/mask.py, tests/unit/palmscan/test_scan_attributes.py, tests/unit/palmscan/test_scan_mask.py]
-owner: ""
-branch: ""
-worktree: ""
+owner: claude-agent
+branch: task/scan-009-palm-sizes-exclusion-radius-building-con
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-009"
 updated: 2026-11-22
 ---
 
@@ -55,3 +55,4 @@ pytest tests/unit/palmscan/test_scan_attributes.py tests/unit/palmscan/test_scan
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [reconcile] Exclusion margin and clamps now come from the region exclusion: block (ARCH-003 defaults margin 1.5, radius_min 1.0, radius_max 8.0); removed SCAN's duplicate 1.5 m min clamp. Masks use palmcore MaskArea (kind, bbox|geometry|path, absolute paths). Cross-area reconciliation.
+- 2026-11-22 [claude-agent] Claimed. branch=task/scan-009-palm-sizes-exclusion-radius-building-con worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-009
