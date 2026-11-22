@@ -1,7 +1,7 @@
 ---
 id: ARCH-009
 title: "Add shared CLI plumbing and the palmfix utility CLI"
-status: review
+status: done
 phase: 1
 area: ARCH
 kind: build
@@ -87,3 +87,4 @@ ruff check . && mypy
 - 2026-11-22 [claude-agent] Claimed. branch=task/arch-009-add-shared-cli-plumbing-and-the-palmfix worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/ARCH-009
 - 2026-11-22 [claude-agent] Implemented context.py, cli_common.py, cli.py, __main__.py, palmfix script (49c11d7). pytest 542 passed/1 skipped, ruff check+format clean, mypy clean. Verification: palmfix validate sample_10 -> 'OK: 10 features, schema 1.0, 0 warnings' exit 0; duplicate_palm_id exit 3; regions lists full, minimal; regions --check dup_prefix exit 2; config --region minimal --format json has exclusion.margin_m 1.5; python -m palmcore --help ok. validate --json stdout is JSON only (logs on stderr). Exit codes 1/2/3/5/130 and error_map override covered in test_cli_common.py. No files under palmscan/ or palmgen/ changed; palmgen/cli.py not migrated (spec: SCAN/GEN own their CLIs, plumbing use is optional). Note: validate on a missing file exits 2 (ConfigError, bad path) rather than 3. Windows only locally; Ubuntu CI not run.
 - 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] Status review -> done.

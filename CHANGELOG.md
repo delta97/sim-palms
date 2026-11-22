@@ -5,6 +5,7 @@ Format: `- TASK-ID: what changed (PR link)`.
 
 ## Unreleased
 
+- ARCH-009: Added shared CLI plumbing (`run_main`, context, exit codes) and the `palmfix` utility CLI (validate, regions, config) (local merge).
 - TEST-003: Added geometry assertion helpers for exclusion polygons (`tests/helpers/geom.py`) (local merge).
 - GEN-008: Added the template engine and deterministic XML writer, tested on fake templates (real templates come from SPIKE-003) (local merge).
 - GEN-005: Added exclusion geometry (palm circles, cluster merge, simplification, ring normalisation); fixed the plan's 3 m row merge example (local merge).

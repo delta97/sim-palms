@@ -7,18 +7,18 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 182 | 5 | 0 | 1 | 25 | 0 | 213 |
+| 181 | 5 | 0 | 1 | 26 | 0 | 213 |
 
 ## In progress / in review
 
 | Task | Status | Owner | Branch | Title |
 |---|---|---|---|---|
-| [ARCH-009](tasks/ARCH-009.md) | in_progress | claude-agent | task/arch-009-add-shared-cli-plumbing-and-the-palmfix | Add shared CLI plumbing and the palmfix utility CLI |
 | [ASSET-001](tasks/ASSET-001.md) | in_progress | claude-agent | task/asset-001-write-reference-sheets-for-the-5-socal-p | Write reference sheets for the 5 SoCal palm species |
 | [ASSET-006](tasks/ASSET-006.md) | in_progress | claude-agent | task/asset-006-gltf-stats-and-automated-asset-checks-tr | glTF stats and automated asset checks (triangle budgets, heights, alpha mode, textures, naming) |
 | [GEN-004](tasks/GEN-004.md) | in_progress | claude-agent | task/gen-004-load-palms-buildings-and-region-config | Load palms, buildings and region config |
 | [GEN-006](tasks/GEN-006.md) | in_progress | claude-agent | task/gen-006-building-footprint-clipping | Building footprint clipping |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
+| [TEST-015](tasks/TEST-015.md) | in_progress | claude-agent | task/test-015-write-the-post-update-regression-routine | Write the post-update regression routine, log and entry scaffolder |
 
 ## Blocked
 
@@ -32,7 +32,7 @@ _None._
 | [SPIKE-001](tasks/SPIKE-001.md) | 0 | windows-sim, human | msfs-sdk-specialist | Install the MSFS 2024 SDK and create an empty Dev Mode scenery project |
 | [TEST-006](tasks/TEST-006.md) | 0 | windows-sim | msfs-sdk-specialist | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
 | [RISK-003](tasks/RISK-003.md) | 1 | network, human | geo-data-engineer | Inventory other palm and tree mods and their coverage for mask_out defaults |
-| [TEST-015](tasks/TEST-015.md) | 2 | none | test-engineer | Write the post-update regression routine, log and entry scaffolder |
+| [SCAN-001](tasks/SCAN-001.md) | 1 | none | python-architect | Create palmscan package core: config, cache, HTTP, models, CLI skeleton |
 | [TEST-017](tasks/TEST-017.md) | 2 | none | test-engineer | Write the test runbook and CI wiring notes |
 | [TEST-102](tasks/TEST-102.md) | 2 | none | test-engineer | Visual test protocol tooling: run scaffolder, checklist template, test log |
 | [ASSET-002](tasks/ASSET-002.md) | 3 | network | asset-pipeline-artist | Collect build-vs-license inputs for DEC-002 (palm models) |
@@ -64,7 +64,7 @@ _None._
 | [SPIKE-011](tasks/SPIKE-011.md) | todo | human | SPIKE-010, RISK-005 | Write the Phase 0 go/no-go proposal and get the user's decision |
 | [TEST-006](tasks/TEST-006.md) | todo | windows-sim |  | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
 
-## Phase 1 (12/31 done)
+## Phase 1 (13/31 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -76,7 +76,7 @@ _None._
 | [ARCH-006](tasks/ARCH-006.md) | done | none | ARCH-001 | Add deterministic UUIDv5 ids and seeded randomness to palmcore |
 | [ARCH-007](tasks/ARCH-007.md) | done | none | ARCH-002, ARCH-004 | Add the palms.geojson serializer, reader and writer |
 | [ARCH-008](tasks/ARCH-008.md) | done | network | ARCH-003 | Write the two example region configs and verify their sources |
-| [ARCH-009](tasks/ARCH-009.md) | in_progress | none | ARCH-003, ARCH-004, ARCH-007 | Add shared CLI plumbing and the palmfix utility CLI |
+| [ARCH-009](tasks/ARCH-009.md) | done | none | ARCH-003, ARCH-004, ARCH-007 | Add shared CLI plumbing and the palmfix utility CLI |
 | [DEC-009](tasks/DEC-009.md) | todo | human, network | DEC-004, RISK-001 | Decide: building footprint source (OSM, Microsoft, both, or county data) |
 | [GATE-P1](tasks/GATE-P1.md) | todo | human | GATE-P0, ARCH-008, DEC-009, TEST-004, TEST-100, SCAN-100 | Phase 1 exit gate: palms.geojson for the test neighbourhood from inventory data |
 | [RISK-001](tasks/RISK-001.md) | done | network |  | Audit data source licenses and terms (inventories, OSM, footprints, LiDAR) |
@@ -128,7 +128,7 @@ _None._
 | [TEST-002](tasks/TEST-002.md) | done | none | TEST-001 | Add the golden-file comparison helper with an update flag |
 | [TEST-003](tasks/TEST-003.md) | done | none | TEST-001 | Add geometry assertion helpers for exclusion polygons |
 | [TEST-007](tasks/TEST-007.md) | todo | windows-sim, human | TEST-100, TEST-102 | Capture a baseline no-fix visual run at T1-T5 |
-| [TEST-015](tasks/TEST-015.md) | todo | none | TEST-001 | Write the post-update regression routine, log and entry scaffolder |
+| [TEST-015](tasks/TEST-015.md) | in_progress | none | TEST-001 | Write the post-update regression routine, log and entry scaffolder |
 | [TEST-016](tasks/TEST-016.md) | todo | none | TEST-015, SPIKE-003, SPIKE-004 | Build the independent build-output checker and build-time history |
 | [TEST-017](tasks/TEST-017.md) | todo | none | TEST-002, TEST-004, ARCH-001 | Write the test runbook and CI wiring notes |
 | [TEST-102](tasks/TEST-102.md) | todo | none | TEST-001, TEST-005 | Visual test protocol tooling: run scaffolder, checklist template, test log |
