@@ -1,7 +1,7 @@
 ---
 id: SCAN-012
 title: "QA outputs: qa_summary.md, qa_map.gpkg, qa_rejects.csv"
-status: review
+status: done
 phase: 1
 area: SCAN
 kind: build
@@ -54,3 +54,4 @@ pytest tests/unit/palmscan/test_scan_qa.py -q
 - 2026-11-22 [claude-agent] Claimed. branch=task/scan-012-qa-outputs-qa-summary-md-qa-map-gpkg-qa worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-012
 - 2026-11-22 [claude-agent] Implemented qa/rejects.py, gpkg.py, summary.py; 18 tests in test_scan_qa.py pass; full suite 900 passed, ruff check/format and mypy clean. Added pyproject.toml to touches (mypy ignore for pandas stubs, imported by gpkg.py). Plan W10 updated with signature additions (id_prefix, crs, ConflictBuilding, accuracy_md, ClassifierSummary). Reject reasons are accepted as data (no import of SCAN-002/024). Acceptance: all 4 boxes ticked.
 - 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] Status review -> done.
