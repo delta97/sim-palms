@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<FSData version="9.0">
+    <Polygon displayName="palmfix A: ExcludeTIN" groupIndex="1" altitude="5.64">
+        <Attribute name="UniqueGUID" guid="{359C73E8-06BE-4FB2-ABCB-EC942F7761D0}" type="GUID" value="{37FC30F5-8293-528B-AEE8-A81F59D6E58C}"/>
+        <Attribute name="ExcludeTIN" guid="{18B58CBF-AE02-4A19-8AA9-3809E8E73400}" type="UINT8" value="1"/>
+        <Vertex lat="32.79442513" lon="-117.25145592"/>
+        <Vertex lat="32.79445217" lon="-117.25146458"/>
+        <Vertex lat="32.79447194" lon="-117.25148809"/>
+        <Vertex lat="32.79447912" lon="-117.25152015"/>
+        <Vertex lat="32.79447181" lon="-117.25155217"/>
+        <Vertex lat="32.79445195" lon="-117.25157557"/>
+        <Vertex lat="32.79442487" lon="-117.25158408"/>
+        <Vertex lat="32.79439783" lon="-117.25157542"/>
+        <Vertex lat="32.79437806" lon="-117.25155191"/>
+        <Vertex lat="32.79437088" lon="-117.25151985"/>
+        <Vertex lat="32.79437819" lon="-117.25148783"/>
+        <Vertex lat="32.79439805" lon="-117.25146443"/>
+    </Polygon>
+    <Polygon displayName="palmfix B: ExcludeTIN + vegetation 0" groupIndex="2" altitude="4.73">
+        <Attribute name="UniqueGUID" guid="{359C73E8-06BE-4FB2-ABCB-EC942F7761D0}" type="GUID" value="{4855FA65-02E3-5BBF-B3FE-0681B0DA16B4}"/>
+        <Attribute name="ExcludeTIN" guid="{18B58CBF-AE02-4A19-8AA9-3809E8E73400}" type="UINT8" value="1"/>
+        <Attribute name="VegetationDensity" guid="{41EFF715-C392-4B31-A457-50A504353A90}" type="UINT32" value="0"/>
+        <Vertex lat="32.79423913" lon="-117.25227692"/>
+        <Vertex lat="32.79426617" lon="-117.25228558"/>
+        <Vertex lat="32.79428594" lon="-117.25230909"/>
+        <Vertex lat="32.79429312" lon="-117.25234115"/>
+        <Vertex lat="32.79428581" lon="-117.25237317"/>
+        <Vertex lat="32.79426595" lon="-117.25239657"/>
+        <Vertex lat="32.79423887" lon="-117.25240508"/>
+        <Vertex lat="32.79421183" lon="-117.25239642"/>
+        <Vertex lat="32.79419206" lon="-117.25237291"/>
+        <Vertex lat="32.79418488" lon="-117.25234085"/>
+        <Vertex lat="32.79419219" lon="-117.25230883"/>
+        <Vertex lat="32.79421205" lon="-117.25228543"/>
+    </Polygon>
+</FSData>

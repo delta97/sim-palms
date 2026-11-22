@@ -7,11 +7,13 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 138 | 0 | 1 | 0 | 75 | 0 | 214 |
+| 137 | 1 | 1 | 0 | 75 | 0 | 214 |
 
 ## In progress / in review
 
-_None._
+| Task | Status | Owner | Branch | Title |
+|---|---|---|---|---|
+| [SPIKE-002](tasks/SPIKE-002.md) | in_progress | user | main | Cut one photogrammetry palm blob with Exclude TIN and the vegetation exclude |
 
 ## Blocked
 
@@ -23,7 +25,6 @@ _None._
 
 | Task | Phase | Requires | Agent | Title |
 |---|---|---|---|---|
-| [SPIKE-002](tasks/SPIKE-002.md) | 0 | windows-sim, human | msfs-sdk-specialist | Cut one photogrammetry palm blob with Exclude TIN and the vegetation exclude |
 | [SPIKE-005](tasks/SPIKE-005.md) | 0 | windows-sim | simconnect-dotnet-engineer | Test SimConnect static SimObject spawn and whether it survives client disconnect |
 | [TEST-006](tasks/TEST-006.md) | 0 | windows-sim | msfs-sdk-specialist | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
 | [DEC-009](tasks/DEC-009.md) | 1 | human, network | geo-data-engineer | Decide: building footprint source (OSM, Microsoft, both, or county data) |
@@ -45,7 +46,7 @@ _None._
 | [RISK-005](tasks/RISK-005.md) | done | network |  | Set up the sim/SDK update watch and do the first pass on exclusion bugs |
 | [RISK-006](tasks/RISK-006.md) | todo | none | GATE-P0 | Define the risk review routine and run the first review after Phase 0 |
 | [SPIKE-001](tasks/SPIKE-001.md) | done | windows-sim, human |  | Install the MSFS 2024 SDK and create an empty Dev Mode scenery project |
-| [SPIKE-002](tasks/SPIKE-002.md) | todo | windows-sim, human | SPIKE-001, DEC-004 | Cut one photogrammetry palm blob with Exclude TIN and the vegetation exclude |
+| [SPIKE-002](tasks/SPIKE-002.md) | in_progress | windows-sim, human | SPIKE-001, DEC-004 | Cut one photogrammetry palm blob with Exclude TIN and the vegetation exclude |
 | [SPIKE-003](tasks/SPIKE-003.md) | todo | windows-sim, human | SPIKE-002, SPIKE-006 | Capture Scenery Editor XML templates (Exclude TIN polygon, vegetation exclude, scenery object) into palmgen/templates/ |
 | [SPIKE-004](tasks/SPIKE-004.md) | todo | windows-sim | SPIKE-001, SPIKE-002, SPIKE-008 | Measure fspackagetool command-line builds (1 and 1,000 polygons; behaviour with the sim open) |
 | [SPIKE-005](tasks/SPIKE-005.md) | todo | windows-sim | SPIKE-001, SPIKE-009 | Test SimConnect static SimObject spawn and whether it survives client disconnect |

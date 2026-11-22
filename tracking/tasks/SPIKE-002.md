@@ -1,7 +1,7 @@
 ---
 id: SPIKE-002
 title: Cut one photogrammetry palm blob with Exclude TIN and the vegetation exclude
-status: todo
+status: in_progress
 phase: 0
 area: SPIKE
 kind: spike
@@ -11,8 +11,8 @@ requires: [windows-sim, human]
 agent: msfs-sdk-specialist
 estimate_h: 2
 touches: [docs/findings/SPIKE-002.md, docs/findings/SPIKE-002/, spikes/palmfix-spike/]
-owner: ""
-branch: ""
+owner: user
+branch: main
 worktree: ""
 updated: 2026-11-22
 ---
@@ -80,3 +80,5 @@ Manual: a reviewer compares the before and TIN+vegetation screenshots side by si
 ## Log
 
 - 2026-11-22 [plan-breakdown] Task created.
+- 2026-11-22 [user] Claimed. branch=main worktree=-
+- 2026-11-22 [integrator] integrator 2026-11-22: Dev Mode is unstable on this PC, so the cut is written as XML instead of drawn in the Scenery Editor. Polygon format, ExcludeTIN {18B58CBF-...} and VegetationDensity {41EFF715-...} from the SDK docs (Scenery XML Properties + XML Examples pages, read 2026-11-22); scene validates against bglcomp.xsd. Two 12-gon r=6 m polygons in one scene to need only one build: A ExcludeTIN only around sdpb-8a03f7f6752f55c8 (32.794425,-117.251520), B ExcludeTIN + VegetationDensity 0 around sdpb-e6ea40b0410d50ac (32.794239,-117.252341); both 15.2 m W. robusta >=22 m from buildings. Installed in the user's project (empty scene backed up as Scene.xml.empty-backup); sources and generator in spikes/palmfix-spike/. Waiting on the user to build and look.
