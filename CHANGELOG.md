@@ -5,6 +5,7 @@ Format: `- TASK-ID: what changed (PR link)`.
 
 ## Unreleased
 
+- TEST-008: Added optional image-diff scoring for visual viewpoints (`tests/visual/diff_score.py`), thresholds uncalibrated until TEST-018 (local merge).
 - SCAN-020: Added the 3DEP EPT LiDAR adapter (pipeline generation, tiling, streamed tile cache, injectable PDAL runner); PDAL round-trip untested locally (local merge).
 - SCAN-027: Added the decision-tree species classifier (JSON model, used only when it beats the rules in CV) (local merge).
 - SCAN-025: Added deterministic inventory-to-LiDAR matching and merge with LiDAR-only palm keys (local merge).

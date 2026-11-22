@@ -1,7 +1,7 @@
 ---
 id: TEST-008
 title: Add optional image-diff scoring for visual viewpoints
-status: review
+status: done
 phase: 6
 area: TEST
 kind: build
@@ -58,3 +58,4 @@ python3 scripts/tasks.py validate
 - 2026-11-22 [claude-agent] Spec discrepancy: a 50x50 block in 400x300 is NOT flagged with default thresholds (VP2 ssim 0.9815, mad 0.0101). Block test uses explicit tight thresholds. Left to TEST-018 to settle.
 - 2026-11-22 [claude-agent] Venv needs extras dev,gen,scan,lidar for the full suite (palmscan and palmgen collection); environment gap, not from this task.
 - 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] Status review -> done.

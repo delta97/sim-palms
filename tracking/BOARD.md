@@ -7,13 +7,15 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 153 | 0 | 0 | 1 | 59 | 0 | 213 |
+| 150 | 2 | 0 | 1 | 60 | 0 | 213 |
 
 ## In progress / in review
 
 | Task | Status | Owner | Branch | Title |
 |---|---|---|---|---|
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
+| [SCAN-028](tasks/SCAN-028.md) | in_progress | claude-agent | task/scan-028-wire-lidar-stages-into-palmscan-run-qa-a | Wire LiDAR stages into palmscan run, QA and eval |
+| [TEST-013](tasks/TEST-013.md) | in_progress | claude-agent | task/test-013-build-the-frametime-capture-parser-and-r | Build the frametime capture parser and run comparison report |
 
 ## Blocked
 
@@ -29,10 +31,7 @@ _None._
 | [RISK-003](tasks/RISK-003.md) | 1 | network, human | geo-data-engineer | Inventory other palm and tree mods and their coverage for mask_out defaults |
 | [DEC-002](tasks/DEC-002.md) | 3 | human | task-planner | Decide: build or license the palm models |
 | [DEC-008](tasks/DEC-008.md) | 3 | human | task-planner | Decide: storage for large asset binaries (Git LFS or external) |
-| [SCAN-028](tasks/SCAN-028.md) | 4 | none | lidar-analyst | Wire LiDAR stages into palmscan run, QA and eval |
 | [DEC-005](tasks/DEC-005.md) | 5 | human | test-engineer | Decide: performance budget and reference hardware/settings |
-| [TEST-013](tasks/TEST-013.md) | 5 | none | test-engineer | Build the frametime capture parser and run comparison report |
-| [TEST-008](tasks/TEST-008.md) | 6 | none | test-engineer | Add optional image-diff scoring for visual viewpoints |
 | [FX-001](tasks/FX-001.md) | 7 | windows-sim, human | render-fx-researcher | Verify ReShade depth access in MSFS 2024 (incl. multiplayer/online lockout) |
 | [FX-002](tasks/FX-002.md) | 7 | none | python-architect | Scaffold palmfx.offline package, session I/O and CLI |
 
@@ -184,7 +183,7 @@ _None._
 | [SCAN-025](tasks/SCAN-025.md) | done | none | SCAN-008 | Inventory-to-LiDAR matching and merge |
 | [SCAN-026](tasks/SCAN-026.md) | done | none | SCAN-010 | Species shape rules and classification order |
 | [SCAN-027](tasks/SCAN-027.md) | done | none | SCAN-026 | Decision tree species classifier with rules fallback |
-| [SCAN-028](tasks/SCAN-028.md) | todo | none | SCAN-013, SCAN-020, SCAN-024, SCAN-025, SCAN-027, SCAN-029 | Wire LiDAR stages into palmscan run, QA and eval |
+| [SCAN-028](tasks/SCAN-028.md) | in_progress | none | SCAN-013, SCAN-020, SCAN-024, SCAN-025, SCAN-027, SCAN-029 | Wire LiDAR stages into palmscan run, QA and eval |
 | [SCAN-029](tasks/SCAN-029.md) | done | none | SCAN-001, TEST-010 | Run the TEST-010 accuracy evaluation from palmscan (in-run QA) |
 | [SCAN-030](tasks/SCAN-030.md) | todo | network, human | SCAN-021, SCAN-028, TEST-101 | Tune LiDAR palm thresholds on test sites |
 | [SCAN-101](tasks/SCAN-101.md) | todo | network, human | SCAN-030, SCAN-100 | Deliverable: LiDAR-enriched palmscan run with heights and LiDAR-only palms (Phase 4) |
@@ -221,11 +220,11 @@ _None._
 | [LIVE-100](tasks/LIVE-100.md) | todo | windows-sim, human | LIVE-005, GEN-100 | Deliverable: palmlive region manager (list, activate, deactivate via folder links) |
 | [LIVE-101](tasks/LIVE-101.md) | todo | windows-sim, human | LIVE-011, LIVE-100, ASSET-101, TEST-014, DEC-007 | Deliverable: palmlive live spawner (only if the Phase 5 bake-off picks live placement) |
 | [RISK-008](tasks/RISK-008.md) | todo | none | RISK-007, GATE-P5 | Risk review after Phase 5 (before scale-out and any publishing) |
-| [TEST-013](tasks/TEST-013.md) | todo | none | TEST-001 | Build the frametime capture parser and run comparison report |
+| [TEST-013](tasks/TEST-013.md) | in_progress | none | TEST-001 | Build the frametime capture parser and run comparison report |
 | [TEST-014](tasks/TEST-014.md) | todo | none | TEST-013 | Build soak-test report tooling for the live spawner |
 | [TEST-103](tasks/TEST-103.md) | todo | windows-sim, gpu | TEST-013, TEST-100, DEC-005 | Performance flight harness: fixed route, capture procedure, dry-run capture |
 
-## Phase 6 (0/27 done)
+## Phase 6 (1/27 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -254,7 +253,7 @@ _None._
 | [REGION-040](tasks/REGION-040.md) | todo | network, windows-sim, human | GATE-P6, DEC-011 | Other SoCal photogrammetry cities: pick cities and run the per-region pattern (placeholder) |
 | [REGION-050](tasks/REGION-050.md) | todo | network, windows-sim, human | GATE-P6, DEC-011, ASSET-065 | Florida regions after the Florida species set exists (placeholder) |
 | [RISK-009](tasks/RISK-009.md) | todo | none | DEC-010 | Write attribution and credits text for published packages |
-| [TEST-008](tasks/TEST-008.md) | todo | none | TEST-102 | Add optional image-diff scoring for visual viewpoints |
+| [TEST-008](tasks/TEST-008.md) | done | none | TEST-102 | Add optional image-diff scoring for visual viewpoints |
 | [TEST-018](tasks/TEST-018.md) | todo | windows-sim | TEST-008, TEST-104 | Calibrate the image-diff noise floor at T1 |
 
 ## Phase 7 (0/27 done)
