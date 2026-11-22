@@ -1,7 +1,7 @@
 ---
 id: TEST-009
 title: Define the ground-truth format and write the labeling guide and tooling
-status: todo
+status: in_progress
 phase: 4
 area: TEST
 kind: build
@@ -11,10 +11,10 @@ requires: [none]
 agent: test-engineer
 estimate_h: 3
 touches: [tests/accuracy/__init__.py, tests/accuracy/ground_truth.schema.json, tests/accuracy/gt.py, tests/accuracy/LABELING.md, tests/unit/accuracy/test_gt.py, tests/fixtures/accuracy/gt/]
-owner: ""
-branch: ""
-worktree: ""
-updated: 2026-11-21
+owner: claude-agent
+branch: task/test-009-define-the-ground-truth-format-and-write
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/TEST-009"
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -59,3 +59,4 @@ python3 scripts/tasks.py validate
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [claude-agent] Claimed. branch=task/test-009-define-the-ground-truth-format-and-write worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/TEST-009
