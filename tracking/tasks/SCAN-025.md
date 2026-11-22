@@ -1,7 +1,7 @@
 ---
 id: SCAN-025
 title: "Inventory-to-LiDAR matching and merge"
-status: todo
+status: in_progress
 phase: 4
 area: SCAN
 kind: build
@@ -11,10 +11,10 @@ requires: [none]
 agent: lidar-analyst
 estimate_h: 3
 touches: [palmscan/detect/merge.py, tests/unit/palmscan/test_scan_merge.py]
-owner: ""
-branch: ""
-worktree: ""
-updated: 2026-11-21
+owner: claude-agent
+branch: task/scan-025-inventory-to-lidar-matching-and-merge
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-025"
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -52,3 +52,4 @@ pytest tests/unit/palmscan/test_scan_merge.py -q
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [claude-agent] Claimed. branch=task/scan-025-inventory-to-lidar-matching-and-merge worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-025
