@@ -171,12 +171,17 @@ def remove_holes(poly: Polygon) -> list[Polygon]
 def normalize_ring(poly_lonlat: Polygon, orientation: str, decimals: int, closed: bool) -> tuple[tuple[float, float], ...]
 
 # palmgen/masks.py
-Mask(name: str, kind: str, geometry_lonlat)            # kind: mod | airport | other
-def load_masks(cfg: GenConfig, airports_path: Path | None) -> list[Mask]
-def apply_point_masks(palms, masks) -> tuple[list[Palm], dict[str, list[str]]]
-def clip_polygons_by_masks(polys_local, masks_local, kinds=frozenset({"airport"})) -> ...
+Mask(name: str, kind: str, geometry_lonlat)            # kind: mod | airport | other; LocalMask(name, kind, geometry) in metres
+def load_masks(cfg: GenConfig, projection: LocalProjection, no_airport_mask: bool = False) -> list[Mask]
+def localize_masks(masks, projection) -> list[LocalMask]
+def apply_point_masks(palms, masks) -> tuple[list[Palm], dict[str, list[str]]]   # an entry per mask, even when empty
+def clip_polygons_by_masks(polys_local, masks_local, kinds=frozenset({"airport"}), *, min_part_area_m2=1.0,
+                           supports_holes=False) -> tuple[list[tuple[int, Polygon]], dict[str, int]]
+                           # parts as (index into polys_local, polygon); counts have an entry per mask of the kinds
 def overpass_to_geojson(resp: dict) -> dict
-def fetch_airports(bbox, out_path: Path, endpoint: str, http_post=None) -> int
+def fetch_airports(bbox, out_path: Path, endpoint: str, http_post=None, *, sleep=time.sleep) -> int
+                           # http_post(url, body: bytes) -> bytes, raises OverpassHttpError(status)
+def run_fetch_airports(opts) -> int                    # bbox = region bbox + masks.airports.buffer_m; opts.http_post optional (tests)
 
 # palmgen/templates.py
 class TemplateSet:
@@ -592,7 +597,7 @@ Tests: circle half over a building → one valid part, no overlap with the buffe
 
 GEN-007.
 
-- `load_masks`: inline `mask_out` `bbox`/`geometry` entries and `path` files (already absolute in `RegionConfig`; ARCH-003 resolves against the repo root), plus the airport file `masks.airports.path` (default `docs/compat/airports-mask.geojson` from RISK-004) when `masks.airports.enabled` and not `--no-airport-mask`. Airport polygons are buffered by `masks.airports.buffer_m` in local metres. Airport mask enabled but file missing → `InputError` with the hint (RISK-004 output, or `palmgen masks airports --region NAME --out <path>`).
+- `load_masks`: inline `mask_out` `bbox`/`geometry` entries and `path` files (already absolute in `RegionConfig`; ARCH-003 resolves against the repo root), plus the airport file `masks.airports.path` (default `docs/compat/airports-mask.geojson` from RISK-004) when `masks.airports.enabled` and not `--no-airport-mask`. Airport polygons are buffered by `masks.airports.buffer_m` in local metres (`LocalProjection`, 8 segments per quarter circle); each feature becomes a mask named `airport:<icao|code|faa|osm_id>`. A manual `mask_out` entry of kind `airport` is used as drawn (not buffered). Airport mask enabled but file missing → `InputError` with the hint (RISK-004 output, or `palmgen masks airports --region NAME --out <path>`).
 - Order in the pipeline: point masks first (palm inside any mask → dropped, warning `MASKED`), then after clipping, exclusion polygons are differenced with `airport` masks only (mod overlaps are harmless, airport scenery is not). Counts per mask go to the report.
 - `fetch_airports`: Overpass QL `[out:json][timeout:60];(way["aeroway"="aerodrome"](S,W,N,E);relation["aeroway"="aerodrome"](S,W,N,E););out geom;`, converted by `overpass_to_geojson` (closed ways → Polygon; multipolygon relations → polygonize outer members). Writes a FeatureCollection with `name`, `icao` (from `icao` tag, may be null) and `osm_id`. Credit OSM (ODbL) in the file's `attribution` member. HTTP is injectable; unit tests use `tests/fixtures/palmgen/overpass_airports.json` (hand-written, 1 way + 1 relation). The live fetch is run during region setup, not in tests.
 

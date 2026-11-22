@@ -1,0 +1,38 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "fixture mod area (palms 6 and 7)"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -117.25465,
+       32.7852
+      ],
+      [
+       -117.2544,
+       32.7852
+      ],
+      [
+       -117.2544,
+       32.78535
+      ],
+      [
+       -117.25465,
+       32.78535
+      ],
+      [
+       -117.25465,
+       32.7852
+      ]
+     ]
+    ]
+   }
+  }
+ ]
+}
