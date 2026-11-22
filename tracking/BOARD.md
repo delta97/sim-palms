@@ -7,14 +7,13 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 194 | 4 | 0 | 1 | 14 | 0 | 213 |
+| 194 | 3 | 0 | 1 | 15 | 0 | 213 |
 
 ## In progress / in review
 
 | Task | Status | Owner | Branch | Title |
 |---|---|---|---|---|
 | [ARCH-008](tasks/ARCH-008.md) | in_progress | claude-agent | task/arch-008-write-the-two-example-region-configs-and | Write the two example region configs and verify their sources |
-| [GEN-002](tasks/GEN-002.md) | in_progress | claude-agent | task/gen-002-deterministic-guids-and-per-palm-hashes | Deterministic GUIDs and per-palm hashes |
 | [GEN-003](tasks/GEN-003.md) | in_progress | claude-agent | task/gen-003-0-01-degree-tiling-and-tile-naming | 0.01 degree tiling and tile naming |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
 | [TEST-005](tasks/TEST-005.md) | in_progress | claude-agent | task/test-005-add-the-test-site-registry-schema-and-lo | Add the test-site registry schema and loader |
@@ -105,13 +104,13 @@ _None._
 | [TEST-005](tasks/TEST-005.md) | in_progress | none | TEST-001 | Add the test-site registry schema and loader |
 | [TEST-100](tasks/TEST-100.md) | todo | human, windows-sim | TEST-005, TEST-006, DEC-004 | Define test sites T1-T5 (bbox, purpose, region, saved flights, three viewpoints each) |
 
-## Phase 2 (3/29 done)
+## Phase 2 (4/29 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
 | [GATE-P2](tasks/GATE-P2.md) | todo | human | GATE-P1, GEN-012, GEN-100, TEST-002, TEST-007, TEST-016, TEST-102, TEST-104 | Phase 2 exit gate: generated package removes the test neighbourhood's blobs |
 | [GEN-001](tasks/GEN-001.md) | done | none | ARCH-001 | Scaffold palmgen package, CLI surface and data model |
-| [GEN-002](tasks/GEN-002.md) | in_progress | none | GEN-001, ARCH-006 | Deterministic GUIDs and per-palm hashes |
+| [GEN-002](tasks/GEN-002.md) | done | none | GEN-001, ARCH-006 | Deterministic GUIDs and per-palm hashes |
 | [GEN-003](tasks/GEN-003.md) | in_progress | none | GEN-001 | 0.01 degree tiling and tile naming |
 | [GEN-004](tasks/GEN-004.md) | todo | none | GEN-001, ARCH-002, ARCH-003, ARCH-007 | Load palms, buildings and region config |
 | [GEN-005](tasks/GEN-005.md) | todo | none | GEN-001 | Exclusion circles, merging and simplification |

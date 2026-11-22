@@ -522,16 +522,16 @@ GEN-001. Creates the package, every CLI subcommand and flag above, `errors.py` w
 
 #### GEN deterministic ids
 
-GEN-002. Name strings fed to the UUIDv5 helper (root namespace `palmcore.ids.NAMESPACE`, ARCH-006; GEN-002 depends on ARCH-006):
+GEN-002. `palmgen/ids.py` wraps `palmcore.ids` (plan 01 WS4, ARCH-006): every GUID is `palmcore.ids.object_guid(kind, GUID_SCHEME, *parts)` (UUIDv5 under `palmcore.ids.NAMESPACE`, parts joined with `|`), with `GUID_SCHEME = "v1"`. The `gen/v1/...` strings below are human-readable names only (logs, reports); they are not hashed.
 
-| Item | Name string |
-|---|---|
-| exclusion polygon | `gen/v1/excl/{region}/{tile_id}/{','.join(sorted(member_ids))}#{part}` |
-| scenery object | `gen/v1/obj/{region}/{tile_id}/{palm_id}` |
-| tile-level GUID | `gen/v1/tile/{region}/{tile_id}` |
-| child GUID | `{parent_name}/{role}` |
+| Item | `object_guid` call | Readable name |
+|---|---|---|
+| exclusion polygon | `object_guid("gen_excl", "v1", region, tile_id, ",".join(sorted(member_ids)), str(part))` | `gen/v1/excl/{region}/{tile_id}/{members}#{part}` |
+| scenery object | `object_guid("gen_obj", "v1", region, tile_id, palm_id)` | `gen/v1/obj/{region}/{tile_id}/{palm_id}` |
+| tile-level GUID | `object_guid("gen_tile", "v1", region, tile_id)` | `gen/v1/tile/{region}/{tile_id}` |
+| child GUID | `object_guid("gen_child", "v1", parent_name, role)` | `{parent_name}/{role}` |
 
-- `unit_hash(palm_id, purpose)` = first 8 bytes of `sha256(f"{purpose}:{palm_id}")` as big-endian int / 2**64.
+- `unit_hash(palm_id, purpose)` = `palmcore.ids.stable_unit_float(purpose, palm_id)` (sha256 of `purpose|palm_id`, 52-bit fraction), in [0, 1).
 - `format_guid` styles: `braces_upper` → `{8C5E…}`, `plain_lower` → `8c5e…`, etc.
 - Tests: same input gives same output across runs; 100,000 synthetic ids give zero collisions; changing any part of the name changes the GUID; known-value test pins 3 GUIDs so an accidental scheme change fails loudly.
 

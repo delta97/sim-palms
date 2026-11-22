@@ -5,6 +5,7 @@ Format: `- TASK-ID: what changed (PR link)`.
 
 ## Unreleased
 
+- GEN-002: Added deterministic GUIDs and per-palm hashes for palmgen, wrapping palmcore ids; aligned plan 04 with plan 01 (local merge).
 - ASSET-005: Added the asset manifest schema, species spec format, loader and generator (`palmcore.assets`) (local merge).
 - Repo: added `.gitattributes` forcing LF in working trees so golden files match across Windows and Linux.
 - ARCH-002: Added the palms.geojson and buildings.geojson JSON Schemas and the shared validator (`palmcore/contract.py`) (local merge).
