@@ -7,15 +7,18 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 176 | 3 | 0 | 1 | 33 | 0 | 213 |
+| 172 | 6 | 0 | 1 | 34 | 0 | 213 |
 
 ## In progress / in review
 
 | Task | Status | Owner | Branch | Title |
 |---|---|---|---|---|
 | [ASSET-001](tasks/ASSET-001.md) | in_progress | claude-agent | task/asset-001-write-reference-sheets-for-the-5-socal-p | Write reference sheets for the 5 SoCal palm species |
-| [GEN-007](tasks/GEN-007.md) | in_progress | claude-agent | task/gen-007-mod-and-airport-masks-overpass-airport-f | Mod and airport masks, Overpass airport fetch |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
+| [SCAN-002](tasks/SCAN-002.md) | in_progress | claude-agent | task/scan-002-species-normalization-table-normalizer-a | Species normalization table, normalizer and palm filter |
+| [SCAN-003](tasks/SCAN-003.md) | in_progress | claude-agent | task/scan-003-source-adapter-base-and-geojson-file-ada | Source adapter base and geojson_file adapter |
+| [SCAN-010](tasks/SCAN-010.md) | in_progress | claude-agent | task/scan-010-species-priors-and-deterministic-prior-s | Species priors and deterministic prior sampling |
+| [SCAN-011](tasks/SCAN-011.md) | in_progress | claude-agent | task/scan-011-palms-geojson-writer-palm-ids-and-schema | palms.geojson writer, palm IDs and schema validation |
 | [TEST-017](tasks/TEST-017.md) | in_progress | claude-agent | task/test-017-write-the-test-runbook-and-ci-wiring-not | Write the test runbook and CI wiring notes |
 
 ## Blocked
@@ -30,10 +33,6 @@ _None._
 | [SPIKE-001](tasks/SPIKE-001.md) | 0 | windows-sim, human | msfs-sdk-specialist | Install the MSFS 2024 SDK and create an empty Dev Mode scenery project |
 | [TEST-006](tasks/TEST-006.md) | 0 | windows-sim | msfs-sdk-specialist | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
 | [RISK-003](tasks/RISK-003.md) | 1 | network, human | geo-data-engineer | Inventory other palm and tree mods and their coverage for mask_out defaults |
-| [SCAN-002](tasks/SCAN-002.md) | 1 | none | geo-data-engineer | Species normalization table, normalizer and palm filter |
-| [SCAN-003](tasks/SCAN-003.md) | 1 | none | geo-data-engineer | Source adapter base and geojson_file adapter |
-| [SCAN-010](tasks/SCAN-010.md) | 1 | none | geo-data-engineer | Species priors and deterministic prior sampling |
-| [SCAN-011](tasks/SCAN-011.md) | 1 | none | python-architect | palms.geojson writer, palm IDs and schema validation |
 | [SCAN-012](tasks/SCAN-012.md) | 1 | none | geo-data-engineer | QA outputs: qa_summary.md, qa_map.gpkg, qa_rejects.csv |
 | [TEST-102](tasks/TEST-102.md) | 2 | none | test-engineer | Visual test protocol tooling: run scaffolder, checklist template, test log |
 | [DEC-002](tasks/DEC-002.md) | 3 | human | task-planner | Decide: build or license the palm models |
@@ -85,16 +84,16 @@ _None._
 | [RISK-001](tasks/RISK-001.md) | done | network |  | Audit data source licenses and terms (inventories, OSM, footprints, LiDAR) |
 | [RISK-003](tasks/RISK-003.md) | todo | network, human |  | Inventory other palm and tree mods and their coverage for mask_out defaults |
 | [SCAN-001](tasks/SCAN-001.md) | done | none | ARCH-001, ARCH-003, ARCH-004, ARCH-009 | Create palmscan package core: config, cache, HTTP, models, CLI skeleton |
-| [SCAN-002](tasks/SCAN-002.md) | todo | none | SCAN-001 | Species normalization table, normalizer and palm filter |
-| [SCAN-003](tasks/SCAN-003.md) | todo | none | SCAN-001 | Source adapter base and geojson_file adapter |
+| [SCAN-002](tasks/SCAN-002.md) | in_progress | none | SCAN-001 | Species normalization table, normalizer and palm filter |
+| [SCAN-003](tasks/SCAN-003.md) | in_progress | none | SCAN-001 | Source adapter base and geojson_file adapter |
 | [SCAN-004](tasks/SCAN-004.md) | todo | none | SCAN-003 | ArcGIS REST inventory adapter with paging and cache |
 | [SCAN-005](tasks/SCAN-005.md) | todo | none | SCAN-003 | Overpass client and OSM tree adapter |
 | [SCAN-006](tasks/SCAN-006.md) | todo | none | SCAN-005 | Building footprints adapter (OSM, Microsoft file) |
 | [SCAN-007](tasks/SCAN-007.md) | todo | network | SCAN-002, SCAN-004, SCAN-006 | Record live source fixtures and confirm source fields |
 | [SCAN-008](tasks/SCAN-008.md) | todo | none | SCAN-002, SCAN-004, SCAN-005 | Inventory ingest stage and cross-source dedupe |
 | [SCAN-009](tasks/SCAN-009.md) | todo | none | SCAN-002 | Palm sizes, exclusion radius, building conflict, mask_out |
-| [SCAN-010](tasks/SCAN-010.md) | todo | none | SCAN-001 | Species priors and deterministic prior sampling |
-| [SCAN-011](tasks/SCAN-011.md) | todo | none | SCAN-001, ARCH-002, ARCH-006, ARCH-007 | palms.geojson writer, palm IDs and schema validation |
+| [SCAN-010](tasks/SCAN-010.md) | in_progress | none | SCAN-001 | Species priors and deterministic prior sampling |
+| [SCAN-011](tasks/SCAN-011.md) | in_progress | none | SCAN-001, ARCH-002, ARCH-006, ARCH-007 | palms.geojson writer, palm IDs and schema validation |
 | [SCAN-012](tasks/SCAN-012.md) | todo | none | SCAN-001 | QA outputs: qa_summary.md, qa_map.gpkg, qa_rejects.csv |
 | [SCAN-013](tasks/SCAN-013.md) | todo | none | SCAN-006, SCAN-008, SCAN-009, SCAN-010, SCAN-011, SCAN-012 | palmscan run pipeline and CLI, end-to-end on fixtures |
 | [SCAN-100](tasks/SCAN-100.md) | todo | network, human | SCAN-007, SCAN-013, TEST-100, ARCH-008 | Deliverable: palmscan run produces validated palms.geojson from inventory data (Phase 1) |
@@ -103,7 +102,7 @@ _None._
 | [TEST-005](tasks/TEST-005.md) | done | none | TEST-001 | Add the test-site registry schema and loader |
 | [TEST-100](tasks/TEST-100.md) | todo | human, windows-sim | TEST-005, TEST-006, DEC-004 | Define test sites T1-T5 (bbox, purpose, region, saved flights, three viewpoints each) |
 
-## Phase 2 (14/29 done)
+## Phase 2 (15/29 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -114,7 +113,7 @@ _None._
 | [GEN-004](tasks/GEN-004.md) | done | none | GEN-001, ARCH-002, ARCH-003, ARCH-007 | Load palms, buildings and region config |
 | [GEN-005](tasks/GEN-005.md) | done | none | GEN-001 | Exclusion circles, merging and simplification |
 | [GEN-006](tasks/GEN-006.md) | done | none | GEN-005 | Building footprint clipping |
-| [GEN-007](tasks/GEN-007.md) | in_progress | none | GEN-004, GEN-005 | Mod and airport masks, Overpass airport fetch |
+| [GEN-007](tasks/GEN-007.md) | done | none | GEN-004, GEN-005 | Mod and airport masks, Overpass airport fetch |
 | [GEN-008](tasks/GEN-008.md) | done | none | GEN-001 | Template engine and XML writer on fake templates |
 | [GEN-009](tasks/GEN-009.md) | todo | none | GEN-008, SPIKE-003 | Convert captured scene XML into real templates |
 | [GEN-010](tasks/GEN-010.md) | todo | none | GEN-009 | Project file, PackageDefinitions and version scheme |
