@@ -1,0 +1,99 @@
+{
+ "type": "FeatureCollection",
+ "name": "airports",
+ "attribution": "Aerodrome boundaries (c) OpenStreetMap contributors, ODbL 1.0, https://www.openstreetmap.org/copyright",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Fixture Field",
+    "icao": "KFXT",
+    "osm_id": "way/1001"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -117.2441,
+       32.7874
+      ],
+      [
+       -117.2441,
+       32.7864
+      ],
+      [
+       -117.2431,
+       32.7864
+      ],
+      [
+       -117.2431,
+       32.7874
+      ],
+      [
+       -117.2441,
+       32.7874
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Fixture Heliport",
+    "icao": null,
+    "osm_id": "relation/2001"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -117.258,
+       32.782
+      ],
+      [
+       -117.262,
+       32.782
+      ],
+      [
+       -117.262,
+       32.778
+      ],
+      [
+       -117.258,
+       32.778
+      ],
+      [
+       -117.258,
+       32.782
+      ]
+     ],
+     [
+      [
+       -117.259,
+       32.781
+      ],
+      [
+       -117.259,
+       32.779
+      ],
+      [
+       -117.261,
+       32.779
+      ],
+      [
+       -117.261,
+       32.781
+      ],
+      [
+       -117.259,
+       32.781
+      ]
+     ]
+    ]
+   }
+  }
+ ]
+}

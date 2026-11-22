@@ -1,0 +1,123 @@
+{
+ "version": 0.6,
+ "generator": "hand-written fixture (GEN-007)",
+ "osm3s": {
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+ },
+ "elements": [
+  {
+   "type": "relation",
+   "id": 2001,
+   "members": [
+    {
+     "type": "way",
+     "ref": 3001,
+     "role": "outer",
+     "geometry": [
+      {
+       "lat": 32.778,
+       "lon": -117.262
+      },
+      {
+       "lat": 32.778,
+       "lon": -117.258
+      },
+      {
+       "lat": 32.782,
+       "lon": -117.258
+      }
+     ]
+    },
+    {
+     "type": "way",
+     "ref": 3002,
+     "role": "outer",
+     "geometry": [
+      {
+       "lat": 32.782,
+       "lon": -117.258
+      },
+      {
+       "lat": 32.782,
+       "lon": -117.262
+      },
+      {
+       "lat": 32.778,
+       "lon": -117.262
+      }
+     ]
+    },
+    {
+     "type": "way",
+     "ref": 3003,
+     "role": "inner",
+     "geometry": [
+      {
+       "lat": 32.779,
+       "lon": -117.261
+      },
+      {
+       "lat": 32.779,
+       "lon": -117.259
+      },
+      {
+       "lat": 32.781,
+       "lon": -117.259
+      },
+      {
+       "lat": 32.781,
+       "lon": -117.261
+      },
+      {
+       "lat": 32.779,
+       "lon": -117.261
+      }
+     ]
+    }
+   ],
+   "tags": {
+    "aeroway": "aerodrome",
+    "name": "Fixture Heliport",
+    "type": "multipolygon"
+   }
+  },
+  {
+   "type": "way",
+   "id": 1001,
+   "nodes": [
+    1,
+    2,
+    3,
+    4,
+    1
+   ],
+   "geometry": [
+    {
+     "lat": 32.7864,
+     "lon": -117.2441
+    },
+    {
+     "lat": 32.7874,
+     "lon": -117.2441
+    },
+    {
+     "lat": 32.7874,
+     "lon": -117.2431
+    },
+    {
+     "lat": 32.7864,
+     "lon": -117.2431
+    },
+    {
+     "lat": 32.7864,
+     "lon": -117.2441
+    }
+   ],
+   "tags": {
+    "aeroway": "aerodrome",
+    "icao": "KFXT",
+    "name": "Fixture Field"
+   }
+  }
+ ]
+}
