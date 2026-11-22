@@ -1,7 +1,7 @@
 ---
 id: TEST-003
 title: Add geometry assertion helpers for exclusion polygons
-status: in_progress
+status: review
 phase: 2
 area: TEST
 kind: build
@@ -44,9 +44,9 @@ updated: 2026-11-22
 
 ## Acceptance criteria
 
-- [ ] All helpers exist with the exact signatures in the plan.
+- [x] All helpers exist with the exact signatures in the plan.
 - [ ] Self-tests pass and cover one pass and one fail case per helper.
-- [ ] Failure messages include measured value and limit.
+- [x] Failure messages include measured value and limit.
 
 ## Verification
 
@@ -59,3 +59,7 @@ python3 scripts/tasks.py validate
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [claude-agent] Claimed. branch=task/test-003-add-geometry-assertion-helpers-for-exclu worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/TEST-003
+- 2026-11-22 [claude-agent] Implemented tests/helpers/geom.py: distance_m, to_local_m, assert_valid_polygon, assert_ring_closed, assert_circle_like, assert_radius_within, assert_disjoint_from, assert_points_close (plan signatures). Verified: 20 self-tests in tests/unit/helpers/test_geom.py pass; full suite 529 passed, 1 skipped; ruff check/format clean; mypy clean.
+- 2026-11-22 [claude-agent] Spec discrepancies: task text shows assert_radius_within(r_max_m=3.5) but plan signature requires r_min_m, so tests pass r_min_m=0.0 explicitly; task text shows assert_disjoint_from(poly, others, tol_m2) positional, plan has keyword-only tol_m2 (default 0.01), followed plan. Followed plan signatures throughout.
+- 2026-11-22 [claude-agent] Ticked: signatures match plan (criterion 1); every assertion message carries measured value and limit (criterion 3). Criterion 2 left open: distance_m and to_local_m are pure functions with no assertion, so they have pass cases only; the other six helpers have both pass and fail tests.
+- 2026-11-22 [claude-agent] Status in_progress -> review.
