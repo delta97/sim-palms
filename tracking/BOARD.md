@@ -7,7 +7,7 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 183 | 5 | 0 | 1 | 24 | 0 | 213 |
+| 182 | 5 | 0 | 1 | 25 | 0 | 213 |
 
 ## In progress / in review
 
@@ -17,8 +17,8 @@ Generated: 2026-11-22
 | [ASSET-001](tasks/ASSET-001.md) | in_progress | claude-agent | task/asset-001-write-reference-sheets-for-the-5-socal-p | Write reference sheets for the 5 SoCal palm species |
 | [ASSET-006](tasks/ASSET-006.md) | in_progress | claude-agent | task/asset-006-gltf-stats-and-automated-asset-checks-tr | glTF stats and automated asset checks (triangle budgets, heights, alpha mode, textures, naming) |
 | [GEN-004](tasks/GEN-004.md) | in_progress | claude-agent | task/gen-004-load-palms-buildings-and-region-config | Load palms, buildings and region config |
+| [GEN-006](tasks/GEN-006.md) | in_progress | claude-agent | task/gen-006-building-footprint-clipping | Building footprint clipping |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
-| [TEST-003](tasks/TEST-003.md) | in_progress | claude-agent | task/test-003-add-geometry-assertion-helpers-for-exclu | Add geometry assertion helpers for exclusion polygons |
 
 ## Blocked
 
@@ -32,7 +32,6 @@ _None._
 | [SPIKE-001](tasks/SPIKE-001.md) | 0 | windows-sim, human | msfs-sdk-specialist | Install the MSFS 2024 SDK and create an empty Dev Mode scenery project |
 | [TEST-006](tasks/TEST-006.md) | 0 | windows-sim | msfs-sdk-specialist | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
 | [RISK-003](tasks/RISK-003.md) | 1 | network, human | geo-data-engineer | Inventory other palm and tree mods and their coverage for mask_out defaults |
-| [GEN-006](tasks/GEN-006.md) | 2 | none | scenery-generator-engineer | Building footprint clipping |
 | [TEST-015](tasks/TEST-015.md) | 2 | none | test-engineer | Write the post-update regression routine, log and entry scaffolder |
 | [TEST-017](tasks/TEST-017.md) | 2 | none | test-engineer | Write the test runbook and CI wiring notes |
 | [TEST-102](tasks/TEST-102.md) | 2 | none | test-engineer | Visual test protocol tooling: run scaffolder, checklist template, test log |
@@ -101,7 +100,7 @@ _None._
 | [TEST-005](tasks/TEST-005.md) | done | none | TEST-001 | Add the test-site registry schema and loader |
 | [TEST-100](tasks/TEST-100.md) | todo | human, windows-sim | TEST-005, TEST-006, DEC-004 | Define test sites T1-T5 (bbox, purpose, region, saved flights, three viewpoints each) |
 
-## Phase 2 (9/29 done)
+## Phase 2 (10/29 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -111,7 +110,7 @@ _None._
 | [GEN-003](tasks/GEN-003.md) | done | none | GEN-001 | 0.01 degree tiling and tile naming |
 | [GEN-004](tasks/GEN-004.md) | in_progress | none | GEN-001, ARCH-002, ARCH-003, ARCH-007 | Load palms, buildings and region config |
 | [GEN-005](tasks/GEN-005.md) | done | none | GEN-001 | Exclusion circles, merging and simplification |
-| [GEN-006](tasks/GEN-006.md) | todo | none | GEN-005 | Building footprint clipping |
+| [GEN-006](tasks/GEN-006.md) | in_progress | none | GEN-005 | Building footprint clipping |
 | [GEN-007](tasks/GEN-007.md) | todo | none | GEN-004, GEN-005 | Mod and airport masks, Overpass airport fetch |
 | [GEN-008](tasks/GEN-008.md) | done | none | GEN-001 | Template engine and XML writer on fake templates |
 | [GEN-009](tasks/GEN-009.md) | todo | none | GEN-008, SPIKE-003 | Convert captured scene XML into real templates |
@@ -127,7 +126,7 @@ _None._
 | [RISK-002](tasks/RISK-002.md) | done | network |  | Audit model, texture and tool licenses for palm assets |
 | [RISK-004](tasks/RISK-004.md) | done | network |  | Collect airport boundaries and known airport add-ons for default masks |
 | [TEST-002](tasks/TEST-002.md) | done | none | TEST-001 | Add the golden-file comparison helper with an update flag |
-| [TEST-003](tasks/TEST-003.md) | in_progress | none | TEST-001 | Add geometry assertion helpers for exclusion polygons |
+| [TEST-003](tasks/TEST-003.md) | done | none | TEST-001 | Add geometry assertion helpers for exclusion polygons |
 | [TEST-007](tasks/TEST-007.md) | todo | windows-sim, human | TEST-100, TEST-102 | Capture a baseline no-fix visual run at T1-T5 |
 | [TEST-015](tasks/TEST-015.md) | todo | none | TEST-001 | Write the post-update regression routine, log and entry scaffolder |
 | [TEST-016](tasks/TEST-016.md) | todo | none | TEST-015, SPIKE-003, SPIKE-004 | Build the independent build-output checker and build-time history |

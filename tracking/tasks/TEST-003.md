@@ -1,7 +1,7 @@
 ---
 id: TEST-003
 title: Add geometry assertion helpers for exclusion polygons
-status: review
+status: done
 phase: 2
 area: TEST
 kind: build
@@ -64,3 +64,4 @@ python3 scripts/tasks.py validate
 - 2026-11-22 [claude-agent] Ticked: signatures match plan (criterion 1); every assertion message carries measured value and limit (criterion 3). Criterion 2 left open: distance_m and to_local_m are pure functions with no assertion, so they have pass cases only; the other six helpers have both pass and fail tests.
 - 2026-11-22 [claude-agent] Status in_progress -> review.
 - 2026-11-22 [integrator] integrator: accepted 'one pass and one fail case per helper' — applies to the assert_* helpers (all have both); distance_m and to_local_m are pure conversions with no failing branch
+- 2026-11-22 [integrator] Status review -> done.

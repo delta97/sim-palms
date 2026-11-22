@@ -5,6 +5,7 @@ Format: `- TASK-ID: what changed (PR link)`.
 
 ## Unreleased
 
+- TEST-003: Added geometry assertion helpers for exclusion polygons (`tests/helpers/geom.py`) (local merge).
 - GEN-008: Added the template engine and deterministic XML writer, tested on fake templates (real templates come from SPIKE-003) (local merge).
 - GEN-005: Added exclusion geometry (palm circles, cluster merge, simplification, ring normalisation); fixed the plan's 3 m row merge example (local merge).
 - GEN-014: Added build_report.json and build_report.md generation for palmgen (local merge).
