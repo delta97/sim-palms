@@ -1,0 +1,13 @@
+# SYNTHETIC FIXTURE: not a real run. Hardware and versions are placeholders; nothing here was measured.
+run_label: fixture
+date: 2026-11-22
+hardware: {cpu: synthetic, gpu: synthetic, ram: synthetic, driver: synthetic}
+graphics_profile: synthetic
+sim_version: VERIFY
+sdk_version: VERIFY
+route: synthetic
+aircraft: synthetic
+capture_tool: {name: PresentMon, version: VERIFY}
+packages: {region: synthetic}
+variants: [nofix, static, live]
+reps: 3

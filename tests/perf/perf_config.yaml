@@ -1,0 +1,30 @@
+# Perf harness settings (TEST-013). Plan: plans/detailed/06-testing.md#frametime-metrics,
+# #run-comparison and #perf-capture-format.
+#
+# Column names and the comment prefix are placeholders from the plan. VERIFY (V4, V5): confirm
+# them with a real PresentMon or CapFrameX capture in TEST-103 and update this file. Budget values
+# are the plan's starting values only; they are not DEC-005's decision.
+
+capture:
+  frametime_columns: [MsBetweenPresents, FrameTime, msBetweenPresents]   # VERIFY in TEST-103; first present column wins
+  time_column: null          # optional timestamp column; null means time = cumulative frametime
+  time_unit: s               # unit of time_column when set (s or ms). VERIFY in TEST-103
+  comment_prefix: "//"       # lines starting with this are skipped. VERIFY in TEST-103; null to disable
+  trim_start_s: 5            # seconds removed from the start of each capture
+  trim_end_s: 0              # seconds removed from the end of each capture
+
+stutter:
+  factor: 2.0                # a frame is a stutter when frametime > factor * baseline
+  baseline: global           # global (median of the trimmed capture) or rolling
+  rolling_window_s: 30       # centred window for baseline: rolling only
+
+outliers:
+  rel_dev: 0.10              # a run is dropped when |avg_frametime - median| / median > rel_dev
+  min_kept: 2                # fewer kept runs than this means unstable
+
+budget:
+  provisional: true          # set false when DEC-005 is decided; report says "budget provisional" until then
+  frametime_pct_max: 5.0     # max allowed increase of avg frametime vs nofix (percent)
+  stutter_abs_tol: 3         # stutter_count may exceed nofix by this much...
+  stutter_rel_tol: 0.10      # ...or by this fraction of nofix stutter_count, whichever is larger
+  low1_drop_pct_max: null    # max allowed drop of 1% low FPS vs nofix (percent); null = reported only
