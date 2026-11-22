@@ -640,7 +640,7 @@ def sample_species(priors: dict[str, float], key: str) -> str: ...
 def priors_yaml(priors: dict[str, float]) -> str: ...
 ```
 - `compute_priors`: shares of species-level keys among inventory palms (genus-level and `palm_unknown` excluded), rounded to 0.01, renormalized, sorted by share descending.
-- `merge_priors`: use the computed mix when it rests on at least `min_n` palms, else the configured `species_priors`.
+- `merge_priors`: use the computed mix when it rests on at least `min_n` palms, else the configured `species_priors`. The palm count is needed, so `compute_priors` returns a `SpeciesMix` (a dict subclass with `n_palms`); a plain mapping needs the keyword `n_palms=`. (SCAN-010 Log, 2026-11-22.)
 - `sample_species`: deterministic. `u = int(sha1(key).hexdigest()[:12], 16) / 16**12`; walk the cumulative distribution over keys sorted alphabetically; return the first key whose cumulative share > `u`. `washingtonia_filifera` weight is folded into `washingtonia_robusta` before sampling (source plan: default to robusta without inventory data; see Q2).
 - `priors_yaml`: the `species_priors:` block, ready to paste into a region YAML.
 - Phase 1 use: palms with species `None` get `sample_species(priors, stable_key)`, confidence 0.3, `species_source="prior"`.
