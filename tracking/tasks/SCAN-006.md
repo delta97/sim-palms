@@ -1,7 +1,7 @@
 ---
 id: SCAN-006
 title: "Building footprints adapter (OSM, Microsoft file)"
-status: todo
+status: in_progress
 phase: 1
 area: SCAN
 kind: build
@@ -11,9 +11,9 @@ requires: [none]
 agent: geo-data-engineer
 estimate_h: 3
 touches: [palmscan/sources/buildings.py, tests/unit/palmscan/test_scan_buildings.py, tests/fixtures/palmscan/buildings/]
-owner: ""
-branch: ""
-worktree: ""
+owner: claude-agent
+branch: task/scan-006-building-footprints-adapter-osm-microsof
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-006"
 updated: 2026-11-22
 ---
 
@@ -55,3 +55,4 @@ pytest tests/unit/palmscan/test_scan_buildings.py -q
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [integrator] integrator note from SCAN-005: reuse palmscan.sources overpass.query_bbox(template, bbox) (placeholders {south},{west},{north},{east} or {bbox})
+- 2026-11-22 [claude-agent] Claimed. branch=task/scan-006-building-footprints-adapter-osm-microsof worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-006
