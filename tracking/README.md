@@ -52,6 +52,7 @@ python3 scripts/tasks.py ready --requires none       # what a Linux/cloud agent 
 python3 scripts/tasks.py batch --requires none --max 4   # a parallel-safe set
 python3 scripts/tasks.py list --phase 0              # everything in a phase
 python3 scripts/tasks.py list --needs windows-sim,blender,gpu,human --status todo   # what is waiting on the user
+python3 scripts/tasks.py conflicts                   # same-path tasks with no dependency ordering
 python3 scripts/tasks.py board                       # regenerate BOARD.md (on main)
 ```
 

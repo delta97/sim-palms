@@ -15,6 +15,7 @@ Usage (run from anywhere inside the repo):
   python3 scripts/tasks.py log ID TEXT [--by WHO]
   python3 scripts/tasks.py new AREA --title TEXT [--phase N]   # allocates the next id from the template
   python3 scripts/tasks.py validate [--strict]
+  python3 scripts/tasks.py conflicts                            # same-path tasks with no dependency ordering
   python3 scripts/tasks.py board                                # rewrites tracking/BOARD.md
 """
 from __future__ import annotations
@@ -155,7 +156,7 @@ def load_all() -> dict[str, Task]:
 def is_ready(t: Task, tasks: dict[str, Task]) -> bool:
     if t.meta.get("status") != "todo":
         return False
-    return all(tasks.get(d) is not None and tasks[d].meta.get("status") == "done"
+    return all(tasks.get(d) is not None and tasks[d].meta.get("status") in ("done", "dropped")
                for d in t.get_list("depends_on"))
 
 
@@ -197,6 +198,39 @@ def find_cycles(tasks: dict[str, Task]) -> list:
         if color[k] == WHITE:
             visit(k)
     return cycles
+
+
+def ancestors(tasks: dict[str, Task]) -> dict[str, set]:
+    """Transitive dependency closure for every task."""
+    memo: dict[str, set] = {}
+
+    def anc(n, seen=()):
+        if n in memo:
+            return memo[n]
+        out = set()
+        for d in tasks[n].get_list("depends_on"):
+            if d in tasks and d not in seen:
+                out.add(d)
+                out |= anc(d, seen + (n,))
+        memo[n] = out
+        return out
+
+    for k in tasks:
+        anc(k)
+    return memo
+
+
+def unordered_conflicts(tasks: dict[str, Task]) -> list:
+    """Pairs of open tasks that touch the same path with no dependency path between them."""
+    anc = ancestors(tasks)
+    live = sorted([t for t in tasks.values() if t.meta.get("status") not in ("done", "dropped")], key=lambda t: t.id)
+    out = []
+    for i, a in enumerate(live):
+        for b in live[i + 1:]:
+            hits = paths_overlap(a.get_list("touches"), b.get_list("touches"))
+            if hits and a.id not in anc[b.id] and b.id not in anc[a.id]:
+                out.append((a.id, b.id, hits[0]))
+    return out
 
 
 def validate(tasks: dict[str, Task]) -> tuple[list, list]:
@@ -381,6 +415,7 @@ def main(argv=None):
     v = sub.add_parser("validate")
     v.add_argument("--strict", action="store_true", help="treat warnings as errors")
     sub.add_parser("board")
+    sub.add_parser("conflicts", help="open tasks touching the same path with no dependency ordering")
     a = ap.parse_args(argv)
 
     tasks = load_all()
@@ -468,6 +503,11 @@ def main(argv=None):
         print(f"{len(tasks)} tasks, {len(errors)} errors, {len(warnings)} warnings")
         if errors or (a.strict and warnings):
             sys.exit(1)
+    elif a.cmd == "conflicts":
+        found = unordered_conflicts(tasks)
+        for x, y, (p1, p2) in found:
+            print(f"{x:<10} {y:<10} {p1}" + (f"  ~ {p2}" if p2 != p1 else ""))
+        print(f"{len(found)} unordered conflicts")
     elif a.cmd == "board":
         write_board(tasks)
         print(f"wrote {BOARD.relative_to(ROOT)}")

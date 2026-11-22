@@ -86,7 +86,9 @@ python3 scripts/tasks.py batch --requires none --max 4
 ```
 `batch` returns ready tasks whose `touches` paths don't overlap with each other or with anything
 already `in_progress`. That overlap check is the main conflict-avoidance mechanism, so keep
-`touches` accurate when you create or edit tasks.
+`touches` accurate when you create or edit tasks. After adding or editing tasks, run
+`python3 scripts/tasks.py conflicts`: it lists open tasks that touch the same path with no
+dependency ordering between them. Fix each one with a real `depends_on` edge or narrower `touches`.
 
 **Starting one:**
 ```bash

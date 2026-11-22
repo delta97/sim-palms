@@ -9,3 +9,6 @@ Architecture decision records. File name: `ADR-NNNN-<slug>.md`, numbered in orde
 | ADR | Title | Status |
 |---|---|---|
 | [0001](ADR-0001-repository-and-tracking-structure.md) | File-based task tracking with worktrees for parallel work | proposed |
+| [0013](ADR-0013-linux-code-work-in-parallel-with-phase-0.md) | Allow Linux-container code work in parallel with Phase 0 | proposed |
+
+ADR-0002 to ADR-0012 are reserved for the DEC tasks (see `plans/detailed/07-risks-and-open-questions.md`). New ADRs start at 0014.

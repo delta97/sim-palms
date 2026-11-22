@@ -10,7 +10,7 @@ depends_on: []
 requires: [none]
 agent: task-planner
 estimate_h: 4
-touches: [plans/, tracking/, scripts/, AGENTS.md, CLAUDE.md, README.md, CHANGELOG.md, .claude/agents/, .claude/skills/, .github/workflows/tracking.yml, .gitignore, docs/findings/]
+touches: [plans/README.md, tracking/README.md, tracking/tasks/_TEMPLATE.md, tracking/logs/_TEMPLATE.md, tracking/decisions/_TEMPLATE.md, tracking/decisions/ADR-0001-repository-and-tracking-structure.md, scripts/tasks.py, scripts/wt.sh, AGENTS.md, CLAUDE.md, README.md, CHANGELOG.md, .claude/agents/, .claude/skills/, .github/workflows/tracking.yml, .gitignore, docs/findings/README.md]
 owner: bootstrap-session
 branch: claude/eloquent-brahmagupta-gv5mbg
 worktree: ""
