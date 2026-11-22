@@ -1,0 +1,42 @@
+# Default height_m and crown_diam_m per species, genus and overall (SCAN-002).
+# The five modelled SoCal species are midpoints of plans/03-palm-assets.md#1-species-list.
+# Every other row is a rough starting value to tune (SCAN-007 and later), not a measured fact.
+washingtonia_robusta:           {height_m: 22.0, crown_diam_m: 4.0}
+washingtonia_filifera:          {height_m: 15.0, crown_diam_m: 5.0}
+phoenix_canariensis:            {height_m: 15.0, crown_diam_m: 10.0}
+syagrus_romanzoffiana:          {height_m: 11.0, crown_diam_m: 6.0}
+archontophoenix_cunninghamiana: {height_m: 12.0, crown_diam_m: 5.0}
+phoenix_dactylifera:            {height_m: 15.0, crown_diam_m: 8.0}
+phoenix_roebelenii:             {height_m: 3.0,  crown_diam_m: 2.5}
+sabal_palmetto:                 {height_m: 12.0, crown_diam_m: 4.0}
+roystonea_regia:                {height_m: 18.0, crown_diam_m: 7.0}
+cocos_nucifera:                 {height_m: 15.0, crown_diam_m: 6.0}
+wodyetia_bifurcata:             {height_m: 8.0,  crown_diam_m: 4.0}
+adonidia_merrillii:             {height_m: 5.0,  crown_diam_m: 3.0}
+_genus:                         # fallback by genus
+  washingtonia:    {height_m: 18.0, crown_diam_m: 4.5}
+  phoenix:         {height_m: 10.0, crown_diam_m: 7.0}
+  syagrus:         {height_m: 11.0, crown_diam_m: 6.0}
+  archontophoenix: {height_m: 12.0, crown_diam_m: 5.0}
+  brahea:          {height_m: 9.0,  crown_diam_m: 4.0}
+  butia:           {height_m: 5.0,  crown_diam_m: 4.0}
+  livistona:       {height_m: 10.0, crown_diam_m: 5.0}
+  trachycarpus:    {height_m: 8.0,  crown_diam_m: 3.0}
+  chamaerops:      {height_m: 3.0,  crown_diam_m: 3.0}
+  dypsis:          {height_m: 6.0,  crown_diam_m: 4.0}
+  sabal:           {height_m: 10.0, crown_diam_m: 4.0}
+  roystonea:       {height_m: 18.0, crown_diam_m: 7.0}
+  cocos:           {height_m: 15.0, crown_diam_m: 6.0}
+  wodyetia:        {height_m: 8.0,  crown_diam_m: 4.0}
+  adonidia:        {height_m: 5.0,  crown_diam_m: 3.0}
+  rhapis:          {height_m: 3.0,  crown_diam_m: 2.0}
+  howea:           {height_m: 8.0,  crown_diam_m: 4.0}
+  caryota:         {height_m: 8.0,  crown_diam_m: 4.0}
+  jubaea:          {height_m: 15.0, crown_diam_m: 6.0}
+  chamaedorea:     {height_m: 2.5,  crown_diam_m: 1.5}
+  bismarckia:      {height_m: 10.0, crown_diam_m: 6.0}
+  ravenea:         {height_m: 10.0, crown_diam_m: 5.0}
+  rhopalostylis:   {height_m: 8.0,  crown_diam_m: 4.0}
+  serenoa:         {height_m: 2.0,  crown_diam_m: 2.5}
+  veitchia:        {height_m: 6.0,  crown_diam_m: 3.0}
+_default: {height_m: 12.0, crown_diam_m: 5.0}   # palm_unknown and anything else

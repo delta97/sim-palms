@@ -1,0 +1,221 @@
+alias,species_key,is_palm,notes
+adonidia merrilli,adonidia_merrillii,true,
+adonidia merrillii,adonidia_merrillii,true,
+alexander palm,archontophoenix_alexandrae,true,
+alexandra king palm,archontophoenix_alexandrae,true,
+alexandra palm,archontophoenix_alexandrae,true,
+archontophoenix alexandrae,archontophoenix_alexandrae,true,
+archontophoenix cunninghamia,archontophoenix_cunninghamiana,true,
+archontophoenix cunninghamiana,archontophoenix_cunninghamiana,true,
+archontophoenix cunninghamianum,archontophoenix_cunninghamiana,true,
+archontophoenix cunninghamii,archontophoenix_cunninghamiana,true,
+areca,dypsis_lutescens,true,
+areca palm,dypsis_lutescens,true,
+arecastrum romanzoffiana,syagrus_romanzoffiana,true,Cocos plumosa and Arecastrum are synonyms of the queen palm; not genus Cocos
+arecastrum romanzoffianum,syagrus_romanzoffiana,true,Cocos plumosa and Arecastrum are synonyms of the queen palm; not genus Cocos
+arecastrum romanzoffianus,syagrus_romanzoffiana,true,Cocos plumosa and Arecastrum are synonyms of the queen palm; not genus Cocos
+australian fan palm,livistona_australis,true,
+bangalow palm,archontophoenix_cunninghamiana,true,
+beaucarnea,,false,"Beaucarnea recurvata, not a palm"
+beaucarnea recurvata,,false,"Beaucarnea recurvata, not a palm"
+bismarck palm,bismarckia_nobilis,true,
+bismarckia nobilis,bismarckia_nobilis,true,
+blue fan palm,brahea_armata,true,
+blue hesper palm,brahea_armata,true,
+blue palm,brahea_armata,true,
+brahea armata,brahea_armata,true,
+brahea armatta,brahea_armata,true,
+brahea edulis,brahea_edulis,true,
+butia capitata,butia_capitata,true,VERIFY: pindo and jelly palm are sold as Butia capitata; some authorities treat the plant as Butia odorata
+butia odorata,butia_odorata,true,
+butterfly palm,dypsis_lutescens,true,
+cabbage palm,sabal_palmetto,true,ambiguous: NZ and AU usage of cabbage palm differs; mapped to Sabal palmetto for Florida data
+cabbage palmetto,sabal_palmetto,true,ambiguous: NZ and AU usage of cabbage palm differs; mapped to Sabal palmetto for Florida data
+cabbage tree,,false,"Cordyline, not a palm"
+california fan,washingtonia_filifera,true,
+california fan palm,washingtonia_filifera,true,
+canary date palm,phoenix_canariensis,true,
+canary island,phoenix_canariensis,true,
+canary island date,phoenix_canariensis,true,
+canary island date palm,phoenix_canariensis,true,
+canary island palm,phoenix_canariensis,true,
+canary islands date palm,phoenix_canariensis,true,
+canary palm,phoenix_canariensis,true,
+cardboard palm,,false,Zamia is a cycad
+caryota mitis,caryota_mitis,true,common name is used for several Caryota
+chamaedorea elegans,chamaedorea_elegans,true,
+chamaerops excelsa,trachycarpus_fortunei,true,chamaerops excelsa is an old synonym
+chamaerops humilis,chamaerops_humilis,true,
+chamaerops humulis,chamaerops_humilis,true,
+chilean palm,jubaea_chilensis,true,
+chilean wine palm,jubaea_chilensis,true,
+chinese fan,livistona_chinensis,true,
+chinese fan palm,livistona_chinensis,true,
+chinese fountain palm,livistona_chinensis,true,
+chinese windmill,trachycarpus_fortunei,true,chamaerops excelsa is an old synonym
+chinese windmill palm,trachycarpus_fortunei,true,chamaerops excelsa is an old synonym
+christmas palm,adonidia_merrillii,true,
+chrysalidocarpus lutescens,dypsis_lutescens,true,
+chusan palm,trachycarpus_fortunei,true,chamaerops excelsa is an old synonym
+coco palm,cocos_nucifera,true,
+coconut,cocos_nucifera,true,
+coconut palm,cocos_nucifera,true,
+cocos nucifera,cocos_nucifera,true,
+cocos plumosa,syagrus_romanzoffiana,true,Cocos plumosa and Arecastrum are synonyms of the queen palm; not genus Cocos
+cocos plumosum,syagrus_romanzoffiana,true,Cocos plumosa and Arecastrum are synonyms of the queen palm; not genus Cocos
+cocos romanzoffiana,syagrus_romanzoffiana,true,Cocos plumosa and Arecastrum are synonyms of the queen palm; not genus Cocos
+cocos romanzoffianum,syagrus_romanzoffiana,true,Cocos plumosa and Arecastrum are synonyms of the queen palm; not genus Cocos
+cordyline,,false,"Cordyline, not a palm"
+cordyline australis,,false,"Cordyline, not a palm"
+cordyline fruticosa,,false,"Cordyline, not a palm"
+cuban royal palm,roystonea_regia,true,
+cycas,,false,Cycas revoluta is a cycad
+cycas revoluta,,false,Cycas revoluta is a cycad
+date,phoenix_dactylifera,true,
+date palm,phoenix_dactylifera,true,
+desert fan palm,washingtonia_filifera,true,
+dracaena,,false,"Dracaena, not a palm"
+dracaena draco,,false,"Dracaena, not a palm"
+dracaena marginata,,false,"Dracaena, not a palm"
+dragon tree,,false,"Dracaena, not a palm"
+dwarf date palm,phoenix_roebelenii,true,
+dwarf palmetto,sabal_minor,true,
+dypsis decarii,dypsis_decaryi,true,
+dypsis decaryi,dypsis_decaryi,true,
+dypsis lutescence,dypsis_lutescens,true,
+dypsis lutescens,dypsis_lutescens,true,
+erythea armata,brahea_armata,true,
+erythea edulis,brahea_edulis,true,
+european fan palm,chamaerops_humilis,true,
+fan palm,palm_unknown,true,"real palms, species not implied; palmetto may be Sabal or Serenoa"
+feather palm,palm_unknown,true,"real palms, species not implied; palmetto may be Sabal or Serenoa"
+fishtail palm,caryota_mitis,true,common name is used for several Caryota
+florida royal palm,roystonea_regia,true,
+fountain palm,livistona_chinensis,true,
+foxtail,wodyetia_bifurcata,true,
+foxtail palm,wodyetia_bifurcata,true,
+golden cane palm,dypsis_lutescens,true,
+guadalupe fan palm,brahea_edulis,true,
+guadalupe palm,brahea_edulis,true,
+howea forsteriana,howea_forsteriana,true,
+jelly palm,butia_capitata,true,VERIFY: pindo and jelly palm are sold as Butia capitata; some authorities treat the plant as Butia odorata
+jubaea chilensis,jubaea_chilensis,true,
+jubaea spectabilis,jubaea_chilensis,true,
+kentia,howea_forsteriana,true,
+kentia palm,howea_forsteriana,true,
+king,archontophoenix_cunninghamiana,true,
+king palm,archontophoenix_cunninghamiana,true,
+king sago,,false,Cycas revoluta is a cycad
+king sago palm,,false,Cycas revoluta is a cycad
+lady palm,rhapis_excelsa,true,
+livistona australis,livistona_australis,true,
+livistona chinensis,livistona_chinensis,true,
+livistona chinesis,livistona_chinensis,true,
+majesty palm,ravenea_rivularis,true,
+manila palm,adonidia_merrillii,true,
+mediterranean fan,chamaerops_humilis,true,
+mediterranean fan palm,chamaerops_humilis,true,
+medjool,phoenix_dactylifera,true,
+medjool date palm,phoenix_dactylifera,true,
+mexican blue,brahea_armata,true,
+mexican blue fan palm,brahea_armata,true,
+mexican blue palm,brahea_armata,true,
+mexican fan,washingtonia_robusta,true,
+mexican fan palm,washingtonia_robusta,true,
+mexican palmetto,sabal_mexicana,true,
+mexican washington palm,washingtonia_robusta,true,
+miniature date palm,phoenix_roebelenii,true,
+neodypsis decaryi,dypsis_decaryi,true,
+nikau,rhopalostylis_sapida,true,
+nikau palm,rhopalostylis_sapida,true,
+palm lily,,false,"Yucca, not a palm"
+palmetto,palm_unknown,true,"real palms, species not implied; palmetto may be Sabal or Serenoa"
+palmetto palm,sabal_palmetto,true,ambiguous: NZ and AU usage of cabbage palm differs; mapped to Sabal palmetto for Florida data
+pandanus,,false,"Pandanus, not a palm"
+pandanus utilis,,false,"Pandanus, not a palm"
+parlor palm,chamaedorea_elegans,true,
+phoenix canarensis,phoenix_canariensis,true,
+phoenix canariense,phoenix_canariensis,true,
+phoenix canarienses,phoenix_canariensis,true,
+phoenix canariensis,phoenix_canariensis,true,
+phoenix dactilifera,phoenix_dactylifera,true,
+phoenix dactylifera,phoenix_dactylifera,true,
+phoenix reclinata,phoenix_reclinata,true,
+phoenix robelenii,phoenix_roebelenii,true,
+phoenix roebeleni,phoenix_roebelenii,true,
+phoenix roebelenii,phoenix_roebelenii,true,
+phoenix roebelini,phoenix_roebelenii,true,
+phoenix roebelinii,phoenix_roebelenii,true,
+phoenix sylvestris,phoenix_sylvestris,true,common names VERIFY: also used loosely for other Phoenix
+piccabeen palm,archontophoenix_cunninghamiana,true,
+pindo,butia_capitata,true,VERIFY: pindo and jelly palm are sold as Butia capitata; some authorities treat the plant as Butia odorata
+pindo palm,butia_capitata,true,VERIFY: pindo and jelly palm are sold as Butia capitata; some authorities treat the plant as Butia odorata
+ponytail,,false,"Beaucarnea recurvata, not a palm"
+ponytail palm,,false,"Beaucarnea recurvata, not a palm"
+pygmy date,phoenix_roebelenii,true,
+pygmy date palm,phoenix_roebelenii,true,
+queen,syagrus_romanzoffiana,true,Cocos plumosa and Arecastrum are synonyms of the queen palm; not genus Cocos
+queen palm,syagrus_romanzoffiana,true,Cocos plumosa and Arecastrum are synonyms of the queen palm; not genus Cocos
+queen sago,,false,Cycas revoluta is a cycad
+ravenala,,false,"Ravenala is a Strelitziaceae, not a true palm"
+ravenala madagascariensis,,false,"Ravenala is a Strelitziaceae, not a true palm"
+ravenea rivularis,ravenea_rivularis,true,
+rhapis excelsa,rhapis_excelsa,true,
+rhopalostylis sapida,rhopalostylis_sapida,true,
+royal,roystonea_regia,true,
+royal palm,roystonea_regia,true,
+roystonea elata,roystonea_regia,true,VERIFY: Florida royal palm; treated as a synonym of R. regia
+roystonea regia,roystonea_regia,true,
+sabal mexicana,sabal_mexicana,true,
+sabal minor,sabal_minor,true,
+sabal palmeto,sabal_palmetto,true,ambiguous: NZ and AU usage of cabbage palm differs; mapped to Sabal palmetto for Florida data
+sabal palmetto,sabal_palmetto,true,ambiguous: NZ and AU usage of cabbage palm differs; mapped to Sabal palmetto for Florida data
+sago,,false,Cycas revoluta is a cycad
+sago palm,,false,Cycas revoluta is a cycad
+saw palmetto,serenoa_repens,true,
+screw pine,,false,"Pandanus, not a palm"
+seaforthia elegans,archontophoenix_cunninghamiana,true,synonym; VERIFY
+senegal date,phoenix_reclinata,true,
+senegal date palm,phoenix_reclinata,true,
+sentry palm,howea_forsteriana,true,
+serenoa repens,serenoa_repens,true,
+silver date palm,phoenix_sylvestris,true,common names VERIFY: also used loosely for other Phoenix
+spanish dagger,,false,"Yucca, not a palm"
+sugar date palm,phoenix_sylvestris,true,common names VERIFY: also used loosely for other Phoenix
+syagrus romanzoffiana,syagrus_romanzoffiana,true,Cocos plumosa and Arecastrum are synonyms of the queen palm; not genus Cocos
+syagrus romanzoffianna,syagrus_romanzoffiana,true,Cocos plumosa and Arecastrum are synonyms of the queen palm; not genus Cocos
+syagrus romanzoffianum,syagrus_romanzoffiana,true,Cocos plumosa and Arecastrum are synonyms of the queen palm; not genus Cocos
+syagrus romanzofiana,syagrus_romanzoffiana,true,Cocos plumosa and Arecastrum are synonyms of the queen palm; not genus Cocos
+texas palmetto,sabal_mexicana,true,
+ti plant,,false,"Cordyline, not a palm"
+trachycarpus fortunei,trachycarpus_fortunei,true,chamaerops excelsa is an old synonym
+trachycarpus fortuneii,trachycarpus_fortunei,true,chamaerops excelsa is an old synonym
+trachycarpus fortuni,trachycarpus_fortunei,true,chamaerops excelsa is an old synonym
+trachycarpus fortunii,trachycarpus_fortunei,true,chamaerops excelsa is an old synonym
+travelers palm,,false,"Ravenala is a Strelitziaceae, not a true palm"
+triangle,dypsis_decaryi,true,
+triangle palm,dypsis_decaryi,true,
+true date palm,phoenix_dactylifera,true,
+veitchia merrilli,adonidia_merrillii,true,
+veitchia merrillii,adonidia_merrillii,true,
+washington fan palm,washingtonia_robusta,true,
+washington palm,washingtonia_robusta,true,
+washingtonia filefera,washingtonia_filifera,true,
+washingtonia filibusta,washingtonia_filibusta,true,hybrid W. filifera x robusta; the x marker is dropped by clean_name
+washingtonia filifera,washingtonia_filifera,true,
+washingtonia filifera robusta,washingtonia_filibusta,true,hybrid W. filifera x robusta; the x marker is dropped by clean_name
+washingtonia filifra,washingtonia_filifera,true,
+washingtonia robusta,washingtonia_robusta,true,
+washingtonia robusta filifera,washingtonia_filibusta,true,hybrid W. filifera x robusta; the x marker is dropped by clean_name
+washingtonia robustra,washingtonia_robusta,true,
+washingtonia robustus,washingtonia_robusta,true,
+windmill,trachycarpus_fortunei,true,chamaerops excelsa is an old synonym
+windmill palm,trachycarpus_fortunei,true,chamaerops excelsa is an old synonym
+wodyetia bifurcata,wodyetia_bifurcata,true,
+yellow butterfly palm,dypsis_lutescens,true,
+yucca,,false,"Yucca, not a palm"
+yucca aloifolia,,false,"Yucca, not a palm"
+yucca elephantipes,,false,"Yucca, not a palm"
+yucca gloriosa,,false,"Yucca, not a palm"
+zamia,,false,Zamia is a cycad
+zamia furfuracea,,false,Zamia is a cycad
