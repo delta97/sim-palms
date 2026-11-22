@@ -1,7 +1,7 @@
 ---
 id: SCAN-023
 title: "Peak detection and watershed crown segmentation"
-status: todo
+status: in_progress
 phase: 4
 area: SCAN
 kind: build
@@ -11,10 +11,10 @@ requires: [none]
 agent: lidar-analyst
 estimate_h: 3
 touches: [palmscan/detect/peaks.py, tests/unit/palmscan/test_scan_peaks.py]
-owner: ""
-branch: ""
-worktree: ""
-updated: 2026-11-21
+owner: claude-agent
+branch: task/scan-023-peak-detection-and-watershed-crown-segme
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-023"
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -51,3 +51,4 @@ pytest tests/unit/palmscan/test_scan_peaks.py -q
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [claude-agent] Claimed. branch=task/scan-023-peak-detection-and-watershed-crown-segme worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-023
