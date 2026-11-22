@@ -7,7 +7,7 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 176 | 5 | 0 | 1 | 31 | 0 | 213 |
+| 176 | 4 | 0 | 1 | 32 | 0 | 213 |
 
 ## In progress / in review
 
@@ -17,7 +17,6 @@ Generated: 2026-11-22
 | [ASSET-002](tasks/ASSET-002.md) | in_progress | claude-agent | task/asset-002-collect-build-vs-license-inputs-for-dec | Collect build-vs-license inputs for DEC-002 (palm models) |
 | [GEN-007](tasks/GEN-007.md) | in_progress | claude-agent | task/gen-007-mod-and-airport-masks-overpass-airport-f | Mod and airport masks, Overpass airport fetch |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
-| [SCAN-001](tasks/SCAN-001.md) | in_progress | claude-agent | task/scan-001-create-palmscan-package-core-config-cach | Create palmscan package core: config, cache, HTTP, models, CLI skeleton |
 | [TEST-017](tasks/TEST-017.md) | in_progress | claude-agent | task/test-017-write-the-test-runbook-and-ci-wiring-not | Write the test runbook and CI wiring notes |
 
 ## Blocked
@@ -32,12 +31,19 @@ _None._
 | [SPIKE-001](tasks/SPIKE-001.md) | 0 | windows-sim, human | msfs-sdk-specialist | Install the MSFS 2024 SDK and create an empty Dev Mode scenery project |
 | [TEST-006](tasks/TEST-006.md) | 0 | windows-sim | msfs-sdk-specialist | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
 | [RISK-003](tasks/RISK-003.md) | 1 | network, human | geo-data-engineer | Inventory other palm and tree mods and their coverage for mask_out defaults |
+| [SCAN-002](tasks/SCAN-002.md) | 1 | none | geo-data-engineer | Species normalization table, normalizer and palm filter |
+| [SCAN-003](tasks/SCAN-003.md) | 1 | none | geo-data-engineer | Source adapter base and geojson_file adapter |
+| [SCAN-010](tasks/SCAN-010.md) | 1 | none | geo-data-engineer | Species priors and deterministic prior sampling |
+| [SCAN-011](tasks/SCAN-011.md) | 1 | none | python-architect | palms.geojson writer, palm IDs and schema validation |
+| [SCAN-012](tasks/SCAN-012.md) | 1 | none | geo-data-engineer | QA outputs: qa_summary.md, qa_map.gpkg, qa_rejects.csv |
 | [TEST-102](tasks/TEST-102.md) | 2 | none | test-engineer | Visual test protocol tooling: run scaffolder, checklist template, test log |
 | [DEC-008](tasks/DEC-008.md) | 3 | human | task-planner | Decide: storage for large asset binaries (Git LFS or external) |
+| [SCAN-022](tasks/SCAN-022.md) | 4 | none | lidar-analyst | Canopy height model (DTM, DSM, CHM) |
 | [TEST-009](tasks/TEST-009.md) | 4 | none | test-engineer | Define the ground-truth format and write the labeling guide and tooling |
 | [DEC-005](tasks/DEC-005.md) | 5 | human | test-engineer | Decide: performance budget and reference hardware/settings |
 | [TEST-013](tasks/TEST-013.md) | 5 | none | test-engineer | Build the frametime capture parser and run comparison report |
 | [FX-001](tasks/FX-001.md) | 7 | windows-sim, human | render-fx-researcher | Verify ReShade depth access in MSFS 2024 (incl. multiplayer/online lockout) |
+| [FX-002](tasks/FX-002.md) | 7 | none | python-architect | Scaffold palmfx.offline package, session I/O and CLI |
 
 ## Phase 0 (2/17 done)
 
@@ -61,7 +67,7 @@ _None._
 | [SPIKE-011](tasks/SPIKE-011.md) | todo | human | SPIKE-010, RISK-005 | Write the Phase 0 go/no-go proposal and get the user's decision |
 | [TEST-006](tasks/TEST-006.md) | todo | windows-sim |  | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
 
-## Phase 1 (13/31 done)
+## Phase 1 (14/31 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -78,7 +84,7 @@ _None._
 | [GATE-P1](tasks/GATE-P1.md) | todo | human | GATE-P0, ARCH-008, DEC-009, TEST-004, TEST-100, SCAN-100 | Phase 1 exit gate: palms.geojson for the test neighbourhood from inventory data |
 | [RISK-001](tasks/RISK-001.md) | done | network |  | Audit data source licenses and terms (inventories, OSM, footprints, LiDAR) |
 | [RISK-003](tasks/RISK-003.md) | todo | network, human |  | Inventory other palm and tree mods and their coverage for mask_out defaults |
-| [SCAN-001](tasks/SCAN-001.md) | in_progress | none | ARCH-001, ARCH-003, ARCH-004, ARCH-009 | Create palmscan package core: config, cache, HTTP, models, CLI skeleton |
+| [SCAN-001](tasks/SCAN-001.md) | done | none | ARCH-001, ARCH-003, ARCH-004, ARCH-009 | Create palmscan package core: config, cache, HTTP, models, CLI skeleton |
 | [SCAN-002](tasks/SCAN-002.md) | todo | none | SCAN-001 | Species normalization table, normalizer and palm filter |
 | [SCAN-003](tasks/SCAN-003.md) | todo | none | SCAN-001 | Source adapter base and geojson_file adapter |
 | [SCAN-004](tasks/SCAN-004.md) | todo | none | SCAN-003 | ArcGIS REST inventory adapter with paging and cache |

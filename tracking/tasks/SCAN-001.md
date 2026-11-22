@@ -1,7 +1,7 @@
 ---
 id: SCAN-001
 title: "Create palmscan package core: config, cache, HTTP, models, CLI skeleton"
-status: review
+status: done
 phase: 1
 area: SCAN
 kind: build
@@ -68,3 +68,4 @@ python -c "from palmscan.config import scan_config_from_mapping as f; c=f({'regi
 - 2026-11-22 [claude-agent] Implemented palmscan core (config, cache, http, geo, model, cli, subpackages) in 5bf7591. pyproject.toml untouched: ARCH-001/009 already declare geopandas, shapely, pyproj, pyogrio, numpy, scipy, requests, pyyaml, lidar and pdal extras, palmscan script. Verification: pytest 698 passed 1 skipped (56 palmscan); ruff check/format clean; mypy clean (41 files); import check OK; palmscan --help lists run/priors/eval; sdc 8.0 printed; offline Cache raises CacheMiss; HTTP tests monkeypatch requests.Session.request (no sockets). Acceptance ticked.
 - 2026-11-22 [claude-agent] Spec notes: (1) added tests/unit/palmscan/test_scan_cli.py to touches. (2) scan_config_from_mapping defaults config_version to 1 because palmcore.load_region_dict requires it and the Verification one-liner passes only region and bbox. (3) Plan sketch defines CacheMiss(Exception) in palmscan/cache.py; it is re-exported from palmcore.errors (subclass of SourceError, exit 5) per the reconcile note. (4) Cache.get_or_fetch reads the fetched file back into memory to hand to palmcore.write_cache; fine for JSON, revisit in the LiDAR task if tiles are large. (5) HttpClient retries HTTP 500 too, per plan.
 - 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] Status review -> done.
