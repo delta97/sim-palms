@@ -7,8 +7,8 @@
   "required": ["type", "schema_version", "region", "features"],
   "properties": {
     "type": {"const": "FeatureCollection"},
-    "schema_version": {"type": "string", "pattern": "^1\\.(0|[1-9][0-9]*)$"},
-    "region": {"type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"},
+    "schema_version": {"type": "string", "pattern": "^1\\.(0|[1-9][0-9]*)$(?!\\n)"},
+    "region": {"type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$(?!\\n)"},
     "features": {
       "type": "array",
       "items": {"$ref": "#/$defs/feature"}

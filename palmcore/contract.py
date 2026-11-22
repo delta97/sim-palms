@@ -10,6 +10,7 @@ from __future__ import annotations
 import copy
 import functools
 import json
+import math
 import re
 from collections.abc import Callable, Iterable, Mapping
 from dataclasses import dataclass, field
@@ -18,14 +19,14 @@ from typing import Any, Final, Literal, cast
 
 from jsonschema import Draft202012Validator
 
-from palmcore.errors import ContractError
+from palmcore.errors import ContractError, PalmfixError
 from palmcore.schemas import load_schema, make_validator, schema_dir
 
 PALMS_SCHEMA_VERSION: Final = "1.0"
 SUPPORTED: Final = (1, 0)  # (major, newest minor this code knows)
 BUILDINGS_SCHEMA_FILE: Final = "buildings.geojson.schema.json"
 
-_VERSION_RE: Final = re.compile(r"^\d+\.\d+$")
+_VERSION_RE: Final = re.compile(r"[0-9]+\.[0-9]+")
 _RADIUS_TOLERANCE: Final = 1e-6
 _RELAXED_ENUM_FIELDS: Final = ("species_source", "height_source", "detected_by")
 
@@ -107,7 +108,7 @@ class ValidationReport:
 
 
 def parse_version(text: str) -> tuple[int, int]:
-    if not isinstance(text, str) or not _VERSION_RE.match(text):
+    if not isinstance(text, str) or not _VERSION_RE.fullmatch(text):
         raise ValueError(f"malformed schema version: {text!r} (expected MAJOR.MINOR)")
     major, minor = text.split(".")
     return int(major), int(minor)
@@ -173,7 +174,12 @@ def _palms_validators(relaxed: bool) -> _Compiled:
 @functools.cache
 def _buildings_validators() -> _Compiled:
     path = schema_dir() / BUILDINGS_SCHEMA_FILE
-    schema = cast("dict[str, Any]", json.loads(path.read_text(encoding="utf-8")))
+    try:
+        schema = cast("dict[str, Any]", json.loads(path.read_text(encoding="utf-8")))
+    except OSError as exc:
+        raise PalmfixError(f"schema file not found or unreadable: {path}: {exc}") from exc
+    except ValueError as exc:
+        raise PalmfixError(f"schema file is not valid JSON: {path}: {exc}") from exc
     return _Compiled(make_validator(schema), _feature_validator(schema))
 
 
@@ -221,6 +227,20 @@ def _palm_id_of(feature: Any) -> str | None:
     return None
 
 
+def _non_finite(value: Any, path: str) -> list[tuple[str, str]]:
+    """Paths of NaN or infinite numbers; json.load accepts them and range checks let NaN pass."""
+    if isinstance(value, float):
+        return [] if math.isfinite(value) else [(path, f"non-finite number {value} is not allowed")]
+    found: list[tuple[str, str]] = []
+    if isinstance(value, Mapping):
+        for key, item in value.items():
+            found += _non_finite(item, f"{path}.{key}")
+    elif isinstance(value, list):
+        for i, item in enumerate(value):
+            found += _non_finite(item, f"{path}[{i}]")
+    return found
+
+
 def _check_envelope(
     validator: Draft202012Validator, doc: Mapping[str, Any], out: _Collector
 ) -> None:
@@ -229,6 +249,8 @@ def _check_envelope(
     errors = sorted(validator.iter_errors(envelope), key=lambda e: _path_text("", e.absolute_path))
     for err in errors:
         out.error(_path_text("", err.absolute_path).lstrip("."), err.message)
+    for path, message in _non_finite({k: v for k, v in envelope.items() if k != "features"}, ""):
+        out.error(path.lstrip("."), message)
 
 
 def _check_features(
@@ -240,17 +262,18 @@ def _check_features(
     """Schema-check each feature; return the indexes that passed."""
     clean: set[int] = set()
     for index, feature in enumerate(features):
-        errors = sorted(
-            validator.iter_errors(feature),
-            key=lambda e: (_path_text("", e.absolute_path), e.message),
+        prefix = f"features[{index}]"
+        found = sorted(
+            (_path_text(prefix, err.absolute_path), err.message)
+            for err in validator.iter_errors(feature)
         )
-        if not errors:
+        found += _non_finite(feature, prefix)
+        if not found:
             clean.add(index)
             continue
         palm_id = id_of(feature)
-        prefix = f"features[{index}]"
-        for err in errors:
-            if not out.error(_path_text(prefix, err.absolute_path), err.message, index, palm_id):
+        for path, message in found:
+            if not out.error(path, message, index, palm_id):
                 return clean  # capped; stop early
     return clean
 

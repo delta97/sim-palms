@@ -1,5 +1,6 @@
 import copy
 import json
+import re
 import time
 from pathlib import Path
 from typing import Any
@@ -15,7 +16,7 @@ from palmcore.contract import (
     validate_palms,
     validate_palms_file,
 )
-from palmcore.errors import ContractError
+from palmcore.errors import ContractError, PalmfixError
 from palmcore.schemas import load_schema
 
 FIXTURES = Path(__file__).resolve().parents[2] / "fixtures" / "palmcore"
@@ -332,3 +333,89 @@ def test_ten_thousand_features_under_budget() -> None:
     assert report.ok
     assert report.feature_count == 10_000
     assert elapsed < 15
+
+
+# --- review hardening --------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    "bad", ["garbageZ", "2026-11-21T12:00:00Z\n", "2026-11-21 12:00:00Z", "xZ"]
+)
+def test_generated_at_is_anchored(bad: str) -> None:
+    doc = minimal()
+    doc["generated_at"] = bad
+    report = validate_palms(doc)
+    assert [e.path for e in report.errors] == ["generated_at"]
+
+
+def test_generated_at_accepts_fractional_seconds() -> None:
+    doc = minimal()
+    doc["generated_at"] = "2026-11-21T12:00:00.123Z"
+    assert validate_palms(doc).ok
+
+
+@pytest.mark.parametrize("bad", ["1.0\n", "1.0 ", " 1.0"])
+def test_version_text_rejects_trailing_newline_and_space(bad: str) -> None:
+    with pytest.raises(ValueError):
+        parse_version(bad)
+    doc = minimal()
+    doc["schema_version"] = bad
+    with pytest.raises(ContractError):
+        validate_palms(doc)
+
+
+def test_schema_patterns_reject_trailing_newline() -> None:
+    doc = minimal()
+    doc["region"] = "san-diego\n"
+    doc["data_version"] = "2026-11\n"
+    doc["features"][0]["properties"]["palm_id"] = "sdc-0000000000000001\n"
+    paths = {e.path for e in validate_palms(doc).errors}
+    assert {"region", "data_version", "features[0].properties.palm_id"} <= paths
+    # the schema pattern itself, with a version that only differs by the newline
+    schema_version = load_schema("palms")["properties"]["schema_version"]["pattern"]
+    assert re.search(schema_version, "1.0") is not None
+    assert re.search(schema_version, "1.0\n") is None
+
+
+def test_buildings_schema_version_rejects_trailing_newline() -> None:
+    doc = load(BUILDINGS / "valid_small.geojson")
+    doc["schema_version"] = "1.0\n"
+    with pytest.raises(ContractError):
+        validate_buildings(doc)
+    doc["schema_version"] = "1.0"
+    doc["region"] = "san-diego\n"
+    assert [e.path for e in validate_buildings(doc).errors] == ["region"]
+
+
+def test_buildings_schema_file_problems_raise_palmfix_error(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    doc = load(BUILDINGS / "valid_small.geojson")
+    monkeypatch.setenv("PALMFIX_SCHEMA_DIR", str(tmp_path))
+    contract._buildings_validators.cache_clear()
+    try:
+        with pytest.raises(PalmfixError, match="not found"):
+            validate_buildings(doc)
+        (tmp_path / "buildings.geojson.schema.json").write_text("{broken", encoding="utf-8")
+        with pytest.raises(PalmfixError, match="not valid JSON"):
+            validate_buildings(doc)
+    finally:
+        contract._buildings_validators.cache_clear()
+
+
+def test_non_finite_numbers_are_rejected() -> None:
+    text = (PALMS / "valid_minimal.geojson").read_text(encoding="utf-8")
+    nan_doc = json.loads(text.replace("32.7157", "NaN"))
+    report = validate_palms(nan_doc)
+    assert any(
+        e.path == "features[0].geometry.coordinates[1]" and "non-finite" in e.message
+        for e in report.errors
+    )
+    inf_doc = json.loads(text.replace('"height_m": 12.5', '"height_m": Infinity'))
+    assert not validate_palms(inf_doc).ok
+    bbox_doc = minimal()
+    bbox_doc["bbox"] = [-118.0, 32.0, float("inf"), 33.0]
+    assert [e.path for e in validate_palms(bbox_doc).errors] == ["bbox[2]"]
+    bld = load(BUILDINGS / "valid_small.geojson")
+    bld["features"][0]["geometry"]["coordinates"][0][0][0] = float("nan")
+    assert not validate_buildings(bld).ok
