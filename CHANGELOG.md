@@ -5,6 +5,7 @@ Format: `- TASK-ID: what changed (PR link)`.
 
 ## Unreleased
 
+- ARCH-003: Added the region YAML config schema and loader (`palmcore/config.py`) (local merge).
 - SPIKE-009: Added the SimConnect spawn-and-disconnect spike console app (`spikes/simconnect-persist/`) for SPIKE-005 on the sim PC (local merge).
 - GEN-001: Scaffolded the palmgen package, CLI surface, error types and data model (local merge).
 - RISK-002: Audited palm model, texture and tool licenses (`docs/licenses/models-and-tools.md`), with 10 open questions (local merge).

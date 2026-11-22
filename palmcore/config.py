@@ -10,7 +10,6 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
-import logging
 import os
 import re
 import urllib.parse
@@ -26,9 +25,10 @@ from jsonschema import ValidationError
 
 from palmcore.errors import ConfigError
 from palmcore.geo import Bbox, local_crs_for
+from palmcore.log import get_logger
 from palmcore.schemas import load_schema, make_validator
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 SUPPORTED_CONFIG_VERSIONS: Final = frozenset({1})
 

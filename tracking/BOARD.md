@@ -7,14 +7,13 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 198 | 3 | 0 | 1 | 11 | 0 | 213 |
+| 198 | 2 | 0 | 1 | 12 | 0 | 213 |
 
 ## In progress / in review
 
 | Task | Status | Owner | Branch | Title |
 |---|---|---|---|---|
 | [ARCH-002](tasks/ARCH-002.md) | in_progress | claude-agent | task/arch-002-define-the-palms-geojson-json-schema-and | Define the palms.geojson JSON Schema and a shared validator |
-| [ARCH-003](tasks/ARCH-003.md) | in_progress | claude-agent | task/arch-003-define-the-region-yaml-config-schema-and | Define the region YAML config schema and loader |
 | [ASSET-005](tasks/ASSET-005.md) | in_progress | claude-agent | task/asset-005-asset-manifest-schema-species-spec-forma | Asset manifest schema, species spec format, loader and generator (palmcore.assets) |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
 
@@ -29,6 +28,7 @@ _None._
 | [DEC-004](tasks/DEC-004.md) | 0 | human, network | task-planner | Decide: first test block (a San Diego or LA street the user knows well) |
 | [SPIKE-001](tasks/SPIKE-001.md) | 0 | windows-sim, human | msfs-sdk-specialist | Install the MSFS 2024 SDK and create an empty Dev Mode scenery project |
 | [TEST-006](tasks/TEST-006.md) | 0 | windows-sim | msfs-sdk-specialist | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
+| [ARCH-008](tasks/ARCH-008.md) | 1 | network | geo-data-engineer | Write the two example region configs and verify their sources |
 | [RISK-003](tasks/RISK-003.md) | 1 | network, human | geo-data-engineer | Inventory other palm and tree mods and their coverage for mask_out defaults |
 | [TEST-005](tasks/TEST-005.md) | 1 | none | test-engineer | Add the test-site registry schema and loader |
 | [GEN-002](tasks/GEN-002.md) | 2 | none | scenery-generator-engineer | Deterministic GUIDs and per-palm hashes |
@@ -68,13 +68,13 @@ _None._
 | [SPIKE-011](tasks/SPIKE-011.md) | todo | human | SPIKE-010, RISK-005 | Write the Phase 0 go/no-go proposal and get the user's decision |
 | [TEST-006](tasks/TEST-006.md) | todo | windows-sim |  | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
 
-## Phase 1 (6/31 done)
+## Phase 1 (7/31 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
 | [ARCH-001](tasks/ARCH-001.md) | done | none |  | Scaffold the Python monorepo (pyproject, package layout, lint/test tooling, CI) |
 | [ARCH-002](tasks/ARCH-002.md) | in_progress | none | ARCH-001 | Define the palms.geojson JSON Schema and a shared validator |
-| [ARCH-003](tasks/ARCH-003.md) | in_progress | none | ARCH-001, ARCH-005 | Define the region YAML config schema and loader |
+| [ARCH-003](tasks/ARCH-003.md) | done | none | ARCH-001, ARCH-005 | Define the region YAML config schema and loader |
 | [ARCH-004](tasks/ARCH-004.md) | done | none | ARCH-001 | Add palmcore logging, path resolution and download-cache helpers |
 | [ARCH-005](tasks/ARCH-005.md) | done | none | ARCH-001 | Add palmcore geo helpers (Bbox, distances, UTM, transforms) |
 | [ARCH-006](tasks/ARCH-006.md) | done | none | ARCH-001 | Add deterministic UUIDv5 ids and seeded randomness to palmcore |

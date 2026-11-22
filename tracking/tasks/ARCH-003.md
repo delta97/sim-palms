@@ -1,7 +1,7 @@
 ---
 id: ARCH-003
 title: "Define the region YAML config schema and loader"
-status: review
+status: done
 phase: 1
 area: ARCH
 kind: build
@@ -88,3 +88,5 @@ ruff check palmcore tests && mypy
 - 2026-11-22 [claude-agent] Verification: pytest 113 passed (41 in test_config.py); ruff check 'All checks passed!'; ruff format 13 files already formatted; mypy 'Success: no issues found in 8 source files'; verify one-liner printed 'minimal min 1.5 EPSG:32611'.
 - 2026-11-22 [claude-agent] Spec resolutions (plan WS7 edited): (1) slug vs path: only .yaml/.yml suffix means path, so '../x' is an invalid slug and raises before file access (spec's 'contains a separator is a path' contradicted the ../ test); (2) id_prefix initials give 1 letter for single-word slugs like 'minimal', which fails ^[a-z]{2,6}$, so fall back to first 3 letters ('min'); (3) mask bbox warning fires only when it does not intersect the region bbox; (4) YAML timestamp resolver disabled so vintage 2020-05-01 stays text; (5) schema oneOf/anyOf/not errors use the subschema description for readable messages. Note for integrator: ARCH-004 palmcore.log not on this branch; config.py uses stdlib logging.getLogger(__name__).
 - 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] Status review -> done.
+- 2026-11-22 [integrator] integrator: on merge, config.py logger now uses palmcore.log.get_logger so it sits under the palmfix root
