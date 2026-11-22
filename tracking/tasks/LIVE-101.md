@@ -51,3 +51,5 @@ Manual on the Windows PC per the steps. Check: `python3 -c "import csv;r=list(cs
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [reconcile] Added depends_on TEST-014 (soak report tooling) and DEC-007 (live must be chosen in ADR-0008); ASSET-101 kept. Cross-area reconciliation.
+- 2026-11-22 [claude-agent] Soak checker and SOAK.md: TEST-014 (tests/perf/soak.py, tests/perf/SOAK.md). Telemetry format requested per plans/detailed/06-testing.md#soak-telemetry-format; palmlive logger does not exist yet, so the format is the plan's and any LIVE mapping goes in read_palmlive_log. Open for LIVE: audit method V10, telemetry switch, counts.csv vs JSONL. depends_on TEST-014 already set.
+- 2026-11-22 [claude-agent] TEST-014 requests telemetry: plans/detailed/06-testing.md#soak-telemetry-format (JSONL: tick, shutdown_complete, audit).

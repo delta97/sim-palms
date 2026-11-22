@@ -1,0 +1,6 @@
+{"t": "2027-03-01T14:00:00.000Z", "event": "synthetic_notice", "text": "SYNTHETIC FIXTURE: hand-written example of the plan's telemetry format. Not a palmlive run; values are placeholders."}
+{"t": "2027-03-01T14:00:01.000Z", "event": "tick", "live": 812, "cap": 2000, "spawned_total": 950, "removed_total": 138, "pending_create": 3, "agl_m": 210.5, "radius_m": 2300.0, "proc_private_mb": 182.4}
+{"t": "2027-03-01T14:00:02.000Z", "event": "tick", "live": 813, "cap": 2000, "spawned_total": 951, "removed_total": 138, "pending_create": 2, "agl_m": 210.4, "radius_m": 2300.0, "proc_private_mb": 182.5}
+{"t": "2027-03-01T14:00:03.000Z", "event": "shutdown_begin"}
+{"t": "2027-03-01T14:00:03.500Z", "event": "shutdown_complete", "live": 0}
+{"t": "2027-03-01T14:00:04.000Z", "event": "audit", "palm_objects_found": 0}

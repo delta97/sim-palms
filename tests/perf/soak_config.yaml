@@ -1,0 +1,12 @@
+# Soak report settings (TEST-014). Plan: plans/detailed/06-testing.md#soak-test and
+# #soak-telemetry-format.
+#
+# All limits are the plan's starting values and are PROVISIONAL: nothing here was measured on the
+# live spawner. LIVE-101 (the 1-hour sim run) records the final values in its log. The per-tick cap
+# (S1) is not in this file; it comes from each telemetry record.
+
+provisional: true
+leak_window_min: 30          # S4: window at the end of the run for the least-squares memory slope
+leak_mb_per_min_max: 1.0     # S4: max allowed slope of proc_private_mb over that window (MB/min)
+max_tick_gap_s: 5            # S5: longest allowed gap between consecutive tick events (s)
+min_duration_min: 60         # S6: minimum tick span of the run (min)
