@@ -1,7 +1,7 @@
 ---
 id: ARCH-005
 title: "Add palmcore geo helpers (Bbox, distances, UTM, transforms)"
-status: todo
+status: in_progress
 phase: 1
 area: ARCH
 kind: build
@@ -11,10 +11,10 @@ requires: [none]
 agent: geo-data-engineer
 estimate_h: 3
 touches: [palmcore/geo.py, tests/unit/palmcore/test_geo.py]
-owner: ""
-branch: ""
-worktree: ""
-updated: 2026-11-21
+owner: claude-agent
+branch: task/arch-005-add-palmcore-geo-helpers-bbox-distances
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/ARCH-005"
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -62,3 +62,4 @@ ruff check palmcore tests && mypy
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [claude-agent] Claimed. branch=task/arch-005-add-palmcore-geo-helpers-bbox-distances worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/ARCH-005
