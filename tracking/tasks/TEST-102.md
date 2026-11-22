@@ -1,7 +1,7 @@
 ---
 id: TEST-102
 title: "Visual test protocol tooling: run scaffolder, checklist template, test log"
-status: todo
+status: in_progress
 phase: 2
 area: TEST
 kind: build
@@ -11,9 +11,9 @@ requires: [none]
 agent: test-engineer
 estimate_h: 4
 touches: [tests/visual/__init__.py, tests/visual/new_run.py, tests/visual/check_run.py, tests/visual/PROTOCOL.md, tests/visual/checklist_template.md, tests/visual/test_log.md, tests/visual/graphics_profile.yaml, tests/visual/.gitignore, tests/unit/visual/test_new_run.py, tests/unit/visual/test_check_run.py]
-owner: ""
-branch: ""
-worktree: ""
+owner: claude-agent
+branch: task/test-102-visual-test-protocol-tooling-run-scaffol
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/TEST-102"
 updated: 2026-11-22
 ---
 
@@ -65,3 +65,4 @@ python3 scripts/tasks.py validate
 - 2026-11-21 [bootstrap] Anchor stub created.
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [reconcile] Screenshot storage (JPEG q90 in plain git vs Git LFS) is now decided in DEC-008 (ADR-0009); this task implements the plan default and follows ADR-0009 if it differs. Viewpoints are street (~2 m), oblique (~150 m), approach (~600 m). Cross-area reconciliation.
+- 2026-11-22 [claude-agent] Claimed. branch=task/test-102-visual-test-protocol-tooling-run-scaffol worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/TEST-102
