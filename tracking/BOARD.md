@@ -7,14 +7,13 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 143 | 2 | 1 | 1 | 67 | 0 | 214 |
+| 143 | 1 | 1 | 1 | 68 | 0 | 214 |
 
 ## In progress / in review
 
 | Task | Status | Owner | Branch | Title |
 |---|---|---|---|---|
 | [FX-004](tasks/FX-004.md) | in_progress | claude-agent | task/fx-004-synthetic-test-scene-generator-and-pytes | Synthetic test scene generator and pytest fixtures |
-| [FX-008](tasks/FX-008.md) | in_progress | claude-agent | task/fx-008-ingest-pose-interpolation-and-sample-fix | Ingest, pose interpolation and sample-fixture builder |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
 
 ## Blocked
@@ -259,7 +258,7 @@ Generated: 2026-11-22
 | [TEST-008](tasks/TEST-008.md) | done | none | TEST-102 | Add optional image-diff scoring for visual viewpoints |
 | [TEST-018](tasks/TEST-018.md) | todo | windows-sim | TEST-008, TEST-104 | Calibrate the image-diff noise floor at T1 |
 
-## Phase 7 (4/28 done)
+## Phase 7 (5/28 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -270,7 +269,7 @@ Generated: 2026-11-22
 | [FX-005](tasks/FX-005.md) | done | none | FX-002 | ReShade depth-pack effect and depth decoder |
 | [FX-006](tasks/FX-006.md) | todo | windows-sim | FX-002 | SimConnect pose logger, screenshot trigger and camera SimVar check |
 | [FX-007](tasks/FX-007.md) | todo | windows-sim, human | FX-001, FX-005, FX-006, DEC-004, SCAN-100 | Capture procedure and first capture sessions at the test block |
-| [FX-008](tasks/FX-008.md) | in_progress | none | FX-003, FX-005 | Ingest, pose interpolation and sample-fixture builder |
+| [FX-008](tasks/FX-008.md) | done | none | FX-003, FX-005 | Ingest, pose interpolation and sample-fixture builder |
 | [FX-009](tasks/FX-009.md) | todo | none | FX-004, FX-008 | Calibration: clicks tool, vfov, time offset, pose bias, depth model |
 | [FX-010](tasks/FX-010.md) | todo | none | FX-004, ARCH-002 | Mask by projection from palms.geojson |
 | [FX-011](tasks/FX-011.md) | todo | none | FX-004 | Mask by depth and colour heuristics |

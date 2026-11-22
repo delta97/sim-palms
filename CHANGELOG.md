@@ -5,6 +5,7 @@ Format: `- TASK-ID: what changed (PR link)`.
 
 ## Unreleased
 
+- FX-008: Added capture-session ingest, circular-heading pose interpolation and the sample-fixture builder (`palmfx ingest`, `palmfx fixture`); capture formats are VERIFY (local merge).
 - FX-014 (partial, task blocked): Added the inpainting runner with the Telea baseline and tiling (tested) and the LaMa backend (untested: needs torch and the weights; checksum pending in `models.lock.json`) (local merge).
 - FX-012: Added mask comparison metrics (pixel IoU, instance precision/recall) and the `palmfx mask-compare` command (local merge).
 - FX-003: Added the camera model (WGS84 to ENU geodesy, attitude, pinhole projection and back-projection); sim conventions are VERIFY (local merge).
