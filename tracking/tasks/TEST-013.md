@@ -1,7 +1,7 @@
 ---
 id: TEST-013
 title: Build the frametime capture parser and run comparison report
-status: review
+status: done
 phase: 5
 area: TEST
 kind: build
@@ -82,3 +82,4 @@ python3 scripts/tasks.py validate
 - 2026-11-22 [claude-agent] Spec discrepancy resolved: plan prose names stutter_factor, outlier_rel_dev and stutter_baseline; perf_config.yaml keeps the task's nested layout (stutter.factor, outliers.rel_dev, stutter.baseline). Mapping is one-to-one; no value changed. Column names, comment prefix and time unit are VERIFY (V4, V5) for TEST-103.
 - 2026-11-22 [claude-agent] Outlier rule: a run is dropped when |avg_frametime - median| / median > rel_dev; more than one drop or fewer than min_kept kept gives exit 3 (unstable), which takes precedence over a budget failure (exit 1). Report says provisional while budget.provisional is true.
 - 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] Status review -> done.

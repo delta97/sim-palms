@@ -7,7 +7,7 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 150 | 2 | 0 | 1 | 60 | 0 | 213 |
+| 150 | 1 | 0 | 1 | 61 | 0 | 213 |
 
 ## In progress / in review
 
@@ -15,7 +15,6 @@ Generated: 2026-11-22
 |---|---|---|---|---|
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
 | [SCAN-028](tasks/SCAN-028.md) | in_progress | claude-agent | task/scan-028-wire-lidar-stages-into-palmscan-run-qa-a | Wire LiDAR stages into palmscan run, QA and eval |
-| [TEST-013](tasks/TEST-013.md) | in_progress | claude-agent | task/test-013-build-the-frametime-capture-parser-and-r | Build the frametime capture parser and run comparison report |
 
 ## Blocked
 
@@ -32,6 +31,7 @@ _None._
 | [DEC-002](tasks/DEC-002.md) | 3 | human | task-planner | Decide: build or license the palm models |
 | [DEC-008](tasks/DEC-008.md) | 3 | human | task-planner | Decide: storage for large asset binaries (Git LFS or external) |
 | [DEC-005](tasks/DEC-005.md) | 5 | human | test-engineer | Decide: performance budget and reference hardware/settings |
+| [TEST-014](tasks/TEST-014.md) | 5 | none | test-engineer | Build soak-test report tooling for the live spawner |
 | [FX-001](tasks/FX-001.md) | 7 | windows-sim, human | render-fx-researcher | Verify ReShade depth access in MSFS 2024 (incl. multiplayer/online lockout) |
 | [FX-002](tasks/FX-002.md) | 7 | none | python-architect | Scaffold palmfx.offline package, session I/O and CLI |
 
@@ -193,7 +193,7 @@ _None._
 | [TEST-012](tasks/TEST-012.md) | todo | network | TEST-010, TEST-101, TEST-011, SCAN-101 | Evaluate Phase 4 palmscan output against ground truth at T1, T2 and T4 |
 | [TEST-101](tasks/TEST-101.md) | todo | human | TEST-009, TEST-100 | Hand-label ground-truth palms at T1 and T2 (about 200 palms) |
 
-## Phase 5 (0/26 done)
+## Phase 5 (1/26 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -220,7 +220,7 @@ _None._
 | [LIVE-100](tasks/LIVE-100.md) | todo | windows-sim, human | LIVE-005, GEN-100 | Deliverable: palmlive region manager (list, activate, deactivate via folder links) |
 | [LIVE-101](tasks/LIVE-101.md) | todo | windows-sim, human | LIVE-011, LIVE-100, ASSET-101, TEST-014, DEC-007 | Deliverable: palmlive live spawner (only if the Phase 5 bake-off picks live placement) |
 | [RISK-008](tasks/RISK-008.md) | todo | none | RISK-007, GATE-P5 | Risk review after Phase 5 (before scale-out and any publishing) |
-| [TEST-013](tasks/TEST-013.md) | in_progress | none | TEST-001 | Build the frametime capture parser and run comparison report |
+| [TEST-013](tasks/TEST-013.md) | done | none | TEST-001 | Build the frametime capture parser and run comparison report |
 | [TEST-014](tasks/TEST-014.md) | todo | none | TEST-013 | Build soak-test report tooling for the live spawner |
 | [TEST-103](tasks/TEST-103.md) | todo | windows-sim, gpu | TEST-013, TEST-100, DEC-005 | Performance flight harness: fixed route, capture procedure, dry-run capture |
 
