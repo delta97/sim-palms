@@ -204,8 +204,12 @@ def resolve_data_version(collection_meta: dict, override: str | None) -> str
 # palmgen/variants.py
 Variant(species: str, variant: str, model_guid: str, native_height_m: float, simobject_title: str | None)
 Selection(variant: Variant, scale: float, scale_clamped: bool, species_fallback: bool, height_missing: bool)
-def load_manifest(path: Path) -> list[Variant]     # wraps palmcore.assets.manifest.load_manifest (ASSET-005); never parses JSON itself
-def select_variant(p: Palm, variants: list[Variant], priors: dict[str, float], clamp: float) -> Selection
+VariantLibrary(variants: Mapping[str, tuple[Variant, ...]], scale_min: float, scale_max: float, species_fallback: Mapping[str, str], package_version: str | None)
+SelectionResult(placements: list[tuple[Palm, Selection]], warnings: list[BuildWarning], scale_clamped: int, species_fallback: int, height_missing: int)  # .counts() -> the three report counters
+def load_manifest(path: Path) -> VariantLibrary    # wraps palmcore.assets.manifest.load_manifest (ASSET-005); never parses JSON itself
+def select_variant(p: Palm, library: VariantLibrary, priors: Mapping[str, float], clamp: float | None = None) -> Selection
+def select_all(palms, library, priors, clamp=None) -> SelectionResult   # selections + SPECIES_FALLBACK / HEIGHT_MISSING / SCALE_CLAMPED warnings + counts
+def placeholder_selection(placeholder_model: Mapping | None) -> Selection   # scale 1.0
 def heading_deg(palm_id: str) -> float
 
 # palmgen/pipeline.py
@@ -241,7 +245,7 @@ ARCH-003 owns the schema and is the only place the defaults below are defined (p
 |---|---|---|
 | `region` | required | package name `palmfix-<region>` |
 | `bbox` | required | projection centre; palms outside are dropped |
-| `species_priors` | `{}` | species fallback order |
+| `species_priors` | `{}` | ranks fallback species when the manifest has no `species_fallback` entry for the palm's species; ignored when empty |
 | `exclusion.margin_m` | 1.5 | radius when recomputed from crown |
 | `exclusion.polygon_sides` | 12 | circle sides |
 | `exclusion.merge_gap_m` | 2.0 | merge distance |
@@ -256,7 +260,7 @@ ARCH-003 owns the schema and is the only place the defaults below are defined (p
 | `masks.airports.enabled` *new* | true | default airport mask |
 | `masks.airports.buffer_m` *new* | 100 | buffer around aerodrome polygons |
 | `masks.airports.path` *new* | `docs/compat/airports-mask.geojson` | default airport polygons, produced by RISK-004; may point at a `palmgen masks airports` output |
-| `placement.scale_clamp` *new* | none (optional override) | replaces the manifest `scale_limits` when set (ASSET-005); `GenConfig.scale_clamp` is `None` when unset. ARCH-003 still carries a 0.15 default in `RegionConfig` and the schema; GEN-004 reads the raw value so an unset key stays `None` |
+| `placement.scale_clamp` *new* | none (optional override) | replaces the manifest `scale_limits` when set (ASSET-005); `GenConfig.scale_clamp` is `None` when unset. `RegionConfig` and the schema have no default (ARCH-003); `GenConfig.scale_clamp` is `float \| None` |
 
 ### Asset manifest fields palmgen reads
 
@@ -616,14 +620,14 @@ GEN-010. Converts `captured/project.xml` and `captured/package_definition.xml` i
 GEN-011.
 
 - `--models placeholder`: every placement uses `templates.yaml` `placeholder_model`, scale 1.0.
-- `--models library`: variants from `load_manifest`, which wraps ASSET's `palmcore.assets.manifest.load_manifest` (GEN-011 depends on ASSET-005).
-  1. Species with no variant: use the species with the highest `species_priors` value that has variants (ties alphabetical); warning `SPECIES_FALLBACK`. No priors match → first species alphabetically.
-  2. Height missing: target = median `native_height_m` of the species' variants; warning `HEIGHT_MISSING`.
-  3. Pick the variant minimising `abs(ln(h / native_height_m))`; ties → lower native height. Several variants with the same native height (alternate crowns): pick index `floor(unit_hash(palm_id, "alt") * k)` among them sorted by `variant`.
-  4. `scale = h / native_height_m` clamped to `[1 - clamp, 1 + clamp]` (clamp 0.15); warning `SCALE_CLAMPED`.
+- `--models library`: variants, `scale_limits` and `species_fallback` from `load_manifest`, which wraps ASSET's `palmcore.assets.manifest.load_manifest` (GEN-011 depends on ASSET-005) and returns a `VariantLibrary`. It raises `InputError` naming the entry for a schema failure, a duplicate `(species, variant)`, a null or `<= 0` `native_height_m`, or an empty manifest.
+  1. Species with no variant: the manifest owns the default fallback (ASSET-005, plan 03 "Scale limits and species fallback"). Order: the species itself if it has variants; else `species_fallback[species]`; else, only when `species_priors` is non-empty, the species with the highest `species_priors` value that has variants (ties alphabetical); else `species_fallback["_default"]`. Warning `SPECIES_FALLBACK` for the last three. Nothing usable → `InputError` naming the palm.
+  2. Height missing: target = median `native_height_m` of the (resolved) species' variants; warning `HEIGHT_MISSING`.
+  3. Pick the variant minimising `abs(ln(h / native_height_m))` (compared to 9 decimals); ties → lower native height. Several variants with the same native height (alternate crowns): pick index `floor(unit_hash(palm_id, "alt") * k)` among them sorted by `variant`.
+  4. `scale = h / native_height_m` clamped to the manifest `scale_limits` (`min`..`max`, 0.85..1.15 today). When the region sets `placement.scale_clamp` (optional, no default) it replaces them with `[1 - clamp, 1 + clamp]` for that region. Warning `SCALE_CLAMPED`; the number of clamped palms is `SelectionResult.scale_clamped`, which GEN-014 reports as `counts.scale_clamped` (likewise `species_fallback`, `height_missing`).
 - `heading_deg = round(unit_hash(palm_id, "heading") * 360, 1) % 360`.
 - `--placement exclusions-only` skips placements entirely (live spawning); variant selection still runs for `palmgen index`.
-- Fixture: `tests/fixtures/palmgen/manifest_small.json` (3 species, 2-3 variants each, one pair of same-height alternates, titles set).
+- Fixture: `tests/fixtures/palmgen/manifest_small.json` (3 species, 2-3 variants each, one pair of same-height alternates, titles set), generated with `palmcore.assets.manifest.build_manifest`; its `species_fallback` has `_default` and one explicit entry so every fallback step is testable.
 
 #### GEN generate pipeline
 
@@ -1015,7 +1019,7 @@ flowchart TD
 - Bake-off: LIVE-009 writes `docs/findings/LIVE-009.md`; DEC-007 depends on LIVE-009 and writes ADR-0008; LIVE-010 depends on DEC-007; LIVE-101 depends on ASSET-101, TEST-014 and DEC-007.
 - Cycle removed: DEC-003 depended on DEC-007, which now depends on LIVE-009 → LIVE-008 → LIVE-001 → DEC-003. DEC-003 now depends on SPIKE-005 and is decided before LIVE-001; DEC-007 may reopen the language choice later.
 - New task LIVE-012 (optional): build a region from the app.
-- Open: `assets/library.yaml` `scale_limits` (0.85/1.15) and `species_fallback` duplicate `placement.scale_clamp` (0.15) and GEN's priors-based species fallback. Both say ±15% today; GEN and ASSET owners should pick one source before GEN-019.
+- Resolved (GEN-011, 2026-11-22): the manifest owns `scale_limits` and `species_fallback`; `placement.scale_clamp` is an optional per-region override and `species_priors` only ranks fallbacks when non-empty. See [GEN variant selection](#gen-variant-selection) and plan 03 "Scale limits and species fallback".
 
 ## Recap
 
