@@ -1,0 +1,44 @@
+# Thresholds for `python -m palmcore.assets check` (ASSET-006).
+# Rules and levels: plans/detailed/03-palm-assets.md, "W3 Asset tooling in Python".
+# Budget numbers: "W6 LODs and budgets". Texture limits: "W7 Materials and textures".
+# These are starting values; change them here, never in code.
+
+# Axis that points up in the exported glTF (glTF convention is y).
+up_axis: y
+
+# Triangles per LOD. Over max is an ERROR, under min is a WARN.
+lod_triangles:
+  0: {min: 3000, max: 6000}
+  1: {min: 800, max: 1500}
+  2: {min: 150, max: 300}
+  3: {min: 0, max: 50}
+# Florida set (species `set: florida`): LOD0 max. The LOD0 min is capped at this value.
+florida_lod0_max: 3000
+
+# Primitives (draw calls) per LOD file. Over the limit is a WARN. `lod3` overrides at LOD3.
+max_primitives: {default: 3, lod3: 1}
+
+# Relative height tolerances (fractions of the reference height). ERROR when exceeded.
+height_tolerance:
+  lod0_vs_spec: 0.02     # LOD0 top vs the species spec native_height_m
+  lod_vs_lod0: 0.03      # every LOD top vs LOD0 top (no size pop)
+
+# Allowed range for the bounding-box bottom along the up axis, in metres (trunk sinks a little).
+base_z_range: [-0.25, 0.0]
+
+# Horizontal extent vs spec crown_diam_m, as a fraction. WARN when exceeded.
+crown_tolerance: 0.20
+
+# Maximum texture size [width, height] by map role. The role is `<part>_<map>` from
+# tx_<species>_<part>_<map>.png; a key with only the map (`orm`) covers every part.
+textures:
+  fronds_albedo: [2048, 2048]
+  fronds_normal: [1024, 1024]
+  bark_albedo: [1024, 2048]
+  bark_normal: [1024, 2048]
+  orm: [1024, 1024]
+  skirt_albedo: [1024, 1024]
+  crownshaft_albedo: [1024, 1024]
+  cards_albedo: [1024, 1024]
+# Florida set: all texture max sizes are multiplied by this.
+florida_texture_factor: 0.5
