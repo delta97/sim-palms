@@ -1,5 +1,7 @@
 # Data cache and generated output (see plans/01-architecture.md)
 data/
+# palmscan/data holds the committed species and marker tables, not downloaded data
+!palmscan/data/
 build/
 
 # Python

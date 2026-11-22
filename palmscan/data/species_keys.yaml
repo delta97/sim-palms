@@ -1,0 +1,70 @@
+# Canonical species-key registry (SCAN-002). One list for palmscan normalization, the
+# ARCH-002 species pattern and palmcore.assets manifest validation (ASSET-005, by path).
+# Add a species here first, then to species_aliases.csv. Keep `keys` sorted by key.
+# level: species = real species; genus = `<genus>_sp` (genus known, species not);
+#        generic = `palm_unknown`. set: socal | florida | other (see palm_genera.yaml).
+version: 1
+keys:
+  - {key: adonidia_merrillii, genus: adonidia, set: florida, level: species}
+  - {key: adonidia_sp, genus: adonidia, set: florida, level: genus}
+  - {key: archontophoenix_alexandrae, genus: archontophoenix, set: socal, level: species}
+  - {key: archontophoenix_cunninghamiana, genus: archontophoenix, set: socal, level: species}
+  - {key: archontophoenix_sp, genus: archontophoenix, set: socal, level: genus}
+  - {key: bismarckia_nobilis, genus: bismarckia, set: other, level: species}
+  - {key: bismarckia_sp, genus: bismarckia, set: other, level: genus}
+  - {key: brahea_armata, genus: brahea, set: socal, level: species}
+  - {key: brahea_edulis, genus: brahea, set: socal, level: species}
+  - {key: brahea_sp, genus: brahea, set: socal, level: genus}
+  - {key: butia_capitata, genus: butia, set: socal, level: species}
+  - {key: butia_odorata, genus: butia, set: socal, level: species}
+  - {key: butia_sp, genus: butia, set: socal, level: genus}
+  - {key: caryota_mitis, genus: caryota, set: other, level: species}
+  - {key: caryota_sp, genus: caryota, set: other, level: genus}
+  - {key: chamaedorea_elegans, genus: chamaedorea, set: other, level: species}
+  - {key: chamaedorea_sp, genus: chamaedorea, set: other, level: genus}
+  - {key: chamaerops_humilis, genus: chamaerops, set: socal, level: species}
+  - {key: chamaerops_sp, genus: chamaerops, set: socal, level: genus}
+  - {key: cocos_nucifera, genus: cocos, set: florida, level: species}
+  - {key: cocos_sp, genus: cocos, set: florida, level: genus}
+  - {key: dypsis_decaryi, genus: dypsis, set: socal, level: species}
+  - {key: dypsis_lutescens, genus: dypsis, set: socal, level: species}
+  - {key: dypsis_sp, genus: dypsis, set: socal, level: genus}
+  - {key: howea_forsteriana, genus: howea, set: other, level: species}
+  - {key: howea_sp, genus: howea, set: other, level: genus}
+  - {key: jubaea_chilensis, genus: jubaea, set: other, level: species}
+  - {key: jubaea_sp, genus: jubaea, set: other, level: genus}
+  - {key: livistona_australis, genus: livistona, set: socal, level: species}
+  - {key: livistona_chinensis, genus: livistona, set: socal, level: species}
+  - {key: livistona_sp, genus: livistona, set: socal, level: genus}
+  - {key: palm_unknown, genus: null, set: other, level: generic}
+  - {key: phoenix_canariensis, genus: phoenix, set: socal, level: species}
+  - {key: phoenix_dactylifera, genus: phoenix, set: socal, level: species}
+  - {key: phoenix_reclinata, genus: phoenix, set: socal, level: species}
+  - {key: phoenix_roebelenii, genus: phoenix, set: socal, level: species}
+  - {key: phoenix_sp, genus: phoenix, set: socal, level: genus}
+  - {key: phoenix_sylvestris, genus: phoenix, set: socal, level: species}
+  - {key: ravenea_rivularis, genus: ravenea, set: other, level: species}
+  - {key: ravenea_sp, genus: ravenea, set: other, level: genus}
+  - {key: rhapis_excelsa, genus: rhapis, set: other, level: species}
+  - {key: rhapis_sp, genus: rhapis, set: other, level: genus}
+  - {key: rhopalostylis_sapida, genus: rhopalostylis, set: other, level: species}
+  - {key: rhopalostylis_sp, genus: rhopalostylis, set: other, level: genus}
+  - {key: roystonea_regia, genus: roystonea, set: florida, level: species}
+  - {key: roystonea_sp, genus: roystonea, set: florida, level: genus}
+  - {key: sabal_mexicana, genus: sabal, set: florida, level: species}
+  - {key: sabal_minor, genus: sabal, set: florida, level: species}
+  - {key: sabal_palmetto, genus: sabal, set: florida, level: species}
+  - {key: sabal_sp, genus: sabal, set: florida, level: genus}
+  - {key: serenoa_repens, genus: serenoa, set: other, level: species}
+  - {key: serenoa_sp, genus: serenoa, set: other, level: genus}
+  - {key: syagrus_romanzoffiana, genus: syagrus, set: socal, level: species}
+  - {key: syagrus_sp, genus: syagrus, set: socal, level: genus}
+  - {key: trachycarpus_fortunei, genus: trachycarpus, set: socal, level: species}
+  - {key: trachycarpus_sp, genus: trachycarpus, set: socal, level: genus}
+  - {key: veitchia_sp, genus: veitchia, set: other, level: genus}
+  - {key: washingtonia_filibusta, genus: washingtonia, set: socal, level: species}
+  - {key: washingtonia_filifera, genus: washingtonia, set: socal, level: species}
+  - {key: washingtonia_robusta, genus: washingtonia, set: socal, level: species}
+  - {key: washingtonia_sp, genus: washingtonia, set: socal, level: genus}
+  - {key: wodyetia_bifurcata, genus: wodyetia, set: florida, level: species}
+  - {key: wodyetia_sp, genus: wodyetia, set: florida, level: genus}

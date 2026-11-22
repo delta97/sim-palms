@@ -1,0 +1,8 @@
+# Inventory rows that are not standing trees (SCAN-002). Matched against the cleaned species string
+# (exact or prefix) and the cleaned status string (substring). First matching reason wins.
+# "dead" is deliberately not a marker: a dead palm can still stand (counted in QA instead).
+reasons:
+  stump:   [stump, stump removal, grind stump, stump grinding, stumps]
+  vacant:  [vacant, vacant site, vacant planting site, planting site, empty site, empty tree well,
+            tree well, no tree]
+  removed: [removed, tree removed, tree removal, proposed removal completed]

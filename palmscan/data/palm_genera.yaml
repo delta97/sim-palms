@@ -1,0 +1,47 @@
+# Palm genus sets and name tables used by palmscan.species_names (SCAN-002).
+# All genera below are members of the palm family (Arecaceae).
+# Sets: socal = Phase 1-3 region genera; florida = DEC-006/DEC-011 later set;
+# other = real palm genera seen in city inventories, outside the modelled sets
+# (kept so they count as palms, and are rejected as genus_not_in_set unless "other" is configured).
+genus_sets:
+  socal: [washingtonia, phoenix, syagrus, archontophoenix, brahea, butia, livistona,
+          trachycarpus, chamaerops, dypsis]
+  florida: [sabal, roystonea, cocos, wodyetia, adonidia]
+  other: [rhapis, howea, caryota, jubaea, chamaedorea, bismarckia, ravenea, rhopalostylis, serenoa, veitchia]
+
+# Used for genus-only names ("Phoenix spp."). Genera without an entry become <genus>_sp.
+# The monotypic genera (chamaerops, cocos, wodyetia, adonidia) map to their only species. VERIFY: taxonomy.
+genus_default_species:
+  washingtonia: washingtonia_robusta
+  phoenix: phoenix_canariensis
+  syagrus: syagrus_romanzoffiana
+  archontophoenix: archontophoenix_cunninghamiana
+  chamaerops: chamaerops_humilis
+  cocos: cocos_nucifera
+  wodyetia: wodyetia_bifurcata
+  adonidia: adonidia_merrillii
+
+# Old genus names and typical misspellings -> accepted genus (must be a genus above).
+genus_aliases:
+  arecastrum: syagrus          # Arecastrum romanzoffianum is the queen palm
+  chrysalidocarpus: dypsis     # old name of the areca palm genus
+  neodypsis: dypsis
+  erythea: brahea              # old name (Erythea armata, E. edulis)
+  washingtona: washingtonia
+  washintonia: washingtonia
+  washingtonea: washingtonia
+  pheonix: phoenix
+  phoneix: phoenix
+  livistonia: livistona
+  trachycarpas: trachycarpus
+  trachycarpis: trachycarpus
+  chamerops: chamaerops
+  chamaeropes: chamaerops
+  archontophenix: archontophoenix
+  archotophoenix: archontophoenix
+  roystonia: roystonea
+  cocus: cocos
+  wodietia: wodyetia
+
+generic_palm_names: [palm, palms, palm tree, palm trees, palm spp, palm species, unknown palm, palm sp,
+                     palm unknown, unidentified palm, palm unidentified, other palm, palm other, palm unk]
