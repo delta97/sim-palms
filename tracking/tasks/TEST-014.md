@@ -1,7 +1,7 @@
 ---
 id: TEST-014
 title: Build soak-test report tooling for the live spawner
-status: todo
+status: in_progress
 phase: 5
 area: TEST
 kind: build
@@ -11,10 +11,10 @@ requires: [none]
 agent: test-engineer
 estimate_h: 3
 touches: [tests/perf/soak.py, tests/perf/soak_config.yaml, tests/perf/SOAK.md, tests/unit/perf/test_soak.py, tests/fixtures/perf/soak/]
-owner: ""
-branch: ""
-worktree: ""
-updated: 2026-11-21
+owner: claude-agent
+branch: task/test-014-build-soak-test-report-tooling-for-the-l
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/TEST-014"
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -54,3 +54,4 @@ python3 scripts/tasks.py validate
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [claude-agent] Claimed. branch=task/test-014-build-soak-test-report-tooling-for-the-l worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/TEST-014
