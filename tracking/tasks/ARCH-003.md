@@ -90,3 +90,4 @@ ruff check palmcore tests && mypy
 - 2026-11-22 [claude-agent] Status in_progress -> review.
 - 2026-11-22 [integrator] Status review -> done.
 - 2026-11-22 [integrator] integrator: on merge, config.py logger now uses palmcore.log.get_logger so it sits under the palmfix root
+- 2026-11-22 [integrator] integrator follow-up: placement.scale_clamp now optional with no default (schema, PlacementConfig, plan WS7/WS8) per ASSET-005
