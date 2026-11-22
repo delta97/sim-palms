@@ -7,17 +7,18 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 178 | 4 | 0 | 1 | 30 | 0 | 213 |
+| 176 | 5 | 0 | 1 | 31 | 0 | 213 |
 
 ## In progress / in review
 
 | Task | Status | Owner | Branch | Title |
 |---|---|---|---|---|
 | [ASSET-001](tasks/ASSET-001.md) | in_progress | claude-agent | task/asset-001-write-reference-sheets-for-the-5-socal-p | Write reference sheets for the 5 SoCal palm species |
+| [ASSET-002](tasks/ASSET-002.md) | in_progress | claude-agent | task/asset-002-collect-build-vs-license-inputs-for-dec | Collect build-vs-license inputs for DEC-002 (palm models) |
 | [GEN-007](tasks/GEN-007.md) | in_progress | claude-agent | task/gen-007-mod-and-airport-masks-overpass-airport-f | Mod and airport masks, Overpass airport fetch |
-| [GEN-011](tasks/GEN-011.md) | in_progress | claude-agent | task/gen-011-variant-selection-scaling-and-heading | Variant selection, scaling and heading |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
 | [SCAN-001](tasks/SCAN-001.md) | in_progress | claude-agent | task/scan-001-create-palmscan-package-core-config-cach | Create palmscan package core: config, cache, HTTP, models, CLI skeleton |
+| [TEST-017](tasks/TEST-017.md) | in_progress | claude-agent | task/test-017-write-the-test-runbook-and-ci-wiring-not | Write the test runbook and CI wiring notes |
 
 ## Blocked
 
@@ -31,9 +32,7 @@ _None._
 | [SPIKE-001](tasks/SPIKE-001.md) | 0 | windows-sim, human | msfs-sdk-specialist | Install the MSFS 2024 SDK and create an empty Dev Mode scenery project |
 | [TEST-006](tasks/TEST-006.md) | 0 | windows-sim | msfs-sdk-specialist | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
 | [RISK-003](tasks/RISK-003.md) | 1 | network, human | geo-data-engineer | Inventory other palm and tree mods and their coverage for mask_out defaults |
-| [TEST-017](tasks/TEST-017.md) | 2 | none | test-engineer | Write the test runbook and CI wiring notes |
 | [TEST-102](tasks/TEST-102.md) | 2 | none | test-engineer | Visual test protocol tooling: run scaffolder, checklist template, test log |
-| [ASSET-002](tasks/ASSET-002.md) | 3 | network | asset-pipeline-artist | Collect build-vs-license inputs for DEC-002 (palm models) |
 | [DEC-008](tasks/DEC-008.md) | 3 | human | task-planner | Decide: storage for large asset binaries (Git LFS or external) |
 | [TEST-009](tasks/TEST-009.md) | 4 | none | test-engineer | Define the ground-truth format and write the labeling guide and tooling |
 | [DEC-005](tasks/DEC-005.md) | 5 | human | test-engineer | Decide: performance budget and reference hardware/settings |
@@ -98,7 +97,7 @@ _None._
 | [TEST-005](tasks/TEST-005.md) | done | none | TEST-001 | Add the test-site registry schema and loader |
 | [TEST-100](tasks/TEST-100.md) | todo | human, windows-sim | TEST-005, TEST-006, DEC-004 | Define test sites T1-T5 (bbox, purpose, region, saved flights, three viewpoints each) |
 
-## Phase 2 (13/29 done)
+## Phase 2 (14/29 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -113,7 +112,7 @@ _None._
 | [GEN-008](tasks/GEN-008.md) | done | none | GEN-001 | Template engine and XML writer on fake templates |
 | [GEN-009](tasks/GEN-009.md) | todo | none | GEN-008, SPIKE-003 | Convert captured scene XML into real templates |
 | [GEN-010](tasks/GEN-010.md) | todo | none | GEN-009 | Project file, PackageDefinitions and version scheme |
-| [GEN-011](tasks/GEN-011.md) | in_progress | none | GEN-002, GEN-004, ASSET-005 | Variant selection, scaling and heading |
+| [GEN-011](tasks/GEN-011.md) | done | none | GEN-002, GEN-004, ASSET-005 | Variant selection, scaling and heading |
 | [GEN-012](tasks/GEN-012.md) | todo | none | GEN-003, GEN-006, GEN-007, GEN-010, GEN-011 | Generate pipeline and golden tests |
 | [GEN-013](tasks/GEN-013.md) | todo | none | GEN-001, SPIKE-004 | fspackagetool wrapper and output checks |
 | [GEN-014](tasks/GEN-014.md) | done | none | GEN-001 | build_report.md and build_report.json |
@@ -128,7 +127,7 @@ _None._
 | [TEST-007](tasks/TEST-007.md) | todo | windows-sim, human | TEST-100, TEST-102 | Capture a baseline no-fix visual run at T1-T5 |
 | [TEST-015](tasks/TEST-015.md) | done | none | TEST-001 | Write the post-update regression routine, log and entry scaffolder |
 | [TEST-016](tasks/TEST-016.md) | todo | none | TEST-015, SPIKE-003, SPIKE-004 | Build the independent build-output checker and build-time history |
-| [TEST-017](tasks/TEST-017.md) | todo | none | TEST-002, TEST-004, ARCH-001 | Write the test runbook and CI wiring notes |
+| [TEST-017](tasks/TEST-017.md) | in_progress | none | TEST-002, TEST-004, ARCH-001 | Write the test runbook and CI wiring notes |
 | [TEST-102](tasks/TEST-102.md) | todo | none | TEST-001, TEST-005 | Visual test protocol tooling: run scaffolder, checklist template, test log |
 | [TEST-104](tasks/TEST-104.md) | todo | windows-sim, human | TEST-015, TEST-016, TEST-007, GEN-100, GATE-P0 | Run the post-update regression routine once and record the baseline log entry |
 
@@ -137,7 +136,7 @@ _None._
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
 | [ASSET-001](tasks/ASSET-001.md) | in_progress | network |  | Write reference sheets for the 5 SoCal palm species |
-| [ASSET-002](tasks/ASSET-002.md) | todo | network |  | Collect build-vs-license inputs for DEC-002 (palm models) |
+| [ASSET-002](tasks/ASSET-002.md) | in_progress | network |  | Collect build-vs-license inputs for DEC-002 (palm models) |
 | [ASSET-003](tasks/ASSET-003.md) | todo | blender, windows-sim | SPIKE-004, SPIKE-001 | Install and pin Blender and the MSFS 2024 glTF exporter plugin |
 | [ASSET-004](tasks/ASSET-004.md) | todo | blender, windows-sim | ASSET-003, ASSET-008, SPIKE-003 | Smoke-test the asset pipeline end to end with a throwaway model |
 | [ASSET-005](tasks/ASSET-005.md) | done | none | ARCH-001 | Asset manifest schema, species spec format, loader and generator (palmcore.assets) |
