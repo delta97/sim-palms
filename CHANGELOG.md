@@ -5,6 +5,7 @@ Format: `- TASK-ID: what changed (PR link)`.
 
 ## Unreleased
 
+- ARCH-004: Added palmcore logging setup, repo path resolution and the download-cache helpers (local merge).
 - ARCH-005: Added palmcore geo helpers (Bbox, haversine, UTM/local CRS, transforms); corrected the WS3 haversine test value (local merge).
 - ARCH-006: Added deterministic UUIDv5 palm ids, object GUIDs and seeded randomness to palmcore (local merge).
 - RISK-001: Audited data source licenses and terms (`docs/licenses/data-sources.md`), with 10 open questions for the user (local merge).

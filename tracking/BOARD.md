@@ -7,18 +7,19 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 202 | 5 | 0 | 1 | 5 | 0 | 213 |
+| 200 | 6 | 0 | 1 | 6 | 0 | 213 |
 
 ## In progress / in review
 
 | Task | Status | Owner | Branch | Title |
 |---|---|---|---|---|
 | [ARCH-002](tasks/ARCH-002.md) | in_progress | claude-agent | task/arch-002-define-the-palms-geojson-json-schema-and | Define the palms.geojson JSON Schema and a shared validator |
-| [ARCH-004](tasks/ARCH-004.md) | in_progress | claude-agent | task/arch-004-add-palmcore-logging-path-resolution-and | Add palmcore logging, path resolution and download-cache helpers |
+| [ARCH-003](tasks/ARCH-003.md) | in_progress | claude-agent | task/arch-003-define-the-region-yaml-config-schema-and | Define the region YAML config schema and loader |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
 | [RISK-002](tasks/RISK-002.md) | in_progress | claude-agent | task/risk-002-audit-model-texture-and-tool-licenses-fo | Audit model, texture and tool licenses for palm assets |
 | [RISK-004](tasks/RISK-004.md) | in_progress | claude-agent | task/risk-004-collect-airport-boundaries-and-known-air | Collect airport boundaries and known airport add-ons for default masks |
 | [SPIKE-009](tasks/SPIKE-009.md) | in_progress | claude-agent | task/spike-009-write-the-simconnect-spawn-and-disconnec | Write the SimConnect spawn-and-disconnect spike console app (C#) |
+| [TEST-001](tasks/TEST-001.md) | in_progress | claude-agent | task/test-001-build-the-shared-pytest-harness-and-fixt | Build the shared pytest harness and fixture loaders |
 
 ## Blocked
 
@@ -31,9 +32,7 @@ _None._
 | [DEC-004](tasks/DEC-004.md) | 0 | human, network | task-planner | Decide: first test block (a San Diego or LA street the user knows well) |
 | [SPIKE-001](tasks/SPIKE-001.md) | 0 | windows-sim, human | msfs-sdk-specialist | Install the MSFS 2024 SDK and create an empty Dev Mode scenery project |
 | [TEST-006](tasks/TEST-006.md) | 0 | windows-sim | msfs-sdk-specialist | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
-| [ARCH-003](tasks/ARCH-003.md) | 1 | none | python-architect | Define the region YAML config schema and loader |
 | [RISK-003](tasks/RISK-003.md) | 1 | network, human | geo-data-engineer | Inventory other palm and tree mods and their coverage for mask_out defaults |
-| [TEST-001](tasks/TEST-001.md) | 1 | none | test-engineer | Build the shared pytest harness and fixture loaders |
 | [GEN-001](tasks/GEN-001.md) | 2 | none | scenery-generator-engineer | Scaffold palmgen package, CLI surface and data model |
 | [ASSET-001](tasks/ASSET-001.md) | 3 | network | asset-pipeline-artist | Write reference sheets for the 5 SoCal palm species |
 | [ASSET-002](tasks/ASSET-002.md) | 3 | network | asset-pipeline-artist | Collect build-vs-license inputs for DEC-002 (palm models) |
@@ -63,14 +62,14 @@ _None._
 | [SPIKE-011](tasks/SPIKE-011.md) | todo | human | SPIKE-010, RISK-005 | Write the Phase 0 go/no-go proposal and get the user's decision |
 | [TEST-006](tasks/TEST-006.md) | todo | windows-sim |  | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
 
-## Phase 1 (4/31 done)
+## Phase 1 (5/31 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
 | [ARCH-001](tasks/ARCH-001.md) | done | none |  | Scaffold the Python monorepo (pyproject, package layout, lint/test tooling, CI) |
 | [ARCH-002](tasks/ARCH-002.md) | in_progress | none | ARCH-001 | Define the palms.geojson JSON Schema and a shared validator |
-| [ARCH-003](tasks/ARCH-003.md) | todo | none | ARCH-001, ARCH-005 | Define the region YAML config schema and loader |
-| [ARCH-004](tasks/ARCH-004.md) | in_progress | none | ARCH-001 | Add palmcore logging, path resolution and download-cache helpers |
+| [ARCH-003](tasks/ARCH-003.md) | in_progress | none | ARCH-001, ARCH-005 | Define the region YAML config schema and loader |
+| [ARCH-004](tasks/ARCH-004.md) | done | none | ARCH-001 | Add palmcore logging, path resolution and download-cache helpers |
 | [ARCH-005](tasks/ARCH-005.md) | done | none | ARCH-001 | Add palmcore geo helpers (Bbox, distances, UTM, transforms) |
 | [ARCH-006](tasks/ARCH-006.md) | done | none | ARCH-001 | Add deterministic UUIDv5 ids and seeded randomness to palmcore |
 | [ARCH-007](tasks/ARCH-007.md) | todo | none | ARCH-002, ARCH-004 | Add the palms.geojson serializer, reader and writer |
@@ -94,7 +93,7 @@ _None._
 | [SCAN-012](tasks/SCAN-012.md) | todo | none | SCAN-001 | QA outputs: qa_summary.md, qa_map.gpkg, qa_rejects.csv |
 | [SCAN-013](tasks/SCAN-013.md) | todo | none | SCAN-006, SCAN-008, SCAN-009, SCAN-010, SCAN-011, SCAN-012 | palmscan run pipeline and CLI, end-to-end on fixtures |
 | [SCAN-100](tasks/SCAN-100.md) | todo | network, human | SCAN-007, SCAN-013, TEST-100, ARCH-008 | Deliverable: palmscan run produces validated palms.geojson from inventory data (Phase 1) |
-| [TEST-001](tasks/TEST-001.md) | todo | none | ARCH-001 | Build the shared pytest harness and fixture loaders |
+| [TEST-001](tasks/TEST-001.md) | in_progress | none | ARCH-001 | Build the shared pytest harness and fixture loaders |
 | [TEST-004](tasks/TEST-004.md) | todo | none | TEST-001, ARCH-002, ARCH-003 | Add contract conformance tests for palms.geojson |
 | [TEST-005](tasks/TEST-005.md) | todo | none | TEST-001 | Add the test-site registry schema and loader |
 | [TEST-100](tasks/TEST-100.md) | todo | human, windows-sim | TEST-005, TEST-006, DEC-004 | Define test sites T1-T5 (bbox, purpose, region, saved flights, three viewpoints each) |

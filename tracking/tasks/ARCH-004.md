@@ -1,7 +1,7 @@
 ---
 id: ARCH-004
 title: "Add palmcore logging, path resolution and download-cache helpers"
-status: review
+status: done
 phase: 1
 area: ARCH
 kind: build
@@ -51,7 +51,7 @@ Three small `palmcore` modules every tool uses:
    - `region_file("../x")` raises `ConfigError`.
 6. `tests/unit/palmcore/test_cache.py`:
    - `cache_key` is the same for dicts with different insertion order and changes when a value changes;
-   - `cache_key("abc")` equals the sha1 hex of `"abc"`'s canonical JSON;
+   - `cache_key("abc")` equals the sha1 hex of the raw string `"abc"` (strings are hashed as given, per WS2 and the SCAN plan; dicts use canonical JSON);
    - `canonical_json` rejects NaN;
    - `cache_path(tmp, "lidar/ds_1", "ab12...", ".json")` gives `tmp/lidar/ds_1/ab/ab12....json`;
    - bad namespaces (`"../x"`, `"A B"`) and bad suffixes raise `ValueError`;
@@ -83,3 +83,5 @@ ruff check palmcore tests && mypy
 - 2026-11-22 [claude-agent] Claimed. branch=task/arch-004-add-palmcore-logging-path-resolution-and worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/ARCH-004
 - 2026-11-22 [claude-agent] Implemented palmcore/log.py, paths.py, cache.py + 3 test files. pytest: 65 passed; ruff check/format clean; mypy: Success, no issues in 8 source files; Paths.resolve().palms_path('san-diego-coastal') -> <repo>/build/scan/san-diego-coastal/palms.geojson. Acceptance all ticked. Note: task step 6 says cache_key('abc') = sha1 of canonical JSON, but WS2 and SCAN plan (sha1(url), sha1(ql)) hash a str as given; implemented the plan (raw str) and test asserts sha1(b'abc'). CI Windows run not observed; tests pass locally on Windows.
 - 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] Status review -> done.
+- 2026-11-22 [integrator] integrator: kept plan WS2 behaviour (raw str hash); aligned Step 6 test text
