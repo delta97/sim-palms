@@ -48,18 +48,18 @@ Do not install only `.[dev]`. `pip install -e ".[dev]"` alone fails to collect
 
 | Layer | Command | Runs in | Time |
 |---|---|---|---|
-| Unit, contract, helpers (the default gate) | `python -m pytest -m "not network and not sim"` | CI `python` workflow, `test` job, Ubuntu and Windows; locally | about 12 s on the dev box (760 passed, 1 skipped) |
-| Coverage gate | `python -m pytest -m "not network and not sim" --cov=palmcore --cov-report=term-missing --cov-fail-under=85` | CI `test` job only | same run; palmcore was 95.3% |
-| Lint | `python -m ruff check .` then `python -m ruff format --check .` | CI `lint` job (Ubuntu) | seconds |
-| Types | `python -m mypy` | CI `lint` job (Ubuntu) | seconds |
-| Slow tests | `python -m pytest -m "not slow"` skips them; `-m slow` runs only them | CI runs them (no deselect); locally optional | 1 test on main (`test_contract.py::test_ten_thousand_features_under_budget`) |
-| Network | `python -m pytest --run-network -m network` | by hand, locally, **never CI** | **0 tests on main**; added by the owning task (e.g. TEST-012) |
+| Unit, contract, helpers (the default gate) | `python -m pytest -m "not network and not sim"` | `python scripts/ci.py` (local CI); GitHub CI disabled | about 75 s on the dev box (2,054 passed, 3 skipped, 2026-11-22) |
+| Coverage gate | `python -m pytest -m "not network and not sim" --cov=palmcore --cov-report=term-missing --cov-fail-under=85` | `scripts/ci.py` | same run; palmcore 95.4% |
+| Lint | `python -m ruff check .` then `python -m ruff format --check .` | `scripts/ci.py` | seconds |
+| Types | `python -m mypy` | `scripts/ci.py` | seconds |
+| Slow tests | `python -m pytest -m "not slow"` skips them; `-m slow` runs only them | `scripts/ci.py` runs them; `scripts/ci.py --quick` skips them | a few on main (contract 10k features, CHM 6M points) |
+| Network | `python -m pytest --run-network -m network` | by hand, locally, never in `scripts/ci.py` | a few on main (e.g. the 3DEP EPT adapter); more added by owning tasks |
 | Sim | `python -m pytest --run-sim -m sim` | sim PC only (Windows, MSFS 2024, SDK); skipped on other OSes even with the flag | **0 tests on main**; added by owning tasks |
 | Golden | `python -m pytest --update-golden`, then review the diff | locally only, refused under `CI` | no golden cases on main yet |
 | Contract, one file | `palmfix validate PATH [--region NAME\|PATH] [--strict] [--json]` | anywhere; ARCH-009 | seconds |
 | Contract, module CLI | `python -m tests.helpers.contract PATH [--region PATH]` | anywhere; TEST-004 | seconds |
 | Regions | `palmfix regions`, `palmfix regions --check`, `palmfix config --region NAME [--format json]` | anywhere; ARCH-009 | seconds |
-| Tracking | `python scripts/tasks.py validate` | CI `tracking` workflow (as `python3`, Ubuntu); locally | seconds |
+| Tracking | `python scripts/tasks.py validate` | `scripts/ci.py` (also `conflicts`) | seconds |
 | Regression routine | see `tests/regression/ROUTINE.md` | step 0 anyone; R1, R3 on the sim PC; R2 needs TEST-016 | 1 min to 60 min per step (estimate) |
 
 Checked exit codes on main:

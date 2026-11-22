@@ -1,10 +1,10 @@
 # Status
 
-**Updated:** 2026-11-22 · **Phase:** 0 (sim work not started) with Linux code ahead through Phase 4 under the proposed ADR-0013 · **Newest log:** [2026-11-22 integrator orchestration](logs/2026-11-22-integrator-orchestration.md)
+**Updated:** 2026-11-22 · **Phase:** 0 (sim work not started) with Linux code ahead through Phase 4 and Phase 7 Stage A under the proposed ADR-0013 · **Newest log:** [2026-11-22 integrator, part 2](logs/2026-11-22-integrator-orchestration-2.md)
 
 ## Where things stand
 
-- **72 of 214 tasks done** (plus FX-014 merged as code but `blocked` on FX-026), all merged to `main`, pushed, and their GitHub issues closed with a link to the merge commit. Board: [BOARD.md](BOARD.md). Changelog: [CHANGELOG.md](../CHANGELOG.md).
+- **73 of 214 tasks done** (plus FX-014 merged as code but `blocked` on FX-026), all merged to `main` and pushed. GitHub issues are synced from the task files by `python scripts/issues.py sync` (bodies, labels, open/closed); done issues are closed with a link to the merge commit. Board: [BOARD.md](BOARD.md). Changelog: [CHANGELOG.md](../CHANGELOG.md).
 - **Phase 1 code (palmscan) is complete on fixtures.** `palmscan run` goes ingest → dedupe → species → priors → sizes/exclusion/buildings/masks → `palms.geojson` + QA outputs, offline and byte-reproducible (`SOURCE_DATE_EPOCH`). Adapters: geojson/CSV file, ArcGIS REST, Overpass/OSM, building footprints. Live samples are recorded in `tests/fixtures/palmscan/recorded/` (SCAN-007).
 - **Phase 2 code (palmgen) has its building blocks:** inputs, GUIDs, tiling, exclusion geometry + building clipping, masks, variant/scale/heading, template engine on *fake* templates, build reports. The real Scenery Editor XML (SPIKE-003) and package build (SPIKE-004) need the sim PC.
 - **Shared core (palmcore):** contracts and schemas, region config, ids, geo, cache, logging, CLI plumbing, palms.geojson I/O, asset manifest + glTF checks.
