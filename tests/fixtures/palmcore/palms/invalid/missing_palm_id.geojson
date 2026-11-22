@@ -1,0 +1,45 @@
+{
+ "type": "FeatureCollection",
+ "schema_version": "1.0",
+ "region": "san-diego",
+ "generated_at": "2026-11-21T12:00:00Z",
+ "data_version": "2026-11",
+ "generator": {
+  "name": "palmscan",
+  "version": "0.1.0"
+ },
+ "config_sha256": null,
+ "features": [
+  {
+   "type": "Feature",
+   "id": "sdc-0000000000000001",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.161,
+     32.7157
+    ]
+   },
+   "properties": {
+    "species": "washingtonia_robusta",
+    "species_confidence": 0.9,
+    "species_source": "inventory",
+    "height_m": 12.5,
+    "height_source": "species_default",
+    "crown_diam_m": 4.0,
+    "ground_elev_m": null,
+    "detected_by": "inventory",
+    "source_ids": [
+     "sdc_inventory:1"
+    ],
+    "exclusion_radius_m": 2.5,
+    "building_conflict": false,
+    "data_vintage": {
+     "inventory": "2024-05",
+     "lidar": "2021"
+    },
+    "region": "san-diego"
+   }
+  }
+ ]
+}
