@@ -1,7 +1,7 @@
 ---
 id: SCAN-010
 title: "Species priors and deterministic prior sampling"
-status: todo
+status: in_progress
 phase: 1
 area: SCAN
 kind: build
@@ -11,10 +11,10 @@ requires: [none]
 agent: geo-data-engineer
 estimate_h: 2
 touches: [palmscan/classify/priors.py, tests/unit/palmscan/test_scan_priors.py]
-owner: ""
-branch: ""
-worktree: ""
-updated: 2026-11-21
+owner: claude-agent
+branch: task/scan-010-species-priors-and-deterministic-prior-s
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-010"
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -49,3 +49,4 @@ pytest tests/unit/palmscan/test_scan_priors.py -q
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [claude-agent] Claimed. branch=task/scan-010-species-priors-and-deterministic-prior-s worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-010
