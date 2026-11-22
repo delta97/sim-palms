@@ -5,6 +5,7 @@ Format: `- TASK-ID: what changed (PR link)`.
 
 ## Unreleased
 
+- SCAN-028: Wired the LiDAR stages (EPT tiles, CHM, crowns, rules, merge, classifier) into `palmscan run`, QA outputs and `palmscan eval`; real PDAL/3DEP untested (local merge).
 - Repo: disabled the GitHub Actions workflows (`python`, `tracking`) at the user's request; added `scripts/ci.py`, a local CI that runs the same lint, type, test/coverage and tracking checks.
 - TEST-013: Added the frametime capture parser and run comparison report (`tests/perf/`), budget provisional until DEC-005 (local merge).
 - TEST-008: Added optional image-diff scoring for visual viewpoints (`tests/visual/diff_score.py`), thresholds uncalibrated until TEST-018 (local merge).

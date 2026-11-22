@@ -7,14 +7,13 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 150 | 1 | 0 | 1 | 61 | 0 | 213 |
+| 150 | 0 | 0 | 1 | 62 | 0 | 213 |
 
 ## In progress / in review
 
 | Task | Status | Owner | Branch | Title |
 |---|---|---|---|---|
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
-| [SCAN-028](tasks/SCAN-028.md) | in_progress | claude-agent | task/scan-028-wire-lidar-stages-into-palmscan-run-qa-a | Wire LiDAR stages into palmscan run, QA and eval |
 
 ## Blocked
 
@@ -170,7 +169,7 @@ _None._
 | [GEN-019](tasks/GEN-019.md) | todo | windows-sim, human | GEN-100, ASSET-100 | Integrate the real model library into region builds |
 | [RISK-007](tasks/RISK-007.md) | todo | none | RISK-006, GATE-P3 | Risk review after Phase 3 (mid-project) |
 
-## Phase 4 (10/18 done)
+## Phase 4 (11/18 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -183,7 +182,7 @@ _None._
 | [SCAN-025](tasks/SCAN-025.md) | done | none | SCAN-008 | Inventory-to-LiDAR matching and merge |
 | [SCAN-026](tasks/SCAN-026.md) | done | none | SCAN-010 | Species shape rules and classification order |
 | [SCAN-027](tasks/SCAN-027.md) | done | none | SCAN-026 | Decision tree species classifier with rules fallback |
-| [SCAN-028](tasks/SCAN-028.md) | in_progress | none | SCAN-013, SCAN-020, SCAN-024, SCAN-025, SCAN-027, SCAN-029 | Wire LiDAR stages into palmscan run, QA and eval |
+| [SCAN-028](tasks/SCAN-028.md) | done | none | SCAN-013, SCAN-020, SCAN-024, SCAN-025, SCAN-027, SCAN-029 | Wire LiDAR stages into palmscan run, QA and eval |
 | [SCAN-029](tasks/SCAN-029.md) | done | none | SCAN-001, TEST-010 | Run the TEST-010 accuracy evaluation from palmscan (in-run QA) |
 | [SCAN-030](tasks/SCAN-030.md) | todo | network, human | SCAN-021, SCAN-028, TEST-101 | Tune LiDAR palm thresholds on test sites |
 | [SCAN-101](tasks/SCAN-101.md) | todo | network, human | SCAN-030, SCAN-100 | Deliverable: LiDAR-enriched palmscan run with heights and LiDAR-only palms (Phase 4) |
