@@ -1,7 +1,7 @@
 ---
 id: SCAN-026
 title: "Species shape rules and classification order"
-status: todo
+status: in_progress
 phase: 4
 area: SCAN
 kind: build
@@ -11,10 +11,10 @@ requires: [none]
 agent: lidar-analyst
 estimate_h: 2
 touches: [palmscan/classify/species.py, tests/unit/palmscan/test_scan_species_rules.py]
-owner: ""
-branch: ""
-worktree: ""
-updated: 2026-11-21
+owner: claude-agent
+branch: task/scan-026-species-shape-rules-and-classification-o
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-026"
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -50,3 +50,4 @@ pytest tests/unit/palmscan/test_scan_species_rules.py -q
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [claude-agent] Claimed. branch=task/scan-026-species-shape-rules-and-classification-o worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-026
