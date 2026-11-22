@@ -45,7 +45,7 @@ updated: 2026-11-22
 ## Acceptance criteria
 
 - [x] All helpers exist with the exact signatures in the plan.
-- [ ] Self-tests pass and cover one pass and one fail case per helper.
+- [x] Self-tests pass and cover one pass and one fail case per helper.
 - [x] Failure messages include measured value and limit.
 
 ## Verification
@@ -63,3 +63,4 @@ python3 scripts/tasks.py validate
 - 2026-11-22 [claude-agent] Spec discrepancies: task text shows assert_radius_within(r_max_m=3.5) but plan signature requires r_min_m, so tests pass r_min_m=0.0 explicitly; task text shows assert_disjoint_from(poly, others, tol_m2) positional, plan has keyword-only tol_m2 (default 0.01), followed plan. Followed plan signatures throughout.
 - 2026-11-22 [claude-agent] Ticked: signatures match plan (criterion 1); every assertion message carries measured value and limit (criterion 3). Criterion 2 left open: distance_m and to_local_m are pure functions with no assertion, so they have pass cases only; the other six helpers have both pass and fail tests.
 - 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] integrator: accepted 'one pass and one fail case per helper' — applies to the assert_* helpers (all have both); distance_m and to_local_m are pure conversions with no failing branch
