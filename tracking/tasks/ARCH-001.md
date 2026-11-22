@@ -10,7 +10,7 @@ depends_on: []
 requires: [none]
 agent: python-architect
 estimate_h: 4
-touches: [pyproject.toml, palmcore/__init__.py, palmcore/py.typed, palmcore/errors.py, palmcore/schemas.py, palmscan/__init__.py, palmgen/__init__.py, .github/workflows/python.yml, tests/unit/palmcore/test_package.py, tests/unit/palmcore/test_schemas_loader.py]
+touches: [pyproject.toml, schemas/.gitkeep, palmcore/__init__.py, palmcore/py.typed, palmcore/errors.py, palmcore/schemas.py, palmscan/__init__.py, palmgen/__init__.py, .github/workflows/python.yml, tests/unit/palmcore/test_package.py, tests/unit/palmcore/test_schemas_loader.py]
 owner: claude-agent
 branch: task/arch-001-scaffold-the-python-monorepo-pyproject-p
 worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/ARCH-001"
