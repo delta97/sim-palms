@@ -1,0 +1,199 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:palmfix:schema:region:1",
+  "title": "palmfix region config",
+  "description": "One regions/<name>.yaml file. Defaults here must match palmcore/config.py (a test checks this).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["config_version", "region", "bbox"],
+  "properties": {
+    "config_version": {"const": 1},
+    "region": {"type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"},
+    "id_prefix": {
+      "type": "string",
+      "pattern": "^[a-z]{2,6}$",
+      "description": "Default: initials of the '-' parts of region (see palmcore/config.py)."
+    },
+    "name": {"type": "string", "minLength": 1},
+    "bbox": {"$ref": "#/$defs/bbox"},
+    "local_crs": {"type": ["string", "null"], "default": null},
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "inventory": {"type": "array", "items": {"$ref": "#/$defs/inventory_item"}, "default": []},
+        "lidar": {"$ref": "#/$defs/lidar", "default": "none"},
+        "buildings": {"$ref": "#/$defs/buildings", "default": "none"},
+        "buildings_path": {"type": ["string", "null"], "minLength": 1, "default": null},
+        "overpass_url": {
+          "type": "string",
+          "minLength": 1,
+          "default": "https://overpass-api.de/api/interpreter"
+        },
+        "osm_trees": {"type": "boolean", "default": false}
+      }
+    },
+    "species_priors": {
+      "type": "object",
+      "propertyNames": {"pattern": "^[a-z]+(_[a-z]+)+$"},
+      "additionalProperties": {"type": "number", "minimum": 0},
+      "default": {}
+    },
+    "exclusion": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "margin_m": {"type": "number", "minimum": 0, "maximum": 10, "default": 1.5},
+        "polygon_sides": {"type": "integer", "minimum": 6, "maximum": 64, "default": 12},
+        "merge_gap_m": {"type": "number", "minimum": 0, "maximum": 20, "default": 2.0},
+        "clip_buildings": {"type": "boolean", "default": true},
+        "clip_buffer_m": {"type": "number", "minimum": 0, "maximum": 5, "default": 0.3},
+        "min_part_area_m2": {"type": "number", "minimum": 0, "maximum": 100, "default": 1.0},
+        "radius_min_m": {"type": "number", "minimum": 0, "maximum": 15, "default": 1.0},
+        "radius_max_m": {"type": "number", "minimum": 0, "maximum": 15, "default": 8.0},
+        "default_radius_m": {"type": "number", "minimum": 0, "maximum": 15, "default": 3.0},
+        "max_cluster_extent_m": {"type": "number", "minimum": 10, "maximum": 2000, "default": 150},
+        "max_vertices": {"type": "integer", "minimum": 8, "maximum": 10000, "default": 256}
+      }
+    },
+    "placement": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "scale_clamp": {"type": "number", "minimum": 0, "maximum": 1, "default": 0.15}
+      }
+    },
+    "mask_out": {"type": "array", "items": {"$ref": "#/$defs/mask_item"}, "default": []},
+    "masks": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "airports": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "enabled": {"type": "boolean", "default": true},
+            "buffer_m": {"type": "number", "minimum": 0, "maximum": 2000, "default": 100},
+            "path": {
+              "type": "string",
+              "minLength": 1,
+              "default": "docs/compat/airports-mask.geojson"
+            }
+          }
+        }
+      }
+    },
+    "palmscan": {"type": "object", "default": {}},
+    "palmgen": {"type": "object", "default": {}}
+  },
+  "$defs": {
+    "bbox": {
+      "type": "array",
+      "items": {"type": "number"},
+      "minItems": 4,
+      "maxItems": 4,
+      "description": "[lon_min, lat_min, lon_max, lat_max]"
+    },
+    "lidar_type": {"enum": ["3dep_ept", "none"]},
+    "buildings_type": {"enum": ["osm", "microsoft_footprints", "none"]},
+    "lidar": {
+      "anyOf": [
+        {"$ref": "#/$defs/lidar_type"},
+        {"type": "null"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type"],
+          "properties": {
+            "type": {"$ref": "#/$defs/lidar_type"},
+            "options": {"type": "object"}
+          }
+        }
+      ],
+      "description": "must be '3dep_ept', 'none', null, or an object {type, options}"
+    },
+    "buildings": {
+      "anyOf": [
+        {"$ref": "#/$defs/buildings_type"},
+        {"type": "null"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type"],
+          "properties": {
+            "type": {"$ref": "#/$defs/buildings_type"},
+            "options": {"type": "object"}
+          }
+        }
+      ],
+      "description": "must be 'osm', 'microsoft_footprints', 'none', null, or an object {type, options}"
+    },
+    "nullable_field": {"type": ["string", "null"], "minLength": 1},
+    "inventory_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "type", "species_field"],
+      "properties": {
+        "name": {"type": "string", "pattern": "^[a-z0-9_]+$"},
+        "type": {"enum": ["arcgis_rest", "geojson_file"]},
+        "url": {"type": "string", "minLength": 1},
+        "path": {"type": "string", "minLength": 1},
+        "format": {"enum": ["geojson", "csv"]},
+        "species_field": {"type": "string", "minLength": 1},
+        "common_name_field": {"$ref": "#/$defs/nullable_field"},
+        "id_field": {"$ref": "#/$defs/nullable_field"},
+        "status_field": {"$ref": "#/$defs/nullable_field"},
+        "height_field": {"$ref": "#/$defs/nullable_field"},
+        "height_units": {"enum": ["ft", "m"], "default": "ft"},
+        "dbh_field": {"$ref": "#/$defs/nullable_field"},
+        "date_field": {"$ref": "#/$defs/nullable_field"},
+        "lon_field": {"type": ["string", "null"], "minLength": 1},
+        "lat_field": {"type": ["string", "null"], "minLength": 1},
+        "where": {"type": "string", "default": "1=1"},
+        "vintage": {"type": ["string", "null"], "pattern": "^\\d{4}(-\\d{2}(-\\d{2})?)?$"},
+        "license": {"type": ["string", "null"]},
+        "cache_max_age_days": {"type": ["number", "null"], "minimum": 0},
+        "options": {"type": "object"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"type": {"const": "arcgis_rest"}}, "required": ["type"]},
+          "then": {
+            "required": ["url"],
+            "not": {"anyOf": [{"required": ["path"]}, {"required": ["format"]}]},
+            "description": "arcgis_rest sources take 'url' only; 'path' and 'format' are not allowed"
+          }
+        },
+        {
+          "if": {"properties": {"type": {"const": "geojson_file"}}, "required": ["type"]},
+          "then": {
+            "oneOf": [{"required": ["url"]}, {"required": ["path"]}],
+            "description": "geojson_file needs exactly one of 'url' or 'path'"
+          }
+        }
+      ]
+    },
+    "mask_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name"],
+      "properties": {
+        "name": {"type": "string", "pattern": "^[a-z0-9_-]+$"},
+        "kind": {"enum": ["mod", "airport", "other"], "default": "other"},
+        "bbox": {"$ref": "#/$defs/bbox"},
+        "geometry": {
+          "type": "object",
+          "required": ["type", "coordinates"],
+          "properties": {
+            "type": {"enum": ["Polygon", "MultiPolygon"]},
+            "coordinates": {"type": "array"}
+          }
+        },
+        "path": {"type": "string", "minLength": 1},
+        "note": {"type": "string"}
+      },
+      "oneOf": [{"required": ["bbox"]}, {"required": ["geometry"]}, {"required": ["path"]}],
+      "description": "a mask needs exactly one of 'bbox', 'geometry' or 'path'"
+    }
+  }
+}
