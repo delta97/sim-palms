@@ -7,12 +7,14 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 143 | 0 | 1 | 1 | 69 | 0 | 214 |
+| 140 | 2 | 1 | 1 | 70 | 0 | 214 |
 
 ## In progress / in review
 
 | Task | Status | Owner | Branch | Title |
 |---|---|---|---|---|
+| [FX-009](tasks/FX-009.md) | in_progress | claude-agent | task/fx-009-calibration-clicks-tool-vfov-time-offset | Calibration: clicks tool, vfov, time offset, pose bias, depth model |
+| [FX-011](tasks/FX-011.md) | in_progress | claude-agent | task/fx-011-mask-by-depth-and-colour-heuristics | Mask by depth and colour heuristics |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
 
 ## Blocked
@@ -34,9 +36,6 @@ Generated: 2026-11-22
 | [DEC-005](tasks/DEC-005.md) | 5 | human | test-engineer | Decide: performance budget and reference hardware/settings |
 | [FX-001](tasks/FX-001.md) | 7 | windows-sim, human | render-fx-researcher | Verify ReShade depth access in MSFS 2024 (incl. multiplayer/online lockout) |
 | [FX-006](tasks/FX-006.md) | 7 | windows-sim | simconnect-dotnet-engineer | SimConnect pose logger, screenshot trigger and camera SimVar check |
-| [FX-009](tasks/FX-009.md) | 7 | none | render-fx-researcher | Calibration: clicks tool, vfov, time offset, pose bias, depth model |
-| [FX-010](tasks/FX-010.md) | 7 | none | render-fx-researcher | Mask by projection from palms.geojson |
-| [FX-011](tasks/FX-011.md) | 7 | none | render-fx-researcher | Mask by depth and colour heuristics |
 | [FX-026](tasks/FX-026.md) | 7 | network, human | render-fx-researcher | Fetch and pin the LaMa weights, then run the LaMa inpainting backend end to end |
 
 ## Phase 0 (2/17 done)
@@ -260,7 +259,7 @@ Generated: 2026-11-22
 | [TEST-008](tasks/TEST-008.md) | done | none | TEST-102 | Add optional image-diff scoring for visual viewpoints |
 | [TEST-018](tasks/TEST-018.md) | todo | windows-sim | TEST-008, TEST-104 | Calibrate the image-diff noise floor at T1 |
 
-## Phase 7 (6/28 done)
+## Phase 7 (7/28 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -272,9 +271,9 @@ Generated: 2026-11-22
 | [FX-006](tasks/FX-006.md) | todo | windows-sim | FX-002 | SimConnect pose logger, screenshot trigger and camera SimVar check |
 | [FX-007](tasks/FX-007.md) | todo | windows-sim, human | FX-001, FX-005, FX-006, DEC-004, SCAN-100 | Capture procedure and first capture sessions at the test block |
 | [FX-008](tasks/FX-008.md) | done | none | FX-003, FX-005 | Ingest, pose interpolation and sample-fixture builder |
-| [FX-009](tasks/FX-009.md) | todo | none | FX-004, FX-008 | Calibration: clicks tool, vfov, time offset, pose bias, depth model |
-| [FX-010](tasks/FX-010.md) | todo | none | FX-004, ARCH-002 | Mask by projection from palms.geojson |
-| [FX-011](tasks/FX-011.md) | todo | none | FX-004 | Mask by depth and colour heuristics |
+| [FX-009](tasks/FX-009.md) | in_progress | none | FX-004, FX-008 | Calibration: clicks tool, vfov, time offset, pose bias, depth model |
+| [FX-010](tasks/FX-010.md) | done | none | FX-004, ARCH-002 | Mask by projection from palms.geojson |
+| [FX-011](tasks/FX-011.md) | in_progress | none | FX-004 | Mask by depth and colour heuristics |
 | [FX-012](tasks/FX-012.md) | done | none | FX-002 | Mask comparison metrics (pixel IoU, instance precision/recall) |
 | [FX-013](tasks/FX-013.md) | todo | human | FX-007, FX-008, FX-009 | Hand labels: ground-truth blob masks, correspondences, committed sample fixture |
 | [FX-014](tasks/FX-014.md) | blocked | network | FX-002, FX-026 | Inpainting runner: Telea baseline, LaMa backend, tiling |
