@@ -1,7 +1,7 @@
 ---
 id: RISK-005
 title: Set up the sim/SDK update watch and do the first pass on exclusion bugs
-status: review
+status: done
 phase: 0
 area: RISK
 kind: research
@@ -68,3 +68,4 @@ grep -E "^\| 20[0-9]{2}-" tracking/logs/sim-update-watch.md | head -1   # a date
 - 2026-11-22 [claude-agent] Claimed. branch=task/risk-005-set-up-the-sim-sdk-update-watch-and-do-t worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/RISK-005
 - 2026-11-22 [claude-agent] Verification: files exist; https count >=4 (6 sources); TEST-104 referenced; dated row present. Acceptance ticked. First pass: latest public sim SU7.2 1.9.24.0 (2026-11-05, third party), SDK docs 1.8.2; SU6 thread 18156 tagged fixed (water polygon fix in SU7 beta 1.9.12.0, unconfirmed); installed versions VERIFY on user's PC.
 - 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] Status review -> done.

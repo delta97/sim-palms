@@ -7,13 +7,16 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 212 | 0 | 0 | 1 | 0 | 0 | 213 |
+| 208 | 3 | 0 | 1 | 1 | 0 | 213 |
 
 ## In progress / in review
 
 | Task | Status | Owner | Branch | Title |
 |---|---|---|---|---|
+| [ARCH-001](tasks/ARCH-001.md) | in_progress | claude-agent | task/arch-001-scaffold-the-python-monorepo-pyproject-p | Scaffold the Python monorepo (pyproject, package layout, lint/test tooling, CI) |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
+| [RISK-001](tasks/RISK-001.md) | in_progress | claude-agent | task/risk-001-audit-data-source-licenses-and-terms-inv | Audit data source licenses and terms (inventories, OSM, footprints, LiDAR) |
+| [SPIKE-009](tasks/SPIKE-009.md) | in_progress | claude-agent | task/spike-009-write-the-simconnect-spawn-and-disconnec | Write the SimConnect spawn-and-disconnect spike console app (C#) |
 
 ## Blocked
 
@@ -24,12 +27,8 @@ _None._
 | Task | Phase | Requires | Agent | Title |
 |---|---|---|---|---|
 | [DEC-004](tasks/DEC-004.md) | 0 | human, network | task-planner | Decide: first test block (a San Diego or LA street the user knows well) |
-| [RISK-005](tasks/RISK-005.md) | 0 | network | msfs-sdk-specialist | Set up the sim/SDK update watch and do the first pass on exclusion bugs |
 | [SPIKE-001](tasks/SPIKE-001.md) | 0 | windows-sim, human | msfs-sdk-specialist | Install the MSFS 2024 SDK and create an empty Dev Mode scenery project |
-| [SPIKE-009](tasks/SPIKE-009.md) | 0 | none | simconnect-dotnet-engineer | Write the SimConnect spawn-and-disconnect spike console app (C#) |
 | [TEST-006](tasks/TEST-006.md) | 0 | windows-sim | msfs-sdk-specialist | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
-| [ARCH-001](tasks/ARCH-001.md) | 1 | none | python-architect | Scaffold the Python monorepo (pyproject, package layout, lint/test tooling, CI) |
-| [RISK-001](tasks/RISK-001.md) | 1 | network | scribe | Audit data source licenses and terms (inventories, OSM, footprints, LiDAR) |
 | [RISK-003](tasks/RISK-003.md) | 1 | network, human | geo-data-engineer | Inventory other palm and tree mods and their coverage for mask_out defaults |
 | [RISK-002](tasks/RISK-002.md) | 2 | network | scribe | Audit model, texture and tool licenses for palm assets |
 | [RISK-004](tasks/RISK-004.md) | 2 | network | geo-data-engineer | Collect airport boundaries and known airport add-ons for default masks |
@@ -38,14 +37,14 @@ _None._
 | [DEC-005](tasks/DEC-005.md) | 5 | human | test-engineer | Decide: performance budget and reference hardware/settings |
 | [FX-001](tasks/FX-001.md) | 7 | windows-sim, human | render-fx-researcher | Verify ReShade depth access in MSFS 2024 (incl. multiplayer/online lockout) |
 
-## Phase 0 (0/17 done)
+## Phase 0 (1/17 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
 | [DEC-004](tasks/DEC-004.md) | todo | human, network |  | Decide: first test block (a San Diego or LA street the user knows well) |
 | [GATE-P0](tasks/GATE-P0.md) | todo | human | DEC-004, RISK-005, SPIKE-001, SPIKE-002, SPIKE-003, SPIKE-004, SPIKE-005, SPIKE-006, SPIKE-007, SPIKE-008, SPIKE-009, SPIKE-010, SPIKE-011 | Phase 0 exit gate: one blob cut and replaced, command-line build works |
 | [INFRA-001](tasks/INFRA-001.md) | review | none |  | Bootstrap plans, tracking, worktree tooling and specialist agents |
-| [RISK-005](tasks/RISK-005.md) | todo | network |  | Set up the sim/SDK update watch and do the first pass on exclusion bugs |
+| [RISK-005](tasks/RISK-005.md) | done | network |  | Set up the sim/SDK update watch and do the first pass on exclusion bugs |
 | [RISK-006](tasks/RISK-006.md) | todo | none | GATE-P0 | Define the risk review routine and run the first review after Phase 0 |
 | [SPIKE-001](tasks/SPIKE-001.md) | todo | windows-sim, human |  | Install the MSFS 2024 SDK and create an empty Dev Mode scenery project |
 | [SPIKE-002](tasks/SPIKE-002.md) | todo | windows-sim, human | SPIKE-001, DEC-004 | Cut one photogrammetry palm blob with Exclude TIN and the vegetation exclude |
@@ -55,7 +54,7 @@ _None._
 | [SPIKE-006](tasks/SPIKE-006.md) | todo | windows-sim, human | SPIKE-002 | Place one default library tree as a stand-in in the cut hole |
 | [SPIKE-007](tasks/SPIKE-007.md) | todo | windows-sim, human | SPIKE-006 | Cut a palm blob right next to a building and record what happens to the walls |
 | [SPIKE-008](tasks/SPIKE-008.md) | todo | none | SPIKE-003 | Write the fspackagetool benchmark project generator (1 and 1,000 polygons, broken and CRLF variants) |
-| [SPIKE-009](tasks/SPIKE-009.md) | todo | none |  | Write the SimConnect spawn-and-disconnect spike console app (C#) |
+| [SPIKE-009](tasks/SPIKE-009.md) | in_progress | none |  | Write the SimConnect spawn-and-disconnect spike console app (C#) |
 | [SPIKE-010](tasks/SPIKE-010.md) | todo | none | SPIKE-002, SPIKE-003, SPIKE-004, SPIKE-005, SPIKE-006, SPIKE-007 | Write the one-page Phase 0 findings note with screenshots |
 | [SPIKE-011](tasks/SPIKE-011.md) | todo | human | SPIKE-010, RISK-005 | Write the Phase 0 go/no-go proposal and get the user's decision |
 | [TEST-006](tasks/TEST-006.md) | todo | windows-sim |  | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
@@ -64,7 +63,7 @@ _None._
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
-| [ARCH-001](tasks/ARCH-001.md) | todo | none |  | Scaffold the Python monorepo (pyproject, package layout, lint/test tooling, CI) |
+| [ARCH-001](tasks/ARCH-001.md) | in_progress | none |  | Scaffold the Python monorepo (pyproject, package layout, lint/test tooling, CI) |
 | [ARCH-002](tasks/ARCH-002.md) | todo | none | ARCH-001 | Define the palms.geojson JSON Schema and a shared validator |
 | [ARCH-003](tasks/ARCH-003.md) | todo | none | ARCH-001, ARCH-005 | Define the region YAML config schema and loader |
 | [ARCH-004](tasks/ARCH-004.md) | todo | none | ARCH-001 | Add palmcore logging, path resolution and download-cache helpers |
@@ -75,7 +74,7 @@ _None._
 | [ARCH-009](tasks/ARCH-009.md) | todo | none | ARCH-003, ARCH-004, ARCH-007 | Add shared CLI plumbing and the palmfix utility CLI |
 | [DEC-009](tasks/DEC-009.md) | todo | human, network | DEC-004, RISK-001 | Decide: building footprint source (OSM, Microsoft, both, or county data) |
 | [GATE-P1](tasks/GATE-P1.md) | todo | human | GATE-P0, ARCH-008, DEC-009, TEST-004, TEST-100, SCAN-100 | Phase 1 exit gate: palms.geojson for the test neighbourhood from inventory data |
-| [RISK-001](tasks/RISK-001.md) | todo | network |  | Audit data source licenses and terms (inventories, OSM, footprints, LiDAR) |
+| [RISK-001](tasks/RISK-001.md) | in_progress | network |  | Audit data source licenses and terms (inventories, OSM, footprints, LiDAR) |
 | [RISK-003](tasks/RISK-003.md) | todo | network, human |  | Inventory other palm and tree mods and their coverage for mask_out defaults |
 | [SCAN-001](tasks/SCAN-001.md) | todo | none | ARCH-001, ARCH-003, ARCH-004, ARCH-009 | Create palmscan package core: config, cache, HTTP, models, CLI skeleton |
 | [SCAN-002](tasks/SCAN-002.md) | todo | none | SCAN-001 | Species normalization table, normalizer and palm filter |
