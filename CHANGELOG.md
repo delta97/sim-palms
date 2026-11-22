@@ -5,6 +5,7 @@ Format: `- TASK-ID: what changed (PR link)`.
 
 ## Unreleased
 
+- ASSET-006: Added glTF stats, automated asset checks, triangle/height budgets (`assets/budgets.yaml`) and the `palmcore.assets check` CLI (local merge).
 - GEN-004: Added palmgen input loading (palms, buildings, region config) and `GenConfig` satisfying the geometry RadiusConfig protocol (local merge).
 - GEN-006: Added building-footprint clipping of exclusion clusters (`clip_buildings`, hole removal) (local merge).
 - ARCH-009: Added shared CLI plumbing (`run_main`, context, exit codes) and the `palmfix` utility CLI (validate, regions, config) (local merge).

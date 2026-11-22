@@ -1,7 +1,7 @@
 ---
 id: ASSET-006
 title: "glTF stats and automated asset checks (triangle budgets, heights, alpha mode, textures, naming)"
-status: review
+status: done
 phase: 3
 area: ASSET
 kind: build
@@ -58,3 +58,4 @@ python -m palmcore.assets check --assets-dir tests/fixtures/palmcore/assets/gltf
 - 2026-11-22 [claude-agent] Claimed. branch=task/asset-006-gltf-stats-and-automated-asset-checks-tr worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/ASSET-006
 - 2026-11-22 [claude-agent] Implemented gltf_stats.py, checks.py, budgets.yaml, check CLI, fixtures, 69 tests; build-manifest CLI now measures height/crown/triangles from LOD glTFs. pytest 564 passed 1 skipped (full), ruff check/format and mypy clean. Fixture dir check exits 1 (9 errors, 3 warnings). Commit 2d5139a
 - 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] Status review -> done.
