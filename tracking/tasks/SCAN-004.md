@@ -1,7 +1,7 @@
 ---
 id: SCAN-004
 title: "ArcGIS REST inventory adapter with paging and cache"
-status: todo
+status: in_progress
 phase: 1
 area: SCAN
 kind: build
@@ -11,9 +11,9 @@ requires: [none]
 agent: geo-data-engineer
 estimate_h: 3
 touches: [palmscan/sources/arcgis_rest.py, tests/unit/palmscan/test_scan_arcgis_rest.py, tests/fixtures/palmscan/arcgis_rest/]
-owner: ""
-branch: ""
-worktree: ""
+owner: claude-agent
+branch: task/scan-004-arcgis-rest-inventory-adapter-with-pagin
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-004"
 updated: 2026-11-22
 ---
 
@@ -57,3 +57,4 @@ pytest tests/unit/palmscan/test_scan_arcgis_rest.py -q
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [integrator] integrator note from ARCH-008: StreetsLA has only a GeoServer WFS (EPSG:2229), no ArcGIS REST; LA Westside config uses the stiles/la-trees GeoJSON instead (627 MB county file, common names only, id field stability VERIFY)
+- 2026-11-22 [claude-agent] Claimed. branch=task/scan-004-arcgis-rest-inventory-adapter-with-pagin worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-004
