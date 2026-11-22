@@ -1,7 +1,7 @@
 ---
 id: TEST-015
 title: Write the post-update regression routine, log and entry scaffolder
-status: in_progress
+status: review
 phase: 2
 area: TEST
 kind: build
@@ -36,9 +36,10 @@ A written routine to run after every sim or SDK update, a log with one row per u
 
 ## Acceptance criteria
 
-- [ ] ROUTINE.md can be followed without this task file.
-- [ ] `new_entry` and `set` work as specified, with tests.
-- [ ] LOG.md table header matches the plan.
+- [x] ROUTINE.md can be followed without this task file.
+- [ ] ROUTINE.md can be followed without this task file. (Reviewer check; not ticked by the implementer.)
+- [x] `new_entry` and `set` work as specified, with tests. Evidence: 26 passed in `tests/unit/regression/test_new_entry.py`.
+- [x] LOG.md table header matches the plan. Evidence: `test_committed_header_matches_plan` passes against the committed `tests/regression/LOG.md`.
 
 ## Verification
 
@@ -52,3 +53,7 @@ python3 scripts/tasks.py validate
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [claude-agent] Claimed. branch=task/test-015-write-the-post-update-regression-routine worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/TEST-015
+- 2026-11-22 [claude-agent] Added tests/regression/{__init__.py,LOG.md,ROUTINE.md,new_entry.py} and tests/unit/regression/test_new_entry.py. Verification: pytest test_new_entry.py 26 passed; --help exit 0; ruff, ruff format, mypy clean; full pytest 621 passed, 1 skipped. Acceptance 2 and 3 ticked; acceptance 1 left for reviewer.
+- 2026-11-22 [claude-agent] Spec notes: RISK-005 docs call TEST-104 the routine owner; plan says TEST-015 writes routine and log, TEST-104 runs it first. Followed the plan; RISK-005 files not in touches, flagged for integrator. Used python instead of python3 for validate (no python3 here). set gained optional --trigger for dates with two rows.
+- 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] integrator review: ROUTINE.md read standalone; steps, pass criteria and sim-only boundaries are clear -> box ticked
