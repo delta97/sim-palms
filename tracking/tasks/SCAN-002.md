@@ -1,7 +1,7 @@
 ---
 id: SCAN-002
 title: "Species normalization table, normalizer and palm filter"
-status: todo
+status: in_progress
 phase: 1
 area: SCAN
 kind: build
@@ -11,9 +11,9 @@ requires: [none]
 agent: geo-data-engineer
 estimate_h: 3
 touches: [palmscan/data/species_keys.yaml, palmscan/data/species_aliases.csv, palmscan/data/palm_genera.yaml, palmscan/data/species_defaults.yaml, palmscan/data/non_tree_markers.yaml, palmscan/species_names.py, palmscan/filters.py, tests/unit/palmscan/test_scan_species_names.py, tests/unit/palmscan/test_scan_filters.py]
-owner: ""
-branch: ""
-worktree: ""
+owner: claude-agent
+branch: task/scan-002-species-normalization-table-normalizer-a
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-002"
 updated: 2026-11-22
 ---
 
@@ -62,3 +62,4 @@ python -c "from palmscan.species_names import normalize_species as n; print(n('P
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [reconcile] Added the canonical species-key registry palmscan/data/species_keys.yaml (one list referenced by the ARCH-002 species pattern, SCAN normalization and ASSET-005 manifest validation) with tests tying the alias table, genus defaults and species_defaults to it. Cross-area reconciliation.
+- 2026-11-22 [claude-agent] Claimed. branch=task/scan-002-species-normalization-table-normalizer-a worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-002
