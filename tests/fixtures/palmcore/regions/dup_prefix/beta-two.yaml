@@ -1,0 +1,4 @@
+config_version: 1
+region: beta-two
+id_prefix: shr
+bbox: [-118.30, 33.60, -118.05, 33.90]

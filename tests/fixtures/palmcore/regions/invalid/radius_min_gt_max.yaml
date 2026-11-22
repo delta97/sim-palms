@@ -1,0 +1,6 @@
+config_version: 1
+region: radius-min-gt-max
+bbox: [-117.30, 32.60, -117.05, 32.90]
+exclusion:
+  radius_min_m: 5
+  radius_max_m: 2

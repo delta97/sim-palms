@@ -1,0 +1,4 @@
+config_version: 1
+region: bad-prefix
+id_prefix: BAD1
+bbox: [-117.30, 32.60, -117.05, 32.90]

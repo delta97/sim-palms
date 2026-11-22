@@ -1,0 +1,14 @@
+{
+  "dup_key.yaml": "line 4: duplicate key 'bbox'",
+  "bad_bbox_order.yaml": "bbox: Bbox lon_min",
+  "priors_negative.yaml": "species_priors.washingtonia_robusta: -1",
+  "unknown_key.yaml": "exclusion.marginm: unknown key 'marginm'",
+  "arcgis_no_url.yaml": "sources.inventory[0].url: 'url' is a required property",
+  "file_url_and_path.yaml": "sources.inventory[0]: geojson_file needs exactly one of 'url' or 'path'",
+  "csv_no_lon_field.yaml": "sources.inventory[0].lon_field: required when the source format is csv",
+  "stem_mismatch.yaml": "region: 'something-else' must equal the file name 'stem_mismatch'",
+  "bad_prefix.yaml": "id_prefix: 'BAD1' does not match",
+  "radius_min_gt_max.yaml": "exclusion.radius_min_m: 5.0 is greater than radius_max_m (2.0)",
+  "mask_two_geometries.yaml": "mask_out[0]: a mask needs exactly one of 'bbox', 'geometry' or 'path'",
+  "version_2.yaml": "config_version: 2 is not supported (supported: 1)"
+}
