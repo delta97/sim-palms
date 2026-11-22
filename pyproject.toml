@@ -90,6 +90,7 @@ strict = true
 [[tool.mypy.overrides]]
 module = [
   "geopandas.*",
+  "pandas.*",
   "pdal.*",
   "rasterio.*",
   "skimage.*",
