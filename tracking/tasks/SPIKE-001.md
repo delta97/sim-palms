@@ -86,3 +86,4 @@ A reviewer checks that no row says "assumed".
 ## Log
 
 - 2026-11-22 [plan-breakdown] Task created.
+- 2026-11-22 [integrator] integrator pre-check on this PC (2026-11-22): MSFS 2024 is the Steam edition (app 2537590, buildid 26385953, last updated ~2026-11-07; public SU7.2 1.9.24.0 was 2026-11-05 - in-sim version still to read in step 1). Packages: %APPDATA%\Microsoft Flight Simulator 2024\Packages (Community, Community2024, Official2024, StreamedPackages). SDK not installed: no MSFS* env var, no SDK folder found. Next: the user follows steps 1-3 and 6-8; an agent can do steps 3-5 and 9 (paths, env var, tree listing) once the SDK is installed.

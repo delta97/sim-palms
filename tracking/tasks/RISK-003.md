@@ -14,7 +14,7 @@ touches: [docs/compat/other-mods.md, docs/compat/mods-coverage.geojson]
 owner: ""
 branch: ""
 worktree: ""
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -61,3 +61,4 @@ grep -c "flightsim.to" docs/compat/other-mods.md   # expect >= 1
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [integrator] integrator: on the sim PC (2026-11-22) the Community folder (%APPDATA%\Microsoft Flight Simulator 2024\Packages\Community) holds one add-on, atmospheremod-weather (weather); no palm or tree mods installed. Still need the user's list of mods they plan to use.

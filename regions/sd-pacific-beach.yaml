@@ -1,0 +1,46 @@
+# Pacific Beach test block (about 470 x 555 m between Mission Blvd and Sail Bay, just south of Crystal Pier).
+# Picked 2026-11-22 as the first real-data palmscan test: 392 standing palms in the city inventory,
+# second-densest 0.005 deg cell in san-diego-coastal and easy to find from the air. Candidate for DEC-004.
+# Sources and settings copied from san-diego-coastal.yaml (ARCH-008).
+config_version: 1
+region: sd-pacific-beach
+id_prefix: sdpb
+name: San Diego, Pacific Beach test block
+bbox: [-117.255, 32.790, -117.250, 32.795]   # lon_min, lat_min, lon_max, lat_max
+sources:
+  inventory:
+    # Layer 20 "Trees (Street Trees)", point layer, maxRecordCount 2000. Checked 2026-11-22.
+    - name: sd_street_trees
+      type: arcgis_rest
+      url: https://webmaps.sandiego.gov/arcgis/rest/services/DSD/Environment/MapServer/20
+      species_field: SPECIES_NAME     # Latin name, e.g. "Washingtonia robusta"; null on rows never inspected
+      common_name_field: COMMON_NAME  # e.g. "Mexican Fan Palm"
+      id_field: OBJECTID              # the layer's esriFieldTypeOID field
+      height_field: HEIGHT_FT         # SmallInteger, feet
+      height_units: ft
+      dbh_field: DBH_IN               # SmallInteger, inches
+      date_field: INSPCTDATE          # esriFieldTypeDate (epoch ms); last inspection, not planting date
+      status_field: MAPNG_STAT_CD     # coded domain: AB as built, RM REMOVED (about 25% of rows citywide), AN, OP, NM. SCAN-007, 2026-11-22.
+      # CONDITION holds health ratings (GOOD/FAIR/POOR/DEAD), not alive/removed status. Rows not yet inspected have
+      # SPECIES_NAME, HEIGHT_FT and INSPCTDATE null (about 37% of AB rows) and only COMMON_NAME set.
+      license: "City of San Diego public data; accuracy disclaimer"
+  lidar: 3dep_ept
+  buildings: osm
+  osm_trees: true
+species_priors:                       # placeholders; SCAN computes real values (palmscan priors)
+  washingtonia_robusta: 0.45
+  syagrus_romanzoffiana: 0.25
+  phoenix_canariensis: 0.15
+  archontophoenix_cunninghamiana: 0.10
+  washingtonia_filifera: 0.05
+exclusion:
+  margin_m: 1.5
+  polygon_sides: 12
+  merge_gap_m: 2.0
+  clip_buildings: true
+mask_out: []
+masks:
+  airports:
+    enabled: true
+    path: docs/compat/airports-mask.geojson
+palmscan: {}
