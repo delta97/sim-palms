@@ -613,7 +613,7 @@ def write_fake_session(
             "reshade_depth_flags": {},
             "simvar_conventions": conv,
             "cam_offset_body_m": [0.0, 0.0, 0.0],
-            "reshade_pair_suffixes": list(RESHADE_SUFFIXES),
+            "reshade_suffixes": {"before": RESHADE_SUFFIXES[0], "after": RESHADE_SUFFIXES[1]},
             "notes": "synthetic session from palmfx.offline.synth; VERIFY: real ReShade names",
             "synthetic": {
                 "seed": scene.seed,
