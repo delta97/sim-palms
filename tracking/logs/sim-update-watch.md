@@ -1,6 +1,6 @@
 # Sim and SDK update watch log
 
-Process: `docs/process/sim-update-watch.md`. Regression routine and its own log: TEST-104. Newest row at the bottom.
+Process: `docs/process/sim-update-watch.md`. Regression routine and its own log: `tests/regression/ROUTINE.md` and `tests/regression/LOG.md` (TEST-015; first run TEST-104). The last column keeps its name for continuity. Newest row at the bottom.
 
 | date | sim version | SDK version | source checked | finding | trigger fired (yes/no) | TEST-104 run reference |
 |---|---|---|---|---|---|---|

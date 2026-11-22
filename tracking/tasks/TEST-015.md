@@ -37,7 +37,6 @@ A written routine to run after every sim or SDK update, a log with one row per u
 ## Acceptance criteria
 
 - [x] ROUTINE.md can be followed without this task file.
-- [ ] ROUTINE.md can be followed without this task file. (Reviewer check; not ticked by the implementer.)
 - [x] `new_entry` and `set` work as specified, with tests. Evidence: 26 passed in `tests/unit/regression/test_new_entry.py`.
 - [x] LOG.md table header matches the plan. Evidence: `test_committed_header_matches_plan` passes against the committed `tests/regression/LOG.md`.
 

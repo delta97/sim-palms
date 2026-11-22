@@ -2,7 +2,7 @@
 
 Purpose: catch MSFS 2024 sim, SDK and photogrammetry changes that can break exclusions or move the blobs, and decide when to run the TEST-104 regression routine. Covers risks R-01 (Exclude TIN or vegetation exclude broken), R-16 (photogrammetry refresh) and R-18 (toolchain drift) in `plans/detailed/07-risks-and-open-questions.md`. Kill criteria K1 and K9 in that plan use the log described below.
 
-This document only decides **when** to run the routine. The regression steps, pass criteria and regression log belong to **TEST-104**; do not copy them here.
+This document only decides **when** to run the routine. The regression steps, pass criteria and regression log are the regression routine `tests/regression/ROUTINE.md` and its log `tests/regression/LOG.md` (written by **TEST-015**; **TEST-104** runs it first and records the baseline); do not copy them here.
 
 Every URL below was read on 2026-11-22 unless marked `VERIFY:`.
 
@@ -27,10 +27,10 @@ Known thread (R-01): https://devsupport.flightsimulator.com/t/su6-beta-exclusion
 
 ## Trigger rules
 
-1. Sim update or SDK update installed -> run TEST-104.
-2. Beta or release note mentions exclusions, TIN, polygons, vegetation or photogrammetry -> run TEST-104 when that build reaches the user's install, and note in the log.
-3. New DevSupport report of broken exclusions on the current version -> run TEST-104 now.
-4. SoCal photogrammetry or World Update affecting a target city -> run TEST-104 at affected sites (R-16).
+1. Sim update or SDK update installed -> run the regression routine.
+2. Beta or release note mentions exclusions, TIN, polygons, vegetation or photogrammetry -> run the regression routine when that build reaches the user's install, and note in the log.
+3. New DevSupport report of broken exclusions on the current version -> run the regression routine now.
+4. SoCal photogrammetry or World Update affecting a target city -> run the regression routine at affected sites (R-16).
 
 ## How to log
 
@@ -38,7 +38,7 @@ Add one row per check, newest at the bottom, to `tracking/logs/sim-update-watch.
 
 - Log a row even when nothing changed, so the log shows the watch ran.
 - Record version numbers exactly as published, with the source URL. Public version numbers are not the installed version: mark the installed version `VERIFY on the user's PC` until read from the sim (VERIFY: exact menu path).
-- If a trigger fired, put the TEST-104 regression-log entry reference in the last column, or `pending` until it has run. A failed TEST-104 on exclusions is kill criterion K1 (K9 for an active or released package); say so in the finding.
-- Do not call a bug fixed from a staff reply alone; the fix is confirmed only by a passing TEST-104 on the user's install.
+- If a trigger fired, put the regression-log entry reference (`tests/regression/LOG.md <date> <trigger>`) in the last column, or `pending` until it has run. A failed TEST-104 on exclusions is kill criterion K1 (K9 for an active or released package); say so in the finding.
+- Do not call a bug fixed from a staff reply alone; the fix is confirmed only by a passing regression run on the user's install.
 
 The risk reviews (RISK-006..008) read this log.
