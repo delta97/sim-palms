@@ -1,0 +1,21 @@
+{
+  "big-lama": {
+    "url": "https://github.com/enesmsahin/simple-lama-inpainting/releases/download/v0.1.0/big-lama.pt",
+    "size_bytes": 205803670,
+    "sha256": null,
+    "sha256_note": "VERIFY: no checksum is published (GitHub release asset digest is null, read 2026-11-22) and the weights were not downloaded by the task agent. Download once, run sha256sum on data/fx/models/big-lama.pt and record it here.",
+    "version": "simple-lama-inpainting release v0.1.0",
+    "source_project": "https://github.com/enesmsahin/simple-lama-inpainting (TorchScript export of LaMa, Suvorov et al., arXiv:2109.07161; original https://github.com/advimman/lama)",
+    "licence": "Apache-2.0 for simple-lama-inpainting (LICENSE read 2026-11-22) and for advimman/lama (LICENSE read 2026-11-22). VERIFY: whether the trained big-lama weights carry a separate licence; the original weights are at https://huggingface.co/smartywu/big-lama, a page that was not read.",
+    "read_on": "2026-11-22",
+    "input": {
+      "range": "float32 [0, 1] (uint8 / 255); output also [0, 1]",
+      "channels": "RGB, NCHW, batch of 1",
+      "mask": "1 = pixel to fill, 0 = keep; mask tensor is (mask > 0) * 1, same HxW as the image",
+      "size_multiple": 8,
+      "pad_mode": "symmetric, bottom and right",
+      "call": "model(image, mask)",
+      "source": "simple_lama_inpainting/models/model.py and utils/util.py on main, read 2026-11-22"
+    }
+  }
+}
