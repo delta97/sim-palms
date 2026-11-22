@@ -1,0 +1,115 @@
+{
+  "objectIdFieldName": "OBJECTID",
+  "geometryType": "esriGeometryPoint",
+  "spatialReference": {
+    "wkid": 4326,
+    "latestWkid": 4326
+  },
+  "fields": [
+    {
+      "name": "OBJECTID",
+      "type": "esriFieldTypeOID",
+      "alias": "OBJECTID"
+    },
+    {
+      "name": "SPECIES_NAME",
+      "type": "esriFieldTypeString",
+      "alias": "Species",
+      "length": 80
+    },
+    {
+      "name": "COMMON_NAME",
+      "type": "esriFieldTypeString",
+      "alias": "Common name",
+      "length": 80
+    },
+    {
+      "name": "HEIGHT_FT",
+      "type": "esriFieldTypeSmallInteger",
+      "alias": "Height (ft)"
+    },
+    {
+      "name": "DBH_IN",
+      "type": "esriFieldTypeSmallInteger",
+      "alias": "DBH (in)"
+    },
+    {
+      "name": "INSPCTDATE",
+      "type": "esriFieldTypeDate",
+      "alias": "Inspection date",
+      "length": 8
+    }
+  ],
+  "features": [
+    {
+      "attributes": {
+        "OBJECTID": 101,
+        "SPECIES_NAME": "Washingtonia robusta",
+        "COMMON_NAME": "Mexican Fan Palm",
+        "HEIGHT_FT": 45,
+        "DBH_IN": 14,
+        "INSPCTDATE": 1546300800000
+      },
+      "geometry": {
+        "x": -117.2531,
+        "y": 32.7893
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 102,
+        "SPECIES_NAME": "Platanus racemosa",
+        "COMMON_NAME": "California Sycamore",
+        "HEIGHT_FT": 30,
+        "DBH_IN": 20,
+        "INSPCTDATE": 1546300800000
+      },
+      "geometry": {
+        "x": -117.2528,
+        "y": 32.7894
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 103,
+        "SPECIES_NAME": "Syagrus romanzoffiana",
+        "COMMON_NAME": "Queen Palm",
+        "HEIGHT_FT": 28,
+        "DBH_IN": 12,
+        "INSPCTDATE": 1577836800000
+      },
+      "geometry": {
+        "x": -117.2525,
+        "y": 32.7895
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 104,
+        "SPECIES_NAME": "Phoenix canariensis",
+        "COMMON_NAME": "Canary Island Date Palm",
+        "HEIGHT_FT": 22,
+        "DBH_IN": 30,
+        "INSPCTDATE": 1577836800000
+      },
+      "geometry": {
+        "x": -117.2522,
+        "y": 32.7896
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 105,
+        "SPECIES_NAME": null,
+        "COMMON_NAME": null,
+        "HEIGHT_FT": null,
+        "DBH_IN": null,
+        "INSPCTDATE": null
+      },
+      "geometry": {
+        "x": -117.2519,
+        "y": 32.7897
+      }
+    }
+  ]
+}

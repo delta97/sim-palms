@@ -512,7 +512,7 @@ Vintage rule, shared helper `derive_vintage(cfg_vintage, record_dates, layer_edi
 1. Layer info: `GET <url>?f=json` (cached). Read `maxRecordCount` (default 1000), `objectIdField` (default `OBJECTID`), `advancedQueryCapabilities.supportsPagination`, `editingInfo.lastEditDate`, `fields`. Fail with `SourceError` if `species_field` is not in `fields`.
 2. Query `GET <url>/query` with `where=<cfg.where>`, `geometry=<lon_min>,<lat_min>,<lon_max>,<lat_max>`, `geometryType=esriGeometryEnvelope`, `inSR=4326`, `spatialRel=esriSpatialRelIntersects`, `outFields=*`, `returnGeometry=true`, `outSR=4326`, `orderByFields=<objectIdField> ASC`, `f=json`, `resultOffset=<n>`, `resultRecordCount=<page>`, where `page = min(maxRecordCount, 2000)`.
 3. Continue while the response has `exceededTransferLimit: true` or a full page came back. Each page cached as its own entry keyed by URL + params.
-4. No pagination support: `returnIdsOnly=true` first, then fetch by `objectIds` in chunks of `page`.
+4. No pagination support (only an explicit `supportsPagination: true` enables `resultOffset`; absent or false uses the fallback): `returnIdsOnly=true` first, then fetch by `objectIds` in chunks of `min(page, 500)` (ids travel in the GET query string, so the chunk is capped to keep URLs short). A page that adds no new object ids raises `SourceError` (server ignored `resultOffset`).
 5. A JSON body with an `error` key (ArcGIS returns HTTP 200 for errors) raises `SourceError` with its `code` and `message`.
 6. Point geometry `{x, y}` -> lon/lat. Features with null geometry are skipped and counted.
 7. Hard stop at 200,000 records per source per run (guards a wrong bbox); raise `SourceError`.
