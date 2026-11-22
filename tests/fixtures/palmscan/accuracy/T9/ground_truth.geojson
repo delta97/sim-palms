@@ -1,0 +1,118 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.001,
+          0.001
+        ]
+      },
+      "properties": {
+        "gt_id": "T9-gt-0001",
+        "height_class": "S",
+        "species": "washingtonia_robusta",
+        "species_basis": "inventory",
+        "context": "street",
+        "confidence": "high",
+        "height_ref_m": 6.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.002,
+          0.001
+        ]
+      },
+      "properties": {
+        "gt_id": "T9-gt-0002",
+        "height_class": "M",
+        "species": "washingtonia_filifera",
+        "species_basis": "imagery",
+        "context": "street",
+        "confidence": "high",
+        "height_ref_m": 11.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.003,
+          0.001
+        ]
+      },
+      "properties": {
+        "gt_id": "T9-gt-0003",
+        "height_class": "T",
+        "species": "washingtonia_robusta",
+        "species_basis": "streetview",
+        "context": "park",
+        "confidence": "high",
+        "height_ref_m": 17.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.004,
+          0.001
+        ]
+      },
+      "properties": {
+        "gt_id": "T9-gt-0004",
+        "height_class": "X",
+        "species": "washingtonia_robusta",
+        "species_basis": "imagery",
+        "context": "park",
+        "confidence": "high",
+        "height_ref_m": 26.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.005,
+          0.001
+        ]
+      },
+      "properties": {
+        "gt_id": "T9-gt-0005",
+        "height_class": "unknown",
+        "species": "unknown",
+        "species_basis": "unknown",
+        "context": "street",
+        "confidence": "low"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.006,
+          0.001
+        ]
+      },
+      "properties": {
+        "gt_id": "T9-gt-0006",
+        "height_class": "M",
+        "species": "washingtonia_filifera",
+        "species_basis": "imagery",
+        "context": "street",
+        "confidence": "high",
+        "height_ref_m": 9.0
+      }
+    }
+  ]
+}
