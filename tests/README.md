@@ -1,7 +1,7 @@
 # Tests
 
 How to run each test layer, what CI runs, what only runs on the sim PC, and how the CI wiring
-is set up. Every command here was run on the branch base `38b886d`, with `.[dev,scan,lidar,gen]` installed,
+is set up. Every command here was run on the branch base `38b886d`, with `.[dev,scan,lidar,gen,fx]` installed,
 on Windows 11 (Python 3.14.2) and on Ubuntu 24.04 (Python 3.12.3, the CI version, under WSL). The
 Ubuntu run is the closest local match to CI. The Windows CI job was not run locally. The files that CI, pytest and the CLIs depend on (`.github/`,
 `pyproject.toml`, `tests/conftest.py`, `tests/helpers/`, `tests/regression/`, `scripts/`,
@@ -13,8 +13,8 @@ Setup, from the repo root:
 
 ```bash
 python -m venv .venv
-.venv/Scripts/python -m pip install -e ".[dev,scan,lidar,gen]"   # Windows (Git Bash)
-.venv/bin/python -m pip install -e ".[dev,scan,lidar,gen]"       # Linux
+.venv/Scripts/python -m pip install -e ".[dev,scan,lidar,gen,fx]"   # Windows (Git Bash)
+.venv/bin/python -m pip install -e ".[dev,scan,lidar,gen,fx]"       # Linux
 ```
 
 Use the venv interpreter (or activate the venv) for every command below. The examples say
@@ -145,7 +145,7 @@ its 30 s budget locally (120 s only when the `CI` env var is set).
 `.github/workflows/python.yml` (triggers on `main` pushes and PRs that touch code, tests,
 `schemas/`, `regions/` or the workflow):
 
-- `lint`, `ubuntu-latest`, Python 3.12: `pip install -e ".[dev,scan,lidar,gen]"`, then
+- `lint`, `ubuntu-latest`, Python 3.12: `pip install -e ".[dev,scan,lidar,gen,fx]"`, then
   `ruff check .`, `ruff format --check .`, `mypy`.
 - `test`, matrix `ubuntu-latest` and `windows-latest`, Python 3.12, same install, then
   `pytest -m "not network and not sim" --cov=palmcore --cov-report=term-missing --cov-fail-under=85`.

@@ -22,7 +22,7 @@ import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-EXTRAS = "dev,scan,lidar,gen"
+EXTRAS = "dev,scan,lidar,gen,fx"
 COVERAGE_MIN = 85
 
 

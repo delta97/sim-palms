@@ -28,7 +28,7 @@ jobs:
         with:
           python-version: "3.12"
           cache: pip
-      - run: pip install -e ".[dev,scan,lidar,gen]"
+      - run: pip install -e ".[dev,scan,lidar,gen,fx]"
       - run: ruff check .
       - run: ruff format --check .
       - run: mypy
@@ -45,5 +45,5 @@ jobs:
         with:
           python-version: "3.12"
           cache: pip
-      - run: pip install -e ".[dev,scan,lidar,gen]"
+      - run: pip install -e ".[dev,scan,lidar,gen,fx]"
       - run: pytest -m "not network and not sim" --cov=palmcore --cov-report=term-missing --cov-fail-under=85
