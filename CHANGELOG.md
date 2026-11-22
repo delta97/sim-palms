@@ -5,6 +5,7 @@ Format: `- TASK-ID: what changed (PR link)`.
 
 ## Unreleased
 
+- Repo: disabled the GitHub Actions workflows (`python`, `tracking`) at the user's request; added `scripts/ci.py`, a local CI that runs the same lint, type, test/coverage and tracking checks.
 - TEST-013: Added the frametime capture parser and run comparison report (`tests/perf/`), budget provisional until DEC-005 (local merge).
 - TEST-008: Added optional image-diff scoring for visual viewpoints (`tests/visual/diff_score.py`), thresholds uncalibrated until TEST-018 (local merge).
 - SCAN-020: Added the 3DEP EPT LiDAR adapter (pipeline generation, tiling, streamed tile cache, injectable PDAL runner); PDAL round-trip untested locally (local merge).

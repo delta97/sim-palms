@@ -8,7 +8,7 @@
 - **Phase 1 code (palmscan) is complete on fixtures.** `palmscan run` goes ingest → dedupe → species → priors → sizes/exclusion/buildings/masks → `palms.geojson` + QA outputs, offline and byte-reproducible (`SOURCE_DATE_EPOCH`). Adapters: geojson/CSV file, ArcGIS REST, Overpass/OSM, building footprints. Live samples are recorded in `tests/fixtures/palmscan/recorded/` (SCAN-007).
 - **Phase 2 code (palmgen) has its building blocks:** inputs, GUIDs, tiling, exclusion geometry + building clipping, masks, variant/scale/heading, template engine on *fake* templates, build reports. The real Scenery Editor XML (SPIKE-003) and package build (SPIKE-004) need the sim PC.
 - **Shared core (palmcore):** contracts and schemas, region config, ids, geo, cache, logging, CLI plumbing, palms.geojson I/O, asset manifest + glTF checks.
-- **Tests:** about 1,680 passing (Windows local) plus CI on Ubuntu and Windows. Harness, golden files, contract checks, geometry helpers, accuracy metrics, ground-truth format, visual protocol and post-update regression routine are in `tests/`.
+- **Tests:** 1,822 passing locally. **GitHub Actions is disabled** (user request, 2026-11-22); `python scripts/ci.py` is the CI now and gates every merge to `main`. Harness, golden files, contract checks, geometry helpers, accuracy metrics, ground-truth format, visual protocol and post-update regression routine are in `tests/`.
 - **Phase 4 (LiDAR) in progress:** CHM, peaks/crowns, species rules and in-run accuracy are merged. EPT adapter, palm rule filter, inventory–LiDAR merge and the tree classifier are being built.
 - Nothing about the sim, the SDK or SimConnect has been confirmed. Every such claim in code or docs is marked `VERIFY:` and waits for the SPIKE tasks.
 

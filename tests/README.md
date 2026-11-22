@@ -120,7 +120,27 @@ It applies only under pytest. Plain Python can still open sockets. Its self-test
 
 ## CI wiring
 
-### What runs on main
+### Local CI (current)
+
+**The GitHub Actions workflows are disabled** in the repository settings (2026-11-22, at the
+user's request). CI runs locally instead, with one command that mirrors both workflows:
+
+```bash
+python scripts/ci.py --install   # once: create .venv with dev,scan,lidar,gen
+python scripts/ci.py             # ruff check, ruff format --check, mypy, pytest + coverage gate, tasks validate/conflicts
+python scripts/ci.py --quick     # same, skipping tests marked slow
+```
+
+It exits 0 only if every step passes. Run it before merging a task branch into `main`. The
+integrator runs it on `main` after every merge, before pushing. To turn GitHub CI back on:
+`gh workflow enable python` and `gh workflow enable tracking`. The workflow files below are kept
+unchanged so that works.
+
+Differences from the GitHub runs: the local run uses this machine's Python (3.14 on the dev box)
+instead of 3.12, and one OS instead of the Ubuntu + Windows matrix. The slow CHM benchmark uses
+its 30 s budget locally (120 s only when the `CI` env var is set).
+
+### What the disabled workflows ran
 
 `.github/workflows/python.yml` (triggers on `main` pushes and PRs that touch code, tests,
 `schemas/`, `regions/` or the workflow):

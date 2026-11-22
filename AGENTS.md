@@ -22,6 +22,7 @@ every model and every person. `CLAUDE.md` imports it; other tools should be poin
 | `CHANGELOG.md` | One line per merged task | Integrator, at merge |
 | `scripts/tasks.py` | Task CLI: list, ready, batch, claim, set, log, validate, board | |
 | `scripts/wt.sh` | Worktree helper for parallel work | |
+| `scripts/ci.py` | Local CI (GitHub Actions is disabled): lint, types, tests + coverage, tracking checks. Must pass before merging to `main` | |
 | `.claude/agents/*.md` | Specialist subagents for this project | |
 | `.claude/skills/*/SKILL.md` | Repeatable procedures: `/start-task`, `/handoff`, `/plan-batch` | |
 
@@ -188,6 +189,7 @@ Each task's `agent` field names the suggested specialist.
 
 - [ ] Every Acceptance criterion is ticked, with evidence in the Log.
 - [ ] Verification commands pass; unit tests added for new code; `python3 scripts/tasks.py validate` passes.
+- [ ] `python scripts/ci.py` passes on the branch (it replaces GitHub CI, which is disabled).
 - [ ] Only files in `touches` (plus the task file, session log and plan section) changed. If more, update `touches` and say why.
 - [ ] Docs or detailed plan updated if behaviour or interfaces changed.
 - [ ] Reviewed by someone other than the implementer, then merged.
