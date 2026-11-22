@@ -1,7 +1,7 @@
 ---
 id: SCAN-003
 title: "Source adapter base and geojson_file adapter"
-status: todo
+status: in_progress
 phase: 1
 area: SCAN
 kind: build
@@ -11,10 +11,10 @@ requires: [none]
 agent: geo-data-engineer
 estimate_h: 3
 touches: [palmscan/sources/base.py, palmscan/sources/geojson_file.py, tests/unit/palmscan/test_scan_geojson_file.py, tests/fixtures/palmscan/geojson_file/]
-owner: ""
-branch: ""
-worktree: ""
-updated: 2026-11-21
+owner: claude-agent
+branch: task/scan-003-source-adapter-base-and-geojson-file-ada
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-003"
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -56,3 +56,4 @@ pytest tests/unit/palmscan/test_scan_geojson_file.py -q
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [claude-agent] Claimed. branch=task/scan-003-source-adapter-base-and-geojson-file-ada worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-003
