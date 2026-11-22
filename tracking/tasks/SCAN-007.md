@@ -1,7 +1,7 @@
 ---
 id: SCAN-007
 title: "Record live source fixtures and confirm source fields"
-status: review
+status: done
 phase: 1
 area: SCAN
 kind: test
@@ -62,3 +62,4 @@ grep -c VERIFY tests/fixtures/palmscan/recorded/README.md   # expect 0 unanswere
 - 2026-11-22 [claude-agent] Plan contradictions found (also in fixtures README and plan W5): SD layer 20 has status field MAPNG_STAT_CD (RM removed = 25% of rows; removed palms were being ingested via COMMON_NAME); no editingInfo.lastEditDate; SPECIES_NAME null on ~37% of AB rows; la-trees county id is a row index, file has no height/status/date; per-city la-trees files are EPSG:2229 with class-string heights; OSM has zero trees in the SD recording bbox (recorded a second bbox with 29 Jubaea palms); MS footprints = CSV index of country+L9 quadkey .csv.gz GeoJSONL tiles (78-171 MB).
 - 2026-11-22 [claude-agent] Evidence: pytest 1548 passed 4 skipped (new test_scan_recorded_sources.py passes offline; species_names and filters tests pass); ruff check, ruff format --check, mypy clean; recorded fixtures 25-40 KB per source; grep -c VERIFY on README = 0. Acceptance boxes 1-4 ticked.
 - 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] Status review -> done.

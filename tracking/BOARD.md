@@ -7,14 +7,17 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 157 | 1 | 0 | 1 | 54 | 0 | 213 |
+| 153 | 4 | 0 | 1 | 55 | 0 | 213 |
 
 ## In progress / in review
 
 | Task | Status | Owner | Branch | Title |
 |---|---|---|---|---|
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
-| [SCAN-007](tasks/SCAN-007.md) | in_progress | claude-agent | task/scan-007-record-live-source-fixtures-and-confirm | Record live source fixtures and confirm source fields |
+| [SCAN-020](tasks/SCAN-020.md) | in_progress | claude-agent | task/scan-020-usgs-3dep-ept-lidar-adapter-pdal-pipelin | USGS 3DEP EPT LiDAR adapter (PDAL pipeline, tiles, cache) |
+| [SCAN-024](tasks/SCAN-024.md) | in_progress | claude-agent | task/scan-024-palm-rule-filter-with-reject-reasons | Palm rule filter with reject reasons |
+| [SCAN-025](tasks/SCAN-025.md) | in_progress | claude-agent | task/scan-025-inventory-to-lidar-matching-and-merge | Inventory-to-LiDAR matching and merge |
+| [SCAN-027](tasks/SCAN-027.md) | in_progress | claude-agent | task/scan-027-decision-tree-species-classifier-with-ru | Decision tree species classifier with rules fallback |
 
 ## Blocked
 
@@ -30,10 +33,6 @@ _None._
 | [RISK-003](tasks/RISK-003.md) | 1 | network, human | geo-data-engineer | Inventory other palm and tree mods and their coverage for mask_out defaults |
 | [DEC-002](tasks/DEC-002.md) | 3 | human | task-planner | Decide: build or license the palm models |
 | [DEC-008](tasks/DEC-008.md) | 3 | human | task-planner | Decide: storage for large asset binaries (Git LFS or external) |
-| [SCAN-020](tasks/SCAN-020.md) | 4 | none | lidar-analyst | USGS 3DEP EPT LiDAR adapter (PDAL pipeline, tiles, cache) |
-| [SCAN-024](tasks/SCAN-024.md) | 4 | none | lidar-analyst | Palm rule filter with reject reasons |
-| [SCAN-025](tasks/SCAN-025.md) | 4 | none | lidar-analyst | Inventory-to-LiDAR matching and merge |
-| [SCAN-027](tasks/SCAN-027.md) | 4 | none | lidar-analyst | Decision tree species classifier with rules fallback |
 | [DEC-005](tasks/DEC-005.md) | 5 | human | test-engineer | Decide: performance budget and reference hardware/settings |
 | [TEST-013](tasks/TEST-013.md) | 5 | none | test-engineer | Build the frametime capture parser and run comparison report |
 | [TEST-008](tasks/TEST-008.md) | 6 | none | test-engineer | Add optional image-diff scoring for visual viewpoints |
@@ -62,7 +61,7 @@ _None._
 | [SPIKE-011](tasks/SPIKE-011.md) | todo | human | SPIKE-010, RISK-005 | Write the Phase 0 go/no-go proposal and get the user's decision |
 | [TEST-006](tasks/TEST-006.md) | todo | windows-sim |  | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
 
-## Phase 1 (25/31 done)
+## Phase 1 (26/31 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -85,7 +84,7 @@ _None._
 | [SCAN-004](tasks/SCAN-004.md) | done | none | SCAN-003 | ArcGIS REST inventory adapter with paging and cache |
 | [SCAN-005](tasks/SCAN-005.md) | done | none | SCAN-003 | Overpass client and OSM tree adapter |
 | [SCAN-006](tasks/SCAN-006.md) | done | none | SCAN-005 | Building footprints adapter (OSM, Microsoft file) |
-| [SCAN-007](tasks/SCAN-007.md) | in_progress | network | SCAN-002, SCAN-004, SCAN-006 | Record live source fixtures and confirm source fields |
+| [SCAN-007](tasks/SCAN-007.md) | done | network | SCAN-002, SCAN-004, SCAN-006 | Record live source fixtures and confirm source fields |
 | [SCAN-008](tasks/SCAN-008.md) | done | none | SCAN-002, SCAN-004, SCAN-005 | Inventory ingest stage and cross-source dedupe |
 | [SCAN-009](tasks/SCAN-009.md) | done | none | SCAN-002 | Palm sizes, exclusion radius, building conflict, mask_out |
 | [SCAN-010](tasks/SCAN-010.md) | done | none | SCAN-001 | Species priors and deterministic prior sampling |
@@ -180,14 +179,14 @@ _None._
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
 | [GATE-P4](tasks/GATE-P4.md) | todo | human, windows-sim | GATE-P2, SCAN-101, TEST-012, DEC-006 | Phase 4 exit gate: LiDAR accuracy targets met and beach site fixed in the sim |
-| [SCAN-020](tasks/SCAN-020.md) | todo | none | SCAN-003 | USGS 3DEP EPT LiDAR adapter (PDAL pipeline, tiles, cache) |
+| [SCAN-020](tasks/SCAN-020.md) | in_progress | none | SCAN-003 | USGS 3DEP EPT LiDAR adapter (PDAL pipeline, tiles, cache) |
 | [SCAN-021](tasks/SCAN-021.md) | todo | network | SCAN-020, TEST-100 | Record LiDAR fixtures and confirm 3DEP EPT facts |
 | [SCAN-022](tasks/SCAN-022.md) | done | none | SCAN-001 | Canopy height model (DTM, DSM, CHM) |
 | [SCAN-023](tasks/SCAN-023.md) | done | none | SCAN-022 | Peak detection and watershed crown segmentation |
-| [SCAN-024](tasks/SCAN-024.md) | todo | none | SCAN-023 | Palm rule filter with reject reasons |
-| [SCAN-025](tasks/SCAN-025.md) | todo | none | SCAN-008 | Inventory-to-LiDAR matching and merge |
+| [SCAN-024](tasks/SCAN-024.md) | in_progress | none | SCAN-023 | Palm rule filter with reject reasons |
+| [SCAN-025](tasks/SCAN-025.md) | in_progress | none | SCAN-008 | Inventory-to-LiDAR matching and merge |
 | [SCAN-026](tasks/SCAN-026.md) | done | none | SCAN-010 | Species shape rules and classification order |
-| [SCAN-027](tasks/SCAN-027.md) | todo | none | SCAN-026 | Decision tree species classifier with rules fallback |
+| [SCAN-027](tasks/SCAN-027.md) | in_progress | none | SCAN-026 | Decision tree species classifier with rules fallback |
 | [SCAN-028](tasks/SCAN-028.md) | todo | none | SCAN-013, SCAN-020, SCAN-024, SCAN-025, SCAN-027, SCAN-029 | Wire LiDAR stages into palmscan run, QA and eval |
 | [SCAN-029](tasks/SCAN-029.md) | done | none | SCAN-001, TEST-010 | Run the TEST-010 accuracy evaluation from palmscan (in-run QA) |
 | [SCAN-030](tasks/SCAN-030.md) | todo | network, human | SCAN-021, SCAN-028, TEST-101 | Tune LiDAR palm thresholds on test sites |
