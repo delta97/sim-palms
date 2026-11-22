@@ -7,19 +7,21 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 144 | 0 | 1 | 1 | 67 | 0 | 213 |
+| 143 | 2 | 1 | 1 | 67 | 0 | 214 |
 
 ## In progress / in review
 
 | Task | Status | Owner | Branch | Title |
 |---|---|---|---|---|
+| [FX-004](tasks/FX-004.md) | in_progress | claude-agent | task/fx-004-synthetic-test-scene-generator-and-pytes | Synthetic test scene generator and pytest fixtures |
+| [FX-008](tasks/FX-008.md) | in_progress | claude-agent | task/fx-008-ingest-pose-interpolation-and-sample-fix | Ingest, pose interpolation and sample-fixture builder |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
 
 ## Blocked
 
 | Task | Title | Depends on |
 |---|---|---|
-| [FX-014](tasks/FX-014.md) | Inpainting runner: Telea baseline, LaMa backend, tiling | FX-002 |
+| [FX-014](tasks/FX-014.md) | Inpainting runner: Telea baseline, LaMa backend, tiling | FX-002, FX-026 |
 
 ## Ready now (all dependencies done)
 
@@ -33,9 +35,8 @@ Generated: 2026-11-22
 | [DEC-008](tasks/DEC-008.md) | 3 | human | task-planner | Decide: storage for large asset binaries (Git LFS or external) |
 | [DEC-005](tasks/DEC-005.md) | 5 | human | test-engineer | Decide: performance budget and reference hardware/settings |
 | [FX-001](tasks/FX-001.md) | 7 | windows-sim, human | render-fx-researcher | Verify ReShade depth access in MSFS 2024 (incl. multiplayer/online lockout) |
-| [FX-004](tasks/FX-004.md) | 7 | none | render-fx-researcher | Synthetic test scene generator and pytest fixtures |
 | [FX-006](tasks/FX-006.md) | 7 | windows-sim | simconnect-dotnet-engineer | SimConnect pose logger, screenshot trigger and camera SimVar check |
-| [FX-008](tasks/FX-008.md) | 7 | none | python-architect | Ingest, pose interpolation and sample-fixture builder |
+| [FX-026](tasks/FX-026.md) | 7 | network, human | render-fx-researcher | Fetch and pin the LaMa weights, then run the LaMa inpainting backend end to end |
 
 ## Phase 0 (2/17 done)
 
@@ -258,24 +259,24 @@ Generated: 2026-11-22
 | [TEST-008](tasks/TEST-008.md) | done | none | TEST-102 | Add optional image-diff scoring for visual viewpoints |
 | [TEST-018](tasks/TEST-018.md) | todo | windows-sim | TEST-008, TEST-104 | Calibrate the image-diff noise floor at T1 |
 
-## Phase 7 (4/27 done)
+## Phase 7 (4/28 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
 | [FX-001](tasks/FX-001.md) | todo | windows-sim, human |  | Verify ReShade depth access in MSFS 2024 (incl. multiplayer/online lockout) |
 | [FX-002](tasks/FX-002.md) | done | none | ARCH-009, SCAN-001 | Scaffold palmfx.offline package, session I/O and CLI |
 | [FX-003](tasks/FX-003.md) | done | none | FX-002 | Camera model: geodesy, attitude, pinhole projection |
-| [FX-004](tasks/FX-004.md) | todo | none | FX-003, FX-005 | Synthetic test scene generator and pytest fixtures |
+| [FX-004](tasks/FX-004.md) | in_progress | none | FX-003, FX-005 | Synthetic test scene generator and pytest fixtures |
 | [FX-005](tasks/FX-005.md) | done | none | FX-002 | ReShade depth-pack effect and depth decoder |
 | [FX-006](tasks/FX-006.md) | todo | windows-sim | FX-002 | SimConnect pose logger, screenshot trigger and camera SimVar check |
 | [FX-007](tasks/FX-007.md) | todo | windows-sim, human | FX-001, FX-005, FX-006, DEC-004, SCAN-100 | Capture procedure and first capture sessions at the test block |
-| [FX-008](tasks/FX-008.md) | todo | none | FX-003, FX-005 | Ingest, pose interpolation and sample-fixture builder |
+| [FX-008](tasks/FX-008.md) | in_progress | none | FX-003, FX-005 | Ingest, pose interpolation and sample-fixture builder |
 | [FX-009](tasks/FX-009.md) | todo | none | FX-004, FX-008 | Calibration: clicks tool, vfov, time offset, pose bias, depth model |
 | [FX-010](tasks/FX-010.md) | todo | none | FX-004, ARCH-002 | Mask by projection from palms.geojson |
 | [FX-011](tasks/FX-011.md) | todo | none | FX-004 | Mask by depth and colour heuristics |
 | [FX-012](tasks/FX-012.md) | done | none | FX-002 | Mask comparison metrics (pixel IoU, instance precision/recall) |
 | [FX-013](tasks/FX-013.md) | todo | human | FX-007, FX-008, FX-009 | Hand labels: ground-truth blob masks, correspondences, committed sample fixture |
-| [FX-014](tasks/FX-014.md) | blocked | network | FX-002 | Inpainting runner: Telea baseline, LaMa backend, tiling |
+| [FX-014](tasks/FX-014.md) | blocked | network | FX-002, FX-026 | Inpainting runner: Telea baseline, LaMa backend, tiling |
 | [FX-015](tasks/FX-015.md) | todo | none | FX-004, FX-014 | Temporal stabilisation baselines (flow fill, previous-frame reuse, temporal blending) |
 | [FX-016](tasks/FX-016.md) | todo | none | FX-015 | Flicker metric with pseudo-mask baseline |
 | [FX-017](tasks/FX-017.md) | todo | none | FX-010, FX-014 | Palm sprite compositing scaled by depth |
@@ -287,5 +288,6 @@ Generated: 2026-11-22
 | [FX-023](tasks/FX-023.md) | todo | windows-sim | FX-100 | Stage B: pose helper and shared-memory IPC to the add-on |
 | [FX-024](tasks/FX-024.md) | todo | windows-sim, gpu | FX-021, FX-022, FX-023, TEST-103, DEC-005 | Stage B: frame-time budget measurement |
 | [FX-025](tasks/FX-025.md) | todo | windows-sim, gpu, human | FX-021 | Stage B: DLSS, frame generation and DLSS 5 interaction study |
+| [FX-026](tasks/FX-026.md) | todo | network, human | FX-002 | Fetch and pin the LaMa weights, then run the LaMa inpainting backend end to end |
 | [FX-100](tasks/FX-100.md) | todo | human | FX-020 | Deliverable: Stage A offline image-layer go/no-go report |
 | [GATE-P7](tasks/GATE-P7.md) | todo | human | FX-100 | Phase 7 exit gate: offline image-layer go/no-go accepted |
