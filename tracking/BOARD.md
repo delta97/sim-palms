@@ -7,14 +7,13 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 194 | 5 | 0 | 1 | 13 | 0 | 213 |
+| 194 | 4 | 0 | 1 | 14 | 0 | 213 |
 
 ## In progress / in review
 
 | Task | Status | Owner | Branch | Title |
 |---|---|---|---|---|
 | [ARCH-008](tasks/ARCH-008.md) | in_progress | claude-agent | task/arch-008-write-the-two-example-region-configs-and | Write the two example region configs and verify their sources |
-| [ASSET-005](tasks/ASSET-005.md) | in_progress | claude-agent | task/asset-005-asset-manifest-schema-species-spec-forma | Asset manifest schema, species spec format, loader and generator (palmcore.assets) |
 | [GEN-002](tasks/GEN-002.md) | in_progress | claude-agent | task/gen-002-deterministic-guids-and-per-palm-hashes | Deterministic GUIDs and per-palm hashes |
 | [GEN-003](tasks/GEN-003.md) | in_progress | claude-agent | task/gen-003-0-01-degree-tiling-and-tile-naming | 0.01 degree tiling and tile naming |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
@@ -42,6 +41,7 @@ _None._
 | [TEST-015](tasks/TEST-015.md) | 2 | none | test-engineer | Write the post-update regression routine, log and entry scaffolder |
 | [ASSET-001](tasks/ASSET-001.md) | 3 | network | asset-pipeline-artist | Write reference sheets for the 5 SoCal palm species |
 | [ASSET-002](tasks/ASSET-002.md) | 3 | network | asset-pipeline-artist | Collect build-vs-license inputs for DEC-002 (palm models) |
+| [ASSET-006](tasks/ASSET-006.md) | 3 | none | python-architect | glTF stats and automated asset checks (triangle budgets, heights, alpha mode, textures, naming) |
 | [DEC-008](tasks/DEC-008.md) | 3 | human | task-planner | Decide: storage for large asset binaries (Git LFS or external) |
 | [DEC-005](tasks/DEC-005.md) | 5 | human | test-engineer | Decide: performance budget and reference hardware/settings |
 | [TEST-013](tasks/TEST-013.md) | 5 | none | test-engineer | Build the frametime capture parser and run comparison report |
@@ -139,7 +139,7 @@ _None._
 | [TEST-102](tasks/TEST-102.md) | todo | none | TEST-001, TEST-005 | Visual test protocol tooling: run scaffolder, checklist template, test log |
 | [TEST-104](tasks/TEST-104.md) | todo | windows-sim, human | TEST-015, TEST-016, TEST-007, GEN-100, GATE-P0 | Run the post-update regression routine once and record the baseline log entry |
 
-## Phase 3 (0/38 done)
+## Phase 3 (1/38 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -147,7 +147,7 @@ _None._
 | [ASSET-002](tasks/ASSET-002.md) | todo | network |  | Collect build-vs-license inputs for DEC-002 (palm models) |
 | [ASSET-003](tasks/ASSET-003.md) | todo | blender, windows-sim | SPIKE-004, SPIKE-001 | Install and pin Blender and the MSFS 2024 glTF exporter plugin |
 | [ASSET-004](tasks/ASSET-004.md) | todo | blender, windows-sim | ASSET-003, ASSET-008, SPIKE-003 | Smoke-test the asset pipeline end to end with a throwaway model |
-| [ASSET-005](tasks/ASSET-005.md) | in_progress | none | ARCH-001 | Asset manifest schema, species spec format, loader and generator (palmcore.assets) |
+| [ASSET-005](tasks/ASSET-005.md) | done | none | ARCH-001 | Asset manifest schema, species spec format, loader and generator (palmcore.assets) |
 | [ASSET-006](tasks/ASSET-006.md) | todo | none | ASSET-005 | glTF stats and automated asset checks (triangle budgets, heights, alpha mode, textures, naming) |
 | [ASSET-007](tasks/ASSET-007.md) | todo | none | ASSET-006, ASSET-004 | Model XML parsing, GUID cross-check and LOD switch values in the manifest |
 | [ASSET-008](tasks/ASSET-008.md) | todo | none | DEC-008 | Implement the asset large-file policy decided in DEC-008 (.gitattributes, assets/README.md) |

@@ -1,7 +1,7 @@
 ---
 id: ASSET-005
 title: "Asset manifest schema, species spec format, loader and generator (palmcore.assets)"
-status: review
+status: done
 phase: 3
 area: ASSET
 kind: build
@@ -65,3 +65,4 @@ python -m palmcore.assets validate --manifest tests/fixtures/palmcore/assets/man
 - 2026-11-22 [claude-agent] Schema not registered in palmcore/schemas.py SCHEMA_FILES (not in touches): loaded as load_schema('asset-manifest.schema.json') via schema_dir(). Integrator may add an 'asset-manifest' key later. Registry file format is unknown (SCAN-002 not here): _load_registry accepts a list, a mapping, or {species|keys|species_keys: list|mapping}; confirm when SCAN-002 lands. VERIFY (ASSET-004): package definition version location; validate reads a Version element/attribute from PackageDefinitions/palmfix-assets.xml if present.
 - 2026-11-22 [claude-agent] Resolved scale/fallback overlap: manifest (library.yaml) owns scale_limits and species_fallback defaults; region placement.scale_clamp and species_priors only override. Order: species variants, species_fallback[species], region species_priors if non-empty, species_fallback._default. Documented in plans/detailed/03-palm-assets.md ('Scale limits and species fallback', open question 21). Plan 04 / GEN-011 needs the matching edit (not my section). Note for integrator: no .gitattributes and autocrlf=true here; --check and the byte-for-byte test normalise CRLF, but consider eol=lf for assets/manifest.json.
 - 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] Status review -> done.

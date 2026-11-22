@@ -1,0 +1,25 @@
+# Keep LF in the working tree on every OS so generated files, golden files and
+# byte-for-byte comparisons match between Windows checkouts and Linux CI.
+* text=auto eol=lf
+
+# Windows-only scripts keep CRLF.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Binary assets.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.dds binary
+*.ktx2 binary
+*.glb binary
+*.bin binary
+*.blend binary
+*.zip binary
+*.laz binary
+*.las binary
+*.tif binary
+*.tiff binary
+*.dll binary
+*.exe binary
