@@ -1,0 +1,51 @@
+{
+  "currentVersion": 10.9,
+  "id": 20,
+  "name": "Synthetic Trees",
+  "type": "Feature Layer",
+  "geometryType": "esriGeometryPoint",
+  "maxRecordCount": 3,
+  "objectIdField": "OBJECTID",
+  "advancedQueryCapabilities": {
+    "supportsPagination": true,
+    "supportsOrderBy": true
+  },
+  "editingInfo": {
+    "lastEditDate": 1609459200000
+  },
+  "fields": [
+    {
+      "name": "OBJECTID",
+      "type": "esriFieldTypeOID",
+      "alias": "OBJECTID"
+    },
+    {
+      "name": "SPECIES_NAME",
+      "type": "esriFieldTypeString",
+      "alias": "Species",
+      "length": 80
+    },
+    {
+      "name": "COMMON_NAME",
+      "type": "esriFieldTypeString",
+      "alias": "Common name",
+      "length": 80
+    },
+    {
+      "name": "HEIGHT_FT",
+      "type": "esriFieldTypeSmallInteger",
+      "alias": "Height (ft)"
+    },
+    {
+      "name": "DBH_IN",
+      "type": "esriFieldTypeSmallInteger",
+      "alias": "DBH (in)"
+    },
+    {
+      "name": "INSPCTDATE",
+      "type": "esriFieldTypeDate",
+      "alias": "Inspection date",
+      "length": 8
+    }
+  ]
+}
