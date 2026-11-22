@@ -7,7 +7,7 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 200 | 6 | 0 | 1 | 6 | 0 | 213 |
+| 199 | 6 | 0 | 1 | 7 | 0 | 213 |
 
 ## In progress / in review
 
@@ -15,9 +15,9 @@ Generated: 2026-11-22
 |---|---|---|---|---|
 | [ARCH-002](tasks/ARCH-002.md) | in_progress | claude-agent | task/arch-002-define-the-palms-geojson-json-schema-and | Define the palms.geojson JSON Schema and a shared validator |
 | [ARCH-003](tasks/ARCH-003.md) | in_progress | claude-agent | task/arch-003-define-the-region-yaml-config-schema-and | Define the region YAML config schema and loader |
+| [GEN-001](tasks/GEN-001.md) | in_progress | claude-agent | task/gen-001-scaffold-palmgen-package-cli-surface-and | Scaffold palmgen package, CLI surface and data model |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
 | [RISK-002](tasks/RISK-002.md) | in_progress | claude-agent | task/risk-002-audit-model-texture-and-tool-licenses-fo | Audit model, texture and tool licenses for palm assets |
-| [RISK-004](tasks/RISK-004.md) | in_progress | claude-agent | task/risk-004-collect-airport-boundaries-and-known-air | Collect airport boundaries and known airport add-ons for default masks |
 | [SPIKE-009](tasks/SPIKE-009.md) | in_progress | claude-agent | task/spike-009-write-the-simconnect-spawn-and-disconnec | Write the SimConnect spawn-and-disconnect spike console app (C#) |
 | [TEST-001](tasks/TEST-001.md) | in_progress | claude-agent | task/test-001-build-the-shared-pytest-harness-and-fixt | Build the shared pytest harness and fixture loaders |
 
@@ -33,7 +33,6 @@ _None._
 | [SPIKE-001](tasks/SPIKE-001.md) | 0 | windows-sim, human | msfs-sdk-specialist | Install the MSFS 2024 SDK and create an empty Dev Mode scenery project |
 | [TEST-006](tasks/TEST-006.md) | 0 | windows-sim | msfs-sdk-specialist | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
 | [RISK-003](tasks/RISK-003.md) | 1 | network, human | geo-data-engineer | Inventory other palm and tree mods and their coverage for mask_out defaults |
-| [GEN-001](tasks/GEN-001.md) | 2 | none | scenery-generator-engineer | Scaffold palmgen package, CLI surface and data model |
 | [ASSET-001](tasks/ASSET-001.md) | 3 | network | asset-pipeline-artist | Write reference sheets for the 5 SoCal palm species |
 | [ASSET-002](tasks/ASSET-002.md) | 3 | network | asset-pipeline-artist | Collect build-vs-license inputs for DEC-002 (palm models) |
 | [ASSET-005](tasks/ASSET-005.md) | 3 | none | python-architect | Asset manifest schema, species spec format, loader and generator (palmcore.assets) |
@@ -98,12 +97,12 @@ _None._
 | [TEST-005](tasks/TEST-005.md) | todo | none | TEST-001 | Add the test-site registry schema and loader |
 | [TEST-100](tasks/TEST-100.md) | todo | human, windows-sim | TEST-005, TEST-006, DEC-004 | Define test sites T1-T5 (bbox, purpose, region, saved flights, three viewpoints each) |
 
-## Phase 2 (0/29 done)
+## Phase 2 (1/29 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
 | [GATE-P2](tasks/GATE-P2.md) | todo | human | GATE-P1, GEN-012, GEN-100, TEST-002, TEST-007, TEST-016, TEST-102, TEST-104 | Phase 2 exit gate: generated package removes the test neighbourhood's blobs |
-| [GEN-001](tasks/GEN-001.md) | todo | none | ARCH-001 | Scaffold palmgen package, CLI surface and data model |
+| [GEN-001](tasks/GEN-001.md) | in_progress | none | ARCH-001 | Scaffold palmgen package, CLI surface and data model |
 | [GEN-002](tasks/GEN-002.md) | todo | none | GEN-001, ARCH-006 | Deterministic GUIDs and per-palm hashes |
 | [GEN-003](tasks/GEN-003.md) | todo | none | GEN-001 | 0.01 degree tiling and tile naming |
 | [GEN-004](tasks/GEN-004.md) | todo | none | GEN-001, ARCH-002, ARCH-003, ARCH-007 | Load palms, buildings and region config |
@@ -122,7 +121,7 @@ _None._
 | [GEN-017](tasks/GEN-017.md) | todo | windows-sim, human | GEN-016, TEST-100, TEST-102, ARCH-008 | Dev Mode review and margin tuning |
 | [GEN-100](tasks/GEN-100.md) | todo | windows-sim, human | GEN-017 | Deliverable: palmgen build produces a working Community region package (Phase 2) |
 | [RISK-002](tasks/RISK-002.md) | in_progress | network |  | Audit model, texture and tool licenses for palm assets |
-| [RISK-004](tasks/RISK-004.md) | in_progress | network |  | Collect airport boundaries and known airport add-ons for default masks |
+| [RISK-004](tasks/RISK-004.md) | done | network |  | Collect airport boundaries and known airport add-ons for default masks |
 | [TEST-002](tasks/TEST-002.md) | todo | none | TEST-001 | Add the golden-file comparison helper with an update flag |
 | [TEST-003](tasks/TEST-003.md) | todo | none | TEST-001 | Add geometry assertion helpers for exclusion polygons |
 | [TEST-007](tasks/TEST-007.md) | todo | windows-sim, human | TEST-100, TEST-102 | Capture a baseline no-fix visual run at T1-T5 |

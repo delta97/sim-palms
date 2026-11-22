@@ -1,7 +1,7 @@
 ---
 id: RISK-004
 title: Collect airport boundaries and known airport add-ons for default masks
-status: review
+status: done
 phase: 2
 area: RISK
 kind: research
@@ -69,3 +69,4 @@ grep -c "^| K" docs/compat/airports.md   # expect >= 2
 - 2026-11-22 [claude-agent] Verification (task block, python -): 60 airports ok; KSAN and KLAX present; grep -c '^| K' airports.md = 39 (>=2). Required props present on all 60. Add-on searches (WebSearch, 2026-11-22) for KSAN, KLAX, KSMO, KLGB, KNZY; URLs recorded in airports.md; other airports marked not searched.
 - 2026-11-22 [claude-agent] Gaps: docs/licenses/data-sources.md does not exist in this worktree, so the ODbL link is a VERIFY. Add-on prices and MSFS 2024 compatibility are from search snippets only (VERIFY). Region is by polygon-centre bbox, so KNZY sits on the San Diego bbox edge (VERIFY).
 - 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] Status review -> done.
