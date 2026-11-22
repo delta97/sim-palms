@@ -1,0 +1,187 @@
+{
+  "manifest_version": 1,
+  "package_name": "palmfix-assets",
+  "package_version": "0.1.0",
+  "scale_limits": {
+    "max": 1.15,
+    "min": 0.85
+  },
+  "species": {
+    "washingtonia_robusta": {
+      "common_name": "Mexican fan palm",
+      "lean_max_deg": 5,
+      "set": "socal",
+      "status": "in_review",
+      "variants": [
+        {
+          "alt": null,
+          "crown_diam_m": 3.5,
+          "height_class": "short",
+          "lods": [
+            {
+              "design_distance_m": 0,
+              "file": "palmfix_washingtonia_robusta_short_LOD0.gltf",
+              "lod": 0,
+              "min_size": null,
+              "triangles": null
+            },
+            {
+              "design_distance_m": 150,
+              "file": "palmfix_washingtonia_robusta_short_LOD1.gltf",
+              "lod": 1,
+              "min_size": null,
+              "triangles": null
+            },
+            {
+              "design_distance_m": 600,
+              "file": "palmfix_washingtonia_robusta_short_LOD2.gltf",
+              "lod": 2,
+              "min_size": null,
+              "triangles": null
+            },
+            {
+              "design_distance_m": 2000,
+              "file": "palmfix_washingtonia_robusta_short_LOD3.gltf",
+              "lod": 3,
+              "min_size": null,
+              "triangles": null
+            }
+          ],
+          "model_guid": "47faf850-b09b-56a8-8895-4b7b73e4897f",
+          "model_name": "palmfix_washingtonia_robusta_short",
+          "model_xml": "PackageSources/modelLib/washingtonia_robusta/palmfix_washingtonia_robusta_short/palmfix_washingtonia_robusta_short.xml",
+          "native_height_m": 15.0,
+          "simobject_title": "PalmFix Washingtonia robusta Short",
+          "variant": "short"
+        },
+        {
+          "alt": null,
+          "crown_diam_m": 4.0,
+          "height_class": "medium",
+          "lods": [
+            {
+              "design_distance_m": 0,
+              "file": "palmfix_washingtonia_robusta_medium_LOD0.gltf",
+              "lod": 0,
+              "min_size": null,
+              "triangles": null
+            },
+            {
+              "design_distance_m": 150,
+              "file": "palmfix_washingtonia_robusta_medium_LOD1.gltf",
+              "lod": 1,
+              "min_size": null,
+              "triangles": null
+            },
+            {
+              "design_distance_m": 600,
+              "file": "palmfix_washingtonia_robusta_medium_LOD2.gltf",
+              "lod": 2,
+              "min_size": null,
+              "triangles": null
+            },
+            {
+              "design_distance_m": 2000,
+              "file": "palmfix_washingtonia_robusta_medium_LOD3.gltf",
+              "lod": 3,
+              "min_size": null,
+              "triangles": null
+            }
+          ],
+          "model_guid": "26b7f2be-7b80-517a-999d-43b914f72474",
+          "model_name": "palmfix_washingtonia_robusta_medium",
+          "model_xml": "PackageSources/modelLib/washingtonia_robusta/palmfix_washingtonia_robusta_medium/palmfix_washingtonia_robusta_medium.xml",
+          "native_height_m": 21.0,
+          "simobject_title": "PalmFix Washingtonia robusta Medium",
+          "variant": "medium"
+        },
+        {
+          "alt": "b",
+          "crown_diam_m": 4.0,
+          "height_class": "medium",
+          "lods": [
+            {
+              "design_distance_m": 0,
+              "file": "palmfix_washingtonia_robusta_medium_b_LOD0.gltf",
+              "lod": 0,
+              "min_size": null,
+              "triangles": null
+            },
+            {
+              "design_distance_m": 150,
+              "file": "palmfix_washingtonia_robusta_medium_b_LOD1.gltf",
+              "lod": 1,
+              "min_size": null,
+              "triangles": null
+            },
+            {
+              "design_distance_m": 600,
+              "file": "palmfix_washingtonia_robusta_medium_b_LOD2.gltf",
+              "lod": 2,
+              "min_size": null,
+              "triangles": null
+            },
+            {
+              "design_distance_m": 2000,
+              "file": "palmfix_washingtonia_robusta_medium_b_LOD3.gltf",
+              "lod": 3,
+              "min_size": null,
+              "triangles": null
+            }
+          ],
+          "model_guid": "2a02ff3b-2d75-5da3-a9a7-74ca5117a9c3",
+          "model_name": "palmfix_washingtonia_robusta_medium_b",
+          "model_xml": "PackageSources/modelLib/washingtonia_robusta/palmfix_washingtonia_robusta_medium_b/palmfix_washingtonia_robusta_medium_b.xml",
+          "native_height_m": 21.0,
+          "simobject_title": "PalmFix Washingtonia robusta Medium B",
+          "variant": "medium_b"
+        },
+        {
+          "alt": null,
+          "crown_diam_m": 4.5,
+          "height_class": "tall",
+          "lods": [
+            {
+              "design_distance_m": 0,
+              "file": "palmfix_washingtonia_robusta_tall_LOD0.gltf",
+              "lod": 0,
+              "min_size": null,
+              "triangles": null
+            },
+            {
+              "design_distance_m": 150,
+              "file": "palmfix_washingtonia_robusta_tall_LOD1.gltf",
+              "lod": 1,
+              "min_size": null,
+              "triangles": null
+            },
+            {
+              "design_distance_m": 600,
+              "file": "palmfix_washingtonia_robusta_tall_LOD2.gltf",
+              "lod": 2,
+              "min_size": null,
+              "triangles": null
+            },
+            {
+              "design_distance_m": 2000,
+              "file": "palmfix_washingtonia_robusta_tall_LOD3.gltf",
+              "lod": 3,
+              "min_size": null,
+              "triangles": null
+            }
+          ],
+          "model_guid": "d4f3c899-5b05-5699-bd38-71fc386c5ecf",
+          "model_name": "palmfix_washingtonia_robusta_tall",
+          "model_xml": "PackageSources/modelLib/washingtonia_robusta/palmfix_washingtonia_robusta_tall/palmfix_washingtonia_robusta_tall.xml",
+          "native_height_m": 28.0,
+          "simobject_title": "PalmFix Washingtonia robusta Tall",
+          "variant": "tall"
+        }
+      ]
+    }
+  },
+  "species_fallback": {
+    "_default": "washingtonia_robusta",
+    "phoenix_canariensis": "washingtonia_robusta"
+  }
+}
