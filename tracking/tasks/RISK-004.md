@@ -1,7 +1,7 @@
 ---
 id: RISK-004
 title: Collect airport boundaries and known airport add-ons for default masks
-status: in_progress
+status: review
 phase: 2
 area: RISK
 kind: research
@@ -39,10 +39,10 @@ A GeoJSON of airport boundary polygons for the SoCal target regions, plus a list
 
 ## Acceptance criteria
 
-- [ ] `docs/compat/airports-mask.geojson` parses and contains at least KSAN and KLAX boundaries.
-- [ ] Every feature has `kind`, `name`, `buffer_m`, `source`, `checked`.
-- [ ] `docs/compat/airports.md` lists every airport in the GeoJSON with a target-region column.
-- [ ] Provisional bboxes are labelled as provisional.
+- [x] `docs/compat/airports-mask.geojson` parses and contains at least KSAN and KLAX boundaries. (60 features; KSAN and KLAX present, Polygon/MultiPolygon only)
+- [x] Every feature has `kind`, `name`, `buffer_m`, `source`, `checked`. (Checked in Python: no missing props)
+- [x] `docs/compat/airports.md` lists every airport in the GeoJSON with a target-region column. (60 table rows, target region column present)
+- [x] Provisional bboxes are labelled as provisional. (LA Westside labelled PROVISIONAL in airports.md and GeoJSON metadata)
 
 ## Verification
 
@@ -65,3 +65,7 @@ grep -c "^| K" docs/compat/airports.md   # expect >= 2
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [reconcile] ARCH-003 decided the key: this file is the default airport mask (masks.airports.path defaults to docs/compat/airports-mask.geojson; manual extras are mask_out entries with kind: airport). Buffer applied by palmgen from masks.airports.buffer_m (ARCH-003 default 100 m); the per-feature buffer_m is now a suggestion aligned to 100 m. GEN-016 depends on this task. Cross-area reconciliation.
 - 2026-11-22 [claude-agent] Claimed. branch=task/risk-004-collect-airport-boundaries-and-known-air worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/RISK-004
+- 2026-11-22 [claude-agent] Overpass pulls 2026-11-22 (UA sim-palms-research/0.1; default curl UA got 406): San Diego bbox 9 elements, LA Westside 3, SoCal-wide bigger set; raw in data/raw/overpass (gitignored). Converted with scratchpad script: 69 aerodrome/heliport features, 9 with no ICAO/FAA/ref/iata code dropped, 60 kept.
+- 2026-11-22 [claude-agent] Verification (task block, python -): 60 airports ok; KSAN and KLAX present; grep -c '^| K' airports.md = 39 (>=2). Required props present on all 60. Add-on searches (WebSearch, 2026-11-22) for KSAN, KLAX, KSMO, KLGB, KNZY; URLs recorded in airports.md; other airports marked not searched.
+- 2026-11-22 [claude-agent] Gaps: docs/licenses/data-sources.md does not exist in this worktree, so the ODbL link is a VERIFY. Add-on prices and MSFS 2024 compatibility are from search snippets only (VERIFY). Region is by polygon-centre bbox, so KNZY sits on the San Diego bbox edge (VERIFY).
+- 2026-11-22 [claude-agent] Status in_progress -> review.
