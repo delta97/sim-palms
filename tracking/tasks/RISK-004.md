@@ -1,7 +1,7 @@
 ---
 id: RISK-004
 title: Collect airport boundaries and known airport add-ons for default masks
-status: todo
+status: in_progress
 phase: 2
 area: RISK
 kind: research
@@ -11,9 +11,9 @@ requires: [network]
 agent: geo-data-engineer
 estimate_h: 3
 touches: [docs/compat/airports.md, docs/compat/airports-mask.geojson]
-owner: ""
-branch: ""
-worktree: ""
+owner: claude-agent
+branch: task/risk-004-collect-airport-boundaries-and-known-air
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/RISK-004"
 updated: 2026-11-22
 ---
 
@@ -64,3 +64,4 @@ grep -c "^| K" docs/compat/airports.md   # expect >= 2
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [reconcile] ARCH-003 decided the key: this file is the default airport mask (masks.airports.path defaults to docs/compat/airports-mask.geojson; manual extras are mask_out entries with kind: airport). Buffer applied by palmgen from masks.airports.buffer_m (ARCH-003 default 100 m); the per-feature buffer_m is now a suggestion aligned to 100 m. GEN-016 depends on this task. Cross-area reconciliation.
+- 2026-11-22 [claude-agent] Claimed. branch=task/risk-004-collect-airport-boundaries-and-known-air worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/RISK-004
