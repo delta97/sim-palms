@@ -388,7 +388,7 @@ Task FX-004. Exact ground truth for unit tests, at 320×180, under 2 s per test 
 - Camera: straight-line trajectory at 50 m altitude, 10° down, configurable speed and frame step. Analytic ray casting (plane + boxes, nearest hit).
 - Outputs per frame: colour; raw reversed-Z depth `d = 0.1 / z` (synthetic choice); metric depth; GT `MaskSet` with `palm_id`; clean plate (the same frame without blobs, for inpainting/composite checks); a SimVar-like pose row (lat/lon/alt via `LocalFrame.from_enu`, with configurable sign conventions); and a trigger time with a known offset.
 - Also writes a palms FeatureCollection matching the boxes, and can write a complete fake session directory (`raw/` + `session.json`) so ingest runs end to end.
-- Fixtures in `tests/unit/palmfx/conftest.py`: `synth_scene`, `synth_frame`, `synth_seq` (8 frames), `synth_session_dir` (tmp_path).
+- Fixtures in `tests/unit/palmfx/conftest.py` (session-scoped, read-only): `synth_scene`, `synth_K`, `synth_rows`, `synth_frame`, `synth_seq` (8 frames), `synth_session_dir` (tmp_path_factory). API in `palmfx/offline/synth.py`: `SynthScene`, `render`, `render_sequence`, `trajectory`, `to_raw_row`, `make_palms_geojson`, `write_fake_session`. Pixel centres are sampled at (i+0.5, j+0.5); `write_fake_session` fires triggers at `t_i - offset_ms` (so ingest's `t_i = t_trigger + offset` recovers the truth), writes `raw/reshade/shot_NNNNNN_{before,after}.png` (VERIFY real names, FX-001), `palms.geojson` and exact masks in `masks/gt/`.
 
 ---
 
