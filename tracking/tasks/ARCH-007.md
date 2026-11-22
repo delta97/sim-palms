@@ -1,7 +1,7 @@
 ---
 id: ARCH-007
 title: "Add the palms.geojson serializer, reader and writer"
-status: in_progress
+status: review
 phase: 1
 area: ARCH
 kind: build
@@ -71,10 +71,10 @@ palmscan writes through it, and palmgen and TEST read through it, so the file fo
 
 ## Acceptance criteria
 
-- [ ] A test proves that identical input gives byte-identical output.
-- [ ] `write_palms_doc` and `write_palms` never write an invalid file.
-- [ ] `sample_10.geojson` is committed, valid and reproducible.
-- [ ] ruff, mypy (strict for palmcore) and pytest are green.
+- [x] A test proves that identical input gives byte-identical output.
+- [x] `write_palms_doc` and `write_palms` never write an invalid file.
+- [x] `sample_10.geojson` is committed, valid and reproducible.
+- [x] ruff, mypy (strict for palmcore) and pytest are green.
 
 ## Verification
 
@@ -88,3 +88,5 @@ ruff check palmcore tests && mypy
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [claude-agent] Claimed. branch=task/arch-007-add-the-palms-geojson-serializer-reader worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/ARCH-007
+- 2026-11-22 [claude-agent] Implemented palmcore/palms.py; 19 new tests; pytest 404 passed, ruff and mypy clean; sample_10.geojson committed and reproducible; verification prints '10 1.0 2026-01'. All acceptance criteria ticked.
+- 2026-11-22 [claude-agent] Status in_progress -> review.
