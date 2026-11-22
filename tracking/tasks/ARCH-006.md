@@ -1,7 +1,7 @@
 ---
 id: ARCH-006
 title: "Add deterministic UUIDv5 ids and seeded randomness to palmcore"
-status: todo
+status: in_progress
 phase: 1
 area: ARCH
 kind: build
@@ -11,10 +11,10 @@ requires: [none]
 agent: python-architect
 estimate_h: 2
 touches: [palmcore/ids.py, tests/unit/palmcore/test_ids.py]
-owner: ""
-branch: ""
-worktree: ""
-updated: 2026-11-21
+owner: claude-agent
+branch: task/arch-006-add-deterministic-uuidv5-ids-and-seeded
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/ARCH-006"
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -71,3 +71,4 @@ ruff check palmcore tests && mypy
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [claude-agent] Claimed. branch=task/arch-006-add-deterministic-uuidv5-ids-and-seeded worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/ARCH-006
