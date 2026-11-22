@@ -322,7 +322,7 @@ def to_wgs84(xs: Sequence[float], ys: Sequence[float], crs: str) -> tuple[list[f
 - Axis order is always (lon, lat) / (x, y).
 - No antimeridian support and no Norway/Svalbard UTM exceptions. Both are stated in docstrings.
 - `meters_per_degree`: lat m = 111132.92 − 559.82·cos 2φ + 1.175·cos 4φ − 0.0023·cos 6φ; lon m = 111412.84·cos φ − 93.5·cos 3φ + 0.118·cos 5φ.
-- Test values: (−117.25, 32.79) → 32611; (151.2, −33.9) → 32756; lon 180 → zone 60; 0.001° lat at 32.79° N ≈ 110.9 m (±0.2); round trip error < 1e-7°.
+- Test values: (−117.25, 32.79) → 32611; (151.2, −33.9) → 32756; lon 180 → zone 60; `haversine_m` over 0.001° lat ≈ 111.2 m (±0.2) on the fixed sphere (the earlier 110.9 m figure is the ellipsoidal `meters_per_degree(32.79)[1] / 1000`, tested separately); round trip error < 1e-7°.
 - GEN plans a transverse-Mercator `LocalProjection` centred on the bbox. It may use UTM from here or its own projection; either is fine, because metric work is local.
 - Out of scope: circles, unions, clipping, tiling (GEN).
 
