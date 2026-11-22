@@ -5,6 +5,7 @@ Format: `- TASK-ID: what changed (PR link)`.
 
 ## Unreleased
 
+- ARCH-008: Added the San Diego coastal and LA Westside example region configs with verified source endpoints (local merge).
 - TEST-005: Added the test-site registry schema and loader with a placeholder T1-T5 skeleton (local merge).
 - GEN-003: Added 0.01 degree tiling and canonical tile naming for palmgen (local merge).
 - GEN-002: Added deterministic GUIDs and per-palm hashes for palmgen, wrapping palmcore ids; aligned plan 04 with plan 01 (local merge).

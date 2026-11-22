@@ -1,7 +1,7 @@
 ---
 id: ARCH-008
 title: "Write the two example region configs and verify their sources"
-status: review
+status: done
 phase: 1
 area: ARCH
 kind: build
@@ -68,3 +68,4 @@ python -c "from pathlib import Path; from palmcore.config import check_regions; 
 - 2026-11-22 [claude-agent] Other endpoints checked 2026-11-22: 3DEP EPT on S3 bucket usgs-lidar-public: .../USGS_LPC_CA_SanDiegoQL1_2014_LAS_2016/ept.json and .../USGS_LPC_CA_LosAngeles_2016_LAS_2018/ept.json both HTTP 200 (https://s3-us-west-2.amazonaws.com/usgs-lidar-public/ept.json root 404, expected). Overpass https://overpass-api.de/api/interpreter: needs a User-Agent (406 without); a tiny bbox count query returned 31 tree nodes in 32.75,-117.20,32.76,-117.19; larger Washingtonia query got 502 at-capacity (transient). Nothing downloaded or committed.
 - 2026-11-22 [claude-agent] Verification: pytest 262 passed; ruff check and format clean; mypy clean; check_regions(regions) -> [].
 - 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] Status review -> done.

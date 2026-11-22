@@ -14,7 +14,7 @@ touches: [palmscan/sources/arcgis_rest.py, tests/unit/palmscan/test_scan_arcgis_
 owner: ""
 branch: ""
 worktree: ""
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -56,3 +56,4 @@ pytest tests/unit/palmscan/test_scan_arcgis_rest.py -q
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [integrator] integrator note from ARCH-008: StreetsLA has only a GeoServer WFS (EPSG:2229), no ArcGIS REST; LA Westside config uses the stiles/la-trees GeoJSON instead (627 MB county file, common names only, id field stability VERIFY)

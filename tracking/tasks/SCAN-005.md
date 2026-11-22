@@ -14,7 +14,7 @@ touches: [palmscan/sources/overpass.py, palmscan/sources/osm_overpass.py, tests/
 owner: ""
 branch: ""
 worktree: ""
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -51,3 +51,4 @@ pytest tests/unit/palmscan/test_scan_osm_overpass.py -q
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [integrator] integrator note from ARCH-008: Overpass returns HTTP 406 without a User-Agent header; send a generic client UA. Larger queries can 502 (at capacity): retry with backoff
