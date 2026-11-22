@@ -318,3 +318,37 @@ def test_deterministic(tmp_path: Path) -> None:
     first = (root / "masks" / "project-depth" / "000001.inst.png").read_bytes()
     assert _run(root) == 0
     assert (root / "masks" / "project-depth" / "000001.inst.png").read_bytes() == first
+
+
+def test_reads_calib_files_written_by_palmfx_calib(tmp_path: Path) -> None:
+    """mask-project takes vfov from calib/intrinsics.json and the bias from pose_bias.json
+    (the names `palmfx calib`, FX-009, writes). A wrong vfov there must change the masks."""
+    scene = SynthScene(palms_enu=SYNTH_PALMS_ENU, building=None, seed=1)
+    meta_vfov = None
+    scores = {}
+    for label, scale in (("true", 1.0), ("wrong", 1.6)):
+        root = _posed_session(tmp_path / label / "20260101-SYN-low-01", scene, 4)
+        meta = json.loads((root / "session.json").read_text(encoding="utf-8"))
+        meta_vfov = float(meta["synthetic"]["vfov_deg"])
+        calib = root / "calib"
+        calib.mkdir(exist_ok=True)
+        (calib / "intrinsics.json").write_text(
+            json.dumps({"vfov_deg": meta_vfov * scale}), encoding="utf-8"
+        )
+        (calib / "pose_bias.json").write_text(
+            json.dumps(
+                {
+                    "d_heading_deg": 0.0,
+                    "d_pitch_deg": 0.0,
+                    "d_bank_deg": 0.0,
+                    "d_body_m": [0.0, 0.0, 0.0],
+                }
+            ),
+            encoding="utf-8",
+        )
+        assert _run(root) == 0
+        result = compare_dirs(root / "masks" / "project-raw", root / "masks" / "gt")
+        scores[label] = min(r["pixel_iou"] for r in result["frames"])
+    assert meta_vfov is not None
+    assert scores["true"] >= 0.85
+    assert scores["wrong"] < scores["true"] - 0.2

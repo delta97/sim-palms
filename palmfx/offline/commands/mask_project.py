@@ -3,9 +3,9 @@
 Writes ``masks/project-raw/`` and, when metric depth is available and ``--no-depth-test`` is not
 given, ``masks/project-depth/``, plus ``metrics/mask-project-summary.json``.
 
-Camera setup, in order of precedence: ``--vfov-deg``; ``calib/camera.json`` (``vfov_deg`` and an
-optional ``bias`` object, VERIFY: the file name and keys are FX-009's to confirm); the synthetic
-session's ``vfov_deg``; 60 degrees (the plan's starting value, with a warning).
+Camera setup, in order of precedence: ``--vfov-deg``; ``calib/intrinsics.json`` ``vfov_deg``
+(written by ``palmfx calib``, FX-009); the synthetic session's ``vfov_deg``; 60 degrees (the plan's
+starting value, with a warning). The pose bias comes from ``calib/pose_bias.json`` when present.
 """
 
 from __future__ import annotations
@@ -115,11 +115,16 @@ def _intrinsics(session: Session, frames: list[FrameRecord], vfov: float) -> Int
 
 
 def _camera_setup(session: Session, vfov_arg: float | None) -> tuple[float, dict[str, Any]]:
-    calib = session.path("calib", "camera.json")
-    doc = _read_json(calib) if calib.is_file() else {}
+    # File names and keys follow the plan's session layout and what `palmfx calib` (FX-009)
+    # writes: calib/intrinsics.json {"vfov_deg", ...} and calib/pose_bias.json
+    # {"d_heading_deg", "d_pitch_deg", "d_bank_deg", "d_body_m"}.
+    intr_path = session.path("calib", "intrinsics.json")
+    intr = _read_json(intr_path) if intr_path.is_file() else {}
+    bias_path = session.path("calib", "pose_bias.json")
+    bias_doc = _read_json(bias_path) if bias_path.is_file() else {}
     vfov = vfov_arg
-    if vfov is None and doc.get("vfov_deg") is not None:
-        vfov = float(doc["vfov_deg"])
+    if vfov is None and intr.get("vfov_deg") is not None:
+        vfov = float(intr["vfov_deg"])
     if vfov is None:
         synth = session.meta.get("synthetic")
         if isinstance(synth, dict) and synth.get("vfov_deg") is not None:
@@ -127,8 +132,7 @@ def _camera_setup(session: Session, vfov_arg: float | None) -> tuple[float, dict
     if vfov is None:
         log.warning("no vfov found, using the plan's starting value %.0f deg", DEFAULT_VFOV_DEG)
         vfov = DEFAULT_VFOV_DEG
-    bias = doc.get("bias")
-    return vfov, dict(bias) if isinstance(bias, dict) else {}
+    return vfov, dict(bias_doc) if isinstance(bias_doc, dict) else {}
 
 
 def _ground_estimate(frames: list[FrameRecord]) -> float | None:
