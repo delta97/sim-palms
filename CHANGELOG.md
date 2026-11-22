@@ -5,6 +5,7 @@ Format: `- TASK-ID: what changed (PR link)`.
 
 ## Unreleased
 
+- TEST-001: Added the shared pytest harness (run flags, network guard, path fixtures) and fixture loaders (local merge).
 - RISK-004: Added `docs/compat/airports-mask.geojson` (60 SoCal airport boundaries from OSM) and `docs/compat/airports.md` with known add-ons (local merge).
 - ARCH-004: Added palmcore logging setup, repo path resolution and the download-cache helpers (local merge).
 - ARCH-005: Added palmcore geo helpers (Bbox, haversine, UTM/local CRS, transforms); corrected the WS3 haversine test value (local merge).

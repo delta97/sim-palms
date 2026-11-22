@@ -7,7 +7,7 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 199 | 6 | 0 | 1 | 7 | 0 | 213 |
+| 198 | 6 | 0 | 1 | 8 | 0 | 213 |
 
 ## In progress / in review
 
@@ -15,11 +15,11 @@ Generated: 2026-11-22
 |---|---|---|---|---|
 | [ARCH-002](tasks/ARCH-002.md) | in_progress | claude-agent | task/arch-002-define-the-palms-geojson-json-schema-and | Define the palms.geojson JSON Schema and a shared validator |
 | [ARCH-003](tasks/ARCH-003.md) | in_progress | claude-agent | task/arch-003-define-the-region-yaml-config-schema-and | Define the region YAML config schema and loader |
+| [ASSET-005](tasks/ASSET-005.md) | in_progress | claude-agent | task/asset-005-asset-manifest-schema-species-spec-forma | Asset manifest schema, species spec format, loader and generator (palmcore.assets) |
 | [GEN-001](tasks/GEN-001.md) | in_progress | claude-agent | task/gen-001-scaffold-palmgen-package-cli-surface-and | Scaffold palmgen package, CLI surface and data model |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
 | [RISK-002](tasks/RISK-002.md) | in_progress | claude-agent | task/risk-002-audit-model-texture-and-tool-licenses-fo | Audit model, texture and tool licenses for palm assets |
 | [SPIKE-009](tasks/SPIKE-009.md) | in_progress | claude-agent | task/spike-009-write-the-simconnect-spawn-and-disconnec | Write the SimConnect spawn-and-disconnect spike console app (C#) |
-| [TEST-001](tasks/TEST-001.md) | in_progress | claude-agent | task/test-001-build-the-shared-pytest-harness-and-fixt | Build the shared pytest harness and fixture loaders |
 
 ## Blocked
 
@@ -33,10 +33,14 @@ _None._
 | [SPIKE-001](tasks/SPIKE-001.md) | 0 | windows-sim, human | msfs-sdk-specialist | Install the MSFS 2024 SDK and create an empty Dev Mode scenery project |
 | [TEST-006](tasks/TEST-006.md) | 0 | windows-sim | msfs-sdk-specialist | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
 | [RISK-003](tasks/RISK-003.md) | 1 | network, human | geo-data-engineer | Inventory other palm and tree mods and their coverage for mask_out defaults |
+| [TEST-005](tasks/TEST-005.md) | 1 | none | test-engineer | Add the test-site registry schema and loader |
+| [TEST-002](tasks/TEST-002.md) | 2 | none | test-engineer | Add the golden-file comparison helper with an update flag |
+| [TEST-003](tasks/TEST-003.md) | 2 | none | test-engineer | Add geometry assertion helpers for exclusion polygons |
+| [TEST-015](tasks/TEST-015.md) | 2 | none | test-engineer | Write the post-update regression routine, log and entry scaffolder |
 | [ASSET-001](tasks/ASSET-001.md) | 3 | network | asset-pipeline-artist | Write reference sheets for the 5 SoCal palm species |
 | [ASSET-002](tasks/ASSET-002.md) | 3 | network | asset-pipeline-artist | Collect build-vs-license inputs for DEC-002 (palm models) |
-| [ASSET-005](tasks/ASSET-005.md) | 3 | none | python-architect | Asset manifest schema, species spec format, loader and generator (palmcore.assets) |
 | [DEC-005](tasks/DEC-005.md) | 5 | human | test-engineer | Decide: performance budget and reference hardware/settings |
+| [TEST-013](tasks/TEST-013.md) | 5 | none | test-engineer | Build the frametime capture parser and run comparison report |
 | [FX-001](tasks/FX-001.md) | 7 | windows-sim, human | render-fx-researcher | Verify ReShade depth access in MSFS 2024 (incl. multiplayer/online lockout) |
 
 ## Phase 0 (1/17 done)
@@ -61,7 +65,7 @@ _None._
 | [SPIKE-011](tasks/SPIKE-011.md) | todo | human | SPIKE-010, RISK-005 | Write the Phase 0 go/no-go proposal and get the user's decision |
 | [TEST-006](tasks/TEST-006.md) | todo | windows-sim |  | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
 
-## Phase 1 (5/31 done)
+## Phase 1 (6/31 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -92,7 +96,7 @@ _None._
 | [SCAN-012](tasks/SCAN-012.md) | todo | none | SCAN-001 | QA outputs: qa_summary.md, qa_map.gpkg, qa_rejects.csv |
 | [SCAN-013](tasks/SCAN-013.md) | todo | none | SCAN-006, SCAN-008, SCAN-009, SCAN-010, SCAN-011, SCAN-012 | palmscan run pipeline and CLI, end-to-end on fixtures |
 | [SCAN-100](tasks/SCAN-100.md) | todo | network, human | SCAN-007, SCAN-013, TEST-100, ARCH-008 | Deliverable: palmscan run produces validated palms.geojson from inventory data (Phase 1) |
-| [TEST-001](tasks/TEST-001.md) | in_progress | none | ARCH-001 | Build the shared pytest harness and fixture loaders |
+| [TEST-001](tasks/TEST-001.md) | done | none | ARCH-001 | Build the shared pytest harness and fixture loaders |
 | [TEST-004](tasks/TEST-004.md) | todo | none | TEST-001, ARCH-002, ARCH-003 | Add contract conformance tests for palms.geojson |
 | [TEST-005](tasks/TEST-005.md) | todo | none | TEST-001 | Add the test-site registry schema and loader |
 | [TEST-100](tasks/TEST-100.md) | todo | human, windows-sim | TEST-005, TEST-006, DEC-004 | Define test sites T1-T5 (bbox, purpose, region, saved flights, three viewpoints each) |
@@ -139,7 +143,7 @@ _None._
 | [ASSET-002](tasks/ASSET-002.md) | todo | network |  | Collect build-vs-license inputs for DEC-002 (palm models) |
 | [ASSET-003](tasks/ASSET-003.md) | todo | blender, windows-sim | SPIKE-004, SPIKE-001 | Install and pin Blender and the MSFS 2024 glTF exporter plugin |
 | [ASSET-004](tasks/ASSET-004.md) | todo | blender, windows-sim | ASSET-003, ASSET-008, SPIKE-003 | Smoke-test the asset pipeline end to end with a throwaway model |
-| [ASSET-005](tasks/ASSET-005.md) | todo | none | ARCH-001 | Asset manifest schema, species spec format, loader and generator (palmcore.assets) |
+| [ASSET-005](tasks/ASSET-005.md) | in_progress | none | ARCH-001 | Asset manifest schema, species spec format, loader and generator (palmcore.assets) |
 | [ASSET-006](tasks/ASSET-006.md) | todo | none | ASSET-005 | glTF stats and automated asset checks (triangle budgets, heights, alpha mode, textures, naming) |
 | [ASSET-007](tasks/ASSET-007.md) | todo | none | ASSET-006, ASSET-004 | Model XML parsing, GUID cross-check and LOD switch values in the manifest |
 | [ASSET-008](tasks/ASSET-008.md) | todo | none | DEC-008 | Implement the asset large-file policy decided in DEC-008 (.gitattributes, assets/README.md) |
