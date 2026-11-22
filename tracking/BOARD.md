@@ -7,16 +7,14 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 194 | 3 | 0 | 1 | 15 | 0 | 213 |
+| 194 | 1 | 0 | 1 | 17 | 0 | 213 |
 
 ## In progress / in review
 
 | Task | Status | Owner | Branch | Title |
 |---|---|---|---|---|
 | [ARCH-008](tasks/ARCH-008.md) | in_progress | claude-agent | task/arch-008-write-the-two-example-region-configs-and | Write the two example region configs and verify their sources |
-| [GEN-003](tasks/GEN-003.md) | in_progress | claude-agent | task/gen-003-0-01-degree-tiling-and-tile-naming | 0.01 degree tiling and tile naming |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
-| [TEST-005](tasks/TEST-005.md) | in_progress | claude-agent | task/test-005-add-the-test-site-registry-schema-and-lo | Add the test-site registry schema and loader |
 
 ## Blocked
 
@@ -38,10 +36,12 @@ _None._
 | [TEST-002](tasks/TEST-002.md) | 2 | none | test-engineer | Add the golden-file comparison helper with an update flag |
 | [TEST-003](tasks/TEST-003.md) | 2 | none | test-engineer | Add geometry assertion helpers for exclusion polygons |
 | [TEST-015](tasks/TEST-015.md) | 2 | none | test-engineer | Write the post-update regression routine, log and entry scaffolder |
+| [TEST-102](tasks/TEST-102.md) | 2 | none | test-engineer | Visual test protocol tooling: run scaffolder, checklist template, test log |
 | [ASSET-001](tasks/ASSET-001.md) | 3 | network | asset-pipeline-artist | Write reference sheets for the 5 SoCal palm species |
 | [ASSET-002](tasks/ASSET-002.md) | 3 | network | asset-pipeline-artist | Collect build-vs-license inputs for DEC-002 (palm models) |
 | [ASSET-006](tasks/ASSET-006.md) | 3 | none | python-architect | glTF stats and automated asset checks (triangle budgets, heights, alpha mode, textures, naming) |
 | [DEC-008](tasks/DEC-008.md) | 3 | human | task-planner | Decide: storage for large asset binaries (Git LFS or external) |
+| [TEST-009](tasks/TEST-009.md) | 4 | none | test-engineer | Define the ground-truth format and write the labeling guide and tooling |
 | [DEC-005](tasks/DEC-005.md) | 5 | human | test-engineer | Decide: performance budget and reference hardware/settings |
 | [TEST-013](tasks/TEST-013.md) | 5 | none | test-engineer | Build the frametime capture parser and run comparison report |
 | [FX-001](tasks/FX-001.md) | 7 | windows-sim, human | render-fx-researcher | Verify ReShade depth access in MSFS 2024 (incl. multiplayer/online lockout) |
@@ -68,7 +68,7 @@ _None._
 | [SPIKE-011](tasks/SPIKE-011.md) | todo | human | SPIKE-010, RISK-005 | Write the Phase 0 go/no-go proposal and get the user's decision |
 | [TEST-006](tasks/TEST-006.md) | todo | windows-sim |  | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
 
-## Phase 1 (8/31 done)
+## Phase 1 (9/31 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -101,17 +101,17 @@ _None._
 | [SCAN-100](tasks/SCAN-100.md) | todo | network, human | SCAN-007, SCAN-013, TEST-100, ARCH-008 | Deliverable: palmscan run produces validated palms.geojson from inventory data (Phase 1) |
 | [TEST-001](tasks/TEST-001.md) | done | none | ARCH-001 | Build the shared pytest harness and fixture loaders |
 | [TEST-004](tasks/TEST-004.md) | todo | none | TEST-001, ARCH-002, ARCH-003 | Add contract conformance tests for palms.geojson |
-| [TEST-005](tasks/TEST-005.md) | in_progress | none | TEST-001 | Add the test-site registry schema and loader |
+| [TEST-005](tasks/TEST-005.md) | done | none | TEST-001 | Add the test-site registry schema and loader |
 | [TEST-100](tasks/TEST-100.md) | todo | human, windows-sim | TEST-005, TEST-006, DEC-004 | Define test sites T1-T5 (bbox, purpose, region, saved flights, three viewpoints each) |
 
-## Phase 2 (4/29 done)
+## Phase 2 (5/29 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
 | [GATE-P2](tasks/GATE-P2.md) | todo | human | GATE-P1, GEN-012, GEN-100, TEST-002, TEST-007, TEST-016, TEST-102, TEST-104 | Phase 2 exit gate: generated package removes the test neighbourhood's blobs |
 | [GEN-001](tasks/GEN-001.md) | done | none | ARCH-001 | Scaffold palmgen package, CLI surface and data model |
 | [GEN-002](tasks/GEN-002.md) | done | none | GEN-001, ARCH-006 | Deterministic GUIDs and per-palm hashes |
-| [GEN-003](tasks/GEN-003.md) | in_progress | none | GEN-001 | 0.01 degree tiling and tile naming |
+| [GEN-003](tasks/GEN-003.md) | done | none | GEN-001 | 0.01 degree tiling and tile naming |
 | [GEN-004](tasks/GEN-004.md) | todo | none | GEN-001, ARCH-002, ARCH-003, ARCH-007 | Load palms, buildings and region config |
 | [GEN-005](tasks/GEN-005.md) | todo | none | GEN-001 | Exclusion circles, merging and simplification |
 | [GEN-006](tasks/GEN-006.md) | todo | none | GEN-005 | Building footprint clipping |

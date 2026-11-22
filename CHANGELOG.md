@@ -5,6 +5,8 @@ Format: `- TASK-ID: what changed (PR link)`.
 
 ## Unreleased
 
+- TEST-005: Added the test-site registry schema and loader with a placeholder T1-T5 skeleton (local merge).
+- GEN-003: Added 0.01 degree tiling and canonical tile naming for palmgen (local merge).
 - GEN-002: Added deterministic GUIDs and per-palm hashes for palmgen, wrapping palmcore ids; aligned plan 04 with plan 01 (local merge).
 - ASSET-005: Added the asset manifest schema, species spec format, loader and generator (`palmcore.assets`) (local merge).
 - Repo: added `.gitattributes` forcing LF in working trees so golden files match across Windows and Linux.

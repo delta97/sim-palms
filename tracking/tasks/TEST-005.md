@@ -1,7 +1,7 @@
 ---
 id: TEST-005
 title: Add the test-site registry schema and loader
-status: review
+status: done
 phase: 1
 area: TEST
 kind: build
@@ -58,3 +58,4 @@ python3 scripts/tasks.py validate
 - 2026-11-22 [claude-agent] Verification: pytest tests/unit/helpers/test_sites.py 11 passed; full pytest 266 passed; ruff check and format --check clean; mypy no issues in 17 files; load_sites() -> ['T1','T2','T3','T4','T5']; tasks.py validate 0 errors.
 - 2026-11-22 [claude-agent] Acceptance: load_sites loads skeleton; defined sites range-checked, placeholders flagged by status; self-tests pass. Reviewer boxes not ticked.
 - 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] Status review -> done.
