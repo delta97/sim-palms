@@ -1,7 +1,7 @@
 ---
 id: SCAN-005
 title: "Overpass client and OSM tree adapter"
-status: todo
+status: in_progress
 phase: 1
 area: SCAN
 kind: build
@@ -11,9 +11,9 @@ requires: [none]
 agent: geo-data-engineer
 estimate_h: 2
 touches: [palmscan/sources/overpass.py, palmscan/sources/osm_overpass.py, tests/unit/palmscan/test_scan_osm_overpass.py, tests/fixtures/palmscan/osm_overpass/]
-owner: ""
-branch: ""
-worktree: ""
+owner: claude-agent
+branch: task/scan-005-overpass-client-and-osm-tree-adapter
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-005"
 updated: 2026-11-22
 ---
 
@@ -52,3 +52,4 @@ pytest tests/unit/palmscan/test_scan_osm_overpass.py -q
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [integrator] integrator note from ARCH-008: Overpass returns HTTP 406 without a User-Agent header; send a generic client UA. Larger queries can 502 (at capacity): retry with backoff
+- 2026-11-22 [claude-agent] Claimed. branch=task/scan-005-overpass-client-and-osm-tree-adapter worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-005
