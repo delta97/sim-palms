@@ -1,7 +1,7 @@
 ---
 id: ASSET-001
 title: "Write reference sheets for the 5 SoCal palm species"
-status: todo
+status: in_progress
 phase: 3
 area: ASSET
 kind: research
@@ -11,10 +11,10 @@ requires: [network]
 agent: asset-pipeline-artist
 estimate_h: 5
 touches: [assets/reference/washingtonia_robusta.md, assets/reference/washingtonia_filifera.md, assets/reference/phoenix_canariensis.md, assets/reference/syagrus_romanzoffiana.md, assets/reference/archontophoenix_cunninghamiana.md]
-owner: ""
-branch: ""
-worktree: ""
-updated: 2026-11-21
+owner: claude-agent
+branch: task/asset-001-write-reference-sheets-for-the-5-socal-p
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/ASSET-001"
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -56,3 +56,4 @@ Reviewer: open 3 random photo links per sheet and confirm they show the named sp
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [claude-agent] Claimed. branch=task/asset-001-write-reference-sheets-for-the-5-socal-p worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/ASSET-001
