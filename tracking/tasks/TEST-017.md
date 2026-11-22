@@ -1,7 +1,7 @@
 ---
 id: TEST-017
 title: Write the test runbook and CI wiring notes
-status: todo
+status: in_progress
 phase: 2
 area: TEST
 kind: doc
@@ -11,10 +11,10 @@ requires: [none]
 agent: test-engineer
 estimate_h: 2
 touches: [tests/README.md]
-owner: ""
-branch: ""
-worktree: ""
-updated: 2026-11-21
+owner: claude-agent
+branch: task/test-017-write-the-test-runbook-and-ci-wiring-not
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/TEST-017"
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -57,3 +57,4 @@ python3 scripts/tasks.py validate
 ## Log
 
 - 2026-11-21 [plan-breakdown] Task created.
+- 2026-11-22 [claude-agent] Claimed. branch=task/test-017-write-the-test-runbook-and-ci-wiring-not worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/TEST-017
