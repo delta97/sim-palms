@@ -1,0 +1,51 @@
+{
+  "bounds": [
+    -13042756,
+    3833370,
+    -8408,
+    -13025386,
+    3850740,
+    8962
+  ],
+  "dataType": "laszip",
+  "hierarchyType": "json",
+  "points": 1000,
+  "schema": [
+    {
+      "name": "X",
+      "size": 4,
+      "type": "signed"
+    },
+    {
+      "name": "Y",
+      "size": 4,
+      "type": "signed"
+    },
+    {
+      "name": "Z",
+      "size": 4,
+      "type": "signed"
+    },
+    {
+      "name": "ReturnNumber",
+      "size": 1,
+      "type": "unsigned"
+    },
+    {
+      "name": "NumberOfReturns",
+      "size": 1,
+      "type": "unsigned"
+    },
+    {
+      "name": "Classification",
+      "size": 1,
+      "type": "unsigned"
+    }
+  ],
+  "span": 128,
+  "srs": {
+    "authority": "EPSG",
+    "horizontal": "3857"
+  },
+  "version": "1.0.0"
+}
