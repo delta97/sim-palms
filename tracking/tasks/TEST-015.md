@@ -1,7 +1,7 @@
 ---
 id: TEST-015
 title: Write the post-update regression routine, log and entry scaffolder
-status: review
+status: done
 phase: 2
 area: TEST
 kind: build
@@ -57,3 +57,4 @@ python3 scripts/tasks.py validate
 - 2026-11-22 [claude-agent] Spec notes: RISK-005 docs call TEST-104 the routine owner; plan says TEST-015 writes routine and log, TEST-104 runs it first. Followed the plan; RISK-005 files not in touches, flagged for integrator. Used python instead of python3 for validate (no python3 here). set gained optional --trigger for dates with two rows.
 - 2026-11-22 [claude-agent] Status in_progress -> review.
 - 2026-11-22 [integrator] integrator review: ROUTINE.md read standalone; steps, pass criteria and sim-only boundaries are clear -> box ticked
+- 2026-11-22 [integrator] Status review -> done.

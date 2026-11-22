@@ -7,7 +7,7 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 178 | 5 | 0 | 1 | 29 | 0 | 213 |
+| 178 | 4 | 0 | 1 | 30 | 0 | 213 |
 
 ## In progress / in review
 
@@ -18,7 +18,6 @@ Generated: 2026-11-22
 | [GEN-011](tasks/GEN-011.md) | in_progress | claude-agent | task/gen-011-variant-selection-scaling-and-heading | Variant selection, scaling and heading |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
 | [SCAN-001](tasks/SCAN-001.md) | in_progress | claude-agent | task/scan-001-create-palmscan-package-core-config-cach | Create palmscan package core: config, cache, HTTP, models, CLI skeleton |
-| [TEST-015](tasks/TEST-015.md) | in_progress | claude-agent | task/test-015-write-the-post-update-regression-routine | Write the post-update regression routine, log and entry scaffolder |
 
 ## Blocked
 
@@ -99,7 +98,7 @@ _None._
 | [TEST-005](tasks/TEST-005.md) | done | none | TEST-001 | Add the test-site registry schema and loader |
 | [TEST-100](tasks/TEST-100.md) | todo | human, windows-sim | TEST-005, TEST-006, DEC-004 | Define test sites T1-T5 (bbox, purpose, region, saved flights, three viewpoints each) |
 
-## Phase 2 (12/29 done)
+## Phase 2 (13/29 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -127,7 +126,7 @@ _None._
 | [TEST-002](tasks/TEST-002.md) | done | none | TEST-001 | Add the golden-file comparison helper with an update flag |
 | [TEST-003](tasks/TEST-003.md) | done | none | TEST-001 | Add geometry assertion helpers for exclusion polygons |
 | [TEST-007](tasks/TEST-007.md) | todo | windows-sim, human | TEST-100, TEST-102 | Capture a baseline no-fix visual run at T1-T5 |
-| [TEST-015](tasks/TEST-015.md) | in_progress | none | TEST-001 | Write the post-update regression routine, log and entry scaffolder |
+| [TEST-015](tasks/TEST-015.md) | done | none | TEST-001 | Write the post-update regression routine, log and entry scaffolder |
 | [TEST-016](tasks/TEST-016.md) | todo | none | TEST-015, SPIKE-003, SPIKE-004 | Build the independent build-output checker and build-time history |
 | [TEST-017](tasks/TEST-017.md) | todo | none | TEST-002, TEST-004, ARCH-001 | Write the test runbook and CI wiring notes |
 | [TEST-102](tasks/TEST-102.md) | todo | none | TEST-001, TEST-005 | Visual test protocol tooling: run scaffolder, checklist template, test log |
