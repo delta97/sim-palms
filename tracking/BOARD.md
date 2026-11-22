@@ -7,7 +7,7 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 165 | 5 | 0 | 1 | 42 | 0 | 213 |
+| 164 | 5 | 0 | 1 | 43 | 0 | 213 |
 
 ## In progress / in review
 
@@ -15,10 +15,10 @@ Generated: 2026-11-22
 |---|---|---|---|---|
 | [ASSET-001](tasks/ASSET-001.md) | in_progress | claude-agent | task/asset-001-write-reference-sheets-for-the-5-socal-p | Write reference sheets for the 5 SoCal palm species |
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
+| [SCAN-006](tasks/SCAN-006.md) | in_progress | claude-agent | task/scan-006-building-footprints-adapter-osm-microsof | Building footprints adapter (OSM, Microsoft file) |
 | [SCAN-009](tasks/SCAN-009.md) | in_progress | claude-agent | task/scan-009-palm-sizes-exclusion-radius-building-con | Palm sizes, exclusion radius, building conflict, mask_out |
 | [SCAN-022](tasks/SCAN-022.md) | in_progress | claude-agent | task/scan-022-canopy-height-model-dtm-dsm-chm | Canopy height model (DTM, DSM, CHM) |
 | [TEST-009](tasks/TEST-009.md) | in_progress | claude-agent | task/test-009-define-the-ground-truth-format-and-write | Define the ground-truth format and write the labeling guide and tooling |
-| [TEST-102](tasks/TEST-102.md) | in_progress | claude-agent | task/test-102-visual-test-protocol-tooling-run-scaffol | Visual test protocol tooling: run scaffolder, checklist template, test log |
 
 ## Blocked
 
@@ -32,7 +32,6 @@ _None._
 | [SPIKE-001](tasks/SPIKE-001.md) | 0 | windows-sim, human | msfs-sdk-specialist | Install the MSFS 2024 SDK and create an empty Dev Mode scenery project |
 | [TEST-006](tasks/TEST-006.md) | 0 | windows-sim | msfs-sdk-specialist | Verify a repeatable flight, camera and screenshot method in MSFS 2024 |
 | [RISK-003](tasks/RISK-003.md) | 1 | network, human | geo-data-engineer | Inventory other palm and tree mods and their coverage for mask_out defaults |
-| [SCAN-006](tasks/SCAN-006.md) | 1 | none | geo-data-engineer | Building footprints adapter (OSM, Microsoft file) |
 | [SCAN-008](tasks/SCAN-008.md) | 1 | none | geo-data-engineer | Inventory ingest stage and cross-source dedupe |
 | [DEC-002](tasks/DEC-002.md) | 3 | human | task-planner | Decide: build or license the palm models |
 | [DEC-008](tasks/DEC-008.md) | 3 | human | task-planner | Decide: storage for large asset binaries (Git LFS or external) |
@@ -40,6 +39,7 @@ _None._
 | [SCAN-026](tasks/SCAN-026.md) | 4 | none | lidar-analyst | Species shape rules and classification order |
 | [DEC-005](tasks/DEC-005.md) | 5 | human | test-engineer | Decide: performance budget and reference hardware/settings |
 | [TEST-013](tasks/TEST-013.md) | 5 | none | test-engineer | Build the frametime capture parser and run comparison report |
+| [TEST-008](tasks/TEST-008.md) | 6 | none | test-engineer | Add optional image-diff scoring for visual viewpoints |
 | [FX-001](tasks/FX-001.md) | 7 | windows-sim, human | render-fx-researcher | Verify ReShade depth access in MSFS 2024 (incl. multiplayer/online lockout) |
 | [FX-002](tasks/FX-002.md) | 7 | none | python-architect | Scaffold palmfx.offline package, session I/O and CLI |
 
@@ -87,7 +87,7 @@ _None._
 | [SCAN-003](tasks/SCAN-003.md) | done | none | SCAN-001 | Source adapter base and geojson_file adapter |
 | [SCAN-004](tasks/SCAN-004.md) | done | none | SCAN-003 | ArcGIS REST inventory adapter with paging and cache |
 | [SCAN-005](tasks/SCAN-005.md) | done | none | SCAN-003 | Overpass client and OSM tree adapter |
-| [SCAN-006](tasks/SCAN-006.md) | todo | none | SCAN-005 | Building footprints adapter (OSM, Microsoft file) |
+| [SCAN-006](tasks/SCAN-006.md) | in_progress | none | SCAN-005 | Building footprints adapter (OSM, Microsoft file) |
 | [SCAN-007](tasks/SCAN-007.md) | todo | network | SCAN-002, SCAN-004, SCAN-006 | Record live source fixtures and confirm source fields |
 | [SCAN-008](tasks/SCAN-008.md) | todo | none | SCAN-002, SCAN-004, SCAN-005 | Inventory ingest stage and cross-source dedupe |
 | [SCAN-009](tasks/SCAN-009.md) | in_progress | none | SCAN-002 | Palm sizes, exclusion radius, building conflict, mask_out |
@@ -101,7 +101,7 @@ _None._
 | [TEST-005](tasks/TEST-005.md) | done | none | TEST-001 | Add the test-site registry schema and loader |
 | [TEST-100](tasks/TEST-100.md) | todo | human, windows-sim | TEST-005, TEST-006, DEC-004 | Define test sites T1-T5 (bbox, purpose, region, saved flights, three viewpoints each) |
 
-## Phase 2 (16/29 done)
+## Phase 2 (17/29 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
@@ -132,7 +132,7 @@ _None._
 | [TEST-015](tasks/TEST-015.md) | done | none | TEST-001 | Write the post-update regression routine, log and entry scaffolder |
 | [TEST-016](tasks/TEST-016.md) | todo | none | TEST-015, SPIKE-003, SPIKE-004 | Build the independent build-output checker and build-time history |
 | [TEST-017](tasks/TEST-017.md) | done | none | TEST-002, TEST-004, ARCH-001 | Write the test runbook and CI wiring notes |
-| [TEST-102](tasks/TEST-102.md) | in_progress | none | TEST-001, TEST-005 | Visual test protocol tooling: run scaffolder, checklist template, test log |
+| [TEST-102](tasks/TEST-102.md) | done | none | TEST-001, TEST-005 | Visual test protocol tooling: run scaffolder, checklist template, test log |
 | [TEST-104](tasks/TEST-104.md) | todo | windows-sim, human | TEST-015, TEST-016, TEST-007, GEN-100, GATE-P0 | Run the post-update regression routine once and record the baseline log entry |
 
 ## Phase 3 (3/38 done)

@@ -5,6 +5,7 @@ Format: `- TASK-ID: what changed (PR link)`.
 
 ## Unreleased
 
+- TEST-102: Added the visual test protocol, run scaffolder, run checker, checklist template and test log (`tests/visual/`) (local merge).
 - SCAN-004: Added the ArcGIS REST inventory adapter with paging, object-id fallback and cache (local merge).
 - SCAN-005: Added the cached, tiling Overpass client and the OSM tree adapter with ODbL attribution (local merge).
 - SCAN-012: Added palmscan QA outputs: qa_summary.md, qa_map.gpkg and qa_rejects.csv (local merge).

@@ -1,7 +1,7 @@
 ---
 id: TEST-102
 title: "Visual test protocol tooling: run scaffolder, checklist template, test log"
-status: review
+status: done
 phase: 2
 area: TEST
 kind: build
@@ -74,3 +74,4 @@ python3 scripts/tasks.py validate
 - 2026-11-22 [claude-agent] VERIFY open items for TEST-006/TEST-100: flight reload and camera placement method, screenshot save location and format, whether community packages need a restart (all marked VERIFY in PROTOCOL.md).
 - 2026-11-22 [claude-agent] Status in_progress -> review.
 - 2026-11-22 [integrator] integrator review: PROTOCOL.md read standalone; setup, viewpoints, sim-only steps and VERIFY stops are clear
+- 2026-11-22 [integrator] Status review -> done.
