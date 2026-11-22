@@ -1,7 +1,7 @@
 ---
 id: SCAN-002
 title: "Species normalization table, normalizer and palm filter"
-status: in_progress
+status: review
 phase: 1
 area: SCAN
 kind: build
@@ -10,7 +10,7 @@ depends_on: [SCAN-001]
 requires: [none]
 agent: geo-data-engineer
 estimate_h: 3
-touches: [palmscan/data/species_keys.yaml, palmscan/data/species_aliases.csv, palmscan/data/palm_genera.yaml, palmscan/data/species_defaults.yaml, palmscan/data/non_tree_markers.yaml, palmscan/species_names.py, palmscan/filters.py, tests/unit/palmscan/test_scan_species_names.py, tests/unit/palmscan/test_scan_filters.py]
+touches: [palmscan/data/species_keys.yaml, palmscan/data/species_aliases.csv, palmscan/data/palm_genera.yaml, palmscan/data/species_defaults.yaml, palmscan/data/non_tree_markers.yaml, palmscan/species_names.py, palmscan/filters.py, tests/unit/palmscan/test_scan_species_names.py, tests/unit/palmscan/test_scan_filters.py, .gitignore]
 owner: claude-agent
 branch: task/scan-002-species-normalization-table-normalizer-a
 worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-002"
@@ -43,13 +43,13 @@ Any inventory or OSM species string maps to one internal species key (or "not a 
 
 ## Acceptance criteria
 
-- [ ] `Washingtonia robusta`, `WASHINGTONIA ROBUSTA`, `Mexican fan palm` and `PALM, MEXICAN FAN` all give `washingtonia_robusta`, level `species`.
-- [ ] `Cocos plumosa` gives `syagrus_romanzoffiana`; `Sago palm` gives `is_palm=False`.
-- [ ] `Phoenix spp.` gives `phoenix_canariensis` level `genus`; `Brahea` gives `brahea_sp`; `Palm` gives `palm_unknown`.
-- [ ] `Sabal palmetto` is filtered with `genus_not_in_set` when `genus_sets=[socal]` and kept with `[socal, florida]`.
-- [ ] `Vacant Site` (species) and `STUMP` (status) return reasons `vacant` and `stump`.
-- [ ] `palmscan/data/species_keys.yaml` exists and every key normalization can emit is in it.
-- [ ] Every alias row round-trips; tests pass.
+- [x] `Washingtonia robusta`, `WASHINGTONIA ROBUSTA`, `Mexican fan palm` and `PALM, MEXICAN FAN` all give `washingtonia_robusta`, level `species`.
+- [x] `Cocos plumosa` gives `syagrus_romanzoffiana`; `Sago palm` gives `is_palm=False`.
+- [x] `Phoenix spp.` gives `phoenix_canariensis` level `genus`; `Brahea` gives `brahea_sp`; `Palm` gives `palm_unknown`.
+- [x] `Sabal palmetto` is filtered with `genus_not_in_set` when `genus_sets=[socal]` and kept with `[socal, florida]`.
+- [x] `Vacant Site` (species) and `STUMP` (status) return reasons `vacant` and `stump`.
+- [x] `palmscan/data/species_keys.yaml` exists and every key normalization can emit is in it.
+- [x] Every alias row round-trips; tests pass.
 
 ## Verification
 
@@ -63,3 +63,8 @@ python -c "from palmscan.species_names import normalize_species as n; print(n('P
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [reconcile] Added the canonical species-key registry palmscan/data/species_keys.yaml (one list referenced by the ARCH-002 species pattern, SCAN normalization and ASSET-005 manifest validation) with tests tying the alias table, genus defaults and species_defaults to it. Cross-area reconciliation.
 - 2026-11-22 [claude-agent] Claimed. branch=task/scan-002-species-normalization-table-normalizer-a worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-002
+- 2026-11-22 [claude-agent] Implemented species_names.py, filters.py and 5 data files (63 registry keys, 220 aliases). Full suite: 1224 passed, 1 skipped; ruff check/format and mypy clean. Verification one-liner prints washingtonia_robusta / syagrus_romanzoffiana / False. Commits 482a1f3, e51b85f, 5a41664.
+- 2026-11-22 [claude-agent] Acceptance boxes ticked (covered by tests test_mexican_fan_palm_variants, test_cocos_plumosa..., test_phoenix_spp..., test_florida_genus_needs_the_florida_set, test_non_tree_reason_hits, registry tests, per-alias round-trip).
+- 2026-11-22 [claude-agent] ASSET-005 compat: registry uses 'keys: [{key,...}]', which palmcore.assets._load_registry reads. Tests run validate_manifest(fixture manifest, registry_path=real file) -> [] and check assets/library.yaml fallback keys are in the registry. No mismatch. REGISTRY_REL_PATH resolves to this file.
+- 2026-11-22 [claude-agent] Spec changes (also noted in plan W2): extra genus set 'other', genus_aliases, monotypic genus defaults, unlisted epithet -> <genus>_sp (registry rule), alias variants (tree/palm suffix), common column refines generic palm. .gitignore touched: 'data/' ignored palmscan/data, added '!palmscan/data/' (added to touches).
+- 2026-11-22 [claude-agent] Status in_progress -> review.
