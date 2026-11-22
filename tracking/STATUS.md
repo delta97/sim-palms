@@ -1,30 +1,39 @@
 # Status
 
-**Updated:** 2026-11-22 · **Phase:** 0 (not started) · **Newest log:** [2026-11-22 bootstrap](logs/2026-11-22-bootstrap-plans-and-tracking.md)
+**Updated:** 2026-11-22 · **Phase:** 0 (sim work not started) with Linux code ahead through Phase 4 under the proposed ADR-0013 · **Newest log:** [2026-11-22 integrator orchestration](logs/2026-11-22-integrator-orchestration.md)
 
 ## Where things stand
 
-- Planning is complete: 8 detailed plans, 213 tasks, 0 validation errors, 0 unordered conflicts. Board: [BOARD.md](BOARD.md).
-- Nothing is built yet. No sim, SDK or data-source fact in the plans is confirmed; unconfirmed items are marked `VERIFY:`.
-- Policy (proposed, [ADR-0013](decisions/ADR-0013-linux-code-work-in-parallel-with-phase-0.md)): Linux code work runs in parallel with Phase 0; sim work and phase exits follow the gates.
-
-## Ready now
-
-| For agents (Linux) | For the user |
-|---|---|
-| ARCH-001 scaffold (unlocks most of Phase 1-2 code) | DEC-004 pick the first test block (blocks Phase 0 testing) |
-| SPIKE-009 SimConnect spike console app | SPIKE-001 install the SDK, empty Dev Mode project |
-| | TEST-006 verify a repeatable flight/camera/screenshot method |
-| | RISK-003 other palm/tree mods to mask |
+- **55 of 213 tasks done**, all merged to `main`, pushed, and their GitHub issues closed with a link to the merge commit. Board: [BOARD.md](BOARD.md). Changelog: [CHANGELOG.md](../CHANGELOG.md).
+- **Phase 1 code (palmscan) is complete on fixtures.** `palmscan run` goes ingest → dedupe → species → priors → sizes/exclusion/buildings/masks → `palms.geojson` + QA outputs, offline and byte-reproducible (`SOURCE_DATE_EPOCH`). Adapters: geojson/CSV file, ArcGIS REST, Overpass/OSM, building footprints. Live samples are recorded in `tests/fixtures/palmscan/recorded/` (SCAN-007).
+- **Phase 2 code (palmgen) has its building blocks:** inputs, GUIDs, tiling, exclusion geometry + building clipping, masks, variant/scale/heading, template engine on *fake* templates, build reports. The real Scenery Editor XML (SPIKE-003) and package build (SPIKE-004) need the sim PC.
+- **Shared core (palmcore):** contracts and schemas, region config, ids, geo, cache, logging, CLI plumbing, palms.geojson I/O, asset manifest + glTF checks.
+- **Tests:** about 1,680 passing (Windows local) plus CI on Ubuntu and Windows. Harness, golden files, contract checks, geometry helpers, accuracy metrics, ground-truth format, visual protocol and post-update regression routine are in `tests/`.
+- **Phase 4 (LiDAR) in progress:** CHM, peaks/crowns, species rules and in-run accuracy are merged. EPT adapter, palm rule filter, inventory–LiDAR merge and the tree classifier are being built.
+- Nothing about the sim, the SDK or SimConnect has been confirmed. Every such claim in code or docs is marked `VERIFY:` and waits for the SPIKE tasks.
 
 ## Waiting on the user
 
-1. **Review** ADR-0001 (tracking structure) and ADR-0013 (parallel code during Phase 0). Both are `proposed`.
-2. **DEC-004:** which street is the first test block.
-3. **Public or private repo?** Affects DEC-001, DEC-004 (naming a street you know), DEC-008 (asset storage) and RISK-002.
-4. **DEC-008:** Git LFS or external storage for Blender files, textures and screenshots (needed before Phase 3 and the first visual runs).
+Everything else that is ready needs you, the sim PC, or Blender:
+
+1. **DEC-004:** pick the first test block (a street you know). Blocks the test sites (TEST-100) and Phase 0 testing.
+2. **SPIKE-001** on the sim PC: install the MSFS 2024 SDK and make an empty Dev Mode project. Then SPIKE-002..007 runbooks, TEST-006 (repeatable camera/screenshot method), SPIKE-005 using the console app in `spikes/simconnect-persist/` (build: see its README).
+3. **Review the proposed ADRs:** ADR-0001 (tracking structure) and ADR-0013 (Linux code ahead of Phase 0, which this session relied on).
+4. **Decisions with evidence ready:**
+   - DEC-002 build or license palm models: `assets/reference/build-vs-license.md`, `docs/licenses/models-and-tools.md`.
+   - DEC-009 building footprint source (OSM vs Microsoft): `docs/licenses/data-sources.md`, SCAN-007 findings (Microsoft tiles are 78–171 MB per region).
+   - DEC-008 asset storage (Git LFS or external), DEC-005 performance budget.
+   - The open questions at the end of `docs/licenses/data-sources.md` and `docs/licenses/models-and-tools.md` (ODbL share-alike, San Diego indemnity, retail model non-extractability).
+5. **RISK-003:** which other palm/tree mods you use (for default masks).
+
+## Known gaps found this session (not yet tasks)
+
+- No StreetsLA WFS adapter; LA Westside relies on the stiles/la-trees county file (627 MB, common names only, row-index ids, no heights). Per-city files differ (Santa Monica is EPSG:2229 with height classes).
+- Microsoft footprints come as quadkey `.csv.gz` tiles; there is no downloader yet (SCAN-006 reads a local file).
+- `palmgen/masks.py` has its own Overpass fetch; it should move onto `palmscan.sources.overpass` later.
+- `ingest_inventory` wraps an offline `CacheMiss` as `SourceError` (exit 4 vs 5); SCAN-013 works around it in the pipeline.
 
 ## Next
 
-1. An agent claims ARCH-001 (`/start-task ARCH-001`).
-2. The user does DEC-004, then SPIKE-001 on the sim PC.
+1. Merge the Phase 4 LiDAR batch (SCAN-020, 024, 025, 027), then SCAN-028 (wire LiDAR into `palmscan run`).
+2. The user does DEC-004, then SPIKE-001 on the sim PC. Phase 2 build and validation tasks unblock from the SPIKE results.
