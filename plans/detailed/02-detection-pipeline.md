@@ -199,7 +199,7 @@ Default output directory `build/scan/<region>/` (gitignored; override with `--ou
 | `crown_diam_m` | species default | LiDAR crown when matched |
 | `ground_elev_m` | `null` (see Q3) | DTM sample at the palm point |
 | `detected_by` | `inventory`, `osm` | plus `lidar`, `inventory+lidar`, `osm+lidar` |
-| `source_ids` | `["<source name>:<record id>", ...]` sorted | plus `lidar:<dataset>:<candidate id>` |
+| `source_ids` | `["<source name>:<record id>", ...]` sorted | plus `lidar:<candidate id>` (the id already starts with the dataset) |
 | `exclusion_radius_m` | `clamp(crown/2 + exclusion.margin_m, exclusion.radius_min_m, exclusion.radius_max_m)`, all from the region `exclusion:` block | same |
 | `building_conflict` | circle overlaps a building > 0.1 m² | same |
 | `data_vintage` | `{inventory: "YYYY"}` or `{osm: "YYYY-MM"}` | plus `lidar: "YYYY"` |

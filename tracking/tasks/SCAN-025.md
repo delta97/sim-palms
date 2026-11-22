@@ -1,7 +1,7 @@
 ---
 id: SCAN-025
 title: "Inventory-to-LiDAR matching and merge"
-status: in_progress
+status: review
 phase: 4
 area: SCAN
 kind: build
@@ -37,11 +37,11 @@ updated: 2026-11-22
 
 ## Acceptance criteria
 
-- [ ] Matching is one-to-one and deterministic under input shuffling.
-- [ ] Match at 2.9 m, none at 3.1 m.
-- [ ] Building-rejected candidates never match; other rule-rejected candidates can.
-- [ ] Region medians omitted for species with fewer than 5 matches.
-- [ ] Tests pass.
+- [x] Matching is one-to-one and deterministic under input shuffling.
+- [x] Match at 2.9 m, none at 3.1 m.
+- [x] Building-rejected candidates never match; other rule-rejected candidates can.
+- [x] Region medians omitted for species with fewer than 5 matches.
+- [x] Tests pass.
 
 ## Verification
 
@@ -53,3 +53,5 @@ pytest tests/unit/palmscan/test_scan_merge.py -q
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [claude-agent] Claimed. branch=task/scan-025-inventory-to-lidar-matching-and-merge worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-025
+- 2026-11-22 [claude-agent] Added palmscan/detect/merge.py (match_inventory_to_lidar, merge, MergeResult) and 15 tests in test_scan_merge.py: one-to-one, order-independent (shuffle test), 2.9 m match / 3.1 m none, building-rejected never matches, other rejects match, region medians omitted below 5. Full suite 1646 passed, ruff and mypy clean. Plan fix: W17 source_ids row said lidar:<dataset>:<candidate id> but candidate_id already starts with the dataset; now lidar:<candidate id> as in W17 step 3. Added optional min_height_m kwarg to merge (default PeakParams.min_height_m) since MergeParams has no height floor.
+- 2026-11-22 [claude-agent] Status in_progress -> review.
