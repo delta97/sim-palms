@@ -118,7 +118,7 @@ class Task:
     def save(self):
         self.set("updated", today())
         text = "---\n" + "\n".join(self.fm_lines) + "\n---\n" + self.body
-        self.path.write_text(text, encoding="utf-8")
+        self.path.write_text(text, encoding="utf-8", newline="\n")
 
 
 def load_task(path: Path) -> Task:
@@ -369,7 +369,7 @@ def write_board(tasks: dict[str, Task]) -> str:
             ("Task", link), ("Status", lambda t: str(t.meta.get("status"))), ("Requires", req),
             ("Depends on", lambda t: ", ".join(t.get_list("depends_on"))), ("Title", lambda t: str(t.meta.get("title")))])
     text = "\n".join(lines).rstrip() + "\n"
-    BOARD.write_text(text, encoding="utf-8")
+    BOARD.write_text(text, encoding="utf-8", newline="\n")
     return text
 
 
@@ -486,7 +486,7 @@ def main(argv=None):
         tmpl = (TASK_DIR / "_TEMPLATE.md").read_text(encoding="utf-8")
         tmpl = re.sub(r"<!--\nFIELD REFERENCE.*?-->\n\n", "", tmpl, flags=re.S)
         p = TASK_DIR / f"{nid}.md"
-        p.write_text(tmpl, encoding="utf-8")
+        p.write_text(tmpl, encoding="utf-8", newline="\n")
         t = load_task(p)
         t.set("id", nid)
         t.set("area", a.area)
