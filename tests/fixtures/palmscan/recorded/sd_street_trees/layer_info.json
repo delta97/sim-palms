@@ -1,0 +1,179 @@
+{
+ "currentVersion": 11.5,
+ "id": 20,
+ "name": "Trees (Street Trees)",
+ "type": "Feature Layer",
+ "description": "This dataset includes point features for all public trees within the City of San Diego. The data is compiled from the City's records and includes details necessary for associating maintenance work with each tree. Tree locations are periodically updated to reflect the most current information from recent maintenance activities and arboricultural assessments. Users are encouraged to contact the City of San Diego's Street Division if discrepancies are found between dataset attributes and physical observations.",
+ "geometryType": "esriGeometryPoint",
+ "copyrightText": "This layer was created and is maintained by the City of San Diego's Transportation Department. Data sources include SanGIS, city records, aerial imagery, and field surveys. The data was processed and managed using ArcGIS software from Esri.",
+ "displayField": "COMMON_NAME",
+ "capabilities": "Map,Query,Data",
+ "maxRecordCount": 2000,
+ "supportedQueryFormats": "JSON, geoJSON, PBF",
+ "supportsAdvancedQueries": true,
+ "advancedQueryCapabilities": {
+  "useStandardizedQueries": true,
+  "supportsStatistics": true,
+  "supportsPercentileStatistics": true,
+  "supportsHavingClause": true,
+  "supportsOrderBy": true,
+  "supportsDistinct": true,
+  "supportsCountDistinct": true,
+  "supportsAdvancedQueryRelated": true,
+  "supportsQueryRelatedPagination": true,
+  "supportsPagination": true,
+  "supportsLod": false,
+  "supportsQueryWithLodSR": false,
+  "supportsTrueCurve": true,
+  "supportsQueryWithDatumTransformation": true,
+  "supportsReturningQueryExtent": true,
+  "supportsQueryWithDistance": true,
+  "supportsSqlExpression": true,
+  "supportsTimeRelation": true,
+  "supportsSqlFormat": false,
+  "supportsQueryAnalytic": false,
+  "supportsCurrentUserQueries": true
+ },
+ "spatialReference": {
+  "wkid": 102646,
+  "latestWkid": 2230,
+  "xyTolerance": 0.003280833333333333,
+  "zTolerance": 0.001,
+  "mTolerance": 0.001,
+  "falseX": -118608900,
+  "falseY": -91259500,
+  "xyUnits": 35979706.30767777,
+  "falseZ": -100000,
+  "zUnits": 10000,
+  "falseM": -100000,
+  "mUnits": 10000
+ },
+ "fields": [
+  {
+   "name": "OBJECTID",
+   "type": "esriFieldTypeOID",
+   "alias": "OBJECTID",
+   "domain": null
+  },
+  {
+   "name": "Shape",
+   "type": "esriFieldTypeGeometry",
+   "alias": "Shape",
+   "domain": null
+  },
+  {
+   "name": "COMMON_NAME",
+   "type": "esriFieldTypeString",
+   "alias": "Common Name",
+   "length": 30,
+   "domain": null
+  },
+  {
+   "name": "CONDITION",
+   "type": "esriFieldTypeString",
+   "alias": "CONDITION",
+   "length": 20,
+   "domain": {
+    "type": "codedValue",
+    "name": "TreeCondition",
+    "description": "Tree Condition",
+    "codedValues": [
+     {
+      "name": "GOOD",
+      "code": "GOOD"
+     },
+     {
+      "name": "FAIR",
+      "code": "FAIR"
+     },
+     {
+      "name": "POOR",
+      "code": "POOR"
+     },
+     {
+      "name": "DEAD",
+      "code": "DEAD"
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDefaultValue"
+   }
+  },
+  {
+   "name": "INSPCTDATE",
+   "type": "esriFieldTypeDate",
+   "alias": "INSPCTDATE",
+   "length": 8,
+   "domain": null
+  },
+  {
+   "name": "MAPNG_STAT_CD",
+   "type": "esriFieldTypeString",
+   "alias": "MAPNG_STAT_CD",
+   "length": 2,
+   "domain": {
+    "type": "codedValue",
+    "name": "MappingStatus_1",
+    "description": "",
+    "codedValues": [
+     {
+      "name": "AS BUILT",
+      "code": "AB"
+     },
+     {
+      "name": "ABANDONED",
+      "code": "AN"
+     },
+     {
+      "name": "OPERATIONAL",
+      "code": "OP"
+     },
+     {
+      "name": "REMOVED",
+      "code": "RM"
+     },
+     {
+      "name": "NOT MAPPED",
+      "code": "NM"
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDefaultValue"
+   }
+  },
+  {
+   "name": "INST_YR",
+   "type": "esriFieldTypeDate",
+   "alias": "INST_YR",
+   "length": 8,
+   "domain": null
+  },
+  {
+   "name": "last_edited_date",
+   "type": "esriFieldTypeDate",
+   "alias": "last_edited_date",
+   "length": 8,
+   "domain": null
+  },
+  {
+   "name": "DBH_IN",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "DBH_IN",
+   "domain": null
+  },
+  {
+   "name": "HEIGHT_FT",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "HEIGHT_FT",
+   "domain": null
+  },
+  {
+   "name": "SPECIES_NAME",
+   "type": "esriFieldTypeString",
+   "alias": "Biological Species",
+   "length": 50,
+   "domain": null
+  }
+ ],
+ "_note": "Trimmed recording of MapServer/20?f=json (2026-11-22): keys not used by palmscan removed, fields reduced to those kept in query_page_0.json. maxRecordCount, advancedQueryCapabilities, fields and domains are verbatim. The live layer has 48 fields."
+}

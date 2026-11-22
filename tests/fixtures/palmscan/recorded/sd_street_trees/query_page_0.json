@@ -1,0 +1,963 @@
+{
+ "displayFieldName": "COMMON_NAME",
+ "fieldAliases": {
+  "OBJECTID": "OBJECTID",
+  "COMMON_NAME": "Common Name",
+  "CONDITION": "CONDITION",
+  "INSPCTDATE": "INSPCTDATE",
+  "MAPNG_STAT_CD": "MAPNG_STAT_CD",
+  "INST_YR": "INST_YR",
+  "last_edited_date": "last_edited_date",
+  "DBH_IN": "DBH_IN",
+  "HEIGHT_FT": "HEIGHT_FT",
+  "SPECIES_NAME": "Biological Species"
+ },
+ "geometryType": "esriGeometryPoint",
+ "spatialReference": {
+  "wkid": 4326,
+  "latestWkid": 4326
+ },
+ "fields": [
+  {
+   "name": "OBJECTID",
+   "type": "esriFieldTypeOID",
+   "alias": "OBJECTID"
+  },
+  {
+   "name": "COMMON_NAME",
+   "type": "esriFieldTypeString",
+   "alias": "Common Name",
+   "length": 30
+  },
+  {
+   "name": "CONDITION",
+   "type": "esriFieldTypeString",
+   "alias": "CONDITION",
+   "length": 20
+  },
+  {
+   "name": "INSPCTDATE",
+   "type": "esriFieldTypeDate",
+   "alias": "INSPCTDATE",
+   "length": 8
+  },
+  {
+   "name": "MAPNG_STAT_CD",
+   "type": "esriFieldTypeString",
+   "alias": "MAPNG_STAT_CD",
+   "length": 2
+  },
+  {
+   "name": "INST_YR",
+   "type": "esriFieldTypeDate",
+   "alias": "INST_YR",
+   "length": 8
+  },
+  {
+   "name": "last_edited_date",
+   "type": "esriFieldTypeDate",
+   "alias": "last_edited_date",
+   "length": 8
+  },
+  {
+   "name": "DBH_IN",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "DBH_IN"
+  },
+  {
+   "name": "HEIGHT_FT",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "HEIGHT_FT"
+  },
+  {
+   "name": "SPECIES_NAME",
+   "type": "esriFieldTypeString",
+   "alias": "Biological Species",
+   "length": 50
+  }
+ ],
+ "features": [
+  {
+   "attributes": {
+    "OBJECTID": 14747,
+    "COMMON_NAME": "Mexican Fan Palm",
+    "SPECIES_NAME": null,
+    "MAPNG_STAT_CD": "RM",
+    "CONDITION": null,
+    "HEIGHT_FT": null,
+    "DBH_IN": null,
+    "INSPCTDATE": null,
+    "last_edited_date": 1682014370000,
+    "INST_YR": 990489600000
+   },
+   "geometry": {
+    "x": -117.25140863577448,
+    "y": 32.790857751301445
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 46012,
+    "COMMON_NAME": "African Fern Pine",
+    "SPECIES_NAME": null,
+    "MAPNG_STAT_CD": "RM",
+    "CONDITION": null,
+    "HEIGHT_FT": null,
+    "DBH_IN": null,
+    "INSPCTDATE": null,
+    "last_edited_date": 1782356748000,
+    "INST_YR": 990662400000
+   },
+   "geometry": {
+    "x": -117.2534014353185,
+    "y": 32.78868332034676
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 46013,
+    "COMMON_NAME": "Cajeput Tree",
+    "SPECIES_NAME": "Melaleuca quinquenervia",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "POOR",
+    "HEIGHT_FT": 30,
+    "DBH_IN": 24,
+    "INSPCTDATE": 1663113600000,
+    "last_edited_date": 1782356748000,
+    "INST_YR": 990662400000
+   },
+   "geometry": {
+    "x": -117.25341615154127,
+    "y": 32.78850724310409
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 46016,
+    "COMMON_NAME": "Natal Plum",
+    "SPECIES_NAME": "Carissa macrocarpa",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "GOOD",
+    "HEIGHT_FT": 10,
+    "DBH_IN": 6,
+    "INSPCTDATE": 1663113600000,
+    "last_edited_date": 1782356748000,
+    "INST_YR": 990662400000
+   },
+   "geometry": {
+    "x": -117.25361223702454,
+    "y": 32.78765244806789
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 46086,
+    "COMMON_NAME": "New Zealand Christmas Tree",
+    "SPECIES_NAME": "Metrosideros excelsa",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "GOOD",
+    "HEIGHT_FT": 10,
+    "DBH_IN": 6,
+    "INSPCTDATE": 1663113600000,
+    "last_edited_date": 1782356748000,
+    "INST_YR": 990662400000
+   },
+   "geometry": {
+    "x": -117.25336481341854,
+    "y": 32.78779631298615
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 46087,
+    "COMMON_NAME": "Hollywood Juniper",
+    "SPECIES_NAME": "Juniperus chinensis 'Torulosa'",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "GOOD",
+    "HEIGHT_FT": 20,
+    "DBH_IN": 18,
+    "INSPCTDATE": 1663113600000,
+    "last_edited_date": 1782356748000,
+    "INST_YR": 990662400000
+   },
+   "geometry": {
+    "x": -117.25333843018517,
+    "y": 32.78784966307595
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 46088,
+    "COMMON_NAME": "Weeping Fig; Benjamin Fig",
+    "SPECIES_NAME": "Ficus benjamina",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "FAIR",
+    "HEIGHT_FT": 20,
+    "DBH_IN": 6,
+    "INSPCTDATE": 1663113600000,
+    "last_edited_date": 1782356748000,
+    "INST_YR": 990662400000
+   },
+   "geometry": {
+    "x": -117.2533291608781,
+    "y": 32.787874239875805
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 46089,
+    "COMMON_NAME": "Japanese Pittosporum",
+    "SPECIES_NAME": "Pittosporum tobira",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "GOOD",
+    "HEIGHT_FT": 20,
+    "DBH_IN": 6,
+    "INSPCTDATE": 1663113600000,
+    "last_edited_date": 1782356748000,
+    "INST_YR": 990662400000
+   },
+   "geometry": {
+    "x": -117.25330634416291,
+    "y": 32.78791680038312
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 46090,
+    "COMMON_NAME": "Mexican Fan Palm",
+    "SPECIES_NAME": null,
+    "MAPNG_STAT_CD": "RM",
+    "CONDITION": null,
+    "HEIGHT_FT": null,
+    "DBH_IN": null,
+    "INSPCTDATE": null,
+    "last_edited_date": 1782356748000,
+    "INST_YR": 990662400000
+   },
+   "geometry": {
+    "x": -117.25358701939115,
+    "y": 32.79036449282827
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 46091,
+    "COMMON_NAME": "Mexican Fan Palm",
+    "SPECIES_NAME": null,
+    "MAPNG_STAT_CD": "RM",
+    "CONDITION": null,
+    "HEIGHT_FT": null,
+    "DBH_IN": null,
+    "INSPCTDATE": null,
+    "last_edited_date": 1782356748000,
+    "INST_YR": 990662400000
+   },
+   "geometry": {
+    "x": -117.25358246136835,
+    "y": 32.79034992874688
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 46092,
+    "COMMON_NAME": "Mexican Fan Palm",
+    "SPECIES_NAME": "Washingtonia robusta",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "GOOD",
+    "HEIGHT_FT": 50,
+    "DBH_IN": 18,
+    "INSPCTDATE": 1661817600000,
+    "last_edited_date": 1782356748000,
+    "INST_YR": 990662400000
+   },
+   "geometry": {
+    "x": -117.25351722466334,
+    "y": 32.790517758134285
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 46093,
+    "COMMON_NAME": "Mexican Fan Palm",
+    "SPECIES_NAME": "Washingtonia robusta",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "GOOD",
+    "HEIGHT_FT": 50,
+    "DBH_IN": 18,
+    "INSPCTDATE": 1661817600000,
+    "last_edited_date": 1782356748000,
+    "INST_YR": 990662400000
+   },
+   "geometry": {
+    "x": -117.25353219933157,
+    "y": 32.790572904663755
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 46094,
+    "COMMON_NAME": "Mexican Fan Palm",
+    "SPECIES_NAME": "Washingtonia robusta",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "GOOD",
+    "HEIGHT_FT": 60,
+    "DBH_IN": 18,
+    "INSPCTDATE": 1661817600000,
+    "last_edited_date": 1782356748000,
+    "INST_YR": 990662400000
+   },
+   "geometry": {
+    "x": -117.25355216368051,
+    "y": 32.79064123839948
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 46442,
+    "COMMON_NAME": "Smooth-shell Macadamia",
+    "SPECIES_NAME": "Macadamia integrifolia",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "FAIR",
+    "HEIGHT_FT": 20,
+    "DBH_IN": 12,
+    "INSPCTDATE": 1668124800000,
+    "last_edited_date": 1682014370000,
+    "INST_YR": 990489600000
+   },
+   "geometry": {
+    "x": -117.25126576393312,
+    "y": 32.79102807768806
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 46444,
+    "COMMON_NAME": "Queen Palm",
+    "SPECIES_NAME": "Syagrus romanzoffiana",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "FAIR",
+    "HEIGHT_FT": 20,
+    "DBH_IN": 12,
+    "INSPCTDATE": 1668124800000,
+    "last_edited_date": 1682014370000,
+    "INST_YR": 990489600000
+   },
+   "geometry": {
+    "x": -117.25101434736868,
+    "y": 32.791081614827064
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 46447,
+    "COMMON_NAME": "Coral Tree",
+    "SPECIES_NAME": null,
+    "MAPNG_STAT_CD": "RM",
+    "CONDITION": null,
+    "HEIGHT_FT": null,
+    "DBH_IN": null,
+    "INSPCTDATE": null,
+    "last_edited_date": 1682014370000,
+    "INST_YR": 990489600000
+   },
+   "geometry": {
+    "x": -117.25163242734713,
+    "y": 32.79081067672553
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 46479,
+    "COMMON_NAME": "Mexican Fan Palm",
+    "SPECIES_NAME": "Washingtonia robusta",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "GOOD",
+    "HEIGHT_FT": 40,
+    "DBH_IN": 18,
+    "INSPCTDATE": 1661990400000,
+    "last_edited_date": 1782356748000,
+    "INST_YR": 990489600000
+   },
+   "geometry": {
+    "x": -117.25190300809584,
+    "y": 32.790918067798266
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 46481,
+    "COMMON_NAME": "Mexican Fan Palm",
+    "SPECIES_NAME": "Washingtonia robusta",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "GOOD",
+    "HEIGHT_FT": 50,
+    "DBH_IN": 18,
+    "INSPCTDATE": 1661990400000,
+    "last_edited_date": 1782356748000,
+    "INST_YR": 990489600000
+   },
+   "geometry": {
+    "x": -117.2519129912937,
+    "y": 32.79094144489454
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 46483,
+    "COMMON_NAME": "Mexican Fan Palm",
+    "SPECIES_NAME": "Washingtonia robusta",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "GOOD",
+    "HEIGHT_FT": 40,
+    "DBH_IN": 18,
+    "INSPCTDATE": 1661990400000,
+    "last_edited_date": 1782356748000,
+    "INST_YR": 990489600000
+   },
+   "geometry": {
+    "x": -117.25192154764854,
+    "y": 32.79097021701937
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 46485,
+    "COMMON_NAME": "Mexican Fan Palm",
+    "SPECIES_NAME": "Washingtonia robusta",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "GOOD",
+    "HEIGHT_FT": 50,
+    "DBH_IN": 18,
+    "INSPCTDATE": 1661990400000,
+    "last_edited_date": 1782356748000,
+    "INST_YR": 990489600000
+   },
+   "geometry": {
+    "x": -117.25191441672075,
+    "y": 32.79099119640293
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 91813,
+    "COMMON_NAME": "Palm Species",
+    "SPECIES_NAME": null,
+    "MAPNG_STAT_CD": "RM",
+    "CONDITION": null,
+    "HEIGHT_FT": null,
+    "DBH_IN": null,
+    "INSPCTDATE": null,
+    "last_edited_date": 1782356748000,
+    "INST_YR": 1120176000000
+   },
+   "geometry": {
+    "x": -117.2528363066116,
+    "y": 32.78792014215427
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 130412,
+    "COMMON_NAME": "Ficus",
+    "SPECIES_NAME": null,
+    "MAPNG_STAT_CD": "RM",
+    "CONDITION": null,
+    "HEIGHT_FT": null,
+    "DBH_IN": null,
+    "INSPCTDATE": null,
+    "last_edited_date": 1782356748000,
+    "INST_YR": 990662400000
+   },
+   "geometry": {
+    "x": -117.25434755767132,
+    "y": 32.788509716291045
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 130413,
+    "COMMON_NAME": "Travelers Palm",
+    "SPECIES_NAME": "Ravenala madagascariensis",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "GOOD",
+    "HEIGHT_FT": 20,
+    "DBH_IN": 18,
+    "INSPCTDATE": 1662508800000,
+    "last_edited_date": 1782356748000,
+    "INST_YR": 990662400000
+   },
+   "geometry": {
+    "x": -117.25423231853469,
+    "y": 32.78825321141228
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 130873,
+    "COMMON_NAME": "Glossy Privet; Chinese Privet",
+    "SPECIES_NAME": "Ligustrum lucidum",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "FAIR",
+    "HEIGHT_FT": 10,
+    "DBH_IN": 6,
+    "INSPCTDATE": 1661817600000,
+    "last_edited_date": 1782356748000,
+    "INST_YR": 990662400000
+   },
+   "geometry": {
+    "x": -117.25315246615726,
+    "y": 32.78852073667903
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 130874,
+    "COMMON_NAME": "Melaleuca",
+    "SPECIES_NAME": null,
+    "MAPNG_STAT_CD": "RM",
+    "CONDITION": null,
+    "HEIGHT_FT": null,
+    "DBH_IN": null,
+    "INSPCTDATE": null,
+    "last_edited_date": 1782356748000,
+    "INST_YR": 990662400000
+   },
+   "geometry": {
+    "x": -117.25316272418746,
+    "y": 32.78869270003121
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 130876,
+    "COMMON_NAME": "Mediterranean Fan Palm",
+    "SPECIES_NAME": "Chamaerops humilis",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "GOOD",
+    "HEIGHT_FT": 10,
+    "DBH_IN": 6,
+    "INSPCTDATE": 1661817600000,
+    "last_edited_date": 1782356748000,
+    "INST_YR": 990662400000
+   },
+   "geometry": {
+    "x": -117.25314929736712,
+    "y": 32.78916066148888
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 131090,
+    "COMMON_NAME": "Moreton Bay Fig",
+    "SPECIES_NAME": null,
+    "MAPNG_STAT_CD": "RM",
+    "CONDITION": null,
+    "HEIGHT_FT": null,
+    "DBH_IN": null,
+    "INSPCTDATE": null,
+    "last_edited_date": 1682014370000,
+    "INST_YR": 990489600000
+   },
+   "geometry": {
+    "x": -117.25144674840345,
+    "y": 32.79085038861318
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 131091,
+    "COMMON_NAME": "Pygmy Date Palm",
+    "SPECIES_NAME": "Phoenix roebelenii",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "FAIR",
+    "HEIGHT_FT": 20,
+    "DBH_IN": 12,
+    "INSPCTDATE": 1668124800000,
+    "last_edited_date": 1682014370000,
+    "INST_YR": 990489600000
+   },
+   "geometry": {
+    "x": -117.25122489285573,
+    "y": 32.790934614578255
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 297857,
+    "COMMON_NAME": "Moreton Bay Fig",
+    "SPECIES_NAME": "Ficus macrophylla",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "FAIR",
+    "HEIGHT_FT": 20,
+    "DBH_IN": 6,
+    "INSPCTDATE": 1661817600000,
+    "last_edited_date": 1782356748000,
+    "INST_YR": null
+   },
+   "geometry": {
+    "x": -117.25314501944708,
+    "y": 32.78918164210807
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 297863,
+    "COMMON_NAME": "Rose Of Sharon",
+    "SPECIES_NAME": "Hibiscus syriacus",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "GOOD",
+    "HEIGHT_FT": 10,
+    "DBH_IN": 6,
+    "INSPCTDATE": 1661817600000,
+    "last_edited_date": 1782356748000,
+    "INST_YR": null
+   },
+   "geometry": {
+    "x": -117.25294711211845,
+    "y": 32.78797764822654
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 297871,
+    "COMMON_NAME": "Rubber Tree",
+    "SPECIES_NAME": "Ficus elastica",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "FAIR",
+    "HEIGHT_FT": 10,
+    "DBH_IN": 6,
+    "INSPCTDATE": 1661817600000,
+    "last_edited_date": 1782356748000,
+    "INST_YR": null
+   },
+   "geometry": {
+    "x": -117.2529456853276,
+    "y": 32.78798903810314
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 297886,
+    "COMMON_NAME": "Guadalupe Palm",
+    "SPECIES_NAME": "Brahea edulis",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "GOOD",
+    "HEIGHT_FT": 20,
+    "DBH_IN": 12,
+    "INSPCTDATE": 1661817600000,
+    "last_edited_date": 1782356748000,
+    "INST_YR": null
+   },
+   "geometry": {
+    "x": -117.2532615614593,
+    "y": 32.78822101902364
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 297894,
+    "COMMON_NAME": "Canary Island Date Palm",
+    "SPECIES_NAME": "Phoenix canariensis",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "GOOD",
+    "HEIGHT_FT": 20,
+    "DBH_IN": 18,
+    "INSPCTDATE": 1661817600000,
+    "last_edited_date": 1782356748000,
+    "INST_YR": null
+   },
+   "geometry": {
+    "x": -117.253248013812,
+    "y": 32.78823420721946
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 297922,
+    "COMMON_NAME": "Giant Dracaena",
+    "SPECIES_NAME": "Cordyline australis",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "GOOD",
+    "HEIGHT_FT": 20,
+    "DBH_IN": 18,
+    "INSPCTDATE": 1661817600000,
+    "last_edited_date": 1782356748000,
+    "INST_YR": null
+   },
+   "geometry": {
+    "x": -117.25321877935272,
+    "y": 32.788348699279815
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 297939,
+    "COMMON_NAME": "Kentia Palm",
+    "SPECIES_NAME": "Howea forsteriana",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "GOOD",
+    "HEIGHT_FT": 20,
+    "DBH_IN": 6,
+    "INSPCTDATE": 1661817600000,
+    "last_edited_date": 1782356748000,
+    "INST_YR": null
+   },
+   "geometry": {
+    "x": -117.2531317884648,
+    "y": 32.78898589490616
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 297963,
+    "COMMON_NAME": "Brush Cherry",
+    "SPECIES_NAME": "Syzygium australe",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "GOOD",
+    "HEIGHT_FT": 10,
+    "DBH_IN": 6,
+    "INSPCTDATE": 1661817600000,
+    "last_edited_date": 1782356748000,
+    "INST_YR": null
+   },
+   "geometry": {
+    "x": -117.25302839752142,
+    "y": 32.78785836068971
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 297992,
+    "COMMON_NAME": "Jacaranda",
+    "SPECIES_NAME": "Jacaranda mimosifolia",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "GOOD",
+    "HEIGHT_FT": 20,
+    "DBH_IN": 6,
+    "INSPCTDATE": 1661817600000,
+    "last_edited_date": 1782356748000,
+    "INST_YR": null
+   },
+   "geometry": {
+    "x": -117.25313788849228,
+    "y": 32.789153468967285
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 299135,
+    "COMMON_NAME": "Giant Bird Of Paradise",
+    "SPECIES_NAME": "Strelitzia nicolai",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "GOOD",
+    "HEIGHT_FT": 20,
+    "DBH_IN": 6,
+    "INSPCTDATE": 1662508800000,
+    "last_edited_date": 1782356748000,
+    "INST_YR": null
+   },
+   "geometry": {
+    "x": -117.25456394238111,
+    "y": 32.789461821503174
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 299149,
+    "COMMON_NAME": "Oleander",
+    "SPECIES_NAME": "Nerium oleander",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "GOOD",
+    "HEIGHT_FT": 10,
+    "DBH_IN": 6,
+    "INSPCTDATE": 1662508800000,
+    "last_edited_date": 1782356748000,
+    "INST_YR": null
+   },
+   "geometry": {
+    "x": -117.25398852073879,
+    "y": 32.78985204734751
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 299167,
+    "COMMON_NAME": "Dwarf Umbrella Tree; Hawaiian",
+    "SPECIES_NAME": "Schefflera arboricola",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "FAIR",
+    "HEIGHT_FT": 10,
+    "DBH_IN": 6,
+    "INSPCTDATE": 1662508800000,
+    "last_edited_date": 1782356748000,
+    "INST_YR": null
+   },
+   "geometry": {
+    "x": -117.2546131420181,
+    "y": 32.79027643834269
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 299185,
+    "COMMON_NAME": "Pencil Tree",
+    "SPECIES_NAME": "Euphorbia tirucalli",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "GOOD",
+    "HEIGHT_FT": 10,
+    "DBH_IN": 6,
+    "INSPCTDATE": 1662508800000,
+    "last_edited_date": 1782356748000,
+    "INST_YR": null
+   },
+   "geometry": {
+    "x": -117.25356996801581,
+    "y": 32.789916785331705
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 299206,
+    "COMMON_NAME": "Umbrella Tree; Octopus Tree",
+    "SPECIES_NAME": "Schefflera actinophylla",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "FAIR",
+    "HEIGHT_FT": 20,
+    "DBH_IN": 12,
+    "INSPCTDATE": 1662508800000,
+    "last_edited_date": 1782356748000,
+    "INST_YR": null
+   },
+   "geometry": {
+    "x": -117.25347798596196,
+    "y": 32.78955473287364
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 300241,
+    "COMMON_NAME": "Brazilian Pepper Tree",
+    "SPECIES_NAME": "Schinus terebinthefolia",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "GOOD",
+    "HEIGHT_FT": 10,
+    "DBH_IN": 6,
+    "INSPCTDATE": 1663113600000,
+    "last_edited_date": 1782356748000,
+    "INST_YR": null
+   },
+   "geometry": {
+    "x": -117.2533099091815,
+    "y": 32.78787663811193
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 300248,
+    "COMMON_NAME": "Cactus",
+    "SPECIES_NAME": "Cactus spp.",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "GOOD",
+    "HEIGHT_FT": 20,
+    "DBH_IN": 6,
+    "INSPCTDATE": 1663113600000,
+    "last_edited_date": 1782356748000,
+    "INST_YR": null
+   },
+   "geometry": {
+    "x": -117.2534318385274,
+    "y": 32.788561791401605
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 300255,
+    "COMMON_NAME": "Carrotwood",
+    "SPECIES_NAME": "Cupaniopsis anacardioides",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "GOOD",
+    "HEIGHT_FT": 30,
+    "DBH_IN": 12,
+    "INSPCTDATE": 1663113600000,
+    "last_edited_date": 1782356748000,
+    "INST_YR": null
+   },
+   "geometry": {
+    "x": -117.2535088466024,
+    "y": 32.78823689869355
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 300284,
+    "COMMON_NAME": "Tropical Hibiscus",
+    "SPECIES_NAME": "Hibiscus rosa-sinensis",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "GOOD",
+    "HEIGHT_FT": 10,
+    "DBH_IN": 6,
+    "INSPCTDATE": 1663113600000,
+    "last_edited_date": 1782356748000,
+    "INST_YR": null
+   },
+   "geometry": {
+    "x": -117.25333557803152,
+    "y": 32.78786225124686
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 300286,
+    "COMMON_NAME": "King Palm",
+    "SPECIES_NAME": "Archontophoenix cunninghamiana",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "GOOD",
+    "HEIGHT_FT": 10,
+    "DBH_IN": 6,
+    "INSPCTDATE": 1663113600000,
+    "last_edited_date": 1782356748000,
+    "INST_YR": null
+   },
+   "geometry": {
+    "x": -117.25343326444965,
+    "y": 32.788592962331784
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 308450,
+    "COMMON_NAME": "Senegal Date Palm",
+    "SPECIES_NAME": "Phoenix reclinata",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "FAIR",
+    "HEIGHT_FT": 20,
+    "DBH_IN": 6,
+    "INSPCTDATE": 1668124800000,
+    "last_edited_date": 1750297677000,
+    "INST_YR": null
+   },
+   "geometry": {
+    "x": -117.25111145791107,
+    "y": 32.79097557411598
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 308457,
+    "COMMON_NAME": "Rustyleaf Fig",
+    "SPECIES_NAME": "Ficus rubiginosa",
+    "MAPNG_STAT_CD": "AB",
+    "CONDITION": "FAIR",
+    "HEIGHT_FT": 30,
+    "DBH_IN": 24,
+    "INSPCTDATE": 1668124800000,
+    "last_edited_date": 1750297677000,
+    "INST_YR": null
+   },
+   "geometry": {
+    "x": -117.2512598092067,
+    "y": 32.790928570983006
+   }
+  }
+ ]
+}
