@@ -477,6 +477,13 @@ Order in ingest: `non_tree_reason` first (a "Vacant site" row is never a palm), 
 
 **Tests** (`tests/unit/palmscan/test_scan_species_names.py`, `test_scan_filters.py`): the plan's example (`Washingtonia robusta`, `WASHINGTONIA ROBUSTA`, `Mexican fan palm` -> `washingtonia_robusta`); `PALM, MEXICAN FAN`; `Syagrus romanzoffiana 'Silver'`; `Cocos plumosa` -> queen palm not Cocos; `Sago palm` -> not palm; `Phoenix spp.` -> `phoenix_canariensis` level genus; `Brahea` -> `brahea_sp`; `Palm` -> `palm_unknown`; `Quercus agrifolia` -> not palm; empty and `None`; Florida genus excluded when `genus_sets=[socal]`; `Vacant Site` and status `STUMP` -> markers. Also a table test: every alias row normalizes to its own `species_key`.
 
+**Implementation notes (SCAN-002, 2026-11-22)**
+- `palm_genera.yaml` also has a third genus set `other` (real palm genera outside the modelled sets: rhapis, howea, caryota, jubaea, chamaedorea, bismarckia, ravenea, rhopalostylis, serenoa, veitchia). They are palms (`is_palm`), and `palm_filter` rejects them as `genus_not_in_set` unless `other` is in `genus_sets`. It also has `genus_aliases` (old names and misspellings of genera, e.g. `arecastrum`, `pheonix`, `livistonia`), and monotypic genera (chamaerops, cocos, wodyetia, adonidia) have a `genus_default_species`. VERIFY: monotypic status against a taxonomic source.
+- Normalization emits only registry keys. A binomial whose epithet is not a listed species (e.g. `Phoenix rupicola`) gives `<genus>_sp`, level `genus`, match `binomial`, instead of an unregistered `genus_epithet` key. Second words `sp`, `spp`, `species`, `palm`, `tree` count as genus-only.
+- Alias lookup also tries the name with a trailing `tree` removed, and with ` palm` added or removed (so `queen` and `Mexican fan palm tree` hit). The exact form is tried first, so `cabbage tree` stays a non-palm.
+- Step 8 also refines a generic `palm_unknown` from `raw` with the `common` column when `common` gives a genus or species.
+- `genus_sets` in `palm_filter` may be any sequence of set names; an unknown name raises `ValueError`. A generic palm (no genus) is kept.
+
 ### W3. Inventory and OSM source adapters
 
 Tasks: SCAN-003 (base + geojson_file), SCAN-004 (arcgis_rest), SCAN-005 (overpass + osm trees).
