@@ -7,14 +7,13 @@ Generated: 2026-11-22
 
 | todo | in_progress | blocked | review | done | dropped | total |
 |---|---|---|---|---|---|---|
-| 153 | 1 | 0 | 1 | 58 | 0 | 213 |
+| 153 | 0 | 0 | 1 | 59 | 0 | 213 |
 
 ## In progress / in review
 
 | Task | Status | Owner | Branch | Title |
 |---|---|---|---|---|
 | [INFRA-001](tasks/INFRA-001.md) | review | bootstrap-session | claude/eloquent-brahmagupta-gv5mbg | Bootstrap plans, tracking, worktree tooling and specialist agents |
-| [SCAN-020](tasks/SCAN-020.md) | in_progress | claude-agent | task/scan-020-usgs-3dep-ept-lidar-adapter-pdal-pipelin | USGS 3DEP EPT LiDAR adapter (PDAL pipeline, tiles, cache) |
 
 ## Blocked
 
@@ -30,6 +29,7 @@ _None._
 | [RISK-003](tasks/RISK-003.md) | 1 | network, human | geo-data-engineer | Inventory other palm and tree mods and their coverage for mask_out defaults |
 | [DEC-002](tasks/DEC-002.md) | 3 | human | task-planner | Decide: build or license the palm models |
 | [DEC-008](tasks/DEC-008.md) | 3 | human | task-planner | Decide: storage for large asset binaries (Git LFS or external) |
+| [SCAN-028](tasks/SCAN-028.md) | 4 | none | lidar-analyst | Wire LiDAR stages into palmscan run, QA and eval |
 | [DEC-005](tasks/DEC-005.md) | 5 | human | test-engineer | Decide: performance budget and reference hardware/settings |
 | [TEST-013](tasks/TEST-013.md) | 5 | none | test-engineer | Build the frametime capture parser and run comparison report |
 | [TEST-008](tasks/TEST-008.md) | 6 | none | test-engineer | Add optional image-diff scoring for visual viewpoints |
@@ -171,12 +171,12 @@ _None._
 | [GEN-019](tasks/GEN-019.md) | todo | windows-sim, human | GEN-100, ASSET-100 | Integrate the real model library into region builds |
 | [RISK-007](tasks/RISK-007.md) | todo | none | RISK-006, GATE-P3 | Risk review after Phase 3 (mid-project) |
 
-## Phase 4 (9/18 done)
+## Phase 4 (10/18 done)
 
 | Task | Status | Requires | Depends on | Title |
 |---|---|---|---|---|
 | [GATE-P4](tasks/GATE-P4.md) | todo | human, windows-sim | GATE-P2, SCAN-101, TEST-012, DEC-006 | Phase 4 exit gate: LiDAR accuracy targets met and beach site fixed in the sim |
-| [SCAN-020](tasks/SCAN-020.md) | in_progress | none | SCAN-003 | USGS 3DEP EPT LiDAR adapter (PDAL pipeline, tiles, cache) |
+| [SCAN-020](tasks/SCAN-020.md) | done | none | SCAN-003 | USGS 3DEP EPT LiDAR adapter (PDAL pipeline, tiles, cache) |
 | [SCAN-021](tasks/SCAN-021.md) | todo | network | SCAN-020, TEST-100 | Record LiDAR fixtures and confirm 3DEP EPT facts |
 | [SCAN-022](tasks/SCAN-022.md) | done | none | SCAN-001 | Canopy height model (DTM, DSM, CHM) |
 | [SCAN-023](tasks/SCAN-023.md) | done | none | SCAN-022 | Peak detection and watershed crown segmentation |

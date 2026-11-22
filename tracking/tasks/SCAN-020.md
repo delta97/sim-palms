@@ -1,7 +1,7 @@
 ---
 id: SCAN-020
 title: "USGS 3DEP EPT LiDAR adapter (PDAL pipeline, tiles, cache)"
-status: review
+status: done
 phase: 4
 area: SCAN
 kind: build
@@ -61,3 +61,4 @@ python -c "import pdal" 2>/dev/null && echo "pdal present" || echo "pdal absent:
 - 2026-11-22 [claude-agent] Claimed. branch=task/scan-020-usgs-3dep-ept-lidar-adapter-pdal-pipelin worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-020
 - 2026-11-22 [claude-agent] Implemented palmscan/sources/lidar_ept.py (dataset parse/select, tile plan, pipeline JSON, tile cache with .part streaming + signature check, injectable PdalRunner, read_points -> chm fields). Facts read 2026-11-22: boundaries index https://raw.githubusercontent.com/hobuinc/usgs-lidar/master/boundaries/resources.geojson props name/id/count/url, 2284 MultiPolygon; SanDiegoQL1_2014_LAS_2016 ept.json srs authority EPSG horizontal 3857 (live test passed with --run-network). Plan W13 note added (build_pipeline returns {pipeline:[...]}, keyword ept_srs). Cache.get_or_fetch untouched: tiles stream via PDAL to a .part file then os.replace, no touches change. CI/Linux needs: conda-forge pdal + python-pdal, then pip install -e .[pdal]; pdal tests auto-skip otherwise. VERIFY left: Classification classes 2/6 and vertical datum per dataset, execute_streaming/streamable API. Full suite: 1668 passed, 3 skipped; ruff, format, mypy clean.
 - 2026-11-22 [claude-agent] Status in_progress -> review.
+- 2026-11-22 [integrator] Status review -> done.
