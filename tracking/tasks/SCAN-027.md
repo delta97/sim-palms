@@ -1,7 +1,7 @@
 ---
 id: SCAN-027
 title: "Decision tree species classifier with rules fallback"
-status: in_progress
+status: review
 phase: 4
 area: SCAN
 kind: build
@@ -36,10 +36,10 @@ A small decision tree trained on inventory+LiDAR matches replaces the hand shape
 
 ## Acceptance criteria
 
-- [ ] Tree used only when CV accuracy beats rules by at least `tree_min_gain`.
-- [ ] JSON round trip reproduces predictions exactly.
-- [ ] Prediction works without scikit-learn importable.
-- [ ] `TrainReport` includes confusion matrix and reason.
+- [x] Tree used only when CV accuracy beats rules by at least `tree_min_gain`.
+- [x] JSON round trip reproduces predictions exactly.
+- [x] Prediction works without scikit-learn importable.
+- [x] `TrainReport` includes confusion matrix and reason.
 
 ## Verification
 
@@ -51,3 +51,6 @@ pytest tests/unit/palmscan/test_scan_tree_model.py -q
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [claude-agent] Claimed. branch=task/scan-027-decision-tree-species-classifier-with-ru worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-027
+- 2026-11-22 [claude-agent] Plan W18 step 4 clarified: rules None counts right on _other samples (symmetric with tree), folds pooled out-of-fold; filifera labels fold into robusta; added save_model/load_model and rules kwarg. Task text unchanged otherwise.
+- 2026-11-22 [claude-agent] Verified: test_scan_tree_model 16 passed; full suite 1651 passed 1 skipped; ruff, format, mypy clean. All acceptance boxes pass (gain gate, JSON round trip, sklearn-free predict, report with confusion+reason).
+- 2026-11-22 [claude-agent] Status in_progress -> review.
