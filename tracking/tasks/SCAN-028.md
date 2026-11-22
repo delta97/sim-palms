@@ -1,7 +1,7 @@
 ---
 id: SCAN-028
 title: "Wire LiDAR stages into palmscan run, QA and eval"
-status: todo
+status: in_progress
 phase: 4
 area: SCAN
 kind: build
@@ -11,9 +11,9 @@ requires: [none]
 agent: lidar-analyst
 estimate_h: 4
 touches: [palmscan/pipeline.py, palmscan/cli.py, palmscan/qa/summary.py, palmscan/qa/gpkg.py, palmscan/qa/rejects.py, tests/unit/palmscan/test_scan_pipeline_lidar.py, tests/fixtures/palmscan/pipeline_lidar/]
-owner: ""
-branch: ""
-worktree: ""
+owner: claude-agent
+branch: task/scan-028-wire-lidar-stages-into-palmscan-run-qa-a
+worktree: "C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-028"
 updated: 2026-11-22
 ---
 
@@ -59,3 +59,4 @@ palmscan eval --palms tests/fixtures/palmscan/accuracy/pred.geojson --site TX --
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [reconcile] Accuracy now runs through SCAN-029/TEST-010: --truth PATH replaced by --eval-site SITE on run and eval --palms PATH --site SITE; the pipeline also writes the eval site's CHM GeoTIFF as input for TEST-009 fill-heights. Cross-area reconciliation.
 - 2026-11-22 [integrator] integrator notes: SCAN-025 merge(…, cfg.merge, cfg.dedupe_radius_m, cfg.peaks.min_height_m); SCAN-024 apply_palm_rules returns all candidates + rejects (buildings_local must be in local CRS); SCAN-027 train(merge.training, cfg.classify) -> save_model when report.used, load_model(tree_model_path) for regions without inventory, then classify(palms, priors, model); SCAN-020 adapter in progress
+- 2026-11-22 [claude-agent] Claimed. branch=task/scan-028-wire-lidar-stages-into-palmscan-run-qa-a worktree=C:/Users/colep/OneDrive/Desktop/sim-palms-worktrees/SCAN-028
