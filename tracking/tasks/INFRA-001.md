@@ -14,7 +14,7 @@ touches: [plans/README.md, tracking/README.md, tracking/tasks/_TEMPLATE.md, trac
 owner: bootstrap-session
 branch: claude/eloquent-brahmagupta-gv5mbg
 worktree: ""
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 ## Goal
@@ -52,3 +52,4 @@ diff -r <unzipped-source-folder> plans/ --exclude=detailed --exclude=msfs-palm-f
 ## Log
 
 - 2026-11-21 [bootstrap-session] Task created and executed; worktree helper tested in a scratch clone (claim commit, worktree add, double-claim refused, remove).
+- 2026-11-22 [bootstrap-session] PR opened: https://github.com/delta97/sim-palms/pull/1
