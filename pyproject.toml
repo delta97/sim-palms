@@ -55,6 +55,7 @@ gen = [
 [project.scripts]
 palmscan = "palmscan.cli:main"
 palmgen = "palmgen.cli:main"
+palmfix = "palmcore.cli:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["palmcore", "palmscan", "palmgen"]
