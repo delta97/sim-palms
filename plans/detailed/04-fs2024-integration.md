@@ -164,7 +164,9 @@ def palm_radius(p: Palm, cfg: GenConfig, margin_override: float | None) -> tuple
 def circle_polygon(x: float, y: float, r: float, sides: int = 12, circumscribe: bool = True) -> Polygon
 def merge_clusters(items: list[tuple[str, Polygon]], gap_m: float, max_extent_m: float) -> list[Cluster]
 def simplify_cluster(poly: Polygon, tol_m: float, max_vertices: int) -> tuple[Polygon, bool]
-def clip_buildings(clusters, footprints_local, buffer_m, min_part_area_m2) -> ClipResult
+def clip_buildings(clusters, footprints_local, buffer_m, min_part_area_m2, supports_holes=False,
+                   conflict_ids=frozenset(), *, palm_points_local: Mapping[str, tuple[float, float]]) -> ClipResult
+# ClipResult(parts=[(Cluster, part from 0, member_ids)], in_building, too_small, conflict_no_footprint)
 def remove_holes(poly: Polygon) -> list[Polygon]
 def normalize_ring(poly_lonlat: Polygon, orientation: str, decimals: int, closed: bool) -> tuple[tuple[float, float], ...]
 
@@ -575,7 +577,7 @@ GEN-006. Applies when `exclusion.clip_buildings` is true.
 1. Project footprints, buffer each by `clip_buffer_m` (0.3 m), STRtree.
 2. For each cluster polygon P: footprints intersecting P → `P' = P.difference(unary_union(hits))`, then `make_valid`, keep Polygon parts with area ≥ `min_part_area_m2` (smaller parts: warning `CLIP_PART_TOO_SMALL`).
 3. Parts are numbered by sorted `(minx, miny)`; `part` feeds the GUID.
-4. Each member palm is assigned to the part containing its point. A palm whose point is in no part is inside a building: its object is dropped too (no cut means a placed palm would double the blob), warning `IN_BUILDING`.
+4. Each member palm is assigned to the first part (by number) covering its point (`palm_points_local` gives the points; the cluster alone has none). A palm whose point is in no part is inside a building: its object is dropped too (no cut means a placed palm would double the blob), warning `IN_BUILDING`.
 5. No parts left → cluster dropped entirely.
 6. If `supports_holes` is false (expected), `remove_holes` splits a part with interior rings by a vertical line through each hole's centroid (`shapely.ops.split`) until no interiors remain.
 7. Every polygon is clipped, not only flagged ones; `building_conflict = true` on a palm whose polygon hit no footprint gives warning `CONFLICT_NO_FOOTPRINT` (data mismatch signal for SCAN).
