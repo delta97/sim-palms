@@ -58,3 +58,4 @@ palmscan eval --palms tests/fixtures/palmscan/accuracy/pred.geojson --site TX --
 
 - 2026-11-21 [plan-breakdown] Task created.
 - 2026-11-22 [reconcile] Accuracy now runs through SCAN-029/TEST-010: --truth PATH replaced by --eval-site SITE on run and eval --palms PATH --site SITE; the pipeline also writes the eval site's CHM GeoTIFF as input for TEST-009 fill-heights. Cross-area reconciliation.
+- 2026-11-22 [integrator] integrator notes: SCAN-025 merge(…, cfg.merge, cfg.dedupe_radius_m, cfg.peaks.min_height_m); SCAN-024 apply_palm_rules returns all candidates + rejects (buildings_local must be in local CRS); SCAN-027 train(merge.training, cfg.classify) -> save_model when report.used, load_model(tree_model_path) for regions without inventory, then classify(palms, priors, model); SCAN-020 adapter in progress
